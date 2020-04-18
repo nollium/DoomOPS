@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/03/30 14:02:39 by smaccary         ###   ########.fr        #
+#    Updated: 2020/04/18 11:29:41 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,17 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -lm
+CFLAGS = -Wall -Wextra -lm -g
 
 RM = rm -rf
 
 DIRSRC = ./
 
-SRC = main.c
+SRC = main.c frontend.c handlers.c backend.c init.c raycast.c
 
 OBJ = $(SRC:.c=.o)
+
+HEADERS = cub3D.h
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
@@ -49,6 +51,10 @@ clean:
 
 fclean: clean
 	$(MAKE) -C libft/ fclean
+	$(RM) $(NAME) 
+
+lilclean:
+	$(RM) $(OBJ) $(OBJBONUS)
 	$(RM) $(NAME) 
 
 re: fclean all	

@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/02/25 16:22:57 by smaccary         ###   ########.fr        #
+#    Updated: 2020/04/04 19:33:25 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = clang
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -g
 
 RM = rm -rf
 
