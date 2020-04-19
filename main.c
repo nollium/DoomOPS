@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/04/18 12:07:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/04/19 15:47:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ int			main(void)
 	//draw_gradient(vars.img);
 	//draw_rainbow(vars.img);
 //	mlx_do_key_autorepeatoff(vars.mlx);
-//	draw_scene(&vars);
 //	mlx_put_image_to_window(vars.mlx, vars.win, (vars.img)->img, 0, 0);
 	hooks(&vars);
-	ft_printf("x%f y%f\n", vars.cam.x, vars.cam.y);
+	//printf("x%f y%f\n", vars.cam.x, vars.cam.y);
+	draw_scene(&vars);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop(vars.mlx);
 }

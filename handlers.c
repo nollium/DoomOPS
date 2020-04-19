@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/18 11:56:33 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/04/19 16:26:30 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,10 @@ int			loop_handler(t_vars *vars)
 	int worldMap[MAP_WIDTH][MAP_HEIGHT] =
 	{
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
 	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -155,10 +155,10 @@ int			loop_handler(t_vars *vars)
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
 		redraw = 1;
-		if (worldMap[(int)(vars->cam.x + vars->cam.x * SPEED)][(int)(vars->cam.y)] == 0)
-			vars->cam.x += vars->cam.x * SPEED;
-    	if (worldMap[(int)(vars->cam.x)][(int)(vars->cam.y + vars->cam.y * SPEED)] == 0)
-			vars->cam.y += vars->cam.y * SPEED;
+		if (worldMap[(int)(vars->cam.x + vars->cam.dir_x * SPEED)][(int)(vars->cam.y)] == 0)
+			vars->cam.x += vars->cam.dir_x * SPEED;
+    	if (worldMap[(int)(vars->cam.x)][(int)(vars->cam.y + vars->cam.dir_y * SPEED)] == 0)
+			vars->cam.y += vars->cam.dir_y * SPEED;
 
 	}
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))

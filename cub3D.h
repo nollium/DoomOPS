@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/18 12:09:16 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/04/19 16:58:44 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@
  #include <fcntl.h>
  #include "libft/libftprintf.h"
 
- #define K_BUFF_SIZE	20
- #define WINDOW_WIDTH	1920
- #define WINDOW_HEIGHT	1080
- #define WALLS_SIZE		64
- #define FOV 			60
- #define WALL_COLOR		0x00FFFFFF
- #define WALL_SIDE_COLOR	0x0
- #define ROOF_COLOR		0x0000FFFF
- #define FLOOR_COLOR	0x00A0522D
- #define PLAYER_HEIGHT	32
- #define MAP_WIDTH 24
- #define MAP_HEIGHT 24
- #define MAP_PATH		"./map.cub"
+ #define K_BUFF_SIZE		20
+ #define WINDOW_WIDTH		400
+ #define WINDOW_HEIGHT		400
+ #define WALLS_SIZE			64
+ #define FOV 				60
+ #define WALL_COLOR			0x00FFFFFF
+ #define WALL_SIDE_COLOR	0x00FF0000
+ #define ROOF_COLOR			0x0000FFFF
+ #define FLOOR_COLOR		0x00A0522D
+ #define PLAYER_HEIGHT		32
+ #define MAP_WIDTH 			24
+ #define MAP_HEIGHT 		24
+ #define MAP_PATH			"./map.cub"
  
- #define FORWARD_KEY	122
- #define BACKWARD_KEY	115
- #define LEFT_KEY		113
- #define RIGHT_KEY		100
- #define SPEED			0.003
- #define TURN_SPEED		0.006
+ #define FORWARD_KEY		122
+ #define BACKWARD_KEY		115
+ #define LEFT_KEY			113
+ #define RIGHT_KEY			100
+ #define SPEED				0.03
+ #define TURN_SPEED			0.036
 
- #define SPAWN_X		2
- #define SPAWN_Y		2
+ #define SPAWN_X			3
+ #define SPAWN_Y			2
 
 /*
 ** SCREEN_DIST = (SCREEN_WIDTH) / (tan(FOV / 2) * 2)
@@ -52,13 +52,13 @@
 
 typedef struct	s_ray
 {
-	float		dir_x;
-	float		dir_y;
-	float		side_dist_x;
-	float		side_dist_y;
-	float		delta_dist_x;
-	float		delta_dist_y;
-	float		perp_wall_dist;
+	double		dir_x;
+	double		dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
 	int			step_x;
 	int			step_y;
 	int			hit;
@@ -68,8 +68,8 @@ typedef struct	s_ray
 
 typedef struct	s_plane
 {
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 }				t_plane;
 
 /*
@@ -78,12 +78,12 @@ typedef struct	s_plane
 
 typedef struct	s_camera
 {
-	float		x;
-	float		y;
-	float		dir_x;
-	float		dir_y;
+	double		x;
+	double		y;
+	double		dir_x;
+	double		dir_y;
 	t_plane		plane;
-	float		scene[WINDOW_WIDTH];
+	double		scene[WINDOW_WIDTH];
 }				t_camera;
 
 /*
