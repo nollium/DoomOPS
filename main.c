@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/04/19 15:47:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/04/19 17:56:44 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void		draw_col(t_data *img, int i, int line_height, int color)
 	int	draw_end;
 
 	draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
-	draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
 	draw_start = (draw_start < 0) ? 0 : draw_start;
+	draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
 	draw_end = (draw_end >= WINDOW_HEIGHT) ? WINDOW_HEIGHT - 1 : draw_end; 
 	my_line_put(img, i, 0, i, draw_start, ROOF_COLOR);
 	my_line_put(img, i, draw_start, i, draw_end, color);

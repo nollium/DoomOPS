@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/19 16:58:44 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/04/19 18:35:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
  #define WINDOW_HEIGHT		400
  #define WALLS_SIZE			64
  #define FOV 				60
- #define WALL_COLOR			0x00FFFFFF
- #define WALL_SIDE_COLOR	0x00FF0000
+ #define WALL_COLOR			0x00AAAAAA
+ #define WALL_SIDE_COLOR	0x00888888
  #define ROOF_COLOR			0x0000FFFF
  #define FLOOR_COLOR		0x00A0522D
  #define PLAYER_HEIGHT		32
@@ -38,11 +38,11 @@
  #define BACKWARD_KEY		115
  #define LEFT_KEY			113
  #define RIGHT_KEY			100
- #define SPEED				0.03
- #define TURN_SPEED			0.036
+ #define SPEED				0.1
+ #define TURN_SPEED			0.1
 
- #define SPAWN_X			3
- #define SPAWN_Y			2
+ #define SPAWN_X			6
+ #define SPAWN_Y			8
 
 /*
 ** SCREEN_DIST = (SCREEN_WIDTH) / (tan(FOV / 2) * 2)
@@ -52,13 +52,13 @@
 
 typedef struct	s_ray
 {
-	double		dir_x;
-	double		dir_y;
-	double		side_dist_x;
-	double		side_dist_y;
-	double		delta_dist_x;
-	double		delta_dist_y;
-	double		perp_wall_dist;
+	long double		dir_x;
+	long double		dir_y;
+	long double		side_dist_x;
+	long double		side_dist_y;
+	long double		delta_dist_x;
+	long double		delta_dist_y;
+	long double		perp_wall_dist;
 	int			step_x;
 	int			step_y;
 	int			hit;
@@ -68,8 +68,8 @@ typedef struct	s_ray
 
 typedef struct	s_plane
 {
-	double		x;
-	double		y;
+	long double		x;
+	long double		y;
 }				t_plane;
 
 /*
@@ -78,12 +78,12 @@ typedef struct	s_plane
 
 typedef struct	s_camera
 {
-	double		x;
-	double		y;
-	double		dir_x;
-	double		dir_y;
+	long double		x;
+	long double		y;
+	long double		dir_x;
+	long double		dir_y;
 	t_plane		plane;
-	double		scene[WINDOW_WIDTH];
+	long double		scene[WINDOW_WIDTH];
 }				t_camera;
 
 /*
@@ -150,6 +150,12 @@ void			init_vars(int width, int height, t_vars *vars);
 
 t_ray 			raycast(t_vars *vars, int x);
 
+/*
+** BACKEND 
+*/
+
+t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
+
 
 /*
 ** FRONTEND 
@@ -164,7 +170,7 @@ void			drawhalfcircle(t_data *data, int x0, int y0, int radius, int color);
 void			draw_gradient(t_data *data);
 void			draw_rainbow(t_data *data);
 
-void		draw_scene(t_vars *vars);
+void			draw_scene(t_vars *vars);
 
 
 /*

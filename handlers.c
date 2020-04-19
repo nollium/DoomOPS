@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/19 16:26:30 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/04/19 18:34:12 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int             key_handler(int keycode, t_vars *vars)
 		write(1, "\n", 1);
 	}
 	i = -1;
-	while (i < K_BUFF_SIZE && ((vars->keys)[i]).keycode != -1)
+	while (i < K_BUFF_SIZE && (((vars->keys)[i]).keycode != -1))
 		i++;
 	if (((vars->keys)[i]).keycode != -1)
 		return (0);
@@ -108,7 +108,7 @@ int			release_handler(int keycode, t_vars *vars)
 	return (0);
 }
 
-static t_keys	*key_chr(t_keys *arr, int keycode, size_t size)
+t_keys	*key_chr(t_keys *arr, int keycode, size_t size)
 {
 	size_t	i;
 
@@ -124,12 +124,12 @@ int			loop_handler(t_vars *vars)
 	int worldMap[MAP_WIDTH][MAP_HEIGHT] =
 	{
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+	{1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,0,0,0,1,1,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,1,1,1,1,1,1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
 	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -174,20 +174,20 @@ int			loop_handler(t_vars *vars)
 	{
 	//	ft_printf("RIGHT\n");
 		redraw = 1;
-    	double oldDirX = vars->cam.dir_x;
+    	long double oldDirX = vars->cam.dir_x;
     	vars->cam.dir_x = vars->cam.dir_x * cos(-TURN_SPEED) - vars->cam.dir_y * sin(-TURN_SPEED);
     	vars->cam.dir_y = oldDirX * sin(-TURN_SPEED) + vars->cam.dir_y * cos(-TURN_SPEED);
-    	double oldPlaneX = vars->cam.plane.x;
+    	long double oldPlaneX = vars->cam.plane.x;
     	vars->cam.plane.x = vars->cam.plane.x * cos(-TURN_SPEED) - vars->cam.plane.y * sin(-TURN_SPEED);
     	vars->cam.plane.y = oldPlaneX * sin(-TURN_SPEED) + vars->cam.plane.y * cos(-TURN_SPEED);
 	}
 	if (key_chr(vars->keys, LEFT_KEY, K_BUFF_SIZE))
 	{
 		redraw = 1;
-    	double oldDirX = vars->cam.dir_x;
+    	long double oldDirX = vars->cam.dir_x;
     	vars->cam.dir_x = vars->cam.dir_x * cos(TURN_SPEED) - vars->cam.dir_y * sin(TURN_SPEED);
     	vars->cam.dir_y = oldDirX * sin(TURN_SPEED) + vars->cam.dir_y * cos(TURN_SPEED);
-    	double oldPlaneX = vars->cam.plane.x;
+    	long double oldPlaneX = vars->cam.plane.x;
     	vars->cam.plane.x = vars->cam.plane.x * cos(TURN_SPEED) - vars->cam.plane.y * sin(TURN_SPEED);
     	vars->cam.plane.y = oldPlaneX * sin(TURN_SPEED) + vars->cam.plane.y * cos(TURN_SPEED);
 	}
@@ -195,7 +195,7 @@ int			loop_handler(t_vars *vars)
 	{
 		draw_scene(vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, (vars->img)->img, 0, 0);
-		printf("DRAWING : x%f y%f\n", vars->cam.x, vars->cam.y);
+		printf("DRAWING : x%Lf y%Lf\ndir_x:%Lf dir_y:%Lf\n", vars->cam.x, vars->cam.y, vars->cam.dir_x, vars->cam.dir_y);
 		t0 = clock();
 		while (clock() - t0 < CLOCKS_PER_SEC / 30);
 	}	
