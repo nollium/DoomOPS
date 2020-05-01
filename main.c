@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/05/01 15:58:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/01 18:48:39 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ void		draw_col(t_data *img, int x, int line_height, int color, int dist)
 	while (++y < WINDOW_HEIGHT)
 	{
 		if (draw_start <= y && y <= draw_end)
-			draw_color = add_shade(((double)dist / MAP_HEIGHT * 2), color);
+			if (SHADOW_MODE)
+				draw_color = add_shade(((double)dist / MAP_HEIGHT * 2), color);
+			else
+				draw_color = color;
 		if (y > draw_end)
-		//	draw_color = FLOOR_COLOR;
-			draw_color = add_shade(1.05 / ((double)y / (double)((WINDOW_WIDTH - draw_end))) , FLOOR_COLOR);
+			if (SHADOW_MODE)
+				draw_color = add_shade(1.05 / ((double)y * 2.15 / (double)((WINDOW_WIDTH))) , FLOOR_COLOR);
+			else
+				draw_color = FLOOR_COLOR;
 		my_mlx_pixel_put(img, x, y, draw_color);
 	}
 	

@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/05/01 13:07:44 by smaccary         ###   ########.fr        #
+#    Updated: 2020/05/01 19:55:01 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJBONUS = $(SRCBONUS:.c=.o)
 
 LIBFT = libft/libftprintf.a
 
-all: $(NAME)
+all: $(NAME) $(HEADERS)
 
 bonus: $(OBJBONUS) $(NAME)
 	ar rcs $(NAME) $(OBJBONUS)

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/01 16:16:41 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/01 20:03:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WARNINGS 1
 # define WARN_LEVEL 100000
 # define DEBUG_MODE 0
+# define SHADOW_MODE 1
 
  #define K_BUFF_SIZE		20
  #define WINDOW_WIDTH		500
@@ -45,8 +46,10 @@
  #define LEFT_KEY			113
  #define RIGHT_KEY			100
  #define CTRL_KEY			65507
+ #define ALT_KEY			65513
  #define SPEED				0.1
  #define TURN_SPEED			0.1
+ #define ALT_MULT			2
  #define C_KEY				99
 
  #define SPAWN_X			6
@@ -90,6 +93,8 @@ typedef struct	s_camera
 	long double		y;
 	long double		dir_x;
 	long double		dir_y;
+	double			speed;
+	double			turn_speed;
 	t_plane			plane;
 }				t_camera;
 

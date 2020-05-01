@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/01 11:07:54 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/01 19:09:13 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->img2.img = mlx_new_image(vars->mlx, width, height);
 	vars->img2.addr = mlx_get_data_addr(vars->img2.img, &(vars->img2.bits_per_pixel), &(vars->img2).line_length,
 								 &(vars->img2).endian);
-	vars->cam = (t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, (t_plane){0.0, 0.66}};
+	vars->cam = (t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED, (t_plane){0.0, 0.66}};
 	vars->map = (t_map){0,0,{
 	{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},\
 	{'1','1','1','1','1','1','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},\
