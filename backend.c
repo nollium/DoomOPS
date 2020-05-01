@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/19 17:24:59 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/01 13:27:17 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void    hooks(t_vars *vars)
 	mlx_hook(vars->win, ResizeRequest, 1, resize_handler, (void *)0);
 	mlx_hook(vars->win, EnterNotify, EnterWindowMask, enter_handler, NULL);
 	mlx_hook(vars->win, LeaveNotify, LeaveWindowMask, leave_handler, NULL);
-	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 	mlx_hook(vars->win, KeyRelease, KeyReleaseMask, release_handler, (void *)vars);
+	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 }
 
 

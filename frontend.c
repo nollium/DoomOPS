@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:42:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/16 12:39:37 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:09:51 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,30 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void 			my_line_put(t_data *data, int x0, int y0, int x1, int y1, int color)
 { 
-	int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-	int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1; 
-	int err = (dx > dy ? dx : -dy) / 2, e2;
-/*
-	dx = abs(x1 - x0);
-	sx = x0 < x1 ? 1 : -1;
-	dy = abs(y1 - y0);
-	sy = y0 < y1 ? 1 : -1;
-	*/
-	while(1)
+	int d[2];
+	int s[2];
+	int err;
+	int e2;
+
+	d[0] = abs(x1 - x0);
+	s[0] = (x0 < x1) ? 1 : -1;
+	d[1] = abs(y1 - y0);
+	s[1] = (y0 < y1) ? 1 : -1;
+	err = ((d[0] > d[1]) ? d[0] : -d[1]) / 2;
+	while(!(x0==x1 && y0==y1))
 	{
-    	my_mlx_pixel_put(data, x0, y0, color);
-    	if (x0==x1 && y0==y1) break;
+    	my_mlx_pixel_put(data, x0, y0, color);;
     	e2 = err;
-    	if (e2 >-dx) { err -= dy; x0 += sx; }
-    	if (e2 < dy) { err += dx; y0 += sy; }
+    	if (e2 >-d[0])
+		{
+			err -= d[1];
+			x0 += s[0];
+		}
+    	if (e2 < d[1])
+		{
+			err += d[0];
+			y0 += s[1];
+		}
   	}
 }
 
@@ -137,7 +145,7 @@ void			draw_gradient(t_data *data)
 		x = 0;
 		while (x < WINDOW_WIDTH)
 			{
-				my_mlx_pixel_put(data, x, y, create_trgb(255, sin(0.3 * i) * 127 + 128, sin(0.3 * i + 2.0) * 127 + 128, sin(0.3 * i + 4.0) * 127 + 128));
+				my_mlx_pixel_put(data, x, y, add_shade(0.5, create_trgb(255, sin(0.3 * i) * 127 + 128, sin(0.3 * i + 2.0) * 127 + 128, sin(0.3 * i + 4.0) * 127 + 128)));
 				x++;
 			}
 		

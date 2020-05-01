@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/04/19 18:35:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/01 16:16:41 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,21 @@
  #include <fcntl.h>
  #include "libft/libftprintf.h"
 
+# define WARNINGS 1
+# define WARN_LEVEL 100000
+# define DEBUG_MODE 0
+
  #define K_BUFF_SIZE		20
- #define WINDOW_WIDTH		400
- #define WINDOW_HEIGHT		400
+ #define WINDOW_WIDTH		500
+ #define WINDOW_HEIGHT		500
  #define WALLS_SIZE			64
  #define FOV 				60
  #define WALL_COLOR			0x00AAAAAA
  #define WALL_SIDE_COLOR	0x00888888
- #define ROOF_COLOR			0x0000FFFF
- #define FLOOR_COLOR		0x00A0522D
+// #define ROOF_COLOR			0xFF99FFFF
+ #define ROOF_COLOR			0x00000000
+ #define FLOOR_COLOR		0x009C9C9C
+// #define FLOOR_COLOR		0x0099FFFF
  #define PLAYER_HEIGHT		32
  #define MAP_WIDTH 			24
  #define MAP_HEIGHT 		24
@@ -38,8 +44,10 @@
  #define BACKWARD_KEY		115
  #define LEFT_KEY			113
  #define RIGHT_KEY			100
+ #define CTRL_KEY			65507
  #define SPEED				0.1
  #define TURN_SPEED			0.1
+ #define C_KEY				99
 
  #define SPAWN_X			6
  #define SPAWN_Y			8
@@ -82,8 +90,7 @@ typedef struct	s_camera
 	long double		y;
 	long double		dir_x;
 	long double		dir_y;
-	t_plane		plane;
-	long double		scene[WINDOW_WIDTH];
+	t_plane			plane;
 }				t_camera;
 
 /*
@@ -109,21 +116,11 @@ typedef struct  s_keys
 	time_t      time;
 }               t_keys;
 
-typedef struct	s_wall
-{
-	int			x[2];
-	int			y[2];
-	int			color;
-}				t_wall;
-
 typedef struct s_map
 {
-	char		**array;
-	t_wall		**walls;
-	int			width;
-	int			height;
 	int			x;
 	int			y;
+	int 		worldMap[MAP_WIDTH][MAP_HEIGHT];
 }				t_map;
 
 
@@ -138,9 +135,11 @@ typedef struct  s_vars
 	t_keys      keys[K_BUFF_SIZE + 1];
 }               t_vars;
 
+int				 add_shade(double dist, int color);
+
 /*
 ** INIT 
-*/
+*/		
 
 void			init_vars(int width, int height, t_vars *vars);
 
@@ -176,7 +175,7 @@ void			draw_scene(t_vars *vars);
 /*
 ** EVENT HANDLERS 
 */
-
+int				keyboard_handler(t_vars *vars);
 void    		hooks(t_vars *vars);
 int				loop_handler(t_vars *vars);
 int         	key_handler(int keycode, t_vars *vars);
