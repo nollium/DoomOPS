@@ -1,0 +1,25 @@
+	t_drawer draw;
+
+	draw.start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	draw.start = (draw.start < 0) ? 0 : draw.start;
+	draw.end = line_height / 2 + WINDOW_HEIGHT / 2;
+	draw.end = (draw.end >= WINDOW_HEIGHT) ? WINDOW_HEIGHT - 1 : draw.end;
+	
+	draw.color = ROOF_COLOR;
+	y = -1;
+	while (++y < WINDOW_HEIGHT)
+	{
+		if (draw.start <= y && y <= draw.end)
+		{
+			draw.color = get_color(vars, line_height);
+			if (SHADOW_MODE)	
+				draw.color = add_shade(((double)dist / MAP_HEIGHT * 2), draw.color);
+		}
+		if (y > draw.end)
+		{
+			draw.color = FLOOR_COLOR;
+			if (SHADOW_MODE)
+				draw.color = add_shade(1.05 / ((double)y * 2.15 / (double)((WINDOW_WIDTH))) , draw.color);
+		}
+		my_mlx_pixel_put(img, x, y, draw.color);
+	}

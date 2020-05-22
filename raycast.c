@@ -6,17 +6,19 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/01 10:58:16 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/22 17:36:52 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	init_raycast(t_vars *vars, int x, t_ray *ray, long double *camera_x)
+static void	init_raycast(t_vars *vars, int x, t_ray *ray)
 {
-	*camera_x = 2 * x / (long double)WINDOW_WIDTH - 1.0;
-	ray->dir_x = vars->cam.dir_x + vars->cam.plane.x * *camera_x;
-	ray->dir_y = vars->cam.dir_y + vars->cam.plane.y * *camera_x;
+	long double	camera_x;
+
+	camera_x = 2 * x / (long double)WINDOW_WIDTH - 1.0;
+	ray->dir_x = vars->cam.dir_x + vars->cam.plane.x * camera_x;
+	ray->dir_y = vars->cam.dir_y + vars->cam.plane.y * camera_x;
 	vars->map.x = (int)(vars->cam.x);
 	vars->map.y = (int)(vars->cam.y);
 	ray->delta_dist_x = fabsl(1 / ray->dir_x);
@@ -83,14 +85,34 @@ static void	get_wall_dist(t_vars *vars, t_ray *ray)
 				/ ray->dir_y;
 }
 
-t_ray		raycast(t_vars *vars, int x)
+static void	get_texture_coords(t_vars *vars, t_ray *ray)
 {
-	t_ray		ray;
-	long double	camera_x;
+	double wallX; //where exactly the wall was hit
+	int texNum;
 
-	init_raycast(vars, x, &ray, &camera_x);
-	get_step(vars, &ray);
-	perform_dda(vars, &ray);
-	get_wall_dist(vars, &ray);
-	return (ray);
+	//texturing calculations
+	texNum = vars->map.worldMap[vars->map.x][vars->map.x] - 1; //1 subtracted from it so that texture 0 can be used!
+
+	//calculate value of wallX
+	if (ray->side == 0)
+		wallX = vars->cam.y + ray->perp_wall_dist * ray->dir_y;
+	else
+		wallX = vars->cam.x + ray->perp_wall_dist * ray->dir_x;
+	wallX -= floor((wallX));
+
+	//x coordinate on the texture
+	vars->text.x = (int)(wallX * (double)(TEX_WIDTH));
+	if(ray->side == 0 && ray->dir_x > 0)
+		vars->text.x = TEX_WIDTH - vars->text.x - 1;
+	if(ray->side == 1 && ray->dir_y < 0)
+		vars->text.x = TEX_WIDTH - vars->text.x - 1;
+}
+
+t_ray		raycast(t_ray *ray, t_vars *vars, int x)
+{
+	init_raycast(vars, x, ray);
+	get_step(vars, ray);
+	perform_dda(vars, ray);
+	get_wall_dist(vars, ray);
+	get_texture_coords(vars, ray);
 }

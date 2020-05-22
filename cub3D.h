@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/01 20:03:40 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/22 17:28:35 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,27 @@
 # define WARNINGS 1
 # define WARN_LEVEL 100000
 # define DEBUG_MODE 0
-# define SHADOW_MODE 1
+# define SHADOW_MODE 0
 
- #define K_BUFF_SIZE		20
  #define WINDOW_WIDTH		500
  #define WINDOW_HEIGHT		500
- #define WALLS_SIZE			64
- #define FOV 				60
+
+ #define MAP_WIDTH 			24
+ #define MAP_HEIGHT 		24
+ #define MAP_PATH			"./map.cub"
+
+ #define TEX_WIDTH			64
+ #define TEX_HEIGHT			64
+
  #define WALL_COLOR			0x00AAAAAA
  #define WALL_SIDE_COLOR	0x00888888
+
 // #define ROOF_COLOR			0xFF99FFFF
  #define ROOF_COLOR			0x00000000
  #define FLOOR_COLOR		0x009C9C9C
 // #define FLOOR_COLOR		0x0099FFFF
- #define PLAYER_HEIGHT		32
- #define MAP_WIDTH 			24
- #define MAP_HEIGHT 		24
- #define MAP_PATH			"./map.cub"
+ 
+ #define K_BUFF_SIZE		20
  
  #define FORWARD_KEY		122
  #define BACKWARD_KEY		115
@@ -47,13 +51,14 @@
  #define RIGHT_KEY			100
  #define CTRL_KEY			65507
  #define ALT_KEY			65513
+ #define C_KEY				99
+
  #define SPEED				0.1
  #define TURN_SPEED			0.1
  #define ALT_MULT			2
- #define C_KEY				99
 
- #define SPAWN_X			6
- #define SPAWN_Y			8
+ #define SPAWN_X			2
+ #define SPAWN_Y			2
 
 /*
 ** SCREEN_DIST = (SCREEN_WIDTH) / (tan(FOV / 2) * 2)
@@ -63,13 +68,14 @@
 
 typedef struct	s_ray
 {
-	long double		dir_x;
-	long double		dir_y;
-	long double		side_dist_x;
-	long double		side_dist_y;
-	long double		delta_dist_x;
-	long double		delta_dist_y;
-	long double		perp_wall_dist;
+	long double	dir_x;
+	long double	dir_y;
+	long double	side_dist_x;
+	long double	side_dist_y;
+	long double	delta_dist_x;
+	long double	delta_dist_y;
+	long double	perp_wall_dist;
+
 	int			step_x;
 	int			step_y;
 	int			hit;
@@ -82,6 +88,14 @@ typedef struct	s_plane
 	long double		x;
 	long double		y;
 }				t_plane;
+
+typedef struct	s_pxl
+{
+	int			x;
+	int			y;
+	int			color;
+}				t_pxl;
+
 
 /*
 ** PLAYER CAMERA 
@@ -121,12 +135,32 @@ typedef struct  s_keys
 	time_t      time;
 }               t_keys;
 
-typedef struct s_map
+typedef struct	s_map
 {
 	int			x;
 	int			y;
-	int 		worldMap[MAP_WIDTH][MAP_HEIGHT];
+	char 		worldMap[MAP_WIDTH][MAP_HEIGHT];
 }				t_map;
+
+
+typedef struct	s_texture
+{
+	int			array[TEX_WIDTH * TEX_HEIGHT];
+	int			x;
+	int			y;
+}				t_texture;
+
+typedef struct	s_drawer
+{
+	int			start;
+	int			end;
+	int			color;
+	int			line_height;
+	int			x;
+	int			y;
+	int			dist;
+	int			side;
+}				t_drawer;
 
 
 typedef struct  s_vars
@@ -138,6 +172,7 @@ typedef struct  s_vars
 	t_data      img2;
 	t_camera	cam;
 	t_keys      keys[K_BUFF_SIZE + 1];
+	t_texture	text;
 }               t_vars;
 
 int				 add_shade(double dist, int color);
@@ -152,7 +187,7 @@ void			init_vars(int width, int height, t_vars *vars);
 ** RAYCAST 
 */
 
-t_ray 			raycast(t_vars *vars, int x);
+t_ray			raycast(t_ray *ray, t_vars *vars, int x);
 
 /*
 ** BACKEND 
@@ -164,7 +199,7 @@ t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
 /*
 ** FRONTEND 
 */
-
+int				rgb_to_trgb(unsigned char t, int rgb);
 int		        create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void 			my_line_put(t_data *data, int x0, int y0, int x1, int y1, int color);
