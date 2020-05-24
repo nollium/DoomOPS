@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/22 17:36:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/24 19:38:17 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ static void	get_texture_coords(t_vars *vars, t_ray *ray)
 	wallX -= floor((wallX));
 
 	//x coordinate on the texture
-	vars->text.x = (int)(wallX * (double)(TEX_WIDTH));
+	vars->text.x = (int)(wallX * (double)(vars->text.width));
 	if(ray->side == 0 && ray->dir_x > 0)
-		vars->text.x = TEX_WIDTH - vars->text.x - 1;
+		vars->text.x = vars->text.width - vars->text.x - 1;
 	if(ray->side == 1 && ray->dir_y < 0)
-		vars->text.x = TEX_WIDTH - vars->text.x - 1;
+		vars->text.x = vars->text.width - vars->text.x - 1;
 }
 
 t_ray		raycast(t_ray *ray, t_vars *vars, int x)

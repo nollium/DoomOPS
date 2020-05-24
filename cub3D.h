@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/22 17:28:35 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/24 20:53:48 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,19 @@
  #include <X11/Xlib.h>
  #include <fcntl.h>
  #include "libft/libftprintf.h"
+ #include <stdint.h>
 
 # define WARNINGS 1
 # define WARN_LEVEL 100000
 # define DEBUG_MODE 0
 # define SHADOW_MODE 0
 
- #define WINDOW_WIDTH		500
- #define WINDOW_HEIGHT		500
+ #define WINDOW_WIDTH		600
+ #define WINDOW_HEIGHT		600
 
  #define MAP_WIDTH 			24
  #define MAP_HEIGHT 		24
  #define MAP_PATH			"./map.cub"
-
- #define TEX_WIDTH			64
- #define TEX_HEIGHT			64
 
  #define WALL_COLOR			0x00AAAAAA
  #define WALL_SIDE_COLOR	0x00888888
@@ -123,6 +121,8 @@ typedef struct  s_data
 	int         bits_per_pixel;
 	int         line_length;
 	int         endian;
+	int			height;
+	int			width;
 }               t_data;
 
 /*
@@ -145,7 +145,9 @@ typedef struct	s_map
 
 typedef struct	s_texture
 {
-	int			array[TEX_WIDTH * TEX_HEIGHT];
+	int			*array;
+	int			width;
+	int			height;
 	int			x;
 	int			y;
 }				t_texture;
@@ -160,6 +162,9 @@ typedef struct	s_drawer
 	int			y;
 	int			dist;
 	int			side;
+	double 		step;
+	double		tex_pos;
+	
 }				t_drawer;
 
 
@@ -199,6 +204,7 @@ t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
 /*
 ** FRONTEND 
 */
+void			draw_text(t_texture *text, t_data *img);
 int				rgb_to_trgb(unsigned char t, int rgb);
 int		        create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:42:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/22 16:54:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/22 22:46:54 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		rgb_to_trgb(unsigned char t, int rgb)
 {
-	create_trgb(t, (rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, (rgb) & 0xFF);
+	return (create_trgb(t, (rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, (rgb) & 0xFF));
 }
 
 int		create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b)

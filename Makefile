@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/05/22 17:42:01 by smaccary         ###   ########.fr        #
+#    Updated: 2020/05/24 19:58:59 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -lm -g -fsanitize=address
+CFLAGS = -Wall -Wextra -lm -g
 
 RM = rm -rf
 
