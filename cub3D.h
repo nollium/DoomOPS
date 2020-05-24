@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/24 20:53:48 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/24 21:27:19 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WARNINGS 1
 # define WARN_LEVEL 100000
 # define DEBUG_MODE 0
-# define SHADOW_MODE 0
+# define SHADOW_MODE 1
 
  #define WINDOW_WIDTH		600
  #define WINDOW_HEIGHT		600

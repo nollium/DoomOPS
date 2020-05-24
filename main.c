@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/05/24 20:52:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/24 21:26:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int			main(void)
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	t_data data;
 	t_texture text;
-	load_xpm(&data, "pics/500x500.xpm", &vars);
+	load_xpm(&data, "pics/128x128.xpm", &vars);
 	img_to_text(&data, &text);
 	draw_text(&text, vars.img);
 	vars.text = text;
