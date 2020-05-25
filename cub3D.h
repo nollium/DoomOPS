@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/24 21:27:19 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/25 21:39:16 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,25 @@
  #include <fcntl.h>
  #include "libft/libftprintf.h"
  #include <stdint.h>
+ #include <stdio.h>
+
+# define PI 3.1415926535
+
+# define NORTH	0x000000FF
+# define SOUTH	0x00FF0000
+# define EAST	0x0000FFFF
+# define WEST	0x0000FF00
 
 # define WARNINGS 1
 # define WARN_LEVEL 100000
 # define DEBUG_MODE 0
-# define SHADOW_MODE 1
+# define SHADOW_MODE 0
 
  #define WINDOW_WIDTH		600
  #define WINDOW_HEIGHT		600
 
- #define MAP_WIDTH 			24
- #define MAP_HEIGHT 		24
+ #define MAP_WIDTH 			8
+ #define MAP_HEIGHT 		16
  #define MAP_PATH			"./map.cub"
 
  #define WALL_COLOR			0x00AAAAAA
@@ -56,7 +64,7 @@
  #define ALT_MULT			2
 
  #define SPAWN_X			2
- #define SPAWN_Y			2
+ #define SPAWN_Y			3
 
 /*
 ** SCREEN_DIST = (SCREEN_WIDTH) / (tan(FOV / 2) * 2)
@@ -178,6 +186,7 @@ typedef struct  s_vars
 	t_camera	cam;
 	t_keys      keys[K_BUFF_SIZE + 1];
 	t_texture	text;
+	int			w_color;
 }               t_vars;
 
 int				 add_shade(double dist, int color);

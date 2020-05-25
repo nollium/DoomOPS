@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/05/24 21:26:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/25 21:23:32 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 		if (draw->start <= draw->y && draw->y <= draw->end)
 		{
 			get_color(draw, &(vars->text));
+			draw->color = (vars->w_color) ? vars->w_color : draw->color;
 			if (SHADOW_MODE)	
 				draw->color = add_shade(((double)draw->dist / MAP_HEIGHT * 2), draw->color);
 		}
