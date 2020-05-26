@@ -6,13 +6,13 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/25 21:39:16 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/26 18:31:23 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
  #define CUB3D_H
- #include <time.h>
+ #include <time.h> // for bonus version
  #include <unistd.h>
  #include <mlx.h>
  #include <math.h>
@@ -20,14 +20,14 @@
  #include <fcntl.h>
  #include "libft/libftprintf.h"
  #include <stdint.h>
- #include <stdio.h>
-
+ #include <stdio.h> // to be removed
+ #include <float.h>
 # define PI 3.1415926535
 
-# define NORTH	0x000000FF
-# define SOUTH	0x00FF0000
-# define EAST	0x0000FFFF
-# define WEST	0x0000FF00
+# define NORTH	0
+# define SOUTH	1
+# define EAST	2
+# define WEST	3
 
 # define WARNINGS 1
 # define WARN_LEVEL 100000
@@ -86,6 +86,7 @@ typedef struct	s_ray
 	int			step_y;
 	int			hit;
 	int			side;
+	int			w_num;
 	int			line_height;
 }				t_ray;
 
@@ -185,7 +186,7 @@ typedef struct  s_vars
 	t_data      img2;
 	t_camera	cam;
 	t_keys      keys[K_BUFF_SIZE + 1];
-	t_texture	text;
+	t_texture	text[4];
 	int			w_color;
 }               t_vars;
 
@@ -201,7 +202,7 @@ void			init_vars(int width, int height, t_vars *vars);
 ** RAYCAST 
 */
 
-t_ray			raycast(t_ray *ray, t_vars *vars, int x);
+void			raycast(t_ray *ray, t_vars *vars, int x);
 
 /*
 ** BACKEND 
@@ -213,6 +214,8 @@ t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
 /*
 ** FRONTEND 
 */
+int				load_xpm(t_data *data, char *path, void *mlx);
+void			img_to_text(t_data *data, t_texture *text);
 void			draw_text(t_texture *text, t_data *img);
 int				rgb_to_trgb(unsigned char t, int rgb);
 int		        create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
@@ -223,7 +226,6 @@ void			drawcircle(t_data *data, int x0, int y0, int radius, int color);
 void			drawhalfcircle(t_data *data, int x0, int y0, int radius, int color);
 void			draw_gradient(t_data *data);
 void			draw_rainbow(t_data *data);
-
 void			draw_scene(t_vars *vars);
 
 

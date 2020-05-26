@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/25 20:22:06 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/26 18:36:34 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,15 @@ static	void		mikasa()
 	close(fd);
 }
 
-static void		generate_texture(t_texture *texture)
+static int	load_texture(t_texture *text, char *path, void *mlx)
 {
-	int	x;
-	int	y;
+	t_data data;
 
-	x = -1;
-	y = -1;
-	texture->width = 64;
-	texture->height = 64;
-	texture->array = malloc(sizeof(int) * texture->width * texture->height);
-	while(++x < texture->width)
-	{
-		y = -1;
-		while (++y < texture->height)
-			texture->array[texture->width * y + x] = 0X00FF0000 * 192 * (x % 16 && y % 16);//0xFF *  y * 256 / TEX_HEIGHT;
-	}
+	if (load_xpm(&data, path, mlx) == -1)
+		return (-1);
+	img_to_text(&data, text);
+	mlx_destroy_image(mlx, data.img);
+	return (0);
 }
 
 void		init_vars(int width, int height, t_vars *vars)
@@ -75,5 +68,13 @@ void		init_vars(int width, int height, t_vars *vars)
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
 		}
 	};
-	generate_texture(&(vars->text));
+	if (load_texture(vars->text, "pics/NO.xpm", vars->mlx) == -1)
+		printf("TEXTURE ERROR\n");
+	if (load_texture(vars->text + 1, "pics/SO.xpm", vars->mlx) == -1)
+		printf("TEXTURE ERROR\n");
+	if (load_texture(vars->text + 2, "pics/EA.xpm", vars->mlx) == -1)
+		printf("TEXTURE ERROR\n");
+	if (load_texture(vars->text + 3, "pics/WE.xpm", vars->mlx) == -1)
+		printf("TEXTURE ERROR\n");
+	return ;
 }

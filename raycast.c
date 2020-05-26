@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/25 21:43:22 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/26 18:51:19 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,80 +86,34 @@ static void	get_wall_dist(t_vars *vars, t_ray *ray)
 				/ ray->dir_y;
 }
 
-static void	get_wall_side(t_vars *vars, t_ray *ray)
+static int	get_wall_side(t_vars *vars, t_ray *ray)
 {
-	double angle = atan2(3.0 - (double)vars->cam.y, 4.0 - (double)vars->cam.x) * 180.0 / PI;
-	int		side = ray->side;
-	double diff;
-	double max;
-	int corner;
-//	diff = fabs(angle - 175.0); //west
-//	diff = fabs(angle + 110); //east
-//	printf("angle : %lf && side = %d\n", angle, ray->side);
-	
-	diff = fabs(angle - 45.0);
-	max = diff;
-	corner = 45;
-	diff = fabs(angle - 145.0);
-	if (diff < max)
-	{
-		max = diff;
-		corner = 145;
-	}
-	diff = fabs(angle + 55.0);
-	if (diff < max)
-	{
-		max = diff;
-		corner = 55;
-	}
-	diff = fabs(angle + 135.0);
-	if (diff < max)
-	{
-		max = diff;
-		corner = 135;
-	}
-/*
-	if (corner == 45)
-	{
-		printf((side) ? "West a\n" : "South\n"); // 45
-		vars->w_color = (side) ? 0x000000FF : 0x00FF0000;
-	}
-	else if (corner == 145)
-	{
-		printf((side) ? "East a\n" : "South\n"); // 145
-		vars->w_color = (side) ? 0x00FF00FF : 0x00FF0000;
-	}
-	else if (corner == 55)
-	{
-		printf((side) ? "West b\n" : "North a\n"); // 55
-		vars->w_color = (side) ? 0x000000FF : 0x0000FF00;
-	}
-	else if (corner == 135)
-	{
-		printf((side) ? "East b\n" : "North b\n"); // 135
-		vars->w_color = (side) ? 0x00FF00FF : 0x0000FF00;
-	}*/
+	double		angle;
+	double		diff;
+	double		max;
+	int			corner;
+	static int	corner_angle[] = {45, 145, -55, -135};
+	int			i;
+
+//	printf("angle : %lf && ray->side = %d\n", angle, ray->ray->side);
+	i = -1;
+	angle = atan2(vars->map.y - (double)vars->cam.y, (double)vars->map.x - (double)vars->cam.x) * 180.0 / PI;
+	max = DBL_MAX;
+	while (++i <= 3)
+		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
+		{
+			max = diff;
+			corner = corner_angle[i];
+		}
 
 	if (corner == 45)
-	{
-		printf((side) ? "West a\n" : " North (South a)\n"); // 45
-		vars->w_color = (side) ? WEST : NORTH;
-	}
+		return ((ray->side) ? WEST : NORTH);
 	else if (corner == 145)
-	{
-		printf((side) ? "West (east a)\n" : "South b\n"); // 145
-		vars->w_color = (side) ? WEST : SOUTH;
-	}
-	else if (corner == 55)
-	{
-		printf((side) ? "East (West b)\n" : "North a\n"); // 55
-		vars->w_color = (side) ? EAST : NORTH;
-	}
-	else if (corner == 135)
-	{
-		printf((side) ? "East b\n" : "South (North b)\n"); // 135
-		vars->w_color = (side) ? EAST : SOUTH;
-	}
+		return ((ray->side) ? WEST : SOUTH);
+	else if (corner == -55)
+		return ((ray->side) ? EAST : NORTH);
+	else if (corner == -135)
+		return ((ray->side) ? EAST : SOUTH);
 }
 
 static void	get_texture_coords(t_vars *vars, t_ray *ray)
@@ -179,22 +133,19 @@ static void	get_texture_coords(t_vars *vars, t_ray *ray)
 	wallX -= floor((wallX));
 
 	//x coordinate on the texture
-	vars->text.x = (int)(wallX * (double)(vars->text.width));
+	vars->text[ray->w_num].x = (int)(wallX * (double)(vars->text[ray->w_num].width));
 	if(ray->side == 0 && ray->dir_x > 0)
-		vars->text.x = vars->text.width - vars->text.x - 1;
+		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
 	if(ray->side == 1 && ray->dir_y < 0)
-		vars->text.x = vars->text.width - vars->text.x - 1;
+		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
 }
 
-t_ray		raycast(t_ray *ray, t_vars *vars, int x)
+void		raycast(t_ray *ray, t_vars *vars, int x)
 {
 	init_raycast(vars, x, ray);
 	get_step(vars, ray);
 	perform_dda(vars, ray);
 	get_wall_dist(vars, ray);
+	ray->w_num = get_wall_side(vars, ray);
 	get_texture_coords(vars, ray);
-	if (vars->map.x == 4 && vars->map.y == 3)
-		get_wall_side(vars, ray);
-	else
-		vars->w_color = 0;
 }

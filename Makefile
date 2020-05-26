@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/05/24 19:58:59 by smaccary         ###   ########.fr        #
+#    Updated: 2020/05/26 17:35:13 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RM = rm -rf
 DIRSRC = ./
 
 SRC = main.c frontend.c handlers.c backend.c init.c raycast.c keyboard_handler.c \
-colors_handling.c
+colors_handling.c images.c
 
 OBJ = $(SRC:.c=.o)
 
