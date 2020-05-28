@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/26 18:31:23 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/28 15:33:42 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct	s_pxl
 	int			color;
 }				t_pxl;
 
-
 /*
 ** PLAYER CAMERA 
 */
@@ -151,7 +150,6 @@ typedef struct	s_map
 	char 		worldMap[MAP_WIDTH][MAP_HEIGHT];
 }				t_map;
 
-
 typedef struct	s_texture
 {
 	int			*array;
@@ -176,7 +174,6 @@ typedef struct	s_drawer
 	
 }				t_drawer;
 
-
 typedef struct  s_vars
 {
 	void        *mlx;
@@ -195,7 +192,7 @@ int				 add_shade(double dist, int color);
 /*
 ** INIT 
 */		
-
+int				load_texture(t_texture *text, char *path, void *mlx);
 void			init_vars(int width, int height, t_vars *vars);
 
 /*
@@ -216,7 +213,7 @@ t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
 */
 int				load_xpm(t_data *data, char *path, void *mlx);
 void			img_to_text(t_data *data, t_texture *text);
-void			draw_text(t_texture *text, t_data *img);
+void			draw_text(t_texture *text, t_data *img, int x0, int y0);
 int				rgb_to_trgb(unsigned char t, int rgb);
 int		        create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);

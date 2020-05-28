@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/26 18:36:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/28 18:51:17 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	void		mikasa()
 	close(fd);
 }
 
-static int	load_texture(t_texture *text, char *path, void *mlx)
+int	load_texture(t_texture *text, char *path, void *mlx)
 {
 	t_data data;
 
@@ -68,6 +68,7 @@ void		init_vars(int width, int height, t_vars *vars)
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
 		}
 	};
+
 	if (load_texture(vars->text, "pics/NO.xpm", vars->mlx) == -1)
 		printf("TEXTURE ERROR\n");
 	if (load_texture(vars->text + 1, "pics/SO.xpm", vars->mlx) == -1)

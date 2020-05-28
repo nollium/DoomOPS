@@ -1,1 +1,1 @@
-rm cub3D ; make ; ./cub3D
+make lilclean && make && ./cub3D

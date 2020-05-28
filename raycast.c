@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/26 18:51:19 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/26 21:43:58 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 			max = diff;
 			corner = corner_angle[i];
 		}
-
 	if (corner == 45)
 		return ((ray->side) ? WEST : NORTH);
 	else if (corner == 145)

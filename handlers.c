@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/22 22:57:40 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/26 21:54:03 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,19 +103,23 @@ int			release_handler(int keycode, t_vars *vars)
 	int				tmp;
 	time_t			elapsed;
 
-	i = 0;
-	while (i < K_BUFF_SIZE && ((vars->keys)[i]).keycode != keycode)
-		i++;
-	if (i >= K_BUFF_SIZE)
-		return (0);
-	elapsed = (time(NULL) - ((vars->keys)[i]).time);
-	if (elapsed > 10000 || elapsed < 0)
-		if (DEBUG_MODE)
-			ft_printf("wtf bruce \n");
-	if (DEBUG_MODE)
-		ft_printf("index:%d\nKey %d released %d th time for %ld s\n", i, keycode, ++count, elapsed);
-	((vars->keys)[i]).keycode = -1;
-	((vars->keys)[i]).time = 0;
+	i = -1;
+	while (++i < K_BUFF_SIZE)
+	{
+		if ((vars->keys[i]).keycode == keycode)
+		{
+			if (i >= K_BUFF_SIZE)
+				return (0);
+			elapsed = (time(NULL) - ((vars->keys)[i]).time);
+			if (elapsed > 10000 || elapsed < 0)
+				if (DEBUG_MODE)
+					ft_printf("wtf bruce \n");
+			if (DEBUG_MODE)
+				ft_printf("index:%d\nKey %d released %d th time for %ld s\n", i, keycode, ++count, elapsed);
+			((vars->keys)[i]).keycode = -1;
+			((vars->keys)[i]).time = 0;
+		}
+	}
 	return (0);
 }
 

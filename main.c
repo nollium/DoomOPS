@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/05/26 18:35:12 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/05/28 15:43:06 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		draw_scene(t_vars *vars)
 	}
 }
 
-void		draw_text(t_texture *text, t_data *img)
+void		draw_text(t_texture *text, t_data *img, int x0, int y0)
 {
 	int	x;
 	int	y;
@@ -83,7 +83,7 @@ void		draw_text(t_texture *text, t_data *img)
 		y = -1;
 		while (++y < text->height)
 			//my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
-			my_mlx_pixel_put(img, x, y, text->array[text->width * y + x]);
+			my_mlx_pixel_put(img, x + x0, y + y0, text->array[text->width * y + x]);
 	}
 }
 
@@ -100,8 +100,10 @@ int			main(void)
 	//drawRectangle(vars.img, (int []){200, 200}, (int []){400, 0});
 	draw_gradient(vars.img);
 	hooks(&vars);
-	draw_text(&(vars.text[0]), vars.img);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
+	t_texture text;
+	load_texture(&text, "pics/minecraft.xpm", vars.mlx);
+	draw_text(&(vars.text[0]), vars.img, 0, 0);
+	draw_text(&text, vars.img, 64, 0);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop(vars.mlx);
 }
