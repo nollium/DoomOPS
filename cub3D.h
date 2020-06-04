@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/28 15:33:42 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:57:56 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
  #include <stdio.h> // to be removed
  #include <float.h>
 # define PI 3.1415926535
+
+# define ERROR_CODE 1
+# define SUCCESS_CODE 0
 
 # define NORTH	0
 # define SOUTH	1
@@ -50,7 +53,9 @@
 // #define FLOOR_COLOR		0x0099FFFF
  
  #define K_BUFF_SIZE		20
- 
+ #define T_BUFF_SIZE		8
+ #define S_BUFF_SIZE		1
+
  #define FORWARD_KEY		122
  #define BACKWARD_KEY		115
  #define LEFT_KEY			113
@@ -174,6 +179,21 @@ typedef struct	s_drawer
 	
 }				t_drawer;
 
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	int			tex_num;
+}				t_sprite;
+
+
+typedef struct s_sprites_sorter
+{
+	int			sprite_order;
+	double		sprite_distance;
+}				t_sprites_sorter;
+
+
 typedef struct  s_vars
 {
 	void        *mlx;
@@ -183,9 +203,14 @@ typedef struct  s_vars
 	t_data      img2;
 	t_camera	cam;
 	t_keys      keys[K_BUFF_SIZE + 1];
-	t_texture	text[4];
-	int			w_color;
+	t_texture	text[T_BUFF_SIZE + 1];
+	t_sprite	sprites[S_BUFF_SIZE + 1];
+	int			num_sprites;
+	double		z_buffer[WINDOW_WIDTH];
+	//int			w_color;
 }               t_vars;
+
+
 
 int				 add_shade(double dist, int color);
 
@@ -199,7 +224,9 @@ void			init_vars(int width, int height, t_vars *vars);
 ** RAYCAST 
 */
 
-void			raycast(t_ray *ray, t_vars *vars, int x);
+void			raycast_walls(t_ray *ray, t_vars *vars, int x);
+void			cast_sprites(t_ray *ray, t_sprite *sprites, t_camera *cam, t_vars *vars);
+
 
 /*
 ** BACKEND 

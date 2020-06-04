@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/05/28 15:43:06 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:15:51 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static void	get_color(t_drawer *draw, t_texture *tex)
 {
 	tex->y = (int)draw->tex_pos & (tex->height - 1);
 	draw->tex_pos += draw->step;
-	if (!tex->array)
-		printf("WOOPSIE DOOPSY I DID A LITTLE FUCKY WUCKY\n");
-	draw->color = tex->array[tex->height * tex->y + tex->x];
+	if (!tex->array || (tex->height * tex->y + tex->x) > tex->height * tex->width)
+		return;//printf("WOOPSIE DOOPSY I DID A LITTLE FUCKY WUCKY\n");
+	else
+		draw->color = tex->array[tex->height * tex->y + tex->x];
 	//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 	
 }
@@ -59,18 +60,25 @@ void		init_drawer(t_drawer *draw, t_ray *ray, int text_height)
 	draw->tex_pos = (draw->start - WINDOW_HEIGHT / 2 + draw->line_height / 2) * draw->step;
 }
 
+/*	used variables :
+**		vars->num_sprites; vars->cam; vars->sprite[]; v
+** 
+*/
+
 void		draw_scene(t_vars *vars)
 {
 	t_ray		ray;
 	t_drawer	draw;
+	int			i;
 
 	draw.x = -1;
 	while (++(draw.x) < WINDOW_WIDTH)
 	{
-		raycast(&ray, vars, draw.x);
+		raycast_walls(&ray, vars, draw.x);
 		init_drawer(&draw, &ray, vars->text[ray.w_num].height);
 		draw_col(vars, &draw);
 	}
+	cast_sprites(&ray, vars->sprites, &(vars->cam), vars);
 }
 
 void		draw_text(t_texture *text, t_data *img, int x0, int y0)
@@ -101,9 +109,9 @@ int			main(void)
 	draw_gradient(vars.img);
 	hooks(&vars);
 	t_texture text;
-	load_texture(&text, "pics/minecraft.xpm", vars.mlx);
+	load_texture(&text, "pics/shrek.xpm", vars.mlx);
 	draw_text(&(vars.text[0]), vars.img, 0, 0);
-	draw_text(&text, vars.img, 64, 0);
+//	draw_text(&text, vars.img, 64, 0);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop(vars.mlx);
 }

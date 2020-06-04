@@ -1,56 +1,18 @@
-	double angle = atan2(3.0 - (double)vars->cam.y, 4.0 - (double)vars->cam.x) * 180.0 / PI;
-	double diff;
-	double max;
-	int corner;
-	static int	corner_angle[] = {45, 145, -55, -135};
-	int i;
-//	printf("angle : %lf && ray->side = %d\n", angle, ray->ray->side);
-	
-	i = -1;
-	max = DBL_MAX;
-	while (++i < 3)
-		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
-		{
-			max = diff;
-			corner = corner_angle[i];
-		}
-
-	if (corner == 45)
-		vars->w_color = (ray->side) ? WEST : NORTH;
-	else if (corner == 145)
-		vars->w_color = (ray->side) ? WEST : SOUTH;
-	else if (corner == -55)
-		vars->w_color = (ray->side) ? EAST : NORTH;
-	else if (corner == -135)
-		vars->w_color = (ray->side) ? EAST : SOUTH;
-
-
-static void	get_wall_side(t_vars *vars, t_ray *ray)
+static int	init_sprites_info(t_sprites_sorter *sprites_srt, t_vars *vars)
 {
-	double		angle;
-	double		diff;
-	double		max;
-	int			corner;
-	static int	corner_angle[] = {45, 145, -55, -135};
-	int			i;
+	int		i;
 
-//	printf("angle : %lf && ray->side = %d\n", angle, ray->ray->side);
+	sprites_srt->sprite_order = malloc(sizeof(int) * vars->num_sprites);
+	sprites_srt->sprite_distance = malloc(sizeof(double) * vars->num_sprites);
+	if (!(sprites_srt->sprite_distance && sprites_srt->sprite_distance))
+		return (ERROR_CODE);
 	i = -1;
-	angle = atan2(3.0 - (double)vars->cam.y, 4.0 - (double)vars->cam.x) * 180.0 / PI;
-	max = DBL_MAX;
-	while (++i < 3)
-		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
-		{
-			max = diff;
-			corner = corner_angle[i];
-		}
-
-	if (corner == 45)
-		vars->w_color = (ray->side) ? WEST : NORTH;
-	else if (corner == 145)
-		vars->w_color = (ray->side) ? WEST : SOUTH;
-	else if (corner == -55)
-		vars->w_color = (ray->side) ? EAST : NORTH;
-	else if (corner == -135)
-		vars->w_color = (ray->side) ? EAST : SOUTH;
+	while (++i < vars->num_sprites)
+	{
+		sprites_srt->sprite_order[i] = i;
+		sprites_srt->sprite_distance[i] = ((vars->cam.x - vars->sprites[i].x) * (vars->cam.x - vars->sprites[i].x)
+							+ (vars->cam.y - vars->sprites[i].y) * (vars->cam.y - vars->sprites[i].y));
+	}
+	sort_sprites(vars->num_sprites, sprites_srt);
+	return (SUCCESS_CODE)
 }

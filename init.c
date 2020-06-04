@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/28 18:51:17 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/04 18:12:54 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	load_texture(t_texture *text, char *path, void *mlx)
 
 void		init_vars(int width, int height, t_vars *vars)
 {
-	int 	i;
+	register int 	i;
 
 	//mikasa();
 	i = -1;
@@ -68,14 +68,15 @@ void		init_vars(int width, int height, t_vars *vars)
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
 		}
 	};
-
-	if (load_texture(vars->text, "pics/NO.xpm", vars->mlx) == -1)
-		printf("TEXTURE ERROR\n");
-	if (load_texture(vars->text + 1, "pics/SO.xpm", vars->mlx) == -1)
-		printf("TEXTURE ERROR\n");
-	if (load_texture(vars->text + 2, "pics/EA.xpm", vars->mlx) == -1)
-		printf("TEXTURE ERROR\n");
-	if (load_texture(vars->text + 3, "pics/WE.xpm", vars->mlx) == -1)
-		printf("TEXTURE ERROR\n");
-	return ;
+	
+	char *text_paths[] = {"pics/NO.xpm", "pics/SO.xpm", "pics/EA.xpm", "pics/WE.xpm",
+							"pics/small_shrek.xpm", 0};
+	i = -1;
+	while (text_paths[++i])	
+		if (load_texture(vars->text + i, text_paths[i], vars->mlx) == -1)
+			ft_printf("\e[31mTEXTURE \"%s\" ERROR\e[31m\n", text_paths[i]);
+	
+	vars->sprites[0] = (t_sprite){4.3, 4.3, 4};
+	vars->sprites[1] = (t_sprite){5.0, 5.0, 5};
+	vars->num_sprites = 2;
 }

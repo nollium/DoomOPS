@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/26 21:43:58 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/04 18:10:21 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ static void	get_texture_coords(t_vars *vars, t_ray *ray)
 		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
 }
 
-void		raycast(t_ray *ray, t_vars *vars, int x)
+void		raycast_walls(t_ray *ray, t_vars *vars, int x)
 {
 	init_raycast(vars, x, ray);
 	get_step(vars, ray);
@@ -147,4 +147,64 @@ void		raycast(t_ray *ray, t_vars *vars, int x)
 	get_wall_dist(vars, ray);
 	ray->w_num = get_wall_side(vars, ray);
 	get_texture_coords(vars, ray);
+	vars->z_buffer[x] = ray->perp_wall_dist;
+}
+
+/*
+static void swap_sprites(t_sprite *sprite_1, t_sprite *sprite_2)
+{
+	t_sprite	tmp;
+	
+	tmp = *sprite_1;
+	*sprite_1 = *sprite_2;
+	*sprite_2 = tmp;
+}*/
+/* Function to sort an array using insertion sort*/
+void 		sort_sprites(int n, t_sprites_sorter *arr) 
+{ 
+	register int	i;
+	register int	j; 
+	double 			key;
+
+	for (i = 1; i < n; i++) 
+	{ 
+		key = arr[i].sprite_distance; 
+		j = i - 1; 
+
+		/* Move elements of arr[0..i-1], that are 
+		greater than key, to one position ahead 
+		of their current position */
+		while (j >= 0 && arr[j].sprite_distance < key) 
+		{ 
+			arr[j + 1] = arr[j]; 
+			j = j - 1; 
+		} 
+		arr[j + 1].sprite_distance = key; 
+	} 
+} 
+
+static int	init_sprites_info(t_sprites_sorter *sprites_srt, t_vars *vars)
+{
+	register int i;
+
+	sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites);
+	if (!sprites_srt)
+		return (ERROR_CODE);
+	i = -1;
+	while (++i < vars->num_sprites)
+		sprites_srt[i] = (t_sprites_sorter){i, ((vars->cam.x - vars->sprites[i].x) * (vars->cam.x - vars->sprites[i].x)
+							+ (vars->cam.y - vars->sprites[i].y) * (vars->cam.y - vars->sprites[i].y))};
+	sort_sprites(vars->num_sprites, sprites_srt);
+	for (size_t j = 0; j < vars->num_sprites; j++)
+		printf("%lf ", sprites_srt[j].sprite_distance);
+	return (SUCCESS_CODE);
+}
+
+void		cast_sprites(t_ray *ray, t_sprite *sprites, t_camera *cam, t_vars *vars)
+{
+	t_sprites_sorter *sprites_srt;
+
+	if (!init_sprites_info(sprites_srt, vars))
+		ft_putendl_fd("MALLOC ERROR", 2);
+	free(sprites_srt);
 }
