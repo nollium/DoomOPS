@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/06 22:10:18 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 01:14:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,11 +241,11 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 			draw.end_y = WINDOW_HEIGHT - 1;
 		
 		//calculate width of the sprite
-		draw.sprite_height = fabs((WINDOW_HEIGHT / (draw.transform_y)));
-		draw.start_x = -draw.sprite_height / 2 + draw.sprite_screen_x;
+		draw.sprite_width = fabs((WINDOW_HEIGHT / (draw.transform_y)));
+		draw.start_x = -draw.sprite_width / 2 + draw.sprite_screen_x;
 		if (draw.start_x < 0)
 			draw.start_x = 0;
-		draw.end_x = draw.sprite_height / 2 + draw.sprite_screen_x;
+		draw.end_x = draw.sprite_width / 2 + draw.sprite_screen_x;
 		if (draw.end_x >= WINDOW_WIDTH)
 			draw.end_x = WINDOW_WIDTH - 1;
 	
@@ -257,12 +257,16 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 			//2) it's on the screen (left)
 			//3) it's on the screen (right)
 			//4) vars->z_buffer, with perpendicular distance
-		//	if (draw.transform_y > 0 && stripe > 0 && stripe < WINDOW_HEIGHT && draw.transform_y < vars->z_buffer[stripe])
-			for(int y = draw.start_y; y < draw.end_y; y++) //for every pixel of the current stripe
+			if (draw.transform_y > 0 && stripe > 0 && stripe < WINDOW_HEIGHT && draw.transform_y < vars->z_buffer[stripe])
 			{
-				int d = (y) * 256 - WINDOW_HEIGHT * 128 + draw.sprite_height * 128; //256 and 128 factors to avoid floats
-				int texY = ((d * text->width) / draw.sprite_height) / 256;
-				my_mlx_pixel_put(vars->img, stripe, y, text->array[text->width * texY + texX]);
+				for(int y = draw.start_y; y < draw.end_y; y++) //for every pixel of the current stripe
+				{
+					int d = (y) * 256 - WINDOW_HEIGHT * 128 + draw.sprite_height * 128; //256 and 128 factors to avoid floats
+					int texY = ((d * text->width) / draw.sprite_height) / 256;
+					my_mlx_pixel_put(vars->img, stripe, y, text->array[text->width * texY + texX]);
+				}
+				if (v_sprite.tex_num = 5)
+					vars->redraw = 1;
 			}
 		}
 	}

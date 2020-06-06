@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/06/06 21:24:11 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 00:39:27 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,7 @@ int			main(void)
 	t_vars	vars;
 	int		i = -1;
 	
-	DEBUG_PRINT("hello");
 	init_vars(WINDOW_WIDTH, WINDOW_HEIGHT, &vars);
-	DEBUG_PRINT("hi");
 	vars.img = &vars.img2;
 	//my_mlx_pixel_put(vars.img, 5, 5, 0x00FF0000);
 	//my_line_put(vars.img, 1, 1, 1000, 1000, 0xFF);

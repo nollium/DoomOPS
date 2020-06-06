@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/06 21:48:41 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 01:20:10 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,20 @@ void		init_vars(int width, int height, t_vars *vars)
 							"pics/SO.xpm",
 							"pics/EA.xpm",
 							"pics/WE.xpm",
-							"pics/small_shrek.xpm",
-							"pics/chibi.xpm",
 							"pics/wtc.xpm",
+							"pics/128x128.xpm",
+							"pics/64_64.xpm",
 							0};
+
+	/*
+	char *text_paths[] = {	"pics/NO.xpm",
+							"pics/SO.xpm",
+							"pics/EA.xpm",
+							"pics/WE.xpm",
+							"pics/NO.xpm",
+							"pics/64_64.xpm",
+							"pics/EA.xpm",
+							0};*/
 	i = -1;
 	while (text_paths[++i]);
 	vars->text = malloc(sizeof(t_texture) * (i + 1));
@@ -92,10 +102,10 @@ void		init_vars(int width, int height, t_vars *vars)
 			ft_printf("\e[31mTEXTURE \"%s\" ERROR\e[31m\n", text_paths[i]);
 	vars->text[i] = (t_texture) {0};
 	
-	vars->sprites[0] = (t_sprite){10.0, 4.0, 4};
+	vars->sprites[0] = (t_sprite){11.0, 5.0, 4};
 
 	vars->sprites[1] = (t_sprite){4.0, 10.0, 5};
 
-	vars->sprites[2] = (t_sprite){4.0, 1.0, 6};
+	vars->sprites[2] = (t_sprite){4.0, 2.0, 6};
 	vars->num_sprites = 4 - 4 + 3;
 }
