@@ -1,18 +1,21 @@
-static int	init_sprites_info(t_sprites_sorter *sprites_srt, t_vars *vars)
-{
-	int		i;
+invDet = 1.0 / (planeX * dirY - dirX * planeY); //required for correct matrix multiplication
 
-	sprites_srt->sprite_order = malloc(sizeof(int) * vars->num_sprites);
-	sprites_srt->sprite_distance = malloc(sizeof(double) * vars->num_sprites);
-	if (!(sprites_srt->sprite_distance && sprites_srt->sprite_distance))
-		return (ERROR_CODE);
-	i = -1;
-	while (++i < vars->num_sprites)
-	{
-		sprites_srt->sprite_order[i] = i;
-		sprites_srt->sprite_distance[i] = ((vars->cam.x - vars->sprites[i].x) * (vars->cam.x - vars->sprites[i].x)
-							+ (vars->cam.y - vars->sprites[i].y) * (vars->cam.y - vars->sprites[i].y));
-	}
-	sort_sprites(vars->num_sprites, sprites_srt);
-	return (SUCCESS_CODE)
-}
+transformX = invDet * (dirY * spriteX - dirX * spriteY);
+transformY = invDet * (-planeY * spriteX + planeX * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
+
+spriteScreenX = int((w / 2) * (1 + transformX / transformY));
+
+//calculate height of the sprite on screen
+spriteHeight = abs(int(h / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
+//calculate lowest and highest pixel to fill in current stripe
+drawStartY = -spriteHeight / 2 + h / 2;
+if (drawStartY < 0) drawStartY = 0;
+drawEndY = spriteHeight / 2 + h / 2;
+if (drawEndY >= h) drawEndY = h - 1;
+
+//calculate width of the sprite
+spriteWidth = abs( (h / (transformY)));
+drawStartX = -spriteWidth / 2 + spriteScreenX;
+if (drawStartX < 0) drawStartX = 0;
+drawEndX = spriteWidth / 2 + spriteScreenX;
+if (drawEndX >= w) drawEndX = w - 1;

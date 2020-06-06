@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/04 17:57:56 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/06 21:19:32 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,23 @@
  #include <stdint.h>
  #include <stdio.h> // to be removed
  #include <float.h>
-# define PI 3.1415926535
+ 
+ #define DEBUG_PRINT(txt) printf("\n\n"); printf(txt); printf("\n\n")
 
-# define ERROR_CODE 1
-# define SUCCESS_CODE 0
-
-# define NORTH	0
-# define SOUTH	1
-# define EAST	2
-# define WEST	3
-
-# define WARNINGS 1
-# define WARN_LEVEL 100000
-# define DEBUG_MODE 0
-# define SHADOW_MODE 0
+ #define PI 3.141592653
+ 
+ #define ERROR_CODE		1
+ #define SUCCESS_CODE	0
+ 
+ #define NORTH	0
+ #define SOUTH	1
+ #define EAST	2
+ #define WEST	3
+ 
+ #define WARNINGS 		1
+ #define WARN_LEVEL		100000
+ #define DEBUG_MODE		0
+ #define SHADOW_MODE	0
 
  #define WINDOW_WIDTH		600
  #define WINDOW_HEIGHT		600
@@ -43,6 +46,8 @@
  #define MAP_WIDTH 			8
  #define MAP_HEIGHT 		16
  #define MAP_PATH			"./map.cub"
+
+ #define TRANS_COLOR		0x00000001
 
  #define WALL_COLOR			0x00AAAAAA
  #define WALL_SIDE_COLOR	0x00888888
@@ -186,12 +191,29 @@ typedef struct s_sprite
 	int			tex_num;
 }				t_sprite;
 
-
 typedef struct s_sprites_sorter
 {
 	int			sprite_order;
 	double		sprite_distance;
 }				t_sprites_sorter;
+
+typedef struct s_sprite_drawer
+{
+	double		sprite_x;
+	double		sprite_y;
+	double		transform_x;
+	double		transform_y;
+	double		denom;
+	int			sprite_screen_x;
+	int			sprite_height;
+	int			sprite_width;
+	int			start_x;
+	int			start_y;
+	int			end_x;
+	int			end_y;
+	int			tex_x;
+}				t_sprite_drawer;
+
 
 
 typedef struct  s_vars
@@ -203,8 +225,8 @@ typedef struct  s_vars
 	t_data      img2;
 	t_camera	cam;
 	t_keys      keys[K_BUFF_SIZE + 1];
-	t_texture	text[T_BUFF_SIZE + 1];
-	t_sprite	sprites[S_BUFF_SIZE + 1];
+	t_texture	*text;
+	t_sprite	*sprites;
 	int			num_sprites;
 	double		z_buffer[WINDOW_WIDTH];
 	//int			w_color;
@@ -225,7 +247,7 @@ void			init_vars(int width, int height, t_vars *vars);
 */
 
 void			raycast_walls(t_ray *ray, t_vars *vars, int x);
-void			cast_sprites(t_ray *ray, t_sprite *sprites, t_camera *cam, t_vars *vars);
+void			cast_sprites(t_sprite *sprites, t_camera *, t_vars *);
 
 
 /*
@@ -238,6 +260,7 @@ t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
 /*
 ** FRONTEND 
 */
+
 int				load_xpm(t_data *data, char *path, void *mlx);
 void			img_to_text(t_data *data, t_texture *text);
 void			draw_text(t_texture *text, t_data *img, int x0, int y0);
@@ -256,6 +279,7 @@ void			draw_scene(t_vars *vars);
 /*
 ** EVENT HANDLERS 
 */
+
 int				keyboard_handler(t_vars *vars);
 void    		hooks(t_vars *vars);
 int				loop_handler(t_vars *vars);

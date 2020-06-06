@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/04 18:12:54 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/06 21:48:41 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,53 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, width, height, "cub3D");
 	vars->img2.img = mlx_new_image(vars->mlx, width, height);
-	vars->img2.addr = mlx_get_data_addr(vars->img2.img, &(vars->img2.bits_per_pixel), &(vars->img2).line_length,
+	vars->img2.addr = mlx_get_data_addr(vars->img2.img,
+	&(vars->img2.bits_per_pixel), &(vars->img2).line_length,
 								 &(vars->img2).endian);
 	vars->img2.width = width;
 	vars->img2.height = height;
-	vars->cam = (t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED, (t_plane){0.0, 0.66}};
+	vars->cam = (t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
+	(t_plane){0.0, 0.66}};
 	vars->map = (t_map)
 	{
 		0,0,
 		{
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-			{'1','1','0','0','0','1','1','1','1','1','1','1','1','1','1','1'},
-			{'1','0','0','0','0','0','1','1','1','1','1','1','1','1','1','1'},
-			{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
+			{'1','1','0','0','0','1','1','1','1','0','0','0','1','1','1','1'},
+			{'1','0','0','0','0','0','1','1','1','0','0','0','1','1','1','1'},
+			{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'}, //10,4
 			{'1','0','0','1','0','0','0','0','0','0','0','0','0','0','0','1'},
-			{'1','0','0','0','0','0','1','1','1','1','1','1','1','1','1','1'},
-			{'1','0','0','0','0','0','1','1','1','1','1','1','1','1','1','1'},
+			{'1','0','0','0','0','0','1','1','0','0','0','0','1','1','1','1'},
+			{'1','0','0','0','0','0','1','1','0','0','0','0','1','1','1','1'},
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
 		}
 	};
 	
-	char *text_paths[] = {"pics/NO.xpm", "pics/SO.xpm", "pics/EA.xpm", "pics/WE.xpm",
-							"pics/small_shrek.xpm", 0};
+
+	char *text_paths[] = {	"pics/NO.xpm",
+							"pics/SO.xpm",
+							"pics/EA.xpm",
+							"pics/WE.xpm",
+							"pics/small_shrek.xpm",
+							"pics/chibi.xpm",
+							"pics/wtc.xpm",
+							0};
 	i = -1;
+	while (text_paths[++i]);
+	vars->text = malloc(sizeof(t_texture) * (i + 1));
+	vars->sprites = malloc(sizeof(t_sprite) * (i - 3 + 1));
+	i = -1;
+	if (!(vars->text && vars->sprites))
+		ft_putendl_fd("MALLOC ERROR", 1);
 	while (text_paths[++i])	
 		if (load_texture(vars->text + i, text_paths[i], vars->mlx) == -1)
 			ft_printf("\e[31mTEXTURE \"%s\" ERROR\e[31m\n", text_paths[i]);
+	vars->text[i] = (t_texture) {0};
 	
-	vars->sprites[0] = (t_sprite){4.3, 4.3, 4};
-	vars->sprites[1] = (t_sprite){5.0, 5.0, 5};
-	vars->num_sprites = 2;
+	vars->sprites[0] = (t_sprite){10.0, 4.0, 4};
+
+	vars->sprites[1] = (t_sprite){4.0, 10.0, 5};
+
+	vars->sprites[2] = (t_sprite){4.0, 1.0, 6};
+	vars->num_sprites = 4 - 4 + 3;
 }

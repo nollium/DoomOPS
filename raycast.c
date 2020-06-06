@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/04 18:10:21 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/06 22:10:18 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 
 //	printf("angle : %lf && ray->side = %d\n", angle, ray->ray->side);
 	i = -1;
-	angle = atan2(vars->map.y - (double)vars->cam.y, (double)vars->map.x - (double)vars->cam.x) * 180.0 / PI;
+	angle = atan2(vars->map.y - (double)vars->cam.y, (double)vars->map.x
+		- (double)vars->cam.x) * 180.0 / PI;
 	max = DBL_MAX;
 	while (++i <= 3)
 		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
@@ -132,10 +133,11 @@ static void	get_texture_coords(t_vars *vars, t_ray *ray)
 	wallX -= floor((wallX));
 
 	//x coordinate on the texture
-	vars->text[ray->w_num].x = (int)(wallX * (double)(vars->text[ray->w_num].width));
-	if(ray->side == 0 && ray->dir_x > 0)
+	vars->text[ray->w_num].x = (int)
+		(wallX * (double)(vars->text[ray->w_num].width));
+	if (ray->side == 0 && ray->dir_x > 0)
 		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
-	if(ray->side == 1 && ray->dir_y < 0)
+	if (ray->side == 1 && ray->dir_y < 0)
 		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
 }
 
@@ -159,52 +161,110 @@ static void swap_sprites(t_sprite *sprite_1, t_sprite *sprite_2)
 	*sprite_1 = *sprite_2;
 	*sprite_2 = tmp;
 }*/
-/* Function to sort an array using insertion sort*/
+
+/*
+** Insertion sort for sorting sprites from further away to player, to closer from player
+*/
+
 void 		sort_sprites(int n, t_sprites_sorter *arr) 
 { 
 	register int	i;
 	register int	j; 
 	double 			key;
 
-	for (i = 1; i < n; i++) 
+	i = 0;
+	while (++i < n) 
 	{ 
 		key = arr[i].sprite_distance; 
 		j = i - 1; 
-
-		/* Move elements of arr[0..i-1], that are 
-		greater than key, to one position ahead 
-		of their current position */
 		while (j >= 0 && arr[j].sprite_distance < key) 
 		{ 
 			arr[j + 1] = arr[j]; 
 			j = j - 1; 
-		} 
+		}
 		arr[j + 1].sprite_distance = key; 
 	} 
 } 
 
-static int	init_sprites_info(t_sprites_sorter *sprites_srt, t_vars *vars)
+static void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
 {
-	register int i;
+	register int		i;
 
-	sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites);
-	if (!sprites_srt)
-		return (ERROR_CODE);
 	i = -1;
 	while (++i < vars->num_sprites)
-		sprites_srt[i] = (t_sprites_sorter){i, ((vars->cam.x - vars->sprites[i].x) * (vars->cam.x - vars->sprites[i].x)
-							+ (vars->cam.y - vars->sprites[i].y) * (vars->cam.y - vars->sprites[i].y))};
+		sprites_srt[i] = (t_sprites_sorter)
+		{i, ((vars->cam.x - vars->sprites[i].x)
+			* (vars->cam.x - vars->sprites[i].x)
+			+ (vars->cam.y - vars->sprites[i].y)
+			* (vars->cam.y - vars->sprites[i].y))
+		};
 	sort_sprites(vars->num_sprites, sprites_srt);
-	for (size_t j = 0; j < vars->num_sprites; j++)
+
+	/*for (size_t j = 0; j < vars->num_sprites; j++)
 		printf("%lf ", sprites_srt[j].sprite_distance);
-	return (SUCCESS_CODE);
+	printf("\n");debug sorting*/
 }
 
-void		cast_sprites(t_ray *ray, t_sprite *sprites, t_camera *cam, t_vars *vars)
+void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 {
-	t_sprites_sorter *sprites_srt;
-
-	if (!init_sprites_info(sprites_srt, vars))
+	int					i;
+	t_sprite			v_sprite;
+	t_sprites_sorter	*sprites_srt;
+	t_sprite_drawer		draw;
+	t_texture			*text;
+	
+	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
 		ft_putendl_fd("MALLOC ERROR", 2);
+	init_sprites_info(vars, sprites_srt);
+	i = -1;
+	while (++i < vars->num_sprites)
+	{
+		v_sprite = sprites[sprites_srt[i].sprite_order];
+		v_sprite.x -= cam->x;
+		v_sprite.y -= cam->y;
+		text = &(vars->text[v_sprite.tex_num]);
+
+		draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
+		draw.transform_x = draw.denom * (cam->dir_y * v_sprite.x - cam->dir_x * v_sprite.y);
+		draw.transform_y = draw.denom * (-cam->plane.y * v_sprite.x + cam->plane.x * v_sprite.y);
+		
+		draw.sprite_screen_x = (int)(WINDOW_WIDTH / 2) * (1 + draw.transform_x / draw.transform_y);
+		
+		//calculate height of the sprite on screen
+		draw.sprite_height = fabs((int)WINDOW_HEIGHT / (draw.transform_y));
+		//calculate lowest and highest pixel to fill in current stripe
+		draw.start_y = -draw.sprite_height / 2 + WINDOW_HEIGHT / 2;
+		if (draw.start_y < 0)
+			draw.start_y = 0;
+		draw.end_y = draw.sprite_height / 2 + WINDOW_HEIGHT / 2;
+		if (draw.end_y >= WINDOW_HEIGHT)
+			draw.end_y = WINDOW_HEIGHT - 1;
+		
+		//calculate width of the sprite
+		draw.sprite_height = fabs((WINDOW_HEIGHT / (draw.transform_y)));
+		draw.start_x = -draw.sprite_height / 2 + draw.sprite_screen_x;
+		if (draw.start_x < 0)
+			draw.start_x = 0;
+		draw.end_x = draw.sprite_height / 2 + draw.sprite_screen_x;
+		if (draw.end_x >= WINDOW_WIDTH)
+			draw.end_x = WINDOW_WIDTH - 1;
+	
+		for(int stripe = draw.start_x; stripe < draw.end_x; stripe++)
+		{
+			int texX = (int)(256 * (stripe - (-draw.sprite_width / 2 + draw.sprite_screen_x)) * text->width / draw.sprite_width) / 256;
+			//the conditions in the if are:
+			//1) it's in front of camera plane so you don't see things behind you
+			//2) it's on the screen (left)
+			//3) it's on the screen (right)
+			//4) vars->z_buffer, with perpendicular distance
+		//	if (draw.transform_y > 0 && stripe > 0 && stripe < WINDOW_HEIGHT && draw.transform_y < vars->z_buffer[stripe])
+			for(int y = draw.start_y; y < draw.end_y; y++) //for every pixel of the current stripe
+			{
+				int d = (y) * 256 - WINDOW_HEIGHT * 128 + draw.sprite_height * 128; //256 and 128 factors to avoid floats
+				int texY = ((d * text->width) / draw.sprite_height) / 256;
+				my_mlx_pixel_put(vars->img, stripe, y, text->array[text->width * texY + texX]);
+			}
+		}
+	}
 	free(sprites_srt);
 }

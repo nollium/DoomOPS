@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/06/04 17:15:51 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/06 21:24:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		draw_scene(t_vars *vars)
 		init_drawer(&draw, &ray, vars->text[ray.w_num].height);
 		draw_col(vars, &draw);
 	}
-	cast_sprites(&ray, vars->sprites, &(vars->cam), vars);
+	cast_sprites(vars->sprites, &(vars->cam), vars);
 }
 
 void		draw_text(t_texture *text, t_data *img, int x0, int y0)
@@ -99,8 +99,11 @@ void		draw_text(t_texture *text, t_data *img, int x0, int y0)
 int			main(void)
 {
 	t_vars	vars;
-
+	int		i = -1;
+	
+	DEBUG_PRINT("hello");
 	init_vars(WINDOW_WIDTH, WINDOW_HEIGHT, &vars);
+	DEBUG_PRINT("hi");
 	vars.img = &vars.img2;
 	//my_mlx_pixel_put(vars.img, 5, 5, 0x00FF0000);
 	//my_line_put(vars.img, 1, 1, 1000, 1000, 0xFF);
@@ -110,7 +113,8 @@ int			main(void)
 	hooks(&vars);
 	t_texture text;
 	load_texture(&text, "pics/shrek.xpm", vars.mlx);
-	draw_text(&(vars.text[0]), vars.img, 0, 0);
+	while ((vars.text)[++i].array)
+		draw_text(&(vars.text[i]), vars.img, 0, 0);
 //	draw_text(&text, vars.img, 64, 0);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop(vars.mlx);
