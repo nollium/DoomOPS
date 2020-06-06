@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/06 21:19:32 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 01:11:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  #include <stdio.h> // to be removed
  #include <float.h>
  
- #define DEBUG_PRINT(txt) printf("\n\n"); printf(txt); printf("\n\n")
+ #define DEBUG_PRINT(txt) printf("\n\n%s\n", txt)
 
  #define PI 3.141592653
  
@@ -229,6 +229,7 @@ typedef struct  s_vars
 	t_sprite	*sprites;
 	int			num_sprites;
 	double		z_buffer[WINDOW_WIDTH];
+	int			redraw;
 	//int			w_color;
 }               t_vars;
 

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/26 21:54:03 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 01:23:29 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,20 +134,35 @@ t_keys	*key_chr(t_keys *arr, int keycode, size_t size)
 	return (NULL);
 }
 
-int			loop_handler(t_vars *vars)
+int		ennemies_handler(t_vars *vars, t_sprite *sprites)
 {
-	int		redraw;
-	clock_t	t0;
+	static int left = 1;
+	
+	if (sprites[1].x > 6.5)
+		left = 0;
+	else if (sprites[1].x < 2.0)
+		left = 1;
+	if (left)
+		sprites[1].x += 0.1;
+	else
+		sprites[1].x -= 0.1;
+	return (0);
+}
 
-	redraw = keyboard_handler(vars);
-	if (redraw)
+int		loop_handler(t_vars *vars)
+{
+	clock_t	t0;
+// 4.0 10.0
+	vars->redraw |= keyboard_handler(vars);
+	vars->redraw |= ennemies_handler(vars, vars->sprites);
+	if (vars->redraw)
 	{
 		draw_scene(vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, (vars->img)->img, 0, 0);
 		if (DEBUG_MODE)
 			printf("DRAWING : x%Lf y%Lf\ndir_x:%Lf dir_y:%Lf\n", vars->cam.x, vars->cam.y, vars->cam.dir_x, vars->cam.dir_y);
 		t0 = clock();
-		while (clock() - t0 < CLOCKS_PER_SEC / 30);
-	}	
+		while (clock() - t0 < CLOCKS_PER_SEC / 120);
+	}
 	return (0);
 }
