@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 13:16:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 16:48:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,10 @@ typedef struct s_sprite_drawer
 	int			start_y;
 	int			end_x;
 	int			end_y;
-	int			tex_x;
+	int			text_x;
+	int			text_y;
 	int			color;
+	double		shader;
 }				t_sprite_drawer;
 
 

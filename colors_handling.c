@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:58:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 12:55:47 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 17:04:01 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 int add_shade(double shade, int color)
 {
-	int i;
-	int trgb[4];
+	register int i;
+	unsigned char trgb[4];
 
 	if (0 > shade || color == 0x1 || shade > 1)
 		shade = (shade < 0 || color == 0x1) ? 0 : 1;
+	/*
 	trgb[0] = color & 0xFF;
 	trgb[1] = (color >> 8) & 0xFF;
 	trgb[2] = (color >> 16) & 0xFF;
-	trgb[3] = (color >> 24) & 0xFF;
+	trgb[3] = (color >> 24) & 0xFF;*/
+	*(int *)trgb = color;
 	i = -1;
 	while (++i < 3)
 		trgb[i] = trgb[i] - shade * trgb[i];
-  	return(trgb[3] << 24 | trgb[2] << 16 | trgb[1] << 8 | trgb[0]);
+	return (*(int *)trgb);
+  	//return (trgb[3] << 24 | trgb[2] << 16 | trgb[1] << 8 | trgb[0]);
 }
 
 /*
