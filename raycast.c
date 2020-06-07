@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 01:14:11 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 13:22:15 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 	t_sprite_drawer		draw;
 	t_texture			*text;
 	
+	vars->seen_sprite = 0;
 	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
 		ft_putendl_fd("MALLOC ERROR", 2);
 	init_sprites_info(vars, sprites_srt);
@@ -222,6 +223,7 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 		v_sprite = sprites[sprites_srt[i].sprite_order];
 		v_sprite.x -= cam->x;
 		v_sprite.y -= cam->y;
+		draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
 		text = &(vars->text[v_sprite.tex_num]);
 
 		draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
@@ -263,10 +265,14 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 				{
 					int d = (y) * 256 - WINDOW_HEIGHT * 128 + draw.sprite_height * 128; //256 and 128 factors to avoid floats
 					int texY = ((d * text->width) / draw.sprite_height) / 256;
-					my_mlx_pixel_put(vars->img, stripe, y, text->array[text->width * texY + texX]);
+					if (draw.dist < 8)
+					{
+						draw.color = add_shade(draw.dist / MAP_HEIGHT * 2, text->array[text->width * texY + texX]);
+						my_mlx_pixel_put(vars->img, stripe, y, draw.color);
+					}
 				}
-				if (v_sprite.tex_num = 5)
 					vars->redraw = 1;
+					vars->seen_sprite = 1;
 			}
 		}
 	}

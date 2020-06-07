@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 01:20:10 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 13:55:34 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,11 @@ void		init_vars(int width, int height, t_vars *vars)
 							"pics/SO.xpm",
 							"pics/EA.xpm",
 							"pics/WE.xpm",
-							"pics/wtc.xpm",
+							"pics/wtc_bigger.xpm",
 							"pics/128x128.xpm",
-							"pics/64_64.xpm",
+							"pics/small_shrek.xpm",
 							0};
 
-	/*
-	char *text_paths[] = {	"pics/NO.xpm",
-							"pics/SO.xpm",
-							"pics/EA.xpm",
-							"pics/WE.xpm",
-							"pics/NO.xpm",
-							"pics/64_64.xpm",
-							"pics/EA.xpm",
-							0};*/
 	i = -1;
 	while (text_paths[++i]);
 	vars->text = malloc(sizeof(t_texture) * (i + 1));

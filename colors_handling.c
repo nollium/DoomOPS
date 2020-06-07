@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:58:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/01 15:50:22 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 12:55:47 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,9 @@ int add_shade(double shade, int color)
 {
 	int i;
 	int trgb[4];
-	static time_t warning_count = 0;
 
-	if (0 > shade || shade > 1)
-	{
-		if (WARNINGS && !(++warning_count % WARN_LEVEL))
-			printf("\e[1;35m Warning : \e[0m add_shade should only use a shade between 0 and 1 (%F).\n", shade * WINDOW_WIDTH / 2);
-		shade = (shade < 0) ? 0 : 1;
-	}
+	if (0 > shade || color == 0x1 || shade > 1)
+		shade = (shade < 0 || color == 0x1) ? 0 : 1;
 	trgb[0] = color & 0xFF;
 	trgb[1] = (color >> 8) & 0xFF;
 	trgb[2] = (color >> 16) & 0xFF;

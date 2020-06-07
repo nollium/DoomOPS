@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 01:11:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 13:16:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
  #define WARNINGS 		1
  #define WARN_LEVEL		100000
  #define DEBUG_MODE		0
- #define SHADOW_MODE	0
+ #define SHADOW_MODE	1
 
  #define WINDOW_WIDTH		600
  #define WINDOW_HEIGHT		600
@@ -204,6 +204,7 @@ typedef struct s_sprite_drawer
 	double		transform_x;
 	double		transform_y;
 	double		denom;
+	double		dist;
 	int			sprite_screen_x;
 	int			sprite_height;
 	int			sprite_width;
@@ -212,6 +213,7 @@ typedef struct s_sprite_drawer
 	int			end_x;
 	int			end_y;
 	int			tex_x;
+	int			color;
 }				t_sprite_drawer;
 
 
@@ -230,6 +232,7 @@ typedef struct  s_vars
 	int			num_sprites;
 	double		z_buffer[WINDOW_WIDTH];
 	int			redraw;
+	int			seen_sprite;
 	//int			w_color;
 }               t_vars;
 
