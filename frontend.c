@@ -6,22 +6,16 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:42:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/06 20:00:25 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 21:43:54 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int		rgb_to_trgb(unsigned char t, int rgb)
-{
-	return (create_trgb(t, (rgb >> 16) & 0xFF,
-			(rgb >> 8) & 0xFF, (rgb) & 0xFF));
-}
-
-int		create_trgb(unsigned char a, unsigned char r, unsigned char g,
+int		create_rgb(unsigned char r, unsigned char g,
 					unsigned char b)
 {
-	return (a << 24 | r << 16 | g << 8 | b);
+	return (r << 16 | g << 8 | b);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -153,7 +147,7 @@ void	draw_gradient(t_data *data)
 		x = 0;
 		while (x < WINDOW_WIDTH)
 			{
-				my_mlx_pixel_put(data, x, y,add_shade(0.5, create_trgb(255, sin(0.3 * i) * 127 + 128, sin(0.3 * i + 2.0) * 127 + 128, sin(0.3 * i + 4.0) * 127 + 128)));
+				my_mlx_pixel_put(data, x, y, add_shade(0.5, create_rgb((sin(0.3 * i) * 127 + 128), (sin(0.3 * i + 2.0) * 127 + 128), (sin(0.3 * i + 4.0) * 127 + 128))));
 				x++;
 			}
 		
@@ -171,7 +165,7 @@ void	draw_rainbow(t_data *data)
 
 	while (++r < 900)
 	{
-		drawhalfcircle(data, x, y, r, create_trgb(255, sin(0.17 * i) * 127 + 128
+		drawhalfcircle(data, x, y, r, create_rgb(sin(0.17 * i) * 127 + 128
 		, sin(0.17 * i + 2.0) * 127 + 128, sin(0.17 * i + 4.0) * 127 + 128));
 		i += 0.0965;
 	}

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 16:48:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/09 00:28:16 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
  #define WARNINGS 		1
  #define WARN_LEVEL		100000
  #define DEBUG_MODE		0
- #define SHADOW_MODE	1
+ #define SHADOW_MODE	0
 
- #define WINDOW_WIDTH		600
- #define WINDOW_HEIGHT		600
+ #define WINDOW_WIDTH		800
+ #define WINDOW_HEIGHT		800
 
  #define MAP_WIDTH 			8
  #define MAP_HEIGHT 		16
@@ -207,13 +207,17 @@ typedef struct s_sprite_drawer
 	double		dist;
 	int			sprite_screen_x;
 	int			sprite_height;
-	int			sprite_width;
+	double		half_sprite_height;
+	double		sprite_width;
+	double		half_sprite_width;
+	double		half_win_height;
+	double		half_win_width;
 	int			start_x;
 	int			start_y;
 	int			end_x;
 	int			end_y;
-	int			text_x;
-	int			text_y;
+	size_t		text_x;
+	size_t		text_y;
 	int			color;
 	double		shader;
 }				t_sprite_drawer;
@@ -226,7 +230,7 @@ typedef struct  s_vars
 	void        *win;
 	t_map		map;
 	t_data      *img;
-	t_data      img2;
+	t_data      img2[2];
 	t_camera	cam;
 	t_keys      keys[K_BUFF_SIZE + 1];
 	t_texture	*text;

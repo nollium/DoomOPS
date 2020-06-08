@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 16:48:35 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/09 00:46:15 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,20 +152,20 @@ void		raycast_walls(t_ray *ray, t_vars *vars, int x)
 	vars->z_buffer[x] = ray->perp_wall_dist;
 }
 
-/*
-static void swap_sprites(t_sprite *sprite_1, t_sprite *sprite_2)
+
+static void swap_sprites(t_sprites_sorter *sprite_1, t_sprites_sorter *sprite_2)
 {
-	t_sprite	tmp;
+	t_sprites_sorter	tmp;
 	
 	tmp = *sprite_1;
 	*sprite_1 = *sprite_2;
 	*sprite_2 = tmp;
-}*/
+}
 
 /*
 ** Insertion sort for sorting sprites from further away to player, to closer from player
 */
-
+/*
 void 		sort_sprites(int n, t_sprites_sorter *arr) 
 { 
 	register int	i;
@@ -184,7 +184,25 @@ void 		sort_sprites(int n, t_sprites_sorter *arr)
 		}
 		arr[j + 1].sprite_distance = key; 
 	} 
-} 
+} */
+
+void		sort_sprites(int n, t_sprites_sorter *arr)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < n)
+	{
+		j = i;
+		while (j > 0 && arr[j - 1].sprite_distance < arr[j].sprite_distance)
+		{
+			swap_sprites(arr + j, arr + j - 1);
+			j--;
+		}
+		i++;
+	}
+}
 
 static void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
 {
@@ -217,6 +235,9 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
 		ft_putendl_fd("MALLOC ERROR", 2);
 	init_sprites_info(vars, sprites_srt);
+	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
+	draw.half_win_height = WINDOW_HEIGHT / 2;
+	draw.half_win_width = WINDOW_WIDTH / 2;
 	i = -1;
 	while (++i < vars->num_sprites)
 	{
@@ -224,59 +245,67 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 		v_sprite.x -= cam->x;
 		v_sprite.y -= cam->y;
 		draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
-		text = &(vars->text[v_sprite.tex_num]);
-
-		draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
-		draw.transform_x = draw.denom * (cam->dir_y * v_sprite.x - cam->dir_x * v_sprite.y);
-		draw.transform_y = draw.denom * (-cam->plane.y * v_sprite.x + cam->plane.x * v_sprite.y);
-		
-		draw.sprite_screen_x = (int)(WINDOW_WIDTH / 2) * (1 + draw.transform_x / draw.transform_y);
-		
-		//calculate height of the sprite on screen
-		draw.sprite_height = fabs((int)WINDOW_HEIGHT / (draw.transform_y));
-		//calculate lowest and highest pixel to fill in current stripe
-		draw.start_y = -draw.sprite_height / 2 + WINDOW_HEIGHT / 2;
-		if (draw.start_y < 0)
-			draw.start_y = 0;
-		draw.end_y = draw.sprite_height / 2 + WINDOW_HEIGHT / 2;
-		if (draw.end_y >= WINDOW_HEIGHT)
-			draw.end_y = WINDOW_HEIGHT - 1;
-		
-		//calculate width of the sprite
-		draw.sprite_width = fabs((WINDOW_HEIGHT / (draw.transform_y)));
-		draw.start_x = -draw.sprite_width / 2 + draw.sprite_screen_x;
-		if (draw.start_x < 0)
-			draw.start_x = 0;
-		draw.end_x = draw.sprite_width / 2 + draw.sprite_screen_x;
-		if (draw.end_x >= WINDOW_WIDTH)
-			draw.end_x = WINDOW_WIDTH - 1;
-
-
-		int factor_128 = (-WINDOW_HEIGHT * 128 + draw.sprite_height * 128); // WIP
-		draw.shader = draw.dist / MAP_HEIGHT * 2;
-		for (register int stripe = draw.start_x; stripe < draw.end_x; stripe++)
+		if 	(draw.dist < 8 || !SHADOW_MODE)
 		{
-			draw.text_x = (int)(256 * (stripe - (-draw.sprite_width / 2 + draw.sprite_screen_x)) * text->width / draw.sprite_width) / 256;
-			//the conditions in the if are:
-			//1) it's in front of camera plane so you don't see things behind you
-			//2) it's on the screen (left)
-			//3) it's on the screen (right)
-			//4) vars->z_buffer, with perpendicular distance					
+			text = &(vars->text[v_sprite.tex_num]);
 
-			if (draw.dist < 8 && draw.transform_y > 0 && stripe > 0 && stripe < WINDOW_HEIGHT && draw.transform_y < vars->z_buffer[stripe])
+
+			draw.transform_x = draw.denom * (cam->dir_y * v_sprite.x - cam->dir_x * v_sprite.y);
+			draw.transform_y = draw.denom * (-cam->plane.y * v_sprite.x + cam->plane.x * v_sprite.y);
+			
+			draw.sprite_screen_x = (int)(draw.half_win_width) * (1 + draw.transform_x / draw.transform_y);
+			
+			//calculate height of the sprite on screen
+			draw.sprite_height = fabs((int)WINDOW_HEIGHT / (draw.transform_y));
+			draw.half_sprite_height = draw.sprite_height / 2;
+			//calculate lowest and highest pixel to fill in current stripe
+		//	int tst = -draw.sprite_height /  2+ WINDOW_HEIGHT / 2;
+			draw.start_y = -draw.half_sprite_height + draw.half_win_height;
+			if (draw.start_y < 0)
+				draw.start_y = 0;
+			draw.end_y = draw.half_sprite_height + draw.half_win_height;
+			if (draw.end_y >= WINDOW_HEIGHT)
+				draw.end_y = WINDOW_HEIGHT - 1;
+			
+			//calculate width of the sprite
+			draw.sprite_width = fabs((WINDOW_HEIGHT / (draw.transform_y)));
+			draw.half_sprite_width = draw.sprite_width / 2;
+			draw.start_x = -draw.half_sprite_width + draw.sprite_screen_x + 1;
+			if (draw.start_x < 0)
+				draw.start_x = 0;
+			draw.end_x = draw.half_sprite_width + draw.sprite_screen_x;
+			if (draw.end_x >= WINDOW_WIDTH)
+				draw.end_x = WINDOW_WIDTH - 1;
+
+			int factor_128 = (-WINDOW_HEIGHT+ draw.sprite_height) * 128; // WIP
+			draw.shader = draw.dist / MAP_HEIGHT * 2;
+			double pre_calc1 = (double)text->width / (double)draw.sprite_width;
+			double pre_calc2 = -pre_calc1 * (-draw.half_sprite_width + draw.sprite_screen_x);
+			for (register int stripe = draw.start_x; stripe < draw.end_x; stripe++)	
 			{
-				for(register int y = draw.start_y; y < draw.end_y; y++) //for every pixel of the current stripe
+				//256 * X * tW / sW
+				draw.text_x = (int)(stripe * pre_calc1 + pre_calc2);
+				//the conditions in the if are:
+				//1) it's in front of camera plane so you don't see things behind you
+				//2) it's on the screen (left)
+				//3) it's on the screen (right)
+				//4) vars->z_buffer, with perpendicular distance					
+
+				if (draw.transform_y > 0 && stripe > 0 && stripe < WINDOW_WIDTH && draw.transform_y < vars->z_buffer[stripe])
 				{
-					int d = (y) * 256 + factor_128; //256 and 128 factors to avoid floats
-					draw.text_y = ((d * text->width) / (draw.sprite_height) / 256);
-					draw.color = text->array[text->width * draw.text_y + draw.text_x];
-					if (SHADOW_MODE)
-						my_mlx_pixel_put(vars->img, stripe, y, add_shade(draw.shader, draw.color));
-					else
-						my_mlx_pixel_put(vars->img, stripe, y, draw.color);
+					for(register int y = draw.start_y; y < draw.end_y; y++) //for every pixel of the current stripe
+					{
+						register size_t d = (y) * 256 + factor_128; //256 and 128 factors to avoid floats
+						draw.text_y = ((d * text->width) / (draw.sprite_height) / 256);
+						draw.color = text->array[text->width * draw.text_y + draw.text_x]; 
+						if (SHADOW_MODE)
+							my_mlx_pixel_put(vars->img, stripe, y, add_shade(draw.shader, draw.color));
+						else
+							my_mlx_pixel_put(vars->img, stripe, y, draw.color);
+					}
+						vars->redraw = 1;
+						vars->seen_sprite = 1;
 				}
-					vars->redraw = 1;
-					vars->seen_sprite = 1;
 			}
 		}
 	}

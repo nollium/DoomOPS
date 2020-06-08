@@ -6,31 +6,50 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:58:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 17:04:01 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/07 21:43:34 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdint.h>
+
+
 
 int add_shade(double shade, int color)
 {
-	register int i;
-	unsigned char trgb[4];
+	unsigned char rgb[4];
 
-	if (0 > shade || color == 0x1 || shade > 1)
-		shade = (shade < 0 || color == 0x1) ? 0 : 1;
-	/*
-	trgb[0] = color & 0xFF;
-	trgb[1] = (color >> 8) & 0xFF;
-	trgb[2] = (color >> 16) & 0xFF;
-	trgb[3] = (color >> 24) & 0xFF;*/
-	*(int *)trgb = color;
-	i = -1;
-	while (++i < 3)
-		trgb[i] = trgb[i] - shade * trgb[i];
-	return (*(int *)trgb);
-  	//return (trgb[3] << 24 | trgb[2] << 16 | trgb[1] << 8 | trgb[0]);
+	if (0 > shade || color == 0x1)
+		return (color);
+	if (shade >= 1)
+		return (0);
+	*(int *)rgb = color;
+	
+	rgb[0] = rgb[0] - shade * rgb[0];
+	rgb[1] = rgb[1] - shade * rgb[1];
+	rgb[2] = rgb[2] - shade * rgb[2];
+	return (*(int *)rgb);
 }
+
+/* broken LSD mode
+int add_shade(double shade, int color)
+{
+	unsigned char rgb[3];
+
+	if (0 > shade || color == 0x1)
+		return (color);
+	if (shade > 1)
+		shade = 1;
+		/*
+	*(int *)rgb = color;
+	
+	rgb[0] = rgb[0] - shade * rgb[0];
+	rgb[1] = rgb[1] - shade * rgb[1];
+	rgb[2] = rgb[2] - shade * rgb[2];
+	
+	return (*(int *)rgb);
+	return (shade * color);
+}*/
 
 /*
 // weird transparency stuff, works for water / fog effect

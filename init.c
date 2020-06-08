@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 13:55:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/09 00:34:12 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ int	load_texture(t_texture *text, char *path, void *mlx)
 	return (0);
 }
 
+void		init_img(void *mlx, int width, int height, t_data *img)
+{
+	img->img = mlx_new_image(mlx, width, height);
+	img->addr = mlx_get_data_addr(img->img,
+	&(img->bits_per_pixel), &(img->line_length),
+								 &(img->endian));
+	img->width = width;
+	img->height = height;
+}
+
 void		init_vars(int width, int height, t_vars *vars)
 {
 	register int 	i;
@@ -48,12 +58,8 @@ void		init_vars(int width, int height, t_vars *vars)
 		(vars->keys)[i] = (t_keys){-1, 0};
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, width, height, "cub3D");
-	vars->img2.img = mlx_new_image(vars->mlx, width, height);
-	vars->img2.addr = mlx_get_data_addr(vars->img2.img,
-	&(vars->img2.bits_per_pixel), &(vars->img2).line_length,
-								 &(vars->img2).endian);
-	vars->img2.width = width;
-	vars->img2.height = height;
+	init_img(vars->mlx, width, height, vars->img2);
+	init_img(vars->mlx, width, height, vars->img2 + 1);
 	vars->cam = (t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
 	(t_plane){0.0, 0.66}};
 	vars->map = (t_map)
@@ -61,12 +67,12 @@ void		init_vars(int width, int height, t_vars *vars)
 		0,0,
 		{
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-			{'1','1','0','0','0','1','1','1','1','0','0','0','1','1','1','1'},
-			{'1','0','0','0','0','0','1','1','1','0','0','0','1','1','1','1'},
+			{'1','1','0','0','0','1','1','1','0','0','0','0','0','1','1','1'},
+			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
 			{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'}, //10,4
 			{'1','0','0','1','0','0','0','0','0','0','0','0','0','0','0','1'},
-			{'1','0','0','0','0','0','1','1','0','0','0','0','1','1','1','1'},
-			{'1','0','0','0','0','0','1','1','0','0','0','0','1','1','1','1'},
+			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
+			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
 		}
 	};
@@ -76,15 +82,16 @@ void		init_vars(int width, int height, t_vars *vars)
 							"pics/SO.xpm",
 							"pics/EA.xpm",
 							"pics/WE.xpm",
-							"pics/wtc_bigger.xpm",
+							"pics/small_shrek.xpm",
 							"pics/128x128.xpm",
 							"pics/small_shrek.xpm",
+							"pics/hud.xpm",
 							0};
 
 	i = -1;
 	while (text_paths[++i]);
 	vars->text = malloc(sizeof(t_texture) * (i + 1));
-	vars->sprites = malloc(sizeof(t_sprite) * (i - 3 + 1));
+	vars->sprites = malloc(sizeof(t_sprite) * 3);
 	i = -1;
 	if (!(vars->text && vars->sprites))
 		ft_putendl_fd("MALLOC ERROR", 1);
@@ -93,10 +100,10 @@ void		init_vars(int width, int height, t_vars *vars)
 			ft_printf("\e[31mTEXTURE \"%s\" ERROR\e[31m\n", text_paths[i]);
 	vars->text[i] = (t_texture) {0};
 	
-	vars->sprites[0] = (t_sprite){11.0, 5.0, 4};
 
-	vars->sprites[1] = (t_sprite){4.0, 10.0, 5};
+	vars->sprites[0] = (t_sprite){4.0, 10.0, 5};
 
-	vars->sprites[2] = (t_sprite){4.0, 2.0, 6};
+	vars->sprites[1] = (t_sprite){4.2, 2.3, 6};
+	vars->sprites[2] = (t_sprite){4.0, 13.0, 4};
 	vars->num_sprites = 4 - 4 + 3;
 }

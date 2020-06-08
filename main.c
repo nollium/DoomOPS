@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/06/07 00:39:27 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/08 22:14:39 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 		{
 			draw->color = FLOOR_COLOR;
 			if (SHADOW_MODE)
-				draw->color = add_shade(1.05 / ((double)draw->y * 2.15 / (double)((WINDOW_WIDTH))) , draw->color);
+				draw->color = add_shade(1.05 / ((double)draw->y * 2.15 / (double)((WINDOW_HEIGHT))) , draw->color);
 		}
 		my_mlx_pixel_put(vars->img, draw->x, draw->y, draw->color);
 	}
@@ -100,14 +100,16 @@ int			main(void)
 {
 	t_vars	vars;
 	int		i = -1;
-	
+
 	init_vars(WINDOW_WIDTH, WINDOW_HEIGHT, &vars);
-	vars.img = &vars.img2;
+	vars.img = vars.img2;
 	//my_mlx_pixel_put(vars.img, 5, 5, 0x00FF0000);
 	//my_line_put(vars.img, 1, 1, 1000, 1000, 0xFF);
 	//drawcircle(vars.img, 500, 500, 100, 0x00FFFFFF);
 	//drawRectangle(vars.img, (int []){200, 200}, (int []){400, 0});
+//	mlx_do_sync(vars.mlx);
 	draw_gradient(vars.img);
+		DEBUG_PRINT("slt la zone");
 	hooks(&vars);
 	t_texture text;
 	load_texture(&text, "pics/shrek.xpm", vars.mlx);
