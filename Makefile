@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/09 00:25:05 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/12 21:46:14 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -lm -g3 
+CFLAGS = -Wall -Wextra -lm -g3 -O3
 
 RM = rm -rf
 
 DIRSRC = ./
 
-SRC = main.c frontend.c handlers.c backend.c init.c raycast.c keyboard_handler.c \
-colors_handling.c images.c loop.c
+SRC =	main.c frontend.c handlers.c backend.c init.c raycast.c keyboard_handler.c	\
+		colors_handling.c images.c loop.c sprites_sort.c init_sprites.c sprites.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,9 +1,21 @@
-void		init_img(void *mlx, int width, int height, t_data *img)
+static int	get_corner_angle(t_map *map, t_camera *cam)
 {
-	img->img = mlx_new_image(mlx, width, height);
-	img->addr = mlx_get_data_addr(img->img,
-	&(img->bits_per_pixel), &(img).line_length,
-								 &(img).endian);
-	img->width = width;
-	img->height = height;
+	int		i;
+	double	angle;
+	double	max;
+	double	corner;
+	static int	corner_angle[] = {45, 145, -55, -135};
+	double		diff;
+
+
+	i = -1;
+	angle = atan2(vars->map.y - (double)vars->cam.y, (double)vars->map.x
+		- (double)vars->cam.x) * 180.0 / PI;
+	max = DBL_MAX;
+	while (++i <= 3)
+		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
+		{
+			max = diff;
+			corner = corner_angle[i];
+		}
 }

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 13:36:56 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/09 07:11:29 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			mouse_handler(int button, int x, int y, t_vars *vars)
 		x_0 = -1;
 		y_0 = -1;
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
+	//	vars->redraw = 1;
 	}
 	if (DEBUG_MODE)
 		ft_printf("Mouse %d at : x%d\t\ty%d\n", button, x, y);

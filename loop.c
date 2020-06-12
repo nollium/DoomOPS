@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/09 00:13:57 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/12 19:30:00 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ int		ennemies_handler(t_vars *vars, t_sprite *sprites)
 {
 	static int left = 1;
 	
-	if (sprites[1].x > 6)
+	if (sprites[0].x > 6)
     {
 		left = 0;
-        sprites[1].tex_num = 5;
+        sprites[0].tex_num = 5;
     }
-	else if (sprites[1].x < 2.0)
+	else if (sprites[0].x < 2.0)
     {
 		left = 1;
-        sprites[1].tex_num = 4;
+        sprites[0].tex_num = 4;
     }	
     if (left)
-		sprites[1].x += 0.1;
+		sprites[0].x += SPEED;
 	else
-		sprites[1].x -= 0.1;
+		sprites[0].x -= SPEED;
 	return (0);
 }
 
@@ -37,11 +37,13 @@ int		loop_handler(t_vars *vars)
 {
 	clock_t	t0;
 	static int img = 0;
+	int i = -1;
 // 4.0 10.0
 	vars->redraw |= keyboard_handler(vars);
-	//vars->redraw |= ennemies_handler(vars, vars->sprites);
-	vars->redraw |= vars->seen_sprite;
-	if (vars->redraw || 1)
+	vars->redraw |= ennemies_handler(vars, vars->sprites);
+	while (++i < vars->num_sprites)
+		vars->redraw |= vars->sprites[i].seen;
+	if (vars->redraw)
 	{
 		draw_scene(vars);
 	//	draw_text(&(vars->text[7]), vars->img, 0, 0);
@@ -50,8 +52,8 @@ int		loop_handler(t_vars *vars)
 		img = (img) ? 0 : 1;
 		if (DEBUG_MODE)
 			printf("DRAWING : x%Lf y%Lf\ndir_x:%Lf dir_y:%Lf\n", vars->cam.x, vars->cam.y, vars->cam.dir_x, vars->cam.dir_y);
-		//t0 = clock();
-		//while (clock() - t0 < CLOCKS_PER_SEC / 120);
+		/*t0 = clock();
+		while (clock() - t0 < CLOCKS_PER_SEC / 70);*/
 		vars->redraw = 0;
 	}
 	return (0);

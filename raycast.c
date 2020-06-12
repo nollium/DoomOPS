@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/09 00:46:15 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/12 21:46:23 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,51 +29,38 @@ static void	init_raycast(t_vars *vars, int x, t_ray *ray)
 static void	get_step(t_vars *vars, t_ray *ray)
 {
 	if (ray->dir_x < 0)
-	{
-		ray->step_x = -1;
 		ray->side_dist_x = (vars->cam.x - vars->map.x) * ray->delta_dist_x;
-	}
 	else
-	{
-		ray->step_x = 1;
 		ray->side_dist_x =
 			(vars->map.x + 1.0 - vars->cam.x) * ray->delta_dist_x;
-	}
 	if (ray->dir_y < 0)
-	{
-		ray->step_y = -1;
 		ray->side_dist_y = (vars->cam.y - vars->map.y) * ray->delta_dist_y;
-	}
 	else
-	{
-		ray->step_y = 1;
 		ray->side_dist_y =
 			(vars->map.y + 1.0 - vars->cam.y) * ray->delta_dist_y;
-	}
+	ray->step_x = (ray->dir_x < 0) ? -1 : 1;
+	ray->step_y = (ray->dir_y < 0) ? -1 : 1;
 }
 
 static void	perform_dda(t_vars *vars, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
+		ray->side = !(ray->side_dist_x < ray->side_dist_y);
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			vars->map.x += ray->step_x;
-			ray->side = 0;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			vars->map.y += ray->step_y;
-			ray->side = 1;
 		}
-		if (vars->map.worldMap[vars->map.x][vars->map.y] - '0' > 0)
-			ray->hit = 1;
+		ray->hit = (vars->map.worldMap[vars->map.x][vars->map.y] - '0' > 0);
 	}
 }
-//w -0.15 e -0.05  side = 1|side = 0 n -0.91 s s-0.58
-//0.72 1.03 /  0.73 1.10s
+
 static void	get_wall_dist(t_vars *vars, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -86,19 +73,16 @@ static void	get_wall_dist(t_vars *vars, t_ray *ray)
 				/ ray->dir_y;
 }
 
-static int	get_wall_side(t_vars *vars, t_ray *ray)
+static int	get_corner(double angle)
 {
-	double		angle;
-	double		diff;
-	double		max;
-	int			corner;
-	static int	corner_angle[] = {45, 145, -55, -135};
 	int			i;
+	double		max;
+	double		corner;
+	static int	corner_angle[] = {45, 145, -55, -135};
+	double		diff;
 
-//	printf("angle : %lf && ray->side = %d\n", angle, ray->ray->side);
+
 	i = -1;
-	angle = atan2(vars->map.y - (double)vars->cam.y, (double)vars->map.x
-		- (double)vars->cam.x) * 180.0 / PI;
 	max = DBL_MAX;
 	while (++i <= 3)
 		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
@@ -106,6 +90,18 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 			max = diff;
 			corner = corner_angle[i];
 		}
+	return (corner);
+}
+
+static int	get_wall_side(t_vars *vars, t_ray *ray)
+{
+	double		angle;
+	double		max;
+	int			corner;
+	int			i;
+
+	corner = get_corner(atan2(vars->map.y - (double)vars->cam.y,
+						(double)vars->map.x - (double)vars->cam.x) * 180 / PI);
 	if (corner == 45)
 		return ((ray->side) ? WEST : NORTH);
 	else if (corner == 145)
@@ -118,27 +114,21 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 
 static void	get_texture_coords(t_vars *vars, t_ray *ray)
 {
-	double wallX; //where exactly the wall was hit
-	int texNum;
+	double wall_x;
 
-	//texturing calculations
-	texNum = vars->map.worldMap[vars->map.x][vars->map.x] - 1; //1 subtracted from it so that texture 0 can be used!
-
-	//calculate value of wallX
 	if (ray->side == 0)
-		wallX = vars->cam.y + ray->perp_wall_dist * ray->dir_y;
+		wall_x = vars->cam.y + ray->perp_wall_dist * ray->dir_y;
 	else
-		wallX = vars->cam.x + ray->perp_wall_dist * ray->dir_x;
-	(void)0;
-	wallX -= floor((wallX));
-
-	//x coordinate on the texture
+		wall_x = vars->cam.x + ray->perp_wall_dist * ray->dir_x;
+	wall_x -= floor((wall_x));
 	vars->text[ray->w_num].x = (int)
-		(wallX * (double)(vars->text[ray->w_num].width));
+		(wall_x * (double)(vars->text[ray->w_num].width));
 	if (ray->side == 0 && ray->dir_x > 0)
-		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
+		vars->text[ray->w_num].x = vars->text[ray->w_num].width
+									- vars->text[ray->w_num].x - 1;
 	if (ray->side == 1 && ray->dir_y < 0)
-		vars->text[ray->w_num].x = vars->text[ray->w_num].width - vars->text[ray->w_num].x - 1;
+		vars->text[ray->w_num].x = vars->text[ray->w_num].width
+									- vars->text[ray->w_num].x - 1;
 }
 
 void		raycast_walls(t_ray *ray, t_vars *vars, int x)
@@ -150,164 +140,4 @@ void		raycast_walls(t_ray *ray, t_vars *vars, int x)
 	ray->w_num = get_wall_side(vars, ray);
 	get_texture_coords(vars, ray);
 	vars->z_buffer[x] = ray->perp_wall_dist;
-}
-
-
-static void swap_sprites(t_sprites_sorter *sprite_1, t_sprites_sorter *sprite_2)
-{
-	t_sprites_sorter	tmp;
-	
-	tmp = *sprite_1;
-	*sprite_1 = *sprite_2;
-	*sprite_2 = tmp;
-}
-
-/*
-** Insertion sort for sorting sprites from further away to player, to closer from player
-*/
-/*
-void 		sort_sprites(int n, t_sprites_sorter *arr) 
-{ 
-	register int	i;
-	register int	j; 
-	double 			key;
-
-	i = 0;
-	while (++i < n) 
-	{ 
-		key = arr[i].sprite_distance; 
-		j = i - 1; 
-		while (j >= 0 && arr[j].sprite_distance < key) 
-		{ 
-			arr[j + 1] = arr[j]; 
-			j = j - 1; 
-		}
-		arr[j + 1].sprite_distance = key; 
-	} 
-} */
-
-void		sort_sprites(int n, t_sprites_sorter *arr)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	while (i < n)
-	{
-		j = i;
-		while (j > 0 && arr[j - 1].sprite_distance < arr[j].sprite_distance)
-		{
-			swap_sprites(arr + j, arr + j - 1);
-			j--;
-		}
-		i++;
-	}
-}
-
-static void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
-{
-	register int		i;
-
-	i = -1;
-	while (++i < vars->num_sprites)
-		sprites_srt[i] = (t_sprites_sorter)
-		{i, ((vars->cam.x - vars->sprites[i].x)
-			* (vars->cam.x - vars->sprites[i].x)
-			+ (vars->cam.y - vars->sprites[i].y)
-			* (vars->cam.y - vars->sprites[i].y))
-		};
-	sort_sprites(vars->num_sprites, sprites_srt);
-
-	/*for (size_t j = 0; j < vars->num_sprites; j++)
-		printf("%lf ", sprites_srt[j].sprite_distance);
-	printf("\n");debug sorting*/
-}
-
-void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
-{
-	int					i;
-	t_sprite			v_sprite;
-	t_sprites_sorter	*sprites_srt;
-	t_sprite_drawer		draw;
-	t_texture			*text;
-	
-	vars->seen_sprite = 0;
-	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
-		ft_putendl_fd("MALLOC ERROR", 2);
-	init_sprites_info(vars, sprites_srt);
-	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
-	draw.half_win_height = WINDOW_HEIGHT / 2;
-	draw.half_win_width = WINDOW_WIDTH / 2;
-	i = -1;
-	while (++i < vars->num_sprites)
-	{
-		v_sprite = sprites[sprites_srt[i].sprite_order];
-		v_sprite.x -= cam->x;
-		v_sprite.y -= cam->y;
-		draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
-		if 	(draw.dist < 8 || !SHADOW_MODE)
-		{
-			text = &(vars->text[v_sprite.tex_num]);
-
-
-			draw.transform_x = draw.denom * (cam->dir_y * v_sprite.x - cam->dir_x * v_sprite.y);
-			draw.transform_y = draw.denom * (-cam->plane.y * v_sprite.x + cam->plane.x * v_sprite.y);
-			
-			draw.sprite_screen_x = (int)(draw.half_win_width) * (1 + draw.transform_x / draw.transform_y);
-			
-			//calculate height of the sprite on screen
-			draw.sprite_height = fabs((int)WINDOW_HEIGHT / (draw.transform_y));
-			draw.half_sprite_height = draw.sprite_height / 2;
-			//calculate lowest and highest pixel to fill in current stripe
-		//	int tst = -draw.sprite_height /  2+ WINDOW_HEIGHT / 2;
-			draw.start_y = -draw.half_sprite_height + draw.half_win_height;
-			if (draw.start_y < 0)
-				draw.start_y = 0;
-			draw.end_y = draw.half_sprite_height + draw.half_win_height;
-			if (draw.end_y >= WINDOW_HEIGHT)
-				draw.end_y = WINDOW_HEIGHT - 1;
-			
-			//calculate width of the sprite
-			draw.sprite_width = fabs((WINDOW_HEIGHT / (draw.transform_y)));
-			draw.half_sprite_width = draw.sprite_width / 2;
-			draw.start_x = -draw.half_sprite_width + draw.sprite_screen_x + 1;
-			if (draw.start_x < 0)
-				draw.start_x = 0;
-			draw.end_x = draw.half_sprite_width + draw.sprite_screen_x;
-			if (draw.end_x >= WINDOW_WIDTH)
-				draw.end_x = WINDOW_WIDTH - 1;
-
-			int factor_128 = (-WINDOW_HEIGHT+ draw.sprite_height) * 128; // WIP
-			draw.shader = draw.dist / MAP_HEIGHT * 2;
-			double pre_calc1 = (double)text->width / (double)draw.sprite_width;
-			double pre_calc2 = -pre_calc1 * (-draw.half_sprite_width + draw.sprite_screen_x);
-			for (register int stripe = draw.start_x; stripe < draw.end_x; stripe++)	
-			{
-				//256 * X * tW / sW
-				draw.text_x = (int)(stripe * pre_calc1 + pre_calc2);
-				//the conditions in the if are:
-				//1) it's in front of camera plane so you don't see things behind you
-				//2) it's on the screen (left)
-				//3) it's on the screen (right)
-				//4) vars->z_buffer, with perpendicular distance					
-
-				if (draw.transform_y > 0 && stripe > 0 && stripe < WINDOW_WIDTH && draw.transform_y < vars->z_buffer[stripe])
-				{
-					for(register int y = draw.start_y; y < draw.end_y; y++) //for every pixel of the current stripe
-					{
-						register size_t d = (y) * 256 + factor_128; //256 and 128 factors to avoid floats
-						draw.text_y = ((d * text->width) / (draw.sprite_height) / 256);
-						draw.color = text->array[text->width * draw.text_y + draw.text_x]; 
-						if (SHADOW_MODE)
-							my_mlx_pixel_put(vars->img, stripe, y, add_shade(draw.shader, draw.color));
-						else
-							my_mlx_pixel_put(vars->img, stripe, y, draw.color);
-					}
-						vars->redraw = 1;
-						vars->seen_sprite = 1;
-				}
-			}
-		}
-	}
-	free(sprites_srt);
 }

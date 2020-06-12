@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/* 	  cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:51:48 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/09 00:28:16 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/09 07:28:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
  #define SOUTH	1
  #define EAST	2
  #define WEST	3
- 
+ //5 2.9 | 3.9 4
  #define WARNINGS 		1
  #define WARN_LEVEL		100000
- #define DEBUG_MODE		0
+ #define DEBUG_MODE		1
  #define SHADOW_MODE	0
 
  #define WINDOW_WIDTH		800
@@ -69,8 +69,8 @@
  #define ALT_KEY			65513
  #define C_KEY				99
 
- #define SPEED				0.1
- #define TURN_SPEED			0.1
+ #define SPEED				0.04
+ #define TURN_SPEED			SPEED
  #define ALT_MULT			2
 
  #define SPAWN_X			2
@@ -188,6 +188,7 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
+	char		seen;
 	int			tex_num;
 }				t_sprite;
 
@@ -220,6 +221,11 @@ typedef struct s_sprite_drawer
 	size_t		text_y;
 	int			color;
 	double		shader;
+	double		pre_calc1;
+	double		pre_calc2;
+	int			factor_128;
+	t_texture	*text;
+	int			sprite_index;
 }				t_sprite_drawer;
 
 
@@ -244,61 +250,71 @@ typedef struct  s_vars
 
 
 
-int				 add_shade(double dist, int color);
+int		add_shade(double dist, int color);
 
 /*
 ** INIT 
 */		
-int				load_texture(t_texture *text, char *path, void *mlx);
-void			init_vars(int width, int height, t_vars *vars);
+int		load_texture(t_texture *text, char *path, void *mlx);
+void	init_vars(int width, int height, t_vars *vars);
 
 /*
 ** RAYCAST 
 */
 
-void			raycast_walls(t_ray *ray, t_vars *vars, int x);
-void			cast_sprites(t_sprite *sprites, t_camera *, t_vars *);
+void	raycast_walls(t_ray *ray, t_vars *vars, int x);
+void	cast_sprites(t_sprite *sprites, t_camera *, t_vars *);
 
+
+
+/*
+**	SPRITES
+*/
+
+void	sort_sprites(int n, t_sprites_sorter *arr);
+void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt);
+void	init_sprite_drawing(t_sprite_drawer *, t_camera *,
+							t_sprite *, t_texture *);
 
 /*
 ** BACKEND 
 */
 
-t_keys			*key_chr(t_keys *arr, int keycode, size_t size);
+t_keys	*key_chr(t_keys *arr, int keycode, size_t size);
 
 
 /*
 ** FRONTEND 
 */
 
-int				load_xpm(t_data *data, char *path, void *mlx);
-void			img_to_text(t_data *data, t_texture *text);
-void			draw_text(t_texture *text, t_data *img, int x0, int y0);
-int				rgb_to_trgb(unsigned char t, int rgb);
-int		        create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void 			my_line_put(t_data *data, int x0, int y0, int x1, int y1, int color);
-void			drawRectangle(t_data *data, int top_left[2], int bot_right[2]);
-void			drawcircle(t_data *data, int x0, int y0, int radius, int color);
-void			drawhalfcircle(t_data *data, int x0, int y0, int radius, int color);
-void			draw_gradient(t_data *data);
-void			draw_rainbow(t_data *data);
-void			draw_scene(t_vars *vars);
+int		load_xpm(t_data *data, char *path, void *mlx);
+void	img_to_text(t_data *data, t_texture *text);
+void	draw_text(t_texture *text, t_data *img, int x0, int y0);
+int		rgb_to_trgb(unsigned char t, int rgb);
+int		create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void 	my_line_put(t_data *data, int x0, int y0, int x1, int y1, int color);
+void	drawRectangle(t_data *data, int top_left[2], int bot_right[2]);
+void	drawcircle(t_data *data, int x0, int y0, int radius, int color);
+void	drawhalfcircle(t_data *data, int x0, int y0, int radius, int color);
+void	draw_gradient(t_data *data);
+void	draw_rainbow(t_data *data);
+void	draw_scene(t_vars *vars);
 
 
 /*
 ** EVENT HANDLERS 
 */
 
-int				keyboard_handler(t_vars *vars);
-void    		hooks(t_vars *vars);
-int				loop_handler(t_vars *vars);
-int         	key_handler(int keycode, t_vars *vars);
-int				mouse_handler(int button, int x, int y, t_vars *vars);
-int				move_handler(void);
-int				resize_handler(void);
-int				enter_handler(void);
-int				leave_handler(void);
-int				release_handler(int keycode, t_vars *vars);
+int		keyboard_handler(t_vars *vars);
+void    hooks(t_vars *vars);
+int		loop_handler(t_vars *vars);
+int		key_handler(int keycode, t_vars *vars);
+int		mouse_handler(int button, int x, int y, t_vars *vars);
+int		move_handler(void);
+int		resize_handler(void);
+int		enter_handler(void);
+int		leave_handler(void);
+int		release_handler(int keycode, t_vars *vars);
 
 #endif

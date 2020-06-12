@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/09 00:34:12 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/12 22:01:49 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->text[i] = (t_texture) {0};
 	
 
-	vars->sprites[0] = (t_sprite){4.0, 10.0, 5};
+	vars->sprites[0] = (t_sprite){4.0, 10.0, 0, 5};
 
-	vars->sprites[1] = (t_sprite){4.2, 2.3, 6};
-	vars->sprites[2] = (t_sprite){4.0, 13.0, 4};
+	vars->sprites[1] = (t_sprite){4.2, 2.3, 0, 6};
+	vars->sprites[2] = (t_sprite){4.0, 13.0, 0, 4};
 	vars->num_sprites = 4 - 4 + 3;
 }
