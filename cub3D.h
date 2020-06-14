@@ -27,9 +27,14 @@
 
  #define PI 3.141592653
  
- #define ERROR_CODE		1
+ #define ERROR_CODE		-1
  #define SUCCESS_CODE	0
  
+ #define FILE_INVALID_ERROR -2
+ #define MAP_ERROR -3
+ #define WRONG_EXTENSION_ERROR -4
+
+
  #define NORTH	0
  #define SOUTH	1
  #define EAST	2
@@ -38,7 +43,7 @@
  #define WARNINGS 		1
  #define WARN_LEVEL		100000
  #define DEBUG_MODE		1
- #define SHADOW_MODE	0
+ #define SHADOW_MODE	1
 
  #define WINDOW_WIDTH		800
  #define WINDOW_HEIGHT		800
@@ -72,7 +77,7 @@
  #define SPEED				0.04
  #define TURN_SPEED			SPEED
  #define ALT_MULT			2
-
+ #define SPAWN_DIR			'W'
  #define SPAWN_X			2
  #define SPAWN_Y			3
 
@@ -157,7 +162,7 @@ typedef struct	s_map
 {
 	int			x;
 	int			y;
-	char 		worldMap[MAP_WIDTH][MAP_HEIGHT];
+	char 		**worldMap;
 }				t_map;
 
 typedef struct	s_texture
@@ -257,6 +262,7 @@ int		add_shade(double dist, int color);
 */		
 int		load_texture(t_texture *text, char *path, void *mlx);
 void	init_vars(int width, int height, t_vars *vars);
+int   	load_cub(char *path, t_vars *vars);
 
 /*
 ** RAYCAST 
@@ -281,6 +287,7 @@ void	init_sprite_drawing(t_sprite_drawer *, t_camera *,
 */
 
 t_keys	*key_chr(t_keys *arr, int keycode, size_t size);
+int		free_garbage(t_vars *vars);
 
 
 /*

@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/12 21:46:14 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/14 00:21:16 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -lm -g3 -O3
+CFLAGS = -Wall -Wextra -lm -g3 
 
 RM = rm -rf
 
@@ -31,7 +31,9 @@ OBJBONUS = $(SRCBONUS:.c=.o)
 
 LIBFT = libft/libftprintf.a
 
-all: $(NAME) $(HEADERS)
+DEBUG = -O3
+
+all: $(NAME) $(HEADERS)	
 
 bonus: $(OBJBONUS) $(NAME)
 	ar rcs $(NAME) $(OBJBONUS)
@@ -61,3 +63,9 @@ lilclean:
 re: fclean all	
 
 .PHONY: clean fclean
+
+opti:
+	$(eval CFLAGS += -O3)
+
+debug:
+	$(eval CFLAGS += -fsanitize=address)

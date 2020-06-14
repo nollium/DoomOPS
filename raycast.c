@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/12 21:46:23 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/14 00:32:47 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ static int	get_corner(double angle)
 
 static int	get_wall_side(t_vars *vars, t_ray *ray)
 {
-	double		angle;
-	double		max;
 	int			corner;
-	int			i;
 
 	corner = get_corner(atan2(vars->map.y - (double)vars->cam.y,
 						(double)vars->map.x - (double)vars->cam.x) * 180 / PI);
@@ -110,6 +107,7 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 		return ((ray->side) ? EAST : NORTH);
 	else if (corner == -135)
 		return ((ray->side) ? EAST : SOUTH);
+	return (4);
 }
 
 static void	get_texture_coords(t_vars *vars, t_ray *ray)

@@ -1,21 +1,19 @@
-static int	get_corner_angle(t_map *map, t_camera *cam)
+void		init_cam(t_camera *cam, char spawn_direction)
 {
-	int		i;
-	double	angle;
-	double	max;
-	double	corner;
-	static int	corner_angle[] = {45, 145, -55, -135};
-	double		diff;
-
-
+	static t_camera	cam_switcher[] = {
+		(t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
+		(t_plane){0, 0.66}},
+		(t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
+		(t_plane){0, 0.66}},
+		(t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
+		(t_plane){0, 0.66}},
+		(t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
+		(t_plane){0, 0.66}},};
+	char			*dir_str;
+	int				i;
+	dir_str = "NSEW";
 	i = -1;
-	angle = atan2(vars->map.y - (double)vars->cam.y, (double)vars->map.x
-		- (double)vars->cam.x) * 180.0 / PI;
-	max = DBL_MAX;
-	while (++i <= 3)
-		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
-		{
-			max = diff;
-			corner = corner_angle[i];
-		}
+	while (dir_str[++i] && dir_str[i] != spawn_direction)
+        ;
+	
 }

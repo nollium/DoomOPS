@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/05/26 18:25:55 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/14 00:13:01 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		load_xpm(t_data *data, char *path, void *mlx)
 {
+	*data = (t_data){0}; 
 	data->img = mlx_xpm_file_to_image(mlx, path, &(data->width), &(data->height));
     if (!data->img)
         return (-1);

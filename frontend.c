@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:42:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 21:43:54 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/14 00:29:59 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void	draw_rainbow(t_data *data)
 	int x = 1000;
 	int y = 900;
 	int r = 500; 
-	int color = 0xFFFFFFFF;
 	double i = 0;
 
 	while (++r < 900)

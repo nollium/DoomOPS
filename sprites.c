@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/12 21:41:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/13 13:25:58 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 
 void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 {
-	int					i;
 	t_sprites_sorter	*sprites_srt;
 	
 	vars->seen_sprite = 0;

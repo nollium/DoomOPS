@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 12:50:24 by slutymeme         #+#    #+#             */
-/*   Updated: 2020/06/08 22:14:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/14 00:28:59 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void		draw_scene(t_vars *vars)
 {
 	t_ray		ray;
 	t_drawer	draw;
-	int			i;
 
 	draw.x = -1;
 	while (++(draw.x) < WINDOW_WIDTH)
@@ -101,6 +100,7 @@ int			main(void)
 	t_vars	vars;
 	int		i = -1;
 
+	vars = (t_vars){0};
 	init_vars(WINDOW_WIDTH, WINDOW_HEIGHT, &vars);
 	vars.img = vars.img2;
 	//my_mlx_pixel_put(vars.img, 5, 5, 0x00FF0000);
@@ -109,7 +109,6 @@ int			main(void)
 	//drawRectangle(vars.img, (int []){200, 200}, (int []){400, 0});
 //	mlx_do_sync(vars.mlx);
 	draw_gradient(vars.img);
-		DEBUG_PRINT("slt la zone");
 	hooks(&vars);
 	t_texture text;
 	load_texture(&text, "pics/shrek.xpm", vars.mlx);
@@ -117,5 +116,6 @@ int			main(void)
 		draw_text(&(vars.text[i]), vars.img, 0, 0);
 //	draw_text(&text, vars.img, 64, 0);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
+	DEBUG_PRINT("AHHAHAHAIUHDZAHLIDHALIHDLIHLDAHLZDHLAZLDAKZJZADZMJADMLMLZAMMJZLAJMZJMA");
 	mlx_loop(vars.mlx);
 }

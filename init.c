@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/12 22:01:49 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/14 01:31:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,37 @@ void		init_img(void *mlx, int width, int height, t_data *img)
 	img->height = height;
 }
 
+int			init_cam(t_camera *cam, char spawn_direction)
+{
+	static t_camera	cam_switcher[] = {
+		(t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
+		(t_plane){0, 0.66}},
+		(t_camera){SPAWN_X, SPAWN_Y, 1.0, 0.0, SPEED, TURN_SPEED,
+		(t_plane){0, -0.66}},
+		(t_camera){SPAWN_X, SPAWN_Y, 0.0, -1.0, SPEED, TURN_SPEED,
+		(t_plane){-0.66, 0.0}},
+		(t_camera){SPAWN_X, SPAWN_Y, 0.0, 1.0, SPEED, TURN_SPEED,
+		(t_plane){0.66, 0.0}},};
+	char			*dir_str;
+	int				i;
+	dir_str = "SNEW";
+	i = 0;
+	while (dir_str[i] && dir_str[i] != spawn_direction)
+		i++;
+	if (dir_str[i])
+	{
+		*cam = cam_switcher[i];
+		return (1);
+	}
+	else
+		return (0);	
+}
+
 void		init_vars(int width, int height, t_vars *vars)
 {
 	register int 	i;
+	static char		*errors[] = {"NO ERROR", "UNKNOWN ERROR", "FILE INVALID ERROR", "MAP ERROR", "WRONG FILE EXTENSION"};
+	int				error;
 
 	//mikasa();
 	i = -1;
@@ -60,23 +88,26 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, width, height, "cub3D");
 	init_img(vars->mlx, width, height, vars->img2);
 	init_img(vars->mlx, width, height, vars->img2 + 1);
-	vars->cam = (t_camera){SPAWN_X, SPAWN_Y, -1.0, 0.0, SPEED, TURN_SPEED,
-	(t_plane){0.0, 0.66}};
-	vars->map = (t_map)
+	init_cam(&(vars->cam), SPAWN_DIR);
+	if ((error = load_cub("map.cub", vars)))
+	{
+		ft_putendl_fd(errors[-error], 2);
+		free_garbage(vars);
+	}
+	/*vars->map = (t_map)
 	{
 		0,0,
 		{
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
 			{'1','1','0','0','0','1','1','1','0','0','0','0','0','1','1','1'},
 			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
-			{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'}, //10,4
+			{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
 			{'1','0','0','1','0','0','0','0','0','0','0','0','0','0','0','1'},
 			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
 			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
 			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
 		}
-	};
-	
+	};*/
 
 	char *text_paths[] = {	"pics/NO.xpm",
 							"pics/SO.xpm",
@@ -101,9 +132,9 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->text[i] = (t_texture) {0};
 	
 
-	vars->sprites[0] = (t_sprite){4.0, 10.0, 0, 5};
+	vars->sprites[0] = (t_sprite){8.0, 6.0, 0, 5};
 
-	vars->sprites[1] = (t_sprite){4.2, 2.3, 0, 6};
-	vars->sprites[2] = (t_sprite){4.0, 13.0, 0, 4};
+	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 6};
+	vars->sprites[2] = (t_sprite){4.0, 5.0, 0, 4};
 	vars->num_sprites = 4 - 4 + 3;
 }

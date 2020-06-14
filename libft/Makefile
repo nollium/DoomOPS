@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/04/04 19:33:25 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/13 16:23:17 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ lib/ft_lstlast.c lib/ft_lstadd_back.c lib/ft_lstdelone.c lib/ft_lstclear.c \
 lib/ft_lstiter.c lib/ft_lstmap.c lib/ft_lstcpy.c \
 ft_printf.c  ft_putnbr_base.c printspace.c wrappers.c\
 ft_getptr.c get_conv.c get_infos.c print_form.c printconv.c\
-lib/get_next_line.c
+lib/get_next_line.c lib/ft_isspace.c
 
 OBJ = $(SRC:.c=.o)
 

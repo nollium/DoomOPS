@@ -6,11 +6,18 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/09 07:11:29 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/14 00:30:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int				free_garbage(t_vars *vars)
+{
+	mlx_do_key_autorepeaton(vars->mlx);
+    mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);	
+}
 
 int             key_handler(int keycode, t_vars *vars)
 {
@@ -20,11 +27,7 @@ int             key_handler(int keycode, t_vars *vars)
 	if (DEBUG_MODE)
 		ft_printf("Key pressed : %d\n", keycode);
 	if (keycode == 65307)
-	{
-		mlx_do_key_autorepeaton(vars->mlx);
-    	mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
+		free_garbage(vars);
 	if (keycode == 178)
 	{
 		if (DEBUG_MODE)
@@ -101,7 +104,6 @@ int			release_handler(int keycode, t_vars *vars)
 {
 	static int		count = 0;
 	int				i;
-	int				tmp;
 	time_t			elapsed;
 
 	i = -1;
