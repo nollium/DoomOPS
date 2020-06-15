@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/14 00:21:16 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/15 22:30:44 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,15 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -lm -g3 
+CFLAGS = -Wall -Wextra -g3 
 
 RM = rm -rf
 
 DIRSRC = ./
 
 SRC =	main.c frontend.c handlers.c backend.c init.c raycast.c keyboard_handler.c	\
-		colors_handling.c images.c loop.c sprites_sort.c init_sprites.c sprites.c
+		colors_handling.c images.c loop.c sprites_sort.c init_sprites.c sprites.c	\
+		garbage_collector.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -39,7 +40,7 @@ bonus: $(OBJBONUS) $(NAME)
 	ar rcs $(NAME) $(OBJBONUS)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp -lbsd
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp -lbsd -lm
 
 
 $(LIBFT):

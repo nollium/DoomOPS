@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 15:43:52 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/13 16:22:47 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/15 23:25:45 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct		s_infos
 	ssize_t		(*printer)(int, const void *, size_t);
 }					t_infos;
 
+int					ft_strreplace(char *src, char old, char new);
+int					ft_replace_charset(char *src, char *charset,  char new);
 int 				ft_isspace(char c);
 int					get_next_line(int fd, char **line);
 t_infos				check_infos(t_infos infos, va_list *list);

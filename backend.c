@@ -6,13 +6,13 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/14 01:39:56 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/15 23:40:22 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void    hooks(t_vars *vars)
+void hooks(t_vars *vars)
 {
 	mlx_hook(vars->win, KeyPress, KeyPressMask, key_handler, (void *)vars);
 	mlx_mouse_hook(vars->win, mouse_handler, vars);
@@ -23,17 +23,17 @@ void    hooks(t_vars *vars)
 	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 }
 
-void	*printshit(void *str)
+void *printshit(void *str)
 {
 	ft_putendl_fd((char *)str, 1);
 	return (NULL);
 }
 
-int		format_map_line(char *line)
+int format_map_line(char *line)
 {
-	int	error;
-	int	i;
-	
+	int error;
+	int i;
+
 	i = -1;
 	error = 0;
 	printf("\e[31m%p: %s\e[0m\n", line, line);
@@ -50,12 +50,12 @@ int		format_map_line(char *line)
 	return (error);
 }
 
-int		read_cub(char *path, t_list **alst)
+int read_cub(char *path, t_list **alst)
 {
-	char	*line;
-	int		error;
-	int		fd;
-	int		len;
+	char *line;
+	int error;
+	int fd;
+	int len;
 
 	fd = open(path, O_RDONLY);
 	*alst = NULL;
@@ -76,31 +76,21 @@ int		read_cub(char *path, t_list **alst)
 	return ((!error) ? len : error == -1 || !*alst);
 }
 
-char	**parse_array(t_list *lst, int len)
+char **parse_array(t_list *lst, int len)
 {
-	char	**array;
-	int		error;
+	char **array;
+	int error;
 
 	error = 0;
 	if (lst && (array = malloc(sizeof(char *) * (len + 1))))
-	{	
+	{
 		len = 1;
 		while (lst->next && !ft_isdigit(*(char *)(lst->content)) && !ft_isspace(*(char *)lst->content))
 			lst = lst->next;
 		array[0] = lst->content;
 		error |= format_map_line(array[0]);
-		while ((lst = lst->next))
-		{
-			//DEBUG_PRINT("WSH LA ZONE LE 100 TEAM JUL");
-			if (!(error |= format_map_line(lst->content)))
-			{
-				//DEBUG_PRINT("La tu vois j'assigne une valeur à cette merde");
-				array[len++] = lst->content;
-			//	DEBUG_PRINT("Et là c'est fait (:");
-			}
-			else
-				break;
-		}
+		while ((lst = lst->next) && !(error |= format_map_line(lst->content)))
+			array[len++] = lst->content;
 		array[len] = NULL;
 	}
 	else
@@ -117,17 +107,76 @@ char	**parse_array(t_list *lst, int len)
 	return (array);
 }
 
-int   load_cub(char *path, t_vars *vars)
+int get_resolution(char *line, t_screen *screen)
 {
-	t_list	*lst;
-	int		len;
-	
+	char **array __attribute__((cleanup(free_split)));
+	int i;
+
+	array = ft_split(line, ' ');
+	i = -1;
+	while (array[++i])
+		if (i > 1)
+			return (RESOLUTION_ERROR);
+	screen->width = ft_atoi(array[0]);
+	screen->height = ft_atoi(array[1]);
+	if (screen->width <= 0 || screen->height <= 0)
+		return (RESOLUTION_ERROR);
+	return (SUCCESS_CODE);
+}
+
+int get_conf(t_vars *vars, char *line)
+{
+	static char *text_type[] = {"NO", "SO", "WE", "EA", "S ", 0};
+	int i;
+
+	i = -1;
+	if (ft_strnstr(line, "R ", 2))
+		get_resolution(line + 2, &(vars->game_screen));
+	else if (ft_strnstr(line, "F ", 2))
+		;
+	else if (ft_strnstr(line, "C ", 2))
+		;
+	else
+		while (text_type[++i])
+			if (ft_strnstr(line, text_type[i], 2))
+				vars->text_paths[i] = ft_strtrim(line + 2, WHITESPACES);
+	return (SUCCESS_CODE);
+}
+
+int parse_config(t_list *cub, t_vars *vars)
+{
+	char *line __attribute__((cleanup(free_str)));
+
+	line = NULL;
+	if (!cub || !vars)
+		return (NULL_ERROR);
+	while (cub->next)
+	{
+		if (ft_replace_charset(cub->content, WHITESPACES, ' ') < 0)
+			return (NULL_ERROR);
+		if (!(line = ft_strtrim(cub->content, WHITESPACES)))
+			return (MALLOC_ERROR);
+		if (get_conf(vars, line) != SUCCESS_CODE)
+			return (CONFIG_ERROR);
+		cub = cub->next;
+	}
+	return (SUCCESS_CODE);
+}
+
+int load_cub(char *path, t_vars *vars)
+{
+	t_list *cub;
+	int len;
+	int error;
+
 	if (!ft_strnstr(path + ft_strlen(path) - 4, ".cub", 4))
 		return (WRONG_EXTENSION_ERROR);
 	vars->map = (t_map){0, 0, 0};
-	if ((len = read_cub(path, &lst)) <= 0) // FIXED
+	if ((len = read_cub(path, &cub)) <= 0) // FIXED
 		return (FILE_INVALID_ERROR);
-	if (!(vars->map.worldMap = parse_array(lst, len)))
+	if ((error = parse_config(cub, vars)) != SUCCESS_CODE)
+		return (error);
+	if (!(vars->map.worldMap = parse_array(cub, len)))
 		return (MAP_ERROR);
 	return (SUCCESS_CODE);
 }

@@ -33,7 +33,10 @@
  #define FILE_INVALID_ERROR -2
  #define MAP_ERROR -3
  #define WRONG_EXTENSION_ERROR -4
-
+ #define NULL_ERROR -5
+ #define MALLOC_ERROR -6
+ #define CONFIG_ERROR -7
+ #define RESOLUTION_ERROR -8
 
  #define NORTH	0
  #define SOUTH	1
@@ -51,6 +54,9 @@
  #define MAP_WIDTH 			8
  #define MAP_HEIGHT 		16
  #define MAP_PATH			"./map.cub"
+
+ #define VALID_CONF_IDS		"NSWEFC\n"
+ #define WHITESPACES		"\009\010\011\012\013 "
 
  #define TRANS_COLOR		0x00000001
 
@@ -235,10 +241,21 @@ typedef struct s_sprite_drawer
 
 
 
+typedef struct	s_screen
+{
+	int			width;
+	int			height;
+	int			x;
+	int			y;
+	t_data		*img;
+}				t_screen;
+
+
 typedef struct  s_vars
 {
 	void        *mlx;
 	void        *win;
+	t_screen	game_screen;
 	t_map		map;
 	t_data      *img;
 	t_data      img2[2];
@@ -246,6 +263,7 @@ typedef struct  s_vars
 	t_keys      keys[K_BUFF_SIZE + 1];
 	t_texture	*text;
 	t_sprite	*sprites;
+	char		*text_paths[6];
 	int			num_sprites;
 	double		z_buffer[WINDOW_WIDTH];
 	int			redraw;
@@ -263,6 +281,14 @@ int		add_shade(double dist, int color);
 int		load_texture(t_texture *text, char *path, void *mlx);
 void	init_vars(int width, int height, t_vars *vars);
 int   	load_cub(char *path, t_vars *vars);
+
+
+/*
+** GARBAGE COLLECTION 
+*/
+
+void	free_str(char **str);
+void    free_split(char ***split);
 
 /*
 ** RAYCAST 
