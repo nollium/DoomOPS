@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/14 01:31:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:20:26 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,12 @@ int			init_cam(t_camera *cam, char spawn_direction)
 void		init_vars(int width, int height, t_vars *vars)
 {
 	register int 	i;
-	static char		*errors[] = {"NO ERROR", "UNKNOWN ERROR", "FILE INVALID ERROR", "MAP ERROR", "WRONG FILE EXTENSION"};
+	static char		*errors[] = {"NO ERROR", "UNKNOWN ERROR",
+								"FILE INVALID ERROR", "MAP ERROR",
+								"WRONG FILE EXTENSION", "NULL ERROR",
+								"MALLOC ERROR",
+								"CONFIG ERROR", "RESOLUTION_ERROR",
+								"COLOR ERROR"};
 	int				error;
 
 	//mikasa();
@@ -94,22 +99,7 @@ void		init_vars(int width, int height, t_vars *vars)
 		ft_putendl_fd(errors[-error], 2);
 		free_garbage(vars);
 	}
-	/*vars->map = (t_map)
-	{
-		0,0,
-		{
-			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-			{'1','1','0','0','0','1','1','1','0','0','0','0','0','1','1','1'},
-			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
-			{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
-			{'1','0','0','1','0','0','0','0','0','0','0','0','0','0','0','1'},
-			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
-			{'1','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1'},
-			{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
-		}
-	};*/
-
-	char *text_paths[] = {	"pics/NO.xpm",
+	/*char *text_paths[] = {	"pics/NO.xpm",
 							"pics/SO.xpm",
 							"pics/EA.xpm",
 							"pics/WE.xpm",
@@ -117,8 +107,9 @@ void		init_vars(int width, int height, t_vars *vars)
 							"pics/128x128.xpm",
 							"pics/small_shrek.xpm",
 							"pics/hud.xpm",
-							0};
+							0};*/
 
+	char **text_paths = vars->text_paths;
 	i = -1;
 	while (text_paths[++i]);
 	vars->text = malloc(sizeof(t_texture) * (i + 1));
@@ -132,9 +123,9 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->text[i] = (t_texture) {0};
 	
 
-	vars->sprites[0] = (t_sprite){8.0, 6.0, 0, 5};
+	vars->sprites[0] = (t_sprite){8.0, 6.0, 0, 4};
 
-	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 6};
+	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 4};
 	vars->sprites[2] = (t_sprite){4.0, 5.0, 0, 4};
 	vars->num_sprites = 4 - 4 + 3;
 }

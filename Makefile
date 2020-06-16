@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/15 22:30:44 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/16 15:00:52 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DIRSRC = ./
 
 SRC =	main.c frontend.c handlers.c backend.c init.c raycast.c keyboard_handler.c	\
 		colors_handling.c images.c loop.c sprites_sort.c init_sprites.c sprites.c	\
-		garbage_collector.c
+		garbage_collector.c parsing.c
 
 OBJ = $(SRC:.c=.o)
 

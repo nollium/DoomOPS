@@ -37,6 +37,7 @@
  #define MALLOC_ERROR -6
  #define CONFIG_ERROR -7
  #define RESOLUTION_ERROR -8
+ #define COLOR_ERROR -9
 
  #define NORTH	0
  #define SOUTH	1
@@ -56,7 +57,8 @@
  #define MAP_PATH			"./map.cub"
 
  #define VALID_CONF_IDS		"NSWEFC\n"
- #define WHITESPACES		"\009\010\011\012\013 "
+ #define VALID_MAP_CHARS	"012NSEW "
+ #define WHITESPACES		"\t\010\011\012\013 "
 
  #define TRANS_COLOR		0x00000001
 
@@ -263,6 +265,8 @@ typedef struct  s_vars
 	t_keys      keys[K_BUFF_SIZE + 1];
 	t_texture	*text;
 	t_sprite	*sprites;
+	int			floor_color;
+	int			roof_color;
 	char		*text_paths[6];
 	int			num_sprites;
 	double		z_buffer[WINDOW_WIDTH];
@@ -289,6 +293,14 @@ int   	load_cub(char *path, t_vars *vars);
 
 void	free_str(char **str);
 void    free_split(char ***split);
+
+/*
+** PARSING 
+*/
+
+char 	**parse_array(t_list *lst, int len);
+int		parse_resolution(char *line, t_screen *screen);
+int		parse_color(char *line);
 
 /*
 ** RAYCAST 
@@ -323,8 +335,7 @@ int		free_garbage(t_vars *vars);
 int		load_xpm(t_data *data, char *path, void *mlx);
 void	img_to_text(t_data *data, t_texture *text);
 void	draw_text(t_texture *text, t_data *img, int x0, int y0);
-int		rgb_to_trgb(unsigned char t, int rgb);
-int		create_trgb(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
+int		create_rgb(unsigned char r, unsigned char g, unsigned char b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void 	my_line_put(t_data *data, int x0, int y0, int x1, int y1, int color);
 void	drawRectangle(t_data *data, int top_left[2], int bot_right[2]);

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/15 23:40:22 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/16 17:04:59 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,54 @@ void *printshit(void *str)
 	return (NULL);
 }
 
-int format_map_line(char *line)
+int get_conf(t_vars *vars, char *line)
 {
-	int error;
+	static char *text_type[] = {"NO", "SO", "WE", "EA", "S ", 0};
 	int i;
+	int error;
 
 	i = -1;
-	error = 0;
-	printf("\e[31m%p: %s\e[0m\n", line, line);
-	if (!line || !*line)
-		return ((line) ? 0 : 1);
-	while (line[++i])
-	{
-		if (ft_isspace(line[i]))
-			line[i] = '0';
-		if (!ft_isalnum(line[i]))
-			error = 1;
-	}
-	printf("\e[32m%p: %s\e[0m\n", line, line);
-	return (error);
+	error = SUCCESS_CODE;
+	if (ft_strnstr(line, "R ", 2))
+		error = parse_resolution(line + 2, &(vars->game_screen));
+	else if (ft_strnstr(line, "F ", 2))
+		vars->floor_color = parse_color(line + 2);
+	else if (ft_strnstr(line, "C ", 2))
+		vars->roof_color =  parse_color(line + 2);
+	else
+		while (text_type[++i])
+			if (ft_strnstr(line, text_type[i], 2))
+				if (!(vars->text_paths[i] = ft_strtrim(line + 2, WHITESPACES)))
+					return (MALLOC_ERROR);
+	if (error != SUCCESS_CODE)
+		return (error);
+	return (SUCCESS_CODE);
 }
+
+int parse_config(t_list *cub, t_vars *vars)
+{
+	char *line __attribute__((cleanup(free_str)));
+	int  error;
+
+	line = NULL;
+	if (!cub || !vars)
+		return (NULL_ERROR);
+	while (cub->next)
+	{
+		if (ft_replace_charset(cub->content, WHITESPACES, ' ') < 0)
+			return (NULL_ERROR);
+		if (!(line = ft_strtrim(cub->content, WHITESPACES)))
+			return (MALLOC_ERROR);
+		if ((error = get_conf(vars, line)) != SUCCESS_CODE)
+			return (error);
+		cub = cub->next;
+	}
+	if (vars->floor_color < 0 || vars->roof_color < 0)
+		return (COLOR_ERROR);
+	vars->text_paths[5] = NULL;
+	return (SUCCESS_CODE);
+}
+
 
 int read_cub(char *path, t_list **alst)
 {
@@ -74,93 +102,6 @@ int read_cub(char *path, t_list **alst)
 	}
 	close(fd);
 	return ((!error) ? len : error == -1 || !*alst);
-}
-
-char **parse_array(t_list *lst, int len)
-{
-	char **array;
-	int error;
-
-	error = 0;
-	if (lst && (array = malloc(sizeof(char *) * (len + 1))))
-	{
-		len = 1;
-		while (lst->next && !ft_isdigit(*(char *)(lst->content)) && !ft_isspace(*(char *)lst->content))
-			lst = lst->next;
-		array[0] = lst->content;
-		error |= format_map_line(array[0]);
-		while ((lst = lst->next) && !(error |= format_map_line(lst->content)))
-			array[len++] = lst->content;
-		array[len] = NULL;
-	}
-	else
-		array = NULL;
-	ft_lstclear(&lst, NULL);
-	if (error)
-	{
-		free(array);
-		return (NULL);
-	}
-	len = -1;
-	while (DEBUG_MODE && array && array[++len]) // print map
-		ft_putendl_fd(array[len], 2);
-	return (array);
-}
-
-int get_resolution(char *line, t_screen *screen)
-{
-	char **array __attribute__((cleanup(free_split)));
-	int i;
-
-	array = ft_split(line, ' ');
-	i = -1;
-	while (array[++i])
-		if (i > 1)
-			return (RESOLUTION_ERROR);
-	screen->width = ft_atoi(array[0]);
-	screen->height = ft_atoi(array[1]);
-	if (screen->width <= 0 || screen->height <= 0)
-		return (RESOLUTION_ERROR);
-	return (SUCCESS_CODE);
-}
-
-int get_conf(t_vars *vars, char *line)
-{
-	static char *text_type[] = {"NO", "SO", "WE", "EA", "S ", 0};
-	int i;
-
-	i = -1;
-	if (ft_strnstr(line, "R ", 2))
-		get_resolution(line + 2, &(vars->game_screen));
-	else if (ft_strnstr(line, "F ", 2))
-		;
-	else if (ft_strnstr(line, "C ", 2))
-		;
-	else
-		while (text_type[++i])
-			if (ft_strnstr(line, text_type[i], 2))
-				vars->text_paths[i] = ft_strtrim(line + 2, WHITESPACES);
-	return (SUCCESS_CODE);
-}
-
-int parse_config(t_list *cub, t_vars *vars)
-{
-	char *line __attribute__((cleanup(free_str)));
-
-	line = NULL;
-	if (!cub || !vars)
-		return (NULL_ERROR);
-	while (cub->next)
-	{
-		if (ft_replace_charset(cub->content, WHITESPACES, ' ') < 0)
-			return (NULL_ERROR);
-		if (!(line = ft_strtrim(cub->content, WHITESPACES)))
-			return (MALLOC_ERROR);
-		if (get_conf(vars, line) != SUCCESS_CODE)
-			return (CONFIG_ERROR);
-		cub = cub->next;
-	}
-	return (SUCCESS_CODE);
 }
 
 int load_cub(char *path, t_vars *vars)
