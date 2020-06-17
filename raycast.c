@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/14 00:32:47 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 13:43:59 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_raycast(t_vars *vars, int x, t_ray *ray)
 {
 	long double	camera_x;
 
-	camera_x = 2 * x / (long double)WINDOW_WIDTH - 1.0;
+	camera_x = 2 * x / (long double)vars->game_screen.width - 1.0;
 	ray->dir_x = vars->cam.dir_x + vars->cam.plane.x * camera_x;
 	ray->dir_y = vars->cam.dir_y + vars->cam.plane.y * camera_x;
 	vars->map.x = (int)(vars->cam.x);
@@ -57,7 +57,7 @@ static void	perform_dda(t_vars *vars, t_ray *ray)
 			ray->side_dist_y += ray->delta_dist_y;
 			vars->map.y += ray->step_y;
 		}
-		ray->hit = (vars->map.worldMap[vars->map.x][vars->map.y] - '0' > 0);
+		ray->hit = (vars->map.array[vars->map.x][vars->map.y] - '0' > 0);
 	}
 }
 
@@ -107,6 +107,8 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 		return ((ray->side) ? EAST : NORTH);
 	else if (corner == -135)
 		return ((ray->side) ? EAST : SOUTH);
+
+	ft_putendl_fd("Weird", 2);
 	return (4);
 }
 

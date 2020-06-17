@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/16 15:00:52 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/17 17:57:00 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ OBJBONUS = $(SRCBONUS:.c=.o)
 
 LIBFT = libft/libftprintf.a
 
+LIB_ARG = 
+
 DEBUG = -O3
 
 all: $(NAME) $(HEADERS)	
@@ -44,7 +46,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 
 $(LIBFT):
-	$(MAKE) -C libft/
+	$(MAKE) $(LIB_ARG) -C libft/
 
 obj/%.o: %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -67,6 +69,8 @@ re: fclean all
 
 opti:
 	$(eval CFLAGS += -O3)
+	$(eval LIB_ARG += -O3)
 
 debug:
 	$(eval CFLAGS += -fsanitize=address)
+	$(eval LIB_ARG += -fsanitize=address)

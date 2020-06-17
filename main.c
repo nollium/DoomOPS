@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/15 15:50:45 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 17:45:47 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ static void	get_color(t_drawer *draw, t_texture *tex)
 
 void		draw_col(t_vars *vars, t_drawer *draw)
 {
-	while (++draw->y < WINDOW_HEIGHT)
+	while (++draw->y < draw->screen->height)
 	{
 		if (draw->start <= draw->y && draw->y <= draw->end)
 		{
 			get_color(draw, &(vars->text[draw->side]));
 			//draw->color = (vars->w_color) ? vars->w_color : draw->color;
 			if (SHADOW_MODE)	
-				draw->color = add_shade(((double)draw->dist / MAP_HEIGHT * 2), draw->color);
+				draw->color = add_shade(((double)draw->dist / 16 * 2), draw->color);
 		}
 		if (draw->y > draw->end)
 		{
 			draw->color = FLOOR_COLOR;
 			if (SHADOW_MODE)
-				draw->color = add_shade(1.05 / ((double)draw->y * 2.15 / (double)((WINDOW_HEIGHT))) , draw->color);
+				draw->color = add_shade(1.05 / ((double)draw->y * 2.15 / (double)((draw->screen->height))) , draw->color);
 		}
 		my_mlx_pixel_put(vars->img, draw->x, draw->y, draw->color);
 	}
@@ -47,17 +47,17 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 
 void		init_drawer(t_drawer *draw, t_ray *ray, int text_height)
 {
-	draw->line_height = (int)(WINDOW_HEIGHT / ray->perp_wall_dist);
-	draw->start = -(draw->line_height) / 2 + WINDOW_HEIGHT / 2;
-	draw->end = (draw->line_height) / 2 + WINDOW_HEIGHT / 2;
+	draw->line_height = (int)(draw->screen->height / ray->perp_wall_dist);
+	draw->start = -(draw->line_height) / 2 + draw->screen->height / 2;
+	draw->end = (draw->line_height) / 2 + draw->screen->height / 2;
 	draw->color = ROOF_COLOR;
 	draw->y = -1;
 	draw->dist = ray->perp_wall_dist;
 	draw->side = ray->w_num;
 	draw->start = (draw->start < 0) ? 0 : draw->start;
-	draw->end = (draw->end >= WINDOW_HEIGHT) ? WINDOW_HEIGHT - 1 : draw->end;
+	draw->end = (draw->end >= draw->screen->height) ? draw->screen->height - 1 : draw->end;
 	draw->step = 1.0 * text_height / draw->line_height;
-	draw->tex_pos = (draw->start - WINDOW_HEIGHT / 2 + draw->line_height / 2) * draw->step;
+	draw->tex_pos = (draw->start - draw->screen->height / 2 + draw->line_height / 2) * draw->step;
 }
 
 /*	used variables :
@@ -71,7 +71,8 @@ void		draw_scene(t_vars *vars)
 	t_drawer	draw;
 
 	draw.x = -1;
-	while (++(draw.x) < WINDOW_WIDTH)
+	draw.screen = &(vars->game_screen);
+	while (++(draw.x) < draw.screen->width)
 	{
 		raycast_walls(&ray, vars, draw.x);
 		init_drawer(&draw, &ray, vars->text[ray.w_num].height);
@@ -95,13 +96,19 @@ void		draw_text(t_texture *text, t_data *img, int x0, int y0)
 }
 
 
-int			main(void)
+int			main(int argc, char **argv)
 {
 	t_vars	vars;
 	int		i = -1;
 
 	vars = (t_vars){0};
-	init_vars(WINDOW_WIDTH, WINDOW_HEIGHT, &vars);
+	if (argc != 2)
+	{
+		ft_putendl_fd("ERROR: WRONG ARGUMENTS\nUSAGE : ./cub3D config.cub", 2);
+		return (1);
+	}
+	if ((init_vars(argv[1], &vars)) != SUCCESS_CODE)
+		return (1);
 	vars.img = vars.img2;
 	//my_mlx_pixel_put(vars.img, 5, 5, 0x00FF0000);
 	//my_line_put(vars.img, 1, 1, 1000, 1000, 0xFF);

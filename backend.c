@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/16 17:04:59 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 18:23:30 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int parse_config(t_list *cub, t_vars *vars)
 	return (SUCCESS_CODE);
 }
 
-
 int read_cub(char *path, t_list **alst)
 {
 	char *line;
@@ -104,6 +103,36 @@ int read_cub(char *path, t_list **alst)
 	return ((!error) ? len : error == -1 || !*alst);
 }
 
+int	find_spawn(char **map, long double *x_ret, long double *y_ret)
+{
+	char	*spawn_ptr;
+	char	*last_ptr;
+	int		x;
+	int		y;
+	
+	y = -1;
+	x = -1;
+	*x_ret = -1;
+	*y_ret = -1;
+	while (map[++x])
+	{
+		if ((spawn_ptr = ft_setchr(map[x], SPAWN_CHARS))
+						!= (last_ptr = ft_setrchr(map[x], SPAWN_CHARS)))
+			return (MAP_ERROR);
+		else if (spawn_ptr)
+		{
+			if (*x_ret != -1 && *y_ret != -1)
+				return (MAP_ERROR);
+			*x_ret = (double)x;
+			*y_ret = (double)(spawn_ptr - map[x]);
+			map[(int)*x_ret][(int)*y_ret] = '0';
+		}
+	}
+	if (*x_ret <= 0 || *y_ret <= 0)
+		return (MAP_ERROR);
+	return (SUCCESS_CODE);
+}
+
 int load_cub(char *path, t_vars *vars)
 {
 	t_list *cub;
@@ -113,11 +142,13 @@ int load_cub(char *path, t_vars *vars)
 	if (!ft_strnstr(path + ft_strlen(path) - 4, ".cub", 4))
 		return (WRONG_EXTENSION_ERROR);
 	vars->map = (t_map){0, 0, 0};
-	if ((len = read_cub(path, &cub)) <= 0) // FIXED
+	if ((len = read_cub(path, &cub)) <= 0)
 		return (FILE_INVALID_ERROR);
 	if ((error = parse_config(cub, vars)) != SUCCESS_CODE)
 		return (error);
-	if (!(vars->map.worldMap = parse_array(cub, len)))
+	if (!(vars->map.array = parse_array(cub, len)))
+		return (MAP_ERROR);
+	if (find_spawn(vars->map.array, &(vars->cam.x), &(vars->cam.y)) != SUCCESS_CODE)
 		return (MAP_ERROR);
 	return (SUCCESS_CODE);
 }

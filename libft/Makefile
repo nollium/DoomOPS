@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/15 23:35:47 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/17 17:54:47 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -g3 -O3
+CFLAGS = -Wall -Wextra -g3
 
 RM = rm -rf
 
@@ -58,3 +58,9 @@ fclean: clean
 re: fclean all	
 
 .PHONY: clean fclean
+
+opti:
+	$(eval CFLAGS += -O3)
+
+debug:
+	$(eval CFLAGS += -fsanitize=address)

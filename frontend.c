@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:42:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/14 00:29:59 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 14:16:31 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char    *dst;
 
-	if (x <= 0 || x >= WINDOW_WIDTH || y <= 0 || y >= WINDOW_HEIGHT
+	if (x <= 0 || x >= data->width || y <= 0 || y >= data->height
 	|| color == TRANS_COLOR)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
@@ -141,11 +141,11 @@ void	draw_gradient(t_data *data)
 	int y = 0;
 	double i = 0;
 
-	while (y < WINDOW_HEIGHT)
+	while (y < data->height)
 	{
 		i += 0.05;
 		x = 0;
-		while (x < WINDOW_WIDTH)
+		while (x < data->width)
 			{
 				my_mlx_pixel_put(data, x, y, add_shade(0.5, create_rgb((sin(0.3 * i) * 127 + 128), (sin(0.3 * i + 2.0) * 127 + 128), (sin(0.3 * i + 4.0) * 127 + 128))));
 				x++;

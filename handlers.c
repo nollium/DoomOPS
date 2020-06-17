@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/14 00:30:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 17:47:15 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int				free_garbage(t_vars *vars)
 {
-	mlx_do_key_autorepeaton(vars->mlx);
-    mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->mlx)
+	{
+		mlx_do_key_autorepeaton(vars->mlx);
+    	mlx_destroy_window(vars->mlx, vars->win);
+	}
 	exit(0);	
 }
 

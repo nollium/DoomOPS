@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:58:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/07 21:43:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 14:21:10 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ int add_shade(double shade, int color)
 	if (shade >= 1)
 		return (0);
 	*(int *)rgb = color;
-	
-	rgb[0] = rgb[0] - shade * rgb[0];
-	rgb[1] = rgb[1] - shade * rgb[1];
-	rgb[2] = rgb[2] - shade * rgb[2];
+	rgb[0] *= (1.0 - shade);
+	rgb[1] *= (1.0 - shade);
+	rgb[2] *= (1.0 - shade);
 	return (*(int *)rgb);
 }
 

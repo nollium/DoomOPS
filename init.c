@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/16 18:20:26 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 18:05:21 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			init_cam(t_camera *cam, char spawn_direction)
 		return (0);	
 }
 
-void		init_vars(int width, int height, t_vars *vars)
+int		init_vars(char *path, t_vars *vars)
 {
 	register int 	i;
 	static char		*errors[] = {"NO ERROR", "UNKNOWN ERROR",
@@ -89,16 +89,18 @@ void		init_vars(int width, int height, t_vars *vars)
 	i = -1;
 	while (++i < K_BUFF_SIZE)
 		(vars->keys)[i] = (t_keys){-1, 0};
-	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, width, height, "cub3D");
-	init_img(vars->mlx, width, height, vars->img2);
-	init_img(vars->mlx, width, height, vars->img2 + 1);
 	init_cam(&(vars->cam), SPAWN_DIR);
-	if ((error = load_cub("map.cub", vars)))
+	if ((error = load_cub(path, vars)) != SUCCESS_CODE)
 	{
 		ft_putendl_fd(errors[-error], 2);
 		free_garbage(vars);
+		return (error);
 	}
+	vars->z_buffer = malloc(sizeof(double) * vars->game_screen.width);
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, vars->game_screen.width, vars->game_screen.height, "cub3D");
+	init_img(vars->mlx, vars->game_screen.width, vars->game_screen.height, vars->img2);
+	init_img(vars->mlx, vars->game_screen.width, vars->game_screen.height, vars->img2 + 1);
 	/*char *text_paths[] = {	"pics/NO.xpm",
 							"pics/SO.xpm",
 							"pics/EA.xpm",
@@ -128,4 +130,5 @@ void		init_vars(int width, int height, t_vars *vars)
 	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 4};
 	vars->sprites[2] = (t_sprite){4.0, 5.0, 0, 4};
 	vars->num_sprites = 4 - 4 + 3;
+	return (SUCCESS_CODE);
 }

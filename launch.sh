@@ -1,1 +1,1 @@
-make lilclean && make $1 all && ./cub3D
+make lilclean && make $1 all && ./cub3D map.cub

@@ -49,8 +49,8 @@
  #define DEBUG_MODE		1
  #define SHADOW_MODE	1
 
- #define WINDOW_WIDTH		800
- #define WINDOW_HEIGHT		800
+ //#define WINDOW_WIDTH		800
+ //#define WINDOW_HEIGHT		800
 
  #define MAP_WIDTH 			8
  #define MAP_HEIGHT 		16
@@ -58,6 +58,7 @@
 
  #define VALID_CONF_IDS		"NSWEFC\n"
  #define VALID_MAP_CHARS	"012NSEW "
+ #define SPAWN_CHARS		"NSEW"
  #define WHITESPACES		"\t\010\011\012\013 "
 
  #define TRANS_COLOR		0x00000001
@@ -170,7 +171,7 @@ typedef struct	s_map
 {
 	int			x;
 	int			y;
-	char 		**worldMap;
+	char 		**array;
 }				t_map;
 
 typedef struct	s_texture
@@ -181,6 +182,16 @@ typedef struct	s_texture
 	int			x;
 	int			y;
 }				t_texture;
+
+typedef struct	s_screen
+{
+	int			width;
+	int			height;
+	int			x;
+	int			y;
+	t_data		*img;
+}				t_screen;
+
 
 typedef struct	s_drawer
 {
@@ -194,6 +205,7 @@ typedef struct	s_drawer
 	int			side;
 	double 		step;
 	double		tex_pos;
+	t_screen	*screen;
 	
 }				t_drawer;
 
@@ -239,19 +251,8 @@ typedef struct s_sprite_drawer
 	int			factor_128;
 	t_texture	*text;
 	int			sprite_index;
+	t_screen	*screen;
 }				t_sprite_drawer;
-
-
-
-typedef struct	s_screen
-{
-	int			width;
-	int			height;
-	int			x;
-	int			y;
-	t_data		*img;
-}				t_screen;
-
 
 typedef struct  s_vars
 {
@@ -269,7 +270,7 @@ typedef struct  s_vars
 	int			roof_color;
 	char		*text_paths[6];
 	int			num_sprites;
-	double		z_buffer[WINDOW_WIDTH];
+	double		*z_buffer;
 	int			redraw;
 	int			seen_sprite;
 	//int			w_color;
@@ -283,7 +284,7 @@ int		add_shade(double dist, int color);
 ** INIT 
 */		
 int		load_texture(t_texture *text, char *path, void *mlx);
-void	init_vars(int width, int height, t_vars *vars);
+int		init_vars(char *path, t_vars *vars);
 int   	load_cub(char *path, t_vars *vars);
 
 
@@ -318,7 +319,7 @@ void	cast_sprites(t_sprite *sprites, t_camera *, t_vars *);
 void	sort_sprites(int n, t_sprites_sorter *arr);
 void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt);
 void	init_sprite_drawing(t_sprite_drawer *, t_camera *,
-							t_sprite *, t_texture *);
+							t_sprite *, t_texture *, t_screen *);
 
 /*
 ** BACKEND 

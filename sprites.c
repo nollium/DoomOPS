@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/13 13:25:58 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/17 14:00:10 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		draw_sprites(t_sprite_drawer *draw, t_sprite *sprites,
 	while (++stripe < draw->end_x)
 	{
 		draw->text_x = (int)(stripe * draw->pre_calc1 + draw->pre_calc2);
-		if (draw->transform_y > 0 && stripe > 0 && stripe < WINDOW_WIDTH
+		if (draw->transform_y > 0 && stripe > 0 && stripe < draw->screen->width
 			&& draw->transform_y < sprites_depth[stripe])
 		{
 			draw_sprite_pxl(draw, stripe, img);
@@ -58,8 +58,9 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 	t_sprite_drawer	draw;
 
 	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
-	draw.half_win_height = WINDOW_HEIGHT / 2;
-	draw.half_win_width = WINDOW_WIDTH / 2;
+	draw.screen = &(vars->game_screen);
+	draw.half_win_height = draw.screen->height / 2;
+	draw.half_win_width = draw.screen->width / 2;
 	i = -1;
 	while (++i < vars->num_sprites)
 	{
@@ -71,7 +72,8 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 		if 	(draw.dist < 8 || !SHADOW_MODE)
 		{
 			init_sprite_drawing(&draw, cam, &v_sprite,
-								&(vars->text[v_sprite.tex_num]));
+								&(vars->text[v_sprite.tex_num]) ,
+								&(vars->game_screen));
 			draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
 		}
 	}
