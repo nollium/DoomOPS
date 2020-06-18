@@ -1,20 +1,15 @@
-void		draw_col(t_vars *vars, t_drawer *draw)
-{
-	while (++draw->y < draw->screen->height)
-	{
-		if (draw->start <= draw->y && draw->y <= draw->end)
-		{
-			get_color(draw, &(vars->text[draw->side]));
-			//draw->color = (vars->w_color) ? vars->w_color : draw->color;
-			if (SHADOW_MODE)	
-				draw->color = add_shade(((double)draw->dist / 16 * 2), draw->color);
-		}
-		if (draw->y > draw->end)
-		{
-			draw->color = FLOOR_COLOR;
-			if (SHADOW_MODE)
-				draw->color = add_shade(1.05 / ((double)draw->y * 2.15 / (double)((draw->screen->height))) , draw->color);
-		}
-		my_mlx_pixel_put(vars->img, draw->x, draw->y, draw->color);
-	}
-}
+SRC =	src/main.c \
+\
+		src/parsing/backend.c  src/parsing/init.c  src/parsing/parsing.c \
+		src/parsing/images.c \
+\
+		src/raycasting/raycast.c \
+\
+		src/frontend/colors_handling.c  src/frontend/frontend.c \
+\
+		src/sprites/sprites_sort.c  src/sprites/init_sprites.c \
+		src/sprites/sprites.c \
+\
+		src/garbage_collection/garbage_collector.c \
+\
+		src/events/loop.c  src/events/handlers.c  src/events/keyboard_handler.c

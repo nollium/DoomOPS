@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/17 17:57:00 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/18 17:56:06 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,42 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -g3 
+INCLUDES = ./includes/
+
+CFLAGS = -Wall -Wextra -I$(INCLUDES) -g3 
 
 RM = rm -rf
 
-DIRSRC = ./
+DIRSRC = ./src/
 
-SRC =	main.c frontend.c handlers.c backend.c init.c raycast.c keyboard_handler.c	\
-		colors_handling.c images.c loop.c sprites_sort.c init_sprites.c sprites.c	\
-		garbage_collector.c parsing.c
+SRC = $(addprefix $(DIRSRC), \
+			main.c \
+\
+			parsing/backend.c  parsing/init.c  parsing/parsing.c \
+			parsing/images.c \
+\
+			raycasting/raycast.c \
+\
+			frontend/colors_handling.c  frontend/frontend.c \
+\
+			sprites/sprites_sort.c  sprites/init_sprites.c \
+			sprites/sprites.c \
+\
+			garbage_collection/garbage_collector.c \
+\
+			events/loop.c  events/handlers.c  events/keyboard_handler.c \
+		)
+
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = cub3D.h
+
+
+
+HEADERS = $(addprefix $(INCLUDES), \
+				cub3D.h events.h frontend.h \
+				garbage_collection.h parsing.h raycast.h sprites.h\
+			)
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
@@ -34,7 +57,6 @@ LIBFT = libft/libftprintf.a
 
 LIB_ARG = 
 
-DEBUG = -O3
 
 all: $(NAME) $(HEADERS)	
 
@@ -46,7 +68,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 
 $(LIBFT):
-	$(MAKE) $(LIB_ARG) -C libft/
+	$(MAKE) $(LIB_ARG) all -C libft/
 
 obj/%.o: %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -69,8 +91,8 @@ re: fclean all
 
 opti:
 	$(eval CFLAGS += -O3)
-	$(eval LIB_ARG += -O3)
+	$(eval LIB_ARG += opti)
 
 debug:
 	$(eval CFLAGS += -fsanitize=address)
-	$(eval LIB_ARG += -fsanitize=address)
+	$(eval LIB_ARG += debug)
