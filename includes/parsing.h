@@ -6,21 +6,21 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 16:18:38 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/19 14:31:49 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
- #define PARSING_H
+# define PARSING_H
  
- #include <fcntl.h>
- #include "structs/structs.h"
- #include "../libft/libftprintf.h"
- #include "garbage_collection.h"
- #include "settings.h"
+# include <fcntl.h>
+# include "structs/structs.h"
+# include "../libft/libftprintf.h"
+# include "garbage_collection.h"
+# include "settings.h"
 
- #define VALID_CONF_IDS		"NSWEFC\n"
- #define VALID_MAP_CHARS	"012NSEW "
+# define VALID_CONF_IDS		"NSWEFC\n"
+# define VALID_MAP_CHARS	"012NSEW "
 
 /*
 ** PARSING 

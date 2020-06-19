@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 15:03:25 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/19 04:27:32 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,4 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 			draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
 		}
 	}
-}
-
-void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
-{
-	t_sprites_sorter	*sprites_srt;
-	
-	vars->seen_sprite = 0;
-	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
-		ft_putendl_fd("MALLOC ERROR", 2);
-	init_sprites_info(vars, sprites_srt);
-	put_sprites(vars, sprites, sprites_srt, cam);
-	free(sprites_srt);
 }

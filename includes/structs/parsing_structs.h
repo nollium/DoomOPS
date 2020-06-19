@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:54:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 15:55:07 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/19 14:28:17 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_spawn
     double  y;
     char    dir;
 }               t_spawn;
-
 
 typedef struct	s_texture
 {

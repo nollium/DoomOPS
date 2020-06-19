@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 17:51:23 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/19 04:27:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,4 +142,16 @@ void		raycast_walls(t_ray *ray, t_vars *vars, int x)
 	ray->w_num = get_wall_side(vars, ray);
 	get_texture_coords(vars, ray);
 	vars->z_buffer[x] = ray->perp_wall_dist;
+}
+
+void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
+{
+	t_sprites_sorter	*sprites_srt;
+	
+	vars->seen_sprite = 0;
+	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
+		ft_putendl_fd("MALLOC ERROR", 2);
+	init_sprites_info(vars, sprites_srt);
+	put_sprites(vars, sprites, sprites_srt, cam);
+	free(sprites_srt);
 }

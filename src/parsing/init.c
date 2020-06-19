@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 15:30:15 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/19 15:02:12 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		init_vars(char *path, t_vars *vars)
 	i = -1;
 	while (text_paths[++i]);
 	vars->text = malloc(sizeof(t_texture) * (i + 1));
-	vars->sprites = malloc(sizeof(t_sprite) * 3);
+	//vars->sprites = malloc(sizeof(t_sprite) * 3);
 	i = -1;
 	if (!(vars->text && vars->sprites))
 		ft_putendl_fd("MALLOC ERROR", 1);
@@ -126,10 +126,10 @@ int		init_vars(char *path, t_vars *vars)
 	vars->text[i] = (t_texture) {0};
 	
 
-	vars->sprites[0] = (t_sprite){8.0, 6.0, 0, 4};
+/*	vars->sprites[0] = (t_sprite){8.0, 6.0, 0, 4};
 
 	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 4};
 	vars->sprites[2] = (t_sprite){4.0, 5.0, 0, 4};
-	vars->num_sprites = 4 - 4 + 3;
+	vars->num_sprites = 4 - 4 + 3;*/
 	return (SUCCESS_CODE);
 }

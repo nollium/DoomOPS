@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 15:43:53 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/19 15:12:14 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,39 @@ int	find_spawn(char **map, t_spawn *spawn)
 	return (SUCCESS_CODE);
 }
 
+int	parse_sprites(t_vars *vars, char **map, int *size)
+{
+	t_sprite	*array;
+	int			x;
+	int			y;
+	int			i;
+	
+	x = -1;
+	y = -1;
+	*size = 0;
+	while (map[++x])
+	{
+		y = -1;
+		while (map[++y])
+			if (map[x][y] == '2')
+				(*size)++;
+	}
+	if (!(array = malloc(sizeof(t_sprite) * (1 + *size))))
+		return (MALLOC_ERROR);
+	x = -1;
+	y = -1;
+	i = 0;
+	while (map[++x])
+	{
+		y = -1;
+		while (map[++y])
+			if (map[x][y] == '2')
+				array[i++] = (t_sprite){x, y, 0, 4};
+	}
+	vars->map.array = array;
+	return (SUCCESS_CODE);
+}
+
 int load_cub(char *path, t_vars *vars)
 {
 	t_list *cub;
@@ -139,5 +172,8 @@ int load_cub(char *path, t_vars *vars)
 		return (MAP_ERROR);
 	if (find_spawn(vars->map.array, &(vars->spawn)) != SUCCESS_CODE)
 		return (MAP_ERROR);
+	if ((error = parse_sprites(vars, vars->map.array, &(vars->num_sprites)))
+				 != SUCCESS_CODE)
+		return (error);
 	return (SUCCESS_CODE);
 }
