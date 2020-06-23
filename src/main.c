@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 18:00:08 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/23 17:27:39 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ int			main(int argc, char **argv)
 //	draw_text(&text, vars.img, 64, 0);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	DEBUG_PRINT("AHHAHAHAIUHDZAHLIDHALIHDLIHLDAHLZDHLAZLDAKZJZADZMJADMLMLZAMMJZLAJMZJMA");
+	//printf("Z:%d\n", FORWARD_KEY)
 	mlx_loop(vars.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/19 04:27:40 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/23 17:43:05 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	perform_dda(t_vars *vars, t_ray *ray)
 			ray->side_dist_y += ray->delta_dist_y;
 			vars->map.y += ray->step_y;
 		}
-		ray->hit = (vars->map.array[vars->map.x][vars->map.y] - '0' > 0);
+		ray->hit = (((vars->map.array)[vars->map.x][vars->map.y] - '0' ) > 0);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/19 15:12:14 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/23 17:52:12 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int	parse_sprites(t_vars *vars, char **map, int *size)
 			if (map[x][y] == '2')
 				array[i++] = (t_sprite){x, y, 0, 4};
 	}
-	vars->map.array = array;
+	//vars->map.array = array;
 	return (SUCCESS_CODE);
 }
 

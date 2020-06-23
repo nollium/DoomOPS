@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/18 17:56:06 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/23 17:25:18 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,12 @@ all: $(NAME) $(HEADERS)
 bonus: $(OBJBONUS) $(NAME)
 	ar rcs $(NAME) $(OBJBONUS)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp -lbsd -lm
 
+#clang -Wall -Wextra -I./includes/ -g3 -o cub3D $(OBJ) libft/libftprintf.a -L/usr/local/lib -lmlx -lXext -lX1 -lxcb -lXau -lXdmcp -lm
+	#$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lXau -lXdmcp -lm 
+
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework Appkit
 
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
@@ -96,3 +99,9 @@ opti:
 debug:
 	$(eval CFLAGS += -fsanitize=address)
 	$(eval LIB_ARG += debug)
+
+OSX:
+	$(eval CFLAGS += -D OS_OSX=1)
+
+UBUNTU:
+	$(eval CFLAGS += -D OS_UBUNTU=1)

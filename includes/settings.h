@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 17:41:44 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/23 17:32:27 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  #include <unistd.h>
  #include <mlx.h>
  #include <math.h>
- #include <X11/Xlib.h>
+ 
  #include <fcntl.h>
  #include <stdio.h>
  #include <limits.h>
@@ -29,7 +29,7 @@
  #define WARNINGS 		1
  #define WARN_LEVEL		100000
  #define DEBUG_MODE		1
- #define SHADOW_MODE	0
+ #define SHADOW_MODE	1
  #define SPAWN_CHARS		"NSEW"
  #define WHITESPACES		"\t\010\011\012\013 "
  
