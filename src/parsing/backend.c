@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/23 17:52:12 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:23:02 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	parse_sprites(t_vars *vars, char **map, int *size)
 	while (map[++x])
 	{
 		y = -1;
-		while (map[++y])
+		while (map[x][++y])
 			if (map[x][y] == '2')
 				(*size)++;
 	}
@@ -147,19 +147,22 @@ int	parse_sprites(t_vars *vars, char **map, int *size)
 	while (map[++x])
 	{
 		y = -1;
-		while (map[++y])
+		while (map[x][++y])
 			if (map[x][y] == '2')
-				array[i++] = (t_sprite){x, y, 0, 4};
+			{
+				array[i++] = (t_sprite){(double)x + 0.5, (double)y + 0.5, 0, 4};
+				map[x][y] = '0';
+			}
 	}
-	//vars->map.array = array;
+	vars->sprites = array;
 	return (SUCCESS_CODE);
 }
 
 int load_cub(char *path, t_vars *vars)
 {
-	t_list *cub;
-	int len;
-	int error;
+	t_list	*cub;
+	int		len;
+	int		error;
 
 	if (!ft_strnstr(path + ft_strlen(path) - 4, ".cub", 4))
 		return (WRONG_EXTENSION_ERROR);

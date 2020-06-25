@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:24:16 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 16:12:31 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 15:18:04 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ char **parse_array(t_list *lst, int len)
 		free(array);
 		return (NULL);
 	}
-	len = -1;
-	while (DEBUG_MODE && array && array[++len]) // print map
-		ft_putendl_fd(array[len], 2);
 	return (array);
 }
 

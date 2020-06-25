@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/23 17:08:44 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 17:56:53 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void 	hooks(t_vars *vars)
 {
-	mlx_hook(vars->win, KeyPress, KeyPressMask, key_handler, (void *)vars);
+	mlx_hook(vars->win, KEY_PRESS, KEYPRESS_MASK, key_handler, (void *)vars);
 	mlx_mouse_hook(vars->win, mouse_handler, vars);
+	/*
 	mlx_hook(vars->win, ResizeRequest, 1, resize_handler, (void *)0);
 	mlx_hook(vars->win, EnterNotify, EnterWindowMask, enter_handler, NULL);
 	mlx_hook(vars->win, LeaveNotify, LeaveWindowMask, leave_handler, NULL);
-	mlx_hook(vars->win, KeyRelease, KeyReleaseMask, release_handler, (void *)vars);
+	*/
+	mlx_hook(vars->win, KEY_RELEASE, KEYRELEASE_MASK, release_handler, (void *)vars);
 	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 }
 
@@ -45,7 +47,7 @@ int		loop_handler(t_vars *vars)
 	int i = -1;
 // 4.0 10.0
 	vars->redraw |= keyboard_handler(vars);
-	vars->redraw |= ennemies_handler(vars, vars->sprites);
+	//vars->redraw |= ennemies_handler(vars, vars->sprites);
 	while (++i < vars->num_sprites)
 		vars->redraw |= vars->sprites[i].seen;
 	if (vars->redraw)

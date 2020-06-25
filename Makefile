@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/23 17:25:18 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/25 15:30:01 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC = $(addprefix $(DIRSRC), \
 			garbage_collection/garbage_collector.c \
 \
 			events/loop.c  events/handlers.c  events/keyboard_handler.c \
+\
+			debug/debug_map.c \
 		)
 
 

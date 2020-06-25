@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/19 04:27:32 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:02:17 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 void		draw_sprites(t_sprite_drawer *draw, t_sprite *sprites,
 						double *sprites_depth, t_data *img)
 {
-	register int	stripe;
+	int	stripe;
+
 	stripe = draw->start_x - 1;
 	while (++stripe < draw->end_x)
 	{
@@ -71,7 +72,7 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 		if 	(draw.dist < 8 || !SHADOW_MODE)
 		{
 			init_sprite_drawing(&draw, cam, &v_sprite,
-								&(vars->text[v_sprite.tex_num]) ,
+								vars->text + v_sprite.tex_num ,
 								&(vars->game_screen));
 			draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
 		}

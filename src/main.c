@@ -6,11 +6,11 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/23 17:27:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:02:09 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static void	get_color(t_drawer *draw, t_texture *tex)
 {

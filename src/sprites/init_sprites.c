@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:41:36 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 16:23:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:00:20 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void init_sprite_texture(t_sprite_drawer *draw, t_texture *text)
 	draw->text = text;
 	draw->factor_128 = (-draw->screen->height+ draw->sprite_height) * 128;
 	draw->shader = draw->dist / 16 * 2;
-	draw->pre_calc1 = (double)draw->text->width / (double)draw->sprite_width;
+	//printf("DEBUG TEXT %p : AS INT : %d AS DOUBLE : %LF\n", draw->text, (double)draw->text->width, (int)draw->text->width);
+	draw->pre_calc1 = ((double)draw->text->width / (double)draw->sprite_width);
 	draw->pre_calc2 = -draw->pre_calc1
 	* (-draw->half_sprite_width + draw->sprite_screen_x);
 }

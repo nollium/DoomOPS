@@ -6,12 +6,12 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:58:46 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 16:06:14 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:41:37 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_STRUCTS_H
- #define RAYCAST_STRUCTS_H
+# define RAYCAST_STRUCTS_H
 
 typedef struct	s_ray
 {
