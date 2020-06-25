@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 18:01:29 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:14:15 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define T_BUFF_SIZE		8
 # define S_BUFF_SIZE		1
 
-# ifdef  OS_UBUNTU
+# ifdef OS_UBUNTU
 
 #  warning "UBUNTU"
 #  define FORWARD_KEY		122
@@ -44,13 +44,13 @@
 #  define ALT_KEY			258
 #  define C_KEY				8
 
- #endif
+# endif
+
 /*
-** BACKEND 
+** BACKEND
 */
 
 t_keys	*key_chr(t_keys *arr, int keycode, size_t size);
-
 
 /*
 ** EVENT HANDLERS
@@ -72,33 +72,33 @@ int		release_handler(int keycode, t_vars *vars);
 */
 
 # define NOEVENT_MASK			    0L
-# define KEYPRESS_MASK			    (1L<<0)
-# define KEYRELEASE_MASK			(1L<<1)
-# define BUTTONPRESS_MASK			(1L<<2)
-# define BUTTONRELEASE_MASK		    (1L<<3)
-# define ENTERWINDOW_MASK			(1L<<4)
-# define LEAVEWINDOW_MASK			(1L<<5)
-# define POINTERMOTION_MASK		    (1L<<6)
-# define POINTERMOTIONHINT_MASK	    (1L<<7)
+# define KEYPRESS_MASK			    1L
+# define KEYRELEASE_MASK			2L
+# define BUTTONPRESS_MASK			4L
+# define BUTTONRELEASE_MASK		    8L
+# define ENTERWINDOW_MASK			16L
+# define LEAVEWINDOW_MASK			32L
+# define POINTERMOTION_MASK		    64L
+# define POINTERMOTIONHINT_MASK	    128L
 
 /*
-** # define Button1MotionMask		(1L<<8)  
-** # define Button2MotionMask		(1L<<9)  
-** # define Button3MotionMask		(1L<<10) 
-** # define Button4MotionMask		(1L<<11) 
-** # define Button5MotionMask		(1L<<12) 
-** # define ButtonMotionMask		(1L<<13) 
+** # define Button1MotionMask		(1L<<8)
+** # define Button2MotionMask		(1L<<9)
+** # define Button3MotionMask		(1L<<10)
+** # define Button4MotionMask		(1L<<11)
+** # define Button5MotionMask		(1L<<12)
+** # define ButtonMotionMask		(1L<<13)
 ** # define KeymapStateMask			(1L<<14)
-** # define ExposureMask			(1L<<15) 
-** # define VisibilityChangeMask	(1L<<16) 
-** # define StructureNotifyMask		(1L<<17) 
-** # define ResizeRedirectMask		(1L<<18) 
-** # define SubstructureNotifyMask	(1L<<19) 
-** # define SubstructureRedirectMask	(1L<<20) 
-** # define FocusChangeMask			(1L<<21) 
-** # define PropertyChangeMask		(1L<<22) 
-** # define ColormapChangeMask		(1L<<23) 
-** # define OwnerGrabButtonMask		(1L<<24) 
+** # define ExposureMask			(1L<<15)
+** # define VisibilityChangeMask	(1L<<16)
+** # define StructureNotifyMask		(1L<<17)
+** # define ResizeRedirectMask		(1L<<18)
+** # define SubstructureNotifyMask	(1L<<19)
+** # define SubstructureRedirectMask	(1L<<20)
+** # define FocusChangeMask			(1L<<21)
+** # define PropertyChangeMask		(1L<<22)
+** # define ColormapChangeMask		(1L<<23)
+** # define OwnerGrabButtonMask		(1L<<24)
 */
 
 # define KEY_PRESS		    2

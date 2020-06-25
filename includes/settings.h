@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 17:26:42 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:06:05 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <float.h>
 # include "libftprintf.h"
 # include "structs/structs.h"
-
 
 # define DEBUG_PRINT(txt) printf("\n\n%s\n", txt)
 # define PI 3.141592653
