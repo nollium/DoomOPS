@@ -75,13 +75,13 @@ static void	get_wall_dist(t_vars *vars, t_ray *ray)
 		ray->perp_wall_dist = 0.01;
 }
 
-static int	get_corner(double angle)
+static double	get_corner(double angle)
 {
-	int			i;
-	double		max;
-	double		corner;
-	static int	corner_angle[] = {45, 145, -55, -135};
-	double		diff;
+	int				i;
+	double			max;
+	double			corner;
+	static double	corner_angle[] = {36.0, 145.0, -39.0, -140.5};
+	double			diff;
 
 
 	i = -1;
@@ -97,17 +97,17 @@ static int	get_corner(double angle)
 
 static int	get_wall_side(t_vars *vars, t_ray *ray)
 {
-	int			corner;
+	double			corner;
 
-	corner = get_corner(atan2(vars->map.y - (double)vars->cam.y,
-						(double)vars->map.x - (double)vars->cam.x) * 180 / PI);
-	if (corner == 45)
+	corner = get_corner(atan2((double)vars->map.y - (double)vars->cam.y,
+						(double)vars->map.x - (double)vars->cam.x) * 180.0 / PI);
+	if (corner == 36.0)
 		return ((ray->side) ? WEST : NORTH);
-	else if (corner == 145)
+	else if (corner == 145.0)
 		return ((ray->side) ? WEST : SOUTH);
-	else if (corner == -55)
+	else if (corner == -39.0)
 		return ((ray->side) ? EAST : NORTH);
-	else if (corner == -135)
+	else if (corner == -140.5)
 		return ((ray->side) ? EAST : SOUTH);
 
 	ft_putendl_fd("Weird", 2);
