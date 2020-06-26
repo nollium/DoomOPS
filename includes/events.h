@@ -23,13 +23,25 @@
 # ifdef OS_UBUNTU
 
 #  warning "UBUNTU"
-#  define FORWARD_KEY		122
-#  define BACKWARD_KEY		115
-#  define LEFT_KEY			113
-#  define RIGHT_KEY			100
-#  define CTRL_KEY			65507
-#  define ALT_KEY			65513
-#  define C_KEY				99
+#  ifndef QWERTY
+#   define FORWARD_KEY		122
+#   define BACKWARD_KEY		115
+#   define LEFT_KEY			113
+#   define RIGHT_KEY			100
+#   define CTRL_KEY			65507
+#   define ALT_KEY			65513
+#   define C_KEY				99
+#  endif
+
+#  ifdef QWERTY
+#   define FORWARD_KEY		119
+#   define BACKWARD_KEY		115
+#   define LEFT_KEY			97
+#   define RIGHT_KEY		100
+#   define CTRL_KEY			65507
+#   define ALT_KEY			65506
+#   define C_KEY			99
+#  endif
 
 # endif
 

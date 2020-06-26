@@ -49,7 +49,7 @@ OBJ = $(SRC:.c=.o)
 
 
 HEADERS = $(addprefix $(INCLUDES), \
-				cub3D.h events.h frontend.h \
+				cub3d.h events.h frontend.h \
 				garbage_collection.h parsing.h raycast.h sprites.h\
 			)
 
@@ -59,6 +59,9 @@ LIBFT = libft/libftprintf.a
 
 LIB_ARG = 
 
+LINKS = -lmlx
+
+FRAMEWORKS = 
 
 all: $(NAME) $(HEADERS)	
 
@@ -70,8 +73,7 @@ bonus: $(OBJBONUS) $(NAME)
 	#$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lXau -lXdmcp -lm 
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework Appkit
-
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib $(LINKS) $(FRAMEWORKS)
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
 
@@ -104,6 +106,11 @@ debug:
 
 OSX:
 	$(eval CFLAGS += -D OS_OSX=1)
+	$(eval FRAMEWORKS += -framework OpenGL -framework Appkit)
 
 UBUNTU:
 	$(eval CFLAGS += -D OS_UBUNTU=1)
+	$(eval LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm)
+
+QWERTY:
+	$(eval CFLAGS += -D QWERTY=1)
