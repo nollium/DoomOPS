@@ -26,6 +26,8 @@ typedef struct	s_drawer
 	int			side;
 	double		step;
 	double		tex_pos;
+	int			floor_color;
+	int			roof_color;
 	t_screen	*screen;
 
 }				t_drawer;

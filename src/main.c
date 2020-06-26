@@ -17,11 +17,9 @@ static void	get_color(t_drawer *draw, t_texture *tex)
 	tex->y = (int)draw->tex_pos & (tex->height - 1);
 	draw->tex_pos += draw->step;
 	if (!tex->array || (tex->height * tex->y + tex->x) > tex->height * tex->width)
-		return;//printf("WOOPSIE DOOPSY I DID A LITTLE FUCKY WUCKY\n");
+		return ;
 	else
 		draw->color = tex->array[tex->height * tex->y + tex->x];
-	//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-	
 }
 
 void		draw_col(t_vars *vars, t_drawer *draw)
@@ -37,7 +35,7 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 		}
 		if (draw->y > draw->end)
 		{
-			draw->color = FLOOR_COLOR;
+			draw->color = draw->floor_color;
 			if (SHADOW_MODE)
 				draw->color = add_shade(1.05 / ((double)draw->y * 2.15 / (double)((draw->screen->height))) , draw->color);
 		}
@@ -50,7 +48,7 @@ void		init_drawer(t_drawer *draw, t_ray *ray, int text_height)
 	draw->line_height = (int)(draw->screen->height / ray->perp_wall_dist);
 	draw->start = -(draw->line_height) / 2 + draw->screen->height / 2;
 	draw->end = (draw->line_height) / 2 + draw->screen->height / 2;
-	draw->color = ROOF_COLOR;
+	draw->color = draw->roof_color;
 	draw->y = -1;
 	draw->dist = ray->perp_wall_dist;
 	draw->side = ray->w_num;
@@ -70,8 +68,10 @@ void		draw_scene(t_vars *vars)
 	t_ray		ray;
 	t_drawer	draw;
 
-	draw.x = -1;
-	draw.screen = &(vars->game_screen);
+	//draw.x = -1;
+	//draw.screen = &(vars->game_screen);
+	draw = (t_drawer){0, .x = -1, .screen =  &(vars->game_screen),
+					.floor_color = vars->floor_color, .roof_color = vars->roof_color};
 	while (++(draw.x) < draw.screen->width)
 	{
 		raycast_walls(&ray, vars, draw.x);
