@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 17:33:43 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 19:46:38 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@
 # define ERROR_CODE		-1
 # define SUCCESS_CODE	0
 
-# define FILE_INVALID_ERROR -2
-# define MAP_ERROR -3
-# define WRONG_EXTENSION_ERROR -4
-# define NULL_ERROR -5
-# define MALLOC_ERROR -6
-# define CONFIG_ERROR -7
-# define RESOLUTION_ERROR -8
-# define COLOR_ERROR -9
-# define TEXTURE_ERROR -10
+# define FILE_INVALID_ERROR		-2
+# define MAP_ERROR				-3
+# define WRONG_EXTENSION_ERROR	-4
+# define NULL_ERROR				-5
+# define MALLOC_ERROR			-6
+# define CONFIG_ERROR			-7
+# define RESOLUTION_ERROR		-8
+# define COLOR_ERROR			-9
+# define TEXTURE_ERROR			-10
 
 # define SPEED				0.04
 # define TURN_SPEED			SPEED
-# define ALT_MULT			2
+# define ALT_MULT			4
 
 # define NORTH	0
 # define SOUTH	1

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:26:49 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/17 18:01:08 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 19:13:13 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,7 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)s);
 	return ((c == '\0') ? (char *)s : 0);
 }
-/*
-char	*ft_strrchr(char *s, int c)
-{
-	char	*found;
-	char	*next;
 
-	found = s;
-	while (next = ft_strchr(s, c))
-	{
-		if (*s)
-			return ((!c) ? s : 0);
-		s++;
-		found = next;
-	}
-	return (found);
-}
-*/
 char	*ft_setchr(char *str, char *charset)
 {
 	char	*found;
@@ -58,7 +42,7 @@ char	*ft_setrchr(char *str, char *charset)
 	char	*next;
 
 	found = 0;
-	while (next = ft_setchr(str, charset))
+	while ((next = ft_setchr(str, charset)))
 	{
 		if (!*str)
 			return (str);

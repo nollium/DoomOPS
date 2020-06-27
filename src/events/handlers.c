@@ -6,29 +6,20 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 18:00:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 19:10:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "garbage_collection.h"
 
-int				free_garbage(t_vars *vars)
-{
-	if (vars->mlx)
-	{
-		mlx_do_key_autorepeaton(vars->mlx);
-		mlx_destroy_window(vars->mlx, vars->win);
-	}
-	exit(0);	
-}
-
-int				key_handler(int keycode, t_vars *vars)
+int		key_handler(int keycode, t_vars *vars)
 {
 	int i;
 
 	i = -1;
 	if (keycode == 65307)
-		free_garbage(vars);
+		free_vars(vars);
 	i = -1;
 	while (i < K_BUFF_SIZE && (((vars->keys)[i]).keycode != -1))
 		i++;
@@ -38,35 +29,21 @@ int				key_handler(int keycode, t_vars *vars)
 	return (0);
 }
 
-int			move_handler(void)
-{
-	if (DEBUG_MODE)
-		ft_printf("Moving\n");
-	return (0);
-}
-
-int			resize_handler(void)
-{
-	if (DEBUG_MODE)
-		ft_printf("Resizing window\n");
-	return (0);
-}
-
-int			enter_handler(void)
+int		enter_handler(void)
 {
 	if (DEBUG_MODE)
 		ft_printf("Entering window\n");
-	return (0);	
+	return (0);
 }
 
-int			leave_handler(void)
+int		leave_handler(void)
 {
 	if (DEBUG_MODE)
 		ft_printf("Leaving window\n");
 	return (0);
 }
 
-int			release_handler(int keycode, t_vars *vars)
+int		release_handler(int keycode, t_vars *vars)
 {
 	int				i;
 	time_t			elapsed;
@@ -96,4 +73,3 @@ t_keys	*key_chr(t_keys *arr, int keycode, size_t size)
 			return (arr + i);
 	return (NULL);
 }
-
