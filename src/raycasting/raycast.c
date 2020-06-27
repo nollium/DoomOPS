@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/23 17:43:05 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 15:26:14 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static double	get_corner(double angle)
 	int				i;
 	double			max;
 	double			corner;
-	static double	corner_angle[] = {36.0, 145.0, -39.0, -140.5};
+	static double	corner_angle[] = {36.0, 145.0, -38.99999, -142.5};
 	double			diff;
 
 
@@ -105,9 +105,9 @@ static int	get_wall_side(t_vars *vars, t_ray *ray)
 		return ((ray->side) ? WEST : NORTH);
 	else if (corner == 145.0)
 		return ((ray->side) ? WEST : SOUTH);
-	else if (corner == -39.0)
+	else if (corner == -38.99999)
 		return ((ray->side) ? EAST : NORTH);
-	else if (corner == -140.5)
+	else if (corner == -142.5)
 		return ((ray->side) ? EAST : SOUTH);
 
 	ft_putendl_fd("Weird", 2);

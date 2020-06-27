@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/06/26 19:45:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/27 15:08:18 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int			find_spawn(char **map, t_spawn *spawn)
 		{
 			if (spawn->x != -1 && spawn->y != -1)
 				return (MAP_ERROR);
-			*spawn = (t_spawn){x, spawn_ptr - map[x],
+			*spawn = (t_spawn){x + 0.5, spawn_ptr - map[x] + 0.5,
 								map[x][spawn_ptr - map[x]]};
-			map[(int)spawn->x][(int)spawn->y] = '0';
+			map[(int)(spawn->x - 0.5)][(int)(spawn->y - 0.5)] = '0';
 		}
 	}
 	if (spawn->x <= 0 || spawn->y <= 0 || !ft_strchr(SPAWN_CHARS, spawn->dir))
