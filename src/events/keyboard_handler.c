@@ -16,12 +16,12 @@ static int		forward_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
-		if (vars->map.array[(int)(vars->cam.x + vars->cam.dir_x * vars->cam.speed)]
+		if (vars->map.array[(int)(vars->cam.x + vars->cam.dir_x * (vars->cam.speed * 3))]
 			[(int)(vars->cam.y)] - '0' == 0)
-			vars->cam.x += vars->cam.dir_x * vars->cam.speed;
+			vars->cam.x += vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)]
-			[(int)(vars->cam.y + vars->cam.dir_y * vars->cam.speed)] - '0' == 0)
-			vars->cam.y += vars->cam.dir_y * vars->cam.speed;
+			[(int)(vars->cam.y + vars->cam.dir_y * (vars->cam.speed * 3))] - '0' == 0)
+			vars->cam.y += vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
 	return (0);
@@ -31,12 +31,12 @@ static int		backward_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))
 	{
-		if (vars->map.array[(int)(vars->cam.x - vars->cam.dir_x * vars->cam.speed)]
+		if (vars->map.array[(int)(vars->cam.x - vars->cam.dir_x * (vars->cam.speed * 3))]
 			[(int)(vars->cam.y)] - '0' == 0)
-			vars->cam.x -= vars->cam.dir_x * vars->cam.speed;
+			vars->cam.x -= vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)]
-			[(int)(vars->cam.y - vars->cam.dir_y * vars->cam.speed)] - '0' == 0)
-			vars->cam.y -= vars->cam.dir_y * vars->cam.speed;
+			[(int)(vars->cam.y - vars->cam.dir_y * (vars->cam.speed * 3))] - '0' == 0)
+			vars->cam.y -= vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
 	return (0);
