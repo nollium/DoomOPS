@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:01:21 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:03:42 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int			init_vars(char *path, t_vars *vars)
 	if ((error = load_cub(path, vars)) != SUCCESS_CODE)
 	{
 		ft_putendl_fd(errors[-error], 2);
-		free_garbage(vars);
 		exit (1);
 	}
 	init_cam(&(vars->cam), &(vars->spawn));
@@ -75,35 +74,16 @@ int			init_vars(char *path, t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, vars->game_screen.width, vars->game_screen.height, "cub3D");
 	init_img(vars->mlx, vars->game_screen.width, vars->game_screen.height, vars->img2);
 	init_img(vars->mlx, vars->game_screen.width, vars->game_screen.height, vars->img2 + 1);
-	/*char *text_paths[] = {	"pics/NO.xpm",
-							"pics/SO.xpm",
-							"pics/EA.xpm",
-							"pics/WE.xpm",
-							"pics/small_shrek.xpm",
-							"pics/128x128.xpm",
-							"pics/small_shrek.xpm",
-							"pics/hud.xpm",
-							0};*/
-
 	char **text_paths = vars->text_paths;
 	i = -1;
 	while (text_paths[++i]);
 	vars->text = malloc(sizeof(t_texture) * (i + 1));
-	//vars->sprites = malloc(sizeof(t_sprite) * 3);
 	i = -1;
 	if (!(vars->text && vars->sprites))
 		ft_putendl_fd("MALLOC ERROR", 1);
 	while (text_paths[++i])	
 		if (load_texture(vars->text + i, text_paths[i], vars->mlx) == -1)
-			ft_printf("\e[31mTEXTURE \"%s\" ERROR\e[31m\n", text_paths[i]);
+			return (TEXTURE_ERROR);
 	vars->text[i] = (t_texture) {0};
-	
-/*
-	vars->sprites[0] = (t_sprite){8.0, 6.0, 0, 4};
-
-	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 4};
-	vars->sprites[2] = (t_sprite){4.0, 5.0, 0, 4};
-	vars->num_sprites = 5;*/
-
 	return (SUCCESS_CODE);
 }

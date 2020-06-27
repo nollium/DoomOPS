@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 18:14:15 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:00:15 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # ifdef OS_UBUNTU
 
-#  warning "UBUNTU"
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
 #   define BACKWARD_KEY		115
@@ -47,7 +46,6 @@
 
 # ifdef OS_OSX
 
-#  warning "OSX"
 #  define FORWARD_KEY		13
 #  define BACKWARD_KEY		1
 #  define LEFT_KEY			0

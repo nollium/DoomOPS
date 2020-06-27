@@ -6,21 +6,24 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:02:55 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 17:50:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "garbage_collection.h"
 
 static int		forward_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
-		if (vars->map.array[(int)(vars->cam.x + vars->cam.dir_x * (vars->cam.speed * 3))]
-			[(int)(vars->cam.y)] - '0' == 0)
+		if (vars->map.array
+		[(int)(vars->cam.x + vars->cam.dir_x * (vars->cam.speed * 3))]
+		[(int)(vars->cam.y)] - '0' == 0)
 			vars->cam.x += vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)]
-			[(int)(vars->cam.y + vars->cam.dir_y * (vars->cam.speed * 3))] - '0' == 0)
+			[(int)(vars->cam.y + vars->cam.dir_y * (vars->cam.speed * 3))]
+			 - '0' == 0)
 			vars->cam.y += vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
@@ -31,11 +34,13 @@ static int		backward_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))
 	{
-		if (vars->map.array[(int)(vars->cam.x - vars->cam.dir_x * (vars->cam.speed * 3))]
+		if (vars->map.array
+			[(int)(vars->cam.x - vars->cam.dir_x * (vars->cam.speed * 3))]
 			[(int)(vars->cam.y)] - '0' == 0)
 			vars->cam.x -= vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)]
-			[(int)(vars->cam.y - vars->cam.dir_y * (vars->cam.speed * 3))] - '0' == 0)
+			[(int)(vars->cam.y - vars->cam.dir_y * (vars->cam.speed * 3))]
+			- '0' == 0)
 			vars->cam.y -= vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
@@ -94,8 +99,6 @@ static int		alt_handler(t_vars *vars)
 	cam = &(vars->cam);
 	if (key_chr(vars->keys, ALT_KEY, K_BUFF_SIZE) && !sprinting)
 	{
-		if (DEBUG_MODE)
-			ft_putendl_fd("Sprinting", 1);
 		cam->speed = ALT_MULT * SPEED;
 		cam->turn_speed = ALT_MULT * TURN_SPEED;
 		sprinting = 1;
@@ -120,7 +123,10 @@ int				keyboard_handler(t_vars *vars)
 	if (key_chr(vars->keys, CTRL_KEY, K_BUFF_SIZE))
 	{
 		if (key_chr(vars->keys, C_KEY, K_BUFF_SIZE))
+		{
+			free_vars(vars);
 			exit(0);
+		}
 		redraw = 1;
 		vars->cam.plane.y -= 0.01;
 		vars->cam.plane.x -= 0.01;

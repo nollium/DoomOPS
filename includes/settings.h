@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:29:08 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 17:33:43 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define CONFIG_ERROR -7
 # define RESOLUTION_ERROR -8
 # define COLOR_ERROR -9
+# define TEXTURE_ERROR -10
 
 # define SPEED				0.04
 # define TURN_SPEED			SPEED

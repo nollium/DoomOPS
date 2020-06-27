@@ -6,11 +6,12 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:14:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:08:44 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
+#include "garbage_collection.h"
 
 void	init_raycast(t_vars *vars, int x, t_ray *ray)
 {
@@ -86,7 +87,11 @@ void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 
 	vars->seen_sprite = 0;
 	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
+	{
 		ft_putendl_fd("MALLOC ERROR", 2);
+		free_vars(vars);
+		exit(1);
+	}
 	init_sprites_info(vars, sprites_srt);
 	put_sprites(vars, sprites, sprites_srt, cam);
 	free(sprites_srt);

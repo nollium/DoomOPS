@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 15:08:18 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 17:31:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	format_map_line(char *line)
 
 	i = -1;
 	error = SUCCESS_CODE;
-	printf("\e[31m%p: %s\e[0m\n", line, line);
 	if (!line || !*line)
 		return ((line) ? 0 : 1);
 	while (line[++i])
@@ -29,7 +28,6 @@ static int	format_map_line(char *line)
 		if (!ft_strchr(VALID_MAP_CHARS, line[i]))
 			return (MAP_ERROR);
 	}
-	printf("\e[32m%p: %s\e[0m\n", line, line);
 	return (error);
 }
 

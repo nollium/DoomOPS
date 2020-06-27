@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:15:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:10:00 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 ** PARSING
 */
 
+int		find_spawn(char **map, t_spawn *spawn);
 char	**parse_array(t_list *lst, int len);
 int		parse_resolution(char *line, t_screen *screen);
 int		parse_color(char *line);
@@ -34,5 +35,6 @@ int		load_texture(t_texture *text, char *path, void *mlx);
 void	img_to_text(t_data *data, t_texture *text);
 int		init_vars(char *path, t_vars *vars);
 int		load_cub(char *path, t_vars *vars);
+int		parse_sprites(t_vars *vars, char **map, int *size);
 
 #endif

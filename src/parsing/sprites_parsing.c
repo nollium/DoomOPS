@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:38:01 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 15:59:40 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:29:39 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_sprite	*alloc_sprites(char **map, int *size)
 {
 	int			x;
 	int			y;
-	int			i;
 
 	x = -1;
 	y = -1;

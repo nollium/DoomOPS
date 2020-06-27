@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 18:02:09 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:09:04 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 		if (draw->start <= draw->y && draw->y <= draw->end)
 		{
 			get_color(draw, &(vars->text[draw->side]));
-			//draw->color = (vars->w_color) ? vars->w_color : draw->color;
 			if (SHADOW_MODE)	
 				draw->color = add_shade(((double)draw->dist / 16 * 2), draw->color);
 		}
@@ -58,18 +57,11 @@ void		init_drawer(t_drawer *draw, t_ray *ray, int text_height)
 	draw->tex_pos = (draw->start - draw->screen->height / 2 + draw->line_height / 2) * draw->step;
 }
 
-/*	used variables :
-**		vars->num_sprites; vars->cam; vars->sprite[]; v
-** 
-*/
-
 void		draw_scene(t_vars *vars)
 {
 	t_ray		ray;
 	t_drawer	draw;
 
-	//draw.x = -1;
-	//draw.screen = &(vars->game_screen);
 	draw = (t_drawer){0, .x = -1, .screen =  &(vars->game_screen),
 					.floor_color = vars->floor_color, .roof_color = vars->roof_color};
 	while (++(draw.x) < draw.screen->width)
@@ -90,7 +82,6 @@ void		draw_text(t_texture *text, t_data *img, int x0, int y0)
 	{
 		y = -1;
 		while (++y < text->height)
-			//my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
 			my_mlx_pixel_put(img, x + x0, y + y0, text->array[text->width * y + x]);
 	}
 }
@@ -99,7 +90,6 @@ void		draw_text(t_texture *text, t_data *img, int x0, int y0)
 int			main(int argc, char **argv)
 {
 	t_vars	vars;
-	int		i = -1;
 
 	vars = (t_vars){0};
 	if (argc != 2)
@@ -110,20 +100,8 @@ int			main(int argc, char **argv)
 	if ((init_vars(argv[1], &vars)) != SUCCESS_CODE)
 		return (1);
 	vars.img = vars.img2;
-	//my_mlx_pixel_put(vars.img, 5, 5, 0x00FF0000);
-	//my_line_put(vars.img, 1, 1, 1000, 1000, 0xFF);
-	//drawcircle(vars.img, 500, 500, 100, 0x00FFFFFF);
-	//drawRectangle(vars.img, (int []){200, 200}, (int []){400, 0});
-//	mlx_do_sync(vars.mlx);
-	draw_gradient(vars.img);
+	draw_scene(&vars);
 	hooks(&vars);
-	t_texture text;
-	load_texture(&text, "pics/shrek.xpm", vars.mlx);
-	while ((vars.text)[++i].array)
-		draw_text(&(vars.text[i]), vars.img, 0, 0);
-//	draw_text(&text, vars.img, 64, 0);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
-	DEBUG_PRINT("AHHAHAHAIUHDZAHLIDHALIHDLIHLDAHLZDHLAZLDAKZJZADZMJADMLMLZAMMJZLAJMZJMA");
-	//printf("Z:%d\n", FORWARD_KEY)
 	mlx_loop(vars.mlx);
 }
