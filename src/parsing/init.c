@@ -6,37 +6,11 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 16:07:04 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 16:01:21 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-static	void		mikasa()
-{
-	char    *line;
-	int     fd;
-	
-	fd = open("mikasa", O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
-	{
-		ft_printf("\e[31m%s\e[0m\n", line);
-		free(line);
-	}
-	free(line);
-	close(fd);
-}
-
-int	load_texture(t_texture *text, char *path, void *mlx)
-{
-	t_data data;
-
-	if (load_xpm(&data, path, mlx) == -1)
-		return (-1);
-	img_to_text(&data, text);
-	mlx_destroy_image(mlx, data.img);
-	return (0);
-}
 
 void		init_img(void *mlx, int width, int height, t_data *img)
 {
@@ -75,7 +49,7 @@ int			init_cam(t_camera *cam, t_spawn *spawn)
 		return (MAP_ERROR);	
 }
 
-int		init_vars(char *path, t_vars *vars)
+int			init_vars(char *path, t_vars *vars)
 {
 	register int 	i;
 	static char		*errors[] = {"NO ERROR", "UNKNOWN ERROR",
@@ -86,7 +60,6 @@ int		init_vars(char *path, t_vars *vars)
 								"COLOR ERROR"};
 	int				error;
 
-	//mikasa();
 	i = -1;
 	while (++i < K_BUFF_SIZE)
 		(vars->keys)[i] = (t_keys){-1, 0};
@@ -131,5 +104,6 @@ int		init_vars(char *path, t_vars *vars)
 	vars->sprites[1] = (t_sprite){10.2, 2.3, 0, 4};
 	vars->sprites[2] = (t_sprite){4.0, 5.0, 0, 4};
 	vars->num_sprites = 5;*/
+
 	return (SUCCESS_CODE);
 }

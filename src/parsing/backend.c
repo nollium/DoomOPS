@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/26 19:45:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/27 16:51:42 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	get_conf(t_vars *vars, char *line)
 					return (MALLOC_ERROR);
 	if (error != SUCCESS_CODE)
 		return (error);
+	vars->roof_color = (vars->roof_color == 0x1) ? 0 : vars->roof_color;
+	vars->floor_color = (vars->floor_color == 0x1) ? 0 : vars->floor_color;
 	return (SUCCESS_CODE);
 }
 

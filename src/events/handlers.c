@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/18 16:25:37 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 15:28:56 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int				free_garbage(t_vars *vars)
 	if (vars->mlx)
 	{
 		mlx_do_key_autorepeaton(vars->mlx);
-    	mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_window(vars->mlx, vars->win);
 	}
 	exit(0);	
 }
 
-int             key_handler(int keycode, t_vars *vars)
+int				key_handler(int keycode, t_vars *vars)
 {
 	int i;
 
@@ -52,8 +52,8 @@ int             key_handler(int keycode, t_vars *vars)
 
 int			mouse_handler(int button, int x, int y, t_vars *vars)
 {
-	static int x_0 = -1;
-	static int y_0 = -1;
+	static int	x_0 = -1;
+	static int	y_0 = -1;
 
 	if (x_0 == -1 && y_0 == -1)
 	{

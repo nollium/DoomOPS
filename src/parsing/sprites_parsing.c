@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_parsing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:38:01 by user42            #+#    #+#             */
-/*   Updated: 2020/06/26 19:44:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/27 15:59:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_sprite *alloc_sprites(char **map, int *size)
+static t_sprite	*alloc_sprites(char **map, int *size)
 {
 	int			x;
 	int			y;
 	int			i;
-	
+
 	x = -1;
 	y = -1;
 	*size = 0;
@@ -31,7 +31,7 @@ static t_sprite *alloc_sprites(char **map, int *size)
 	return (malloc(sizeof(t_sprite) * (1 + *size)));
 }
 
-int	parse_sprites(t_vars *vars, char **map, int *size)
+int				parse_sprites(t_vars *vars, char **map, int *size)
 {
 	t_sprite	*array;
 	int			x;

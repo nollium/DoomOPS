@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 17:56:53 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 16:08:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ennemies_handler(t_vars *vars, t_sprite *sprites)
 		left = 0;
 	else if (sprites[0].x < 2.0)
 		left = 1;
-    if (left)
+	if (left)
 		sprites[0].x += SPEED;
 	else
 		sprites[0].x -= SPEED;

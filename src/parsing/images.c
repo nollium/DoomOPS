@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/26 19:18:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/27 16:00:42 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ void		img_to_text(t_data *data, t_texture *text)
 			(data->addr + (y * data->line_length + x *
 			(data->bits_per_pixel / 8)));
 	}
+}
+
+int			load_texture(t_texture *text, char *path, void *mlx)
+{
+	t_data data;
+
+	if (load_xpm(&data, path, mlx) == -1)
+		return (-1);
+	img_to_text(&data, text);
+	mlx_destroy_image(mlx, data.img);
+	return (0);
 }

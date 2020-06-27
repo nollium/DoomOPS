@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:58:46 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 16:41:37 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/27 15:49:02 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct	s_ray
 	int			side;
 	int			w_num;
 	int			line_height;
+	int			x;
+	int			y;
 }				t_ray;
 
 typedef struct	s_pxl
