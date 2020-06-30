@@ -6,13 +6,13 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:41:36 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 18:01:17 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:05:55 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
 
-void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
+void		init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
 {
 	register int		i;
 
@@ -26,7 +26,6 @@ void	init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
 		};
 	sort_sprites(vars->num_sprites, sprites_srt);
 }
-
 
 static void	get_stripe_size(t_sprite_drawer *draw)
 {
@@ -44,17 +43,17 @@ static void	get_stripe_size(t_sprite_drawer *draw)
 		draw->end_x = draw->screen->width - 1;
 }
 
-static void init_sprite_texture(t_sprite_drawer *draw, t_texture *text)
+static void	init_sprite_texture(t_sprite_drawer *draw, t_texture *text)
 {
 	draw->text = text;
-	draw->factor_128 = (-draw->screen->height+ draw->sprite_height) * 128;
+	draw->factor_128 = (-draw->screen->height + draw->sprite_height) * 128;
 	draw->shader = draw->dist / 16 * 2;
 	draw->pre_calc1 = ((double)draw->text->width / (double)draw->sprite_width);
 	draw->pre_calc2 = -draw->pre_calc1
 	* (-draw->half_sprite_width + draw->sprite_screen_x);
 }
 
-void		init_sprite_drawing(t_sprite_drawer *draw, t_camera *cam, 
+void		init_sprite_drawing(t_sprite_drawer *draw, t_camera *cam,
 								t_sprite *v_sprite, t_texture *text)
 {
 	draw->transform_x = draw->denom * (cam->dir_y * v_sprite->x - cam->dir_x

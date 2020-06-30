@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/27 16:12:52 by smaccary         ###   ########.fr        #
+#    Updated: 2020/06/30 18:23:35 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC = $(addprefix $(DIRSRC), \
 \
 			raycasting/raycast.c raycasting/walls.c\
 \
-			frontend/colors_handling.c  frontend/frontend.c \
+			$(addprefix frontend/,\
+			colors_handling.c frontend.c draw_scene.c)\
 \
 			$(addprefix sprites/,\
 			sprites_sort.c  init_sprites.c sprites.c)\
@@ -38,16 +39,14 @@ SRC = $(addprefix $(DIRSRC), \
 			garbage_collection/garbage_collector.c \
 \
 			$(addprefix events/,\
-			loop.c  handlers.c  keyboard_handler.c) \
+			loop.c  handlers.c  keyboard_handler.c keyboard.c) \
 \
-			debug/debug_map.c \
+			debug/debug_map.c debug/errors.c \
 		)
 
 OBJDIR = ./obj/
 
 OBJ = $(SRC:.c=.o)
-#$(SRC:./src/%.c=./bin/%.o)
-#$(SRC:.c=.o)
 
 HEADERS = $(addprefix $(INCLUDES), \
 				cub3d.h events.h frontend.h \
@@ -64,17 +63,21 @@ LINKS = -lmlx
 
 FRAMEWORKS = 
 
-all: $(NAME) $(HEADERS)	
+UNAME = $(shell uname)
 
-#clang -Wall -Wextra -I./includes/ -g3 -o cub3D $(OBJ) libft/libftprintf.a -L/usr/local/lib -lmlx -lXext -lX1 -lxcb -lXau -lXdmcp -lm
-	#$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lXau -lXdmcp -lm 
+ifeq ($(UNAME),Darwin)
+	FRAMEWORKS += -framework OpenGL -framework Appkit
+else
+	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+endif
+
+all: $(NAME) $(HEADERS)
 
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib $(LINKS) $(FRAMEWORKS)
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
 
-#$(OBJ): $(SRC) $(HEADERS)
 obj/%.o: $(SRC) $(HEADERS)
 	$(CC) $(CFLAGS) -c $(SRC) -o $@
 
@@ -102,14 +105,6 @@ opti:
 debug:
 	$(eval CFLAGS += -fsanitize=address)
 	$(eval LIB_ARG += debug)
-
-OSX:
-	$(eval CFLAGS += -D OS_OSX=1)
-	$(eval FRAMEWORKS += -framework OpenGL -framework Appkit)
-
-UBUNTU:
-	$(eval CFLAGS += -D OS_UBUNTU=1)
-	$(eval LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm)
 
 QWERTY:
 	$(eval CFLAGS += -D QWERTY=1)

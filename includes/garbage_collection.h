@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:59:21 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 17:28:04 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 18:52:35 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 void	free_str(char **str);
 void	free_split(char ***split);
 void	free_vars(t_vars *vars);
+void	free_textures(t_texture **t);
 
 #endif

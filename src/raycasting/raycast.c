@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 18:08:44 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:08:03 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	get_texture_coords(t_vars *vars, t_ray *ray)
 									- vars->text[ray->w_num].x - 1;
 }
 
-void		cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
+void	cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 {
 	t_sprites_sorter	*sprites_srt;
 

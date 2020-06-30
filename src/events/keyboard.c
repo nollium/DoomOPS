@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors_handling.c                                  :+:      :+:    :+:   */
+/*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/01 12:58:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:11:46 by smaccary         ###   ########.fr       */
+/*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
+/*   Updated: 2020/06/30 17:43:46 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "frontend.h"
+#include "events.h"
+#include "garbage_collection.h"
 
-int	add_shade(double shade, int color)
+int				keyboard_handler(t_vars *vars)
 {
-	unsigned char	rgb[4];
+	int redraw;
 
-	if (0 > shade || color == 0x1)
-		return (color);
-	if (shade >= 1)
-		return (0);
-	*(int *)rgb = color;
-	rgb[0] *= (1.0 - shade);
-	rgb[1] *= (1.0 - shade);
-	rgb[2] *= (1.0 - shade);
-	return (*(int *)rgb);
+	redraw = (int)(forward_handler(vars) + backward_handler(vars)
+					+ right_handler(vars) + left_handler(vars)
+					+ alt_handler(vars));
+	if (key_chr(vars->keys, CTRL_KEY, K_BUFF_SIZE))
+	{
+		if (key_chr(vars->keys, C_KEY, K_BUFF_SIZE))
+		{
+			free_vars(vars);
+			exit(0);
+		}
+	}
+	return (redraw);
 }

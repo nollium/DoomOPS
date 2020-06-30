@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:00:42 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 18:50:19 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int			load_texture(t_texture *text, char *path, void *mlx)
 	t_data data;
 
 	if (load_xpm(&data, path, mlx) == -1)
-		return (-1);
+		return (TEXTURE_ERROR);
 	img_to_text(&data, text);
 	mlx_destroy_image(mlx, data.img);
-	return (0);
+	return (SUCCESS_CODE);
 }

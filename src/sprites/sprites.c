@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 18:32:18 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:04:10 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 {
-	register size_t d;
-	register int 	y;
+	register size_t	d;
+	register int	y;
 
 	y = draw->start_y - 1;
 	while (++y < draw->end_y)
@@ -24,7 +24,7 @@ void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 		draw->text_y = ((d * draw->text->width)
 						/ (draw->sprite_height) / 256);
 		draw->color = draw->text->array[draw->text->width
-										* draw->text_y + draw->text_x]; 
+										* draw->text_y + draw->text_x];
 		my_mlx_pixel_put(img, stripe, y, (SHADOW_MODE) ?
 					add_shade(draw->shader, draw->color) : draw->color);
 	}
@@ -53,7 +53,7 @@ void		draw_sprites(t_sprite_drawer *draw, t_sprite *sprites,
 void		put_sprites(t_vars *vars, t_sprite *sprites,
 						t_sprites_sorter *sprites_srt, t_camera *cam)
 {
-	int 			i;
+	int				i;
 	t_sprite		v_sprite;
 	t_sprite_drawer	draw;
 
@@ -69,7 +69,7 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 		v_sprite.x -= cam->x;
 		v_sprite.y -= cam->y;
 		draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
-		if 	(draw.dist < 8 || !SHADOW_MODE)
+		if (draw.dist < 8 || !SHADOW_MODE)
 		{
 			init_sprite_drawing(&draw, cam, &v_sprite,
 								vars->text + v_sprite.tex_num);

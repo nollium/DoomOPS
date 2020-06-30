@@ -6,14 +6,14 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 17:50:24 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:17:54 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "garbage_collection.h"
 
-static int		forward_handler(t_vars *vars)
+int		forward_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
@@ -23,14 +23,14 @@ static int		forward_handler(t_vars *vars)
 			vars->cam.x += vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)]
 			[(int)(vars->cam.y + vars->cam.dir_y * (vars->cam.speed * 3))]
-			 - '0' == 0)
+			- '0' == 0)
 			vars->cam.y += vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
 	return (0);
 }
 
-static int		backward_handler(t_vars *vars)
+int		backward_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))
 	{
@@ -47,10 +47,10 @@ static int		backward_handler(t_vars *vars)
 	return (0);
 }
 
-static int		right_handler(t_vars *vars)
+int		right_handler(t_vars *vars)
 {
-	long double old_dir_x;
-	long double old_plane_x;
+	long double	old_dir_x;
+	long double	old_plane_x;
 
 	if (key_chr(vars->keys, RIGHT_KEY, K_BUFF_SIZE))
 	{
@@ -69,10 +69,10 @@ static int		right_handler(t_vars *vars)
 	return (0);
 }
 
-static int		left_handler(t_vars *vars)
+int		left_handler(t_vars *vars)
 {
-	long double old_dir_x;
-	long double old_plane_x;
+	long double	old_dir_x;
+	long double	old_plane_x;
 
 	if (key_chr(vars->keys, LEFT_KEY, K_BUFF_SIZE))
 	{
@@ -91,11 +91,12 @@ static int		left_handler(t_vars *vars)
 	return (0);
 }
 
-static int		alt_handler(t_vars *vars)
+int		alt_handler(t_vars *vars)
 {
-	t_camera 	*cam;
-	static int	sprinting = 0;
+	t_camera	*cam;
+	int			sprinting;
 
+	sprinting = 0;
 	cam = &(vars->cam);
 	if (key_chr(vars->keys, ALT_KEY, K_BUFF_SIZE) && !sprinting)
 	{
@@ -111,25 +112,4 @@ static int		alt_handler(t_vars *vars)
 	else
 		sprinting = 0;
 	return (0);
-}
-
-int				keyboard_handler(t_vars *vars)
-{
-	int redraw;
-
-	redraw = (int)(forward_handler(vars) + backward_handler(vars)
-					+ right_handler(vars) + left_handler(vars) 
-					+ alt_handler(vars));
-	if (key_chr(vars->keys, CTRL_KEY, K_BUFF_SIZE))
-	{
-		if (key_chr(vars->keys, C_KEY, K_BUFF_SIZE))
-		{
-			free_vars(vars);
-			exit(0);
-		}
-		redraw = 1;
-		vars->cam.plane.y -= 0.01;
-		vars->cam.plane.x -= 0.01;
-	}
-	return (redraw);
 }

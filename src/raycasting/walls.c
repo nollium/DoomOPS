@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 15:30:41 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:17:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:07:44 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ int				get_wall_side(t_vars *vars, t_ray *ray)
 	return (4);
 }
 
-long double	get_plane_wall_dist(t_camera *cam, t_ray *ray)
+long double		get_plane_wall_dist(t_camera *cam, t_ray *ray)
 {
 	long double	wall_dist;
-
 
 	if (ray->side == 0)
 		wall_dist =

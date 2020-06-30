@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/26 19:08:52 by user42            #+#    #+#             */
-/*   Updated: 2020/06/30 18:25:07 by smaccary         ###   ########.fr       */
+/*   Created: 2020/06/30 18:20:31 by smaccary          #+#    #+#             */
+/*   Updated: 2020/06/30 18:28:54 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "debug.h"
 
-# include "libftprintf.h"
+int	error_print(int error)
+{
+	static char	*errors[] = {
+								"NO ERROR", "UNKNOWN ERROR",
+								"FILE INVALID ERROR", "MAP ERROR",
+								"WRONG FILE EXTENSION", "NULL ERROR",
+								"MALLOC ERROR",
+								"CONFIG ERROR", "RESOLUTION_ERROR",
+								"COLOR ERROR", "MLX_ERROR"
+							};
 
-# include "sprites.h"
-# include "parsing.h"
-# include "frontend.h"
-# include "events.h"
-# include "raycast.h"
-# include "garbage_collection.h"
-# include "settings.h"
-# include "debug.h"
-
-#endif
+	if (error != SUCCESS_CODE)
+		ft_putendl_fd(errors[-error], 2);
+	return (error);
+}

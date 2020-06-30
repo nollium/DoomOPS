@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 17:43:20 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:18:43 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_textures(t_texture **t)
 	int			i;
 
 	text = *t;
-	i = -1;	
+	i = -1;
 	while (text[++i].array)
 	{
 		free(text[i].array);

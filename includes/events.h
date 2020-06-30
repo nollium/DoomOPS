@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 18:00:15 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:15:43 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define T_BUFF_SIZE		8
 # define S_BUFF_SIZE		1
 
-# ifdef OS_UBUNTU
+# ifdef __linux__
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
@@ -44,7 +44,7 @@
 
 # endif
 
-# ifdef OS_OSX
+# ifdef __APPLE__
 
 #  define FORWARD_KEY		13
 #  define BACKWARD_KEY		1
@@ -76,6 +76,12 @@ int		resize_handler(void);
 int		enter_handler(void);
 int		leave_handler(void);
 int		release_handler(int keycode, t_vars *vars);
+
+int		forward_handler(t_vars *vars);
+int		backward_handler(t_vars *vars);
+int		right_handler(t_vars *vars);
+int		left_handler(t_vars *vars);
+int		alt_handler(t_vars *vars);
 
 /*
 ** EVENT DEFINITION
