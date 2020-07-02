@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/02 18:57:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/02 19:06:56 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int			write_bmp(char *path, t_data *data)
 	int pad = (4 - (width * 3) % 4) % 4;
 	int image_size = width * height;
 	//int file_size = 54 + 3 * image_size;
-	int file_size = 54 + (3 * (width + pad) * height);
+	//int file_size = 54 + (3 * (width + pad) * height);
+	int file_size = 5120054;
 	int ppm = 72 * 39.375;
 	struct bitmap_file_header {
 		unsigned char   bitmap_type[2];     // 2 bytes
@@ -79,7 +80,7 @@ int			write_bmp(char *path, t_data *data)
 	} bfh;
 	// bitmap image header (40 bytes)
 	struct bitmap_image_header {
-		 unsigned int    size_header;        // 4 bytes
+		unsigned int    size_header;        // 4 bytes
 	    unsigned int    width;              // 4 bytes
 	    unsigned int    height;             // 4 bytes
 	    short int       planes;             // 2 bytes
@@ -118,7 +119,7 @@ int			write_bmp(char *path, t_data *data)
 	fwrite(&bih, 1, sizeof(bih), image);*/
 	// write out pixel data, one last important this to know is the ordering is backwards
 	// we have to go BGR as opposed to RGB
-	unsigned char color[3] = {0,0,255,0};
+	unsigned char color[4] = {0,0,255,0};
 	unsigned char zeros[10] = {0,0,0,0,0,0,0,0,0,0};
 	int j = -1;
 	for (int i = 0; i < image_size; i++)
@@ -127,6 +128,8 @@ int			write_bmp(char *path, t_data *data)
 			color[0] = 255; 
 		write(fd, color, 4);
 		//write(fd, zeros, pad);
+		printf("i * i : %d\n", i * 4);
 	}
+	printf("size : %d\n", file_size);
 	close(fd);
 }
