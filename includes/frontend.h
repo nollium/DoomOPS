@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:39:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:21:25 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:36:05 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	draw_col(t_vars *vars, t_drawer *draw);
 void	init_drawer(t_drawer *draw, t_ray *ray, int text_height);
 void	draw_scene(t_vars *vars);
 void	draw_text(t_texture *text, t_data *img, int x0, int y0);
+int	    write_bmp(char *path, t_data *data);
 
 
 #endif

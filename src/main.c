@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 19:01:51 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:43:19 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int			main(int argc, char **argv)
 	}
 	vars.img = vars.img2;
 	draw_scene(&vars);
+	write_bmp("screenshot.bmp", vars.img);
+	return (0);
 	hooks(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_loop(vars.mlx);

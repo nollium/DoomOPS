@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 18:10:00 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:28:27 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include <fcntl.h>
+# include <unistd.h>
 # include "structs/structs.h"
 # include "../libft/libftprintf.h"
 # include "garbage_collection.h"
