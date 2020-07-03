@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "frontend.h"
 
 int			load_xpm(t_data *data, char *path, void *mlx)
 {
@@ -54,82 +55,69 @@ int			load_texture(t_texture *text, char *path, void *mlx)
 	return (SUCCESS_CODE);
 }
 
+void		reverse_img(t_data *data)
+{
+	int start;
+	int end;
+	int tmp;
+	
+	start = 0;
+	end =  data->bits_per_pixel / 8 * data->width * data->height;
+	while (start < end)
+	{
+		tmp = *(int *)(data->addr + start);    
+        *(int *)(data->addr + start) = *(int *)(data->addr + end); 
+        *(int *)(data->addr + end) = tmp; 
+        start += sizeof(int); 
+        end -= sizeof(int); 
+	}
+}
+
+void		flip_img(t_data *data)
+{
+	int				y;
+	int				x;
+	int				tmp;
+	int				*ptr;
+	int				*dst;
+
+	x = -1;
+	while (++x < data->width / 2)
+	{
+		y = -1;
+		while (++y < data->height)
+		{
+			ptr = (int *)(data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8)));
+			tmp = *ptr;
+			dst = (int *)(data->addr + (y * data->line_length + (data->width - x) * (data->bits_per_pixel / 8)));
+			*ptr = *dst;
+			*dst = tmp;
+		}
+	}
+}
+
 int			write_bmp(char *path, t_data *data)
 {
 	int			fd;
-	t_texture	img;
-	int			height = 11;
-	int			width = 24;
+	int			image_size;
+	t_bfh		bfh;
+	t_bih		bih;
 
-
-
-	img_to_text(data, &img);
 	fd = open(path, O_WRONLY);
-	int pad = (4 - (width * 3) % 4) % 4;
-	int image_size = width * height;
-	//int file_size = 54 + 3 * image_size;
-	//int file_size = 54 + (3 * (width + pad) * height);
-	int file_size = 5120054;
-	int ppm = 72 * 39.375;
-	struct bitmap_file_header {
-		unsigned char   bitmap_type[2];     // 2 bytes
-	    int             file_size;          // 4 bytes
-	    short           reserved1;          // 2 bytes
-	    short           reserved2;          // 2 bytes
-	    unsigned int    offset_bits;        // 4 bytes
-	} bfh;
-	// bitmap image header (40 bytes)
-	struct bitmap_image_header {
-		unsigned int    size_header;        // 4 bytes
-	    unsigned int    width;              // 4 bytes
-	    unsigned int    height;             // 4 bytes
-	    short int       planes;             // 2 bytes
-	    short int       bit_count;          // 2 bytes
-	    unsigned int    compression;        // 4 bytes
-	    unsigned int    image_size;         // 4 bytes
-	    unsigned int    ppm_x;              // 4 bytes
-	    unsigned int    ppm_y;              // 4 bytes
-	    unsigned int    clr_used;           // 4 bytes
-	    unsigned int    clr_important;      // 4 bytes
-	} bih;
-	// if you are on Windows you can include <windows.h>
-	// and make use of the BITMAPFILEHEADER and BITMAPINFOHEADER structs
-	ft_memcpy(&bfh.bitmap_type, "BM", 2);
-	bfh.file_size       = file_size;
-	bfh.reserved1       = 0;
-	bfh.reserved2       = 0;
-	bfh.offset_bits     = 0;
-	
-	bih.size_header     = sizeof(bih);
-	bih.width           = width;
-	bih.height          = height;
-	bih.planes          = 1;
-	bih.bit_count       = 32;
-	bih.compression     = 0;
-	bih.image_size      = file_size;
-	bih.ppm_x           = ppm;
-	bih.ppm_y           = ppm;
-	bih.clr_used        = 0;
-	bih.clr_important   = 0;
-	fd = open(path, O_WRONLY);
-	// compiler woes so we will just use the constant 14 we know we have
-	write(fd, (void *)&bfh, 14);
-	write(fd, (void *)&bih, sizeof(bih));
-	/*fwrite(&bfh, 1, 14, image);
-	fwrite(&bih, 1, sizeof(bih), image);*/
-	// write out pixel data, one last important this to know is the ordering is backwards
-	// we have to go BGR as opposed to RGB
-	unsigned char color[4] = {0,0,255,0};
-	unsigned char zeros[10] = {0,0,0,0,0,0,0,0,0,0};
-	int j = -1;
-	for (int i = 0; i < image_size; i++)
+	image_size = data->width * data->height * data->bits_per_pixel / 8;
+	reverse_img(data);
+	flip_img(data);
+	bfh = (t_bfh){{'B', 'M'}, BMP_HEADER_SIZE + image_size, 0, 0, 0};
+	bih = (t_bih)
 	{
-		if (i > 200)
-			color[0] = 255; 
-		write(fd, color, 4);
-		//write(fd, zeros, pad);
-		printf("i * i : %d\n", i * 4);
-	}
-	printf("size : %d\n", file_size);
+		sizeof(t_bih), data->width, data->height, 1, 32, 0, bfh.file_size,
+		BMP_DPI * 39.375, BMP_DPI * 39.375, 0, 0
+	};
+	fd = open(path, O_WRONLY);
+	write(fd, (void *)&bfh, 14);
+	write(fd, (void *)&bih, sizeof(t_bih));
+	write(fd, data->addr , image_size);
+	flip_img(data);
+	reverse_img(data);
 	close(fd);
 }

@@ -81,7 +81,7 @@ static void	init_keys_buffer(t_keys *keys)
 		keys[i] = (t_keys){-1, 0};
 }
 
-int			init_vars(char *path, t_vars *vars)
+int			init_vars(char *path, t_vars *vars, int save)
 {
 	int				error;
 
@@ -94,16 +94,15 @@ int			init_vars(char *path, t_vars *vars)
 		return (MALLOC_ERROR);
 	if (!(vars->mlx = mlx_init()))
 		return (MLX_ERROR);
-	if (!(vars->win = mlx_new_window(vars->mlx, vars->game_screen.width,
-		vars->game_screen.height, "cub3D")))
-		return (MLX_ERROR);
+	if (!save)
+		if (!(vars->win = mlx_new_window(vars->mlx,
+		vars->game_screen.width, vars->game_screen.height, "cub3D")))
+			return (MLX_ERROR);
 	if ((error = init_img(vars->mlx, vars->game_screen.width,
 		vars->game_screen.height, vars->img2)) != SUCCESS_CODE)
 		return (error_print(error));
 	if ((error = init_img(vars->mlx, vars->game_screen.width,
 		vars->game_screen.height, vars->img2 + 1)) != SUCCESS_CODE)
 		return (error_print(error));
-	if ((error = init_textures(vars)) != SUCCESS_CODE)
-		return (error_print(error));
-	return (SUCCESS_CODE);
+	return (error_print(init_textures(vars)));
 }

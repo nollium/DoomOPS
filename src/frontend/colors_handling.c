@@ -16,7 +16,7 @@ int	add_shade(double shade, int color)
 {
 	unsigned char	rgb[4];
 
-	if (0 > shade || color == 0x1)
+	if (0 > shade || color == TRANS_COLOR)
 		return (color);
 	if (shade >= 1)
 		return (0);

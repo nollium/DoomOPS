@@ -34,7 +34,7 @@ int		parse_color(char *line);
 int		load_xpm(t_data *data, char *path, void *mlx);
 int		load_texture(t_texture *text, char *path, void *mlx);
 void	img_to_text(t_data *data, t_texture *text);
-int		init_vars(char *path, t_vars *vars);
+int		init_vars(char *path, t_vars *vars, int save);
 int		load_cub(char *path, t_vars *vars);
 int		parse_sprites(t_vars *vars, char **map, int *size);
 

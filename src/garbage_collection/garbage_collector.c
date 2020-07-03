@@ -14,6 +14,8 @@
 
 void	free_str(char **str)
 {
+	if (!*str)
+		return ;
 	free(*str);
 	*str = NULL;
 }
@@ -22,6 +24,8 @@ void	free_split(char ***split)
 {
 	char **array;
 
+	if (!*split)
+		return ;
 	array = *split - 1;
 	while (*(++array))
 	{
@@ -37,7 +41,8 @@ void	free_textures(t_texture **t)
 	t_texture	*text;
 	int			i;
 
-	text = *t;
+	if (!(text = *t))
+		return ;
 	i = -1;
 	while (text[++i].array)
 	{
@@ -49,9 +54,12 @@ void	free_textures(t_texture **t)
 
 void	free_vars(t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_image(vars->mlx, vars->img2[0].img);
-	mlx_destroy_image(vars->mlx, vars->img2[1].img);
+	if (vars->mlx && vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->mlx && vars->img2[0].img)
+		mlx_destroy_image(vars->mlx, vars->img2[0].img);
+	if (vars->mlx && vars->img2[1].img)
+		mlx_destroy_image(vars->mlx, vars->img2[1].img);
 	free_split(&(vars->map.array));
 	free_textures(&(vars->text));
 	free(vars->sprites);
