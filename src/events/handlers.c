@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 19:10:40 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:48:49 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int		key_handler(int keycode, t_vars *vars)
 
 	i = -1;
 	if (keycode == 65307)
+	{
 		free_vars(vars);
+		exit(0);
+	}
 	i = -1;
 	while (i < K_BUFF_SIZE && (((vars->keys)[i]).keycode != -1))
 		i++;
@@ -29,24 +32,9 @@ int		key_handler(int keycode, t_vars *vars)
 	return (0);
 }
 
-int		enter_handler(void)
-{
-	if (DEBUG_MODE)
-		ft_printf("Entering window\n");
-	return (0);
-}
-
-int		leave_handler(void)
-{
-	if (DEBUG_MODE)
-		ft_printf("Leaving window\n");
-	return (0);
-}
-
 int		release_handler(int keycode, t_vars *vars)
 {
 	int				i;
-	time_t			elapsed;
 
 	i = -1;
 	while (++i < K_BUFF_SIZE)
@@ -55,7 +43,6 @@ int		release_handler(int keycode, t_vars *vars)
 		{
 			if (i >= K_BUFF_SIZE)
 				return (0);
-			elapsed = (time(NULL) - ((vars->keys)[i]).time);
 			((vars->keys)[i]).keycode = -1;
 			((vars->keys)[i]).time = 0;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:15:43 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:46:28 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ int		keyboard_handler(t_vars *vars);
 void	hooks(t_vars *vars);
 int		loop_handler(t_vars *vars);
 int		key_handler(int keycode, t_vars *vars);
-int		mouse_handler(int button, int x, int y, t_vars *vars);
-int		move_handler(void);
-int		resize_handler(void);
-int		enter_handler(void);
-int		leave_handler(void);
 int		release_handler(int keycode, t_vars *vars);
 
 int		forward_handler(t_vars *vars);

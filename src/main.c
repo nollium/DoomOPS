@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/02 14:43:19 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:35:13 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ USAGE : ./cub3D --save (optional) config.cub", 2);
 	draw_scene(&vars);
 	if (argc == 3)
 	{
-		write_bmp("screenshot.bmp", vars.img);
+		error_print(write_bmp("screenshot.bmp", vars.img));
 		free_vars(&vars);
 		return (0);
 	}

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_structs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:54:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 17:18:15 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:29:41 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_STRUCTS_H
 # define PARSING_STRUCTS_H
+
+
+/*
+**	Useful graphic structs 
+*/
 
 /*
 **  s_data CONTAINS ALL THE DATA RELATED TO AN MLX IMAGE
@@ -28,13 +33,6 @@ typedef struct	s_data
 	int			width;
 }				t_data;
 
-typedef struct	s_spawn
-{
-	double	x;
-	double	y;
-	char	dir;
-}				t_spawn;
-
 typedef struct	s_texture
 {
 	int			*array;
@@ -44,13 +42,6 @@ typedef struct	s_texture
 	int			y;
 }				t_texture;
 
-typedef struct	s_map
-{
-	int			x;
-	int			y;
-	char		**array;
-}				t_map;
-
 typedef struct	s_screen
 {
 	int			width;
@@ -59,5 +50,23 @@ typedef struct	s_screen
 	int			y;
 	t_data		*img;
 }				t_screen;
+
+/*
+** cub3D specific structs 
+*/
+
+typedef struct	s_spawn
+{
+	double	x;
+	double	y;
+	char	dir;
+}				t_spawn;
+
+typedef struct	s_map
+{
+	int			x;
+	int			y;
+	char		**array;
+}				t_map;
 
 #endif

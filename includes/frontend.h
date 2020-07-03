@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frontend.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:39:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/02 14:36:05 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:00:21 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,32 @@ typedef struct	s_bih
 	unsigned int	clr_important;
 }				t_bih;
 
+/*
+** IN PLACE MODIFICATIONS
+*/
+
+void	flip_img(t_data *data);
+void	reverse_img(t_data *data);
+int		write_bmp(char *path, t_data *data);
+
+/*
+** Useful graphic functions.
+*/
 
 void	draw_text(t_texture *text, t_data *img, int x0, int y0);
 int		create_rgb(unsigned char r, unsigned char g, unsigned char b) \
  __attribute__((pure));
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color) \
  __attribute__((hot));
-void	draw_scene(t_vars *vars);
 int		add_shade(double dist, int color) __attribute__((pure));
+
+/*
+** CUB3D specific functions
+*/
 
 void	draw_col(t_vars *vars, t_drawer *draw);
 void	init_drawer(t_drawer *draw, t_ray *ray, int text_height);
 void	draw_scene(t_vars *vars);
 void	draw_text(t_texture *text, t_data *img, int x0, int y0);
-int	    write_bmp(char *path, t_data *data);
-
 
 #endif
