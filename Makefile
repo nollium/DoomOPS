@@ -81,6 +81,7 @@ ifeq ($(UNAME),Darwin)
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
 	INCLUDES += -I$(MLX_LINUX_PATH)
+	MLX_LIB = $(MLX_PATH)/libmlx.dylib
 	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 endif
 
