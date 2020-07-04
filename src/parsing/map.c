@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/04 10:48:18 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 13:32:22 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		**parse_array(t_list *lst, int len)
 		while (lst->next && !ft_isdigit(*(char *)lst->content)
 						&& !ft_isspace(*(char *)lst->content))
 			lst = lst->next;
-		array[0] = lst->content;
+		array[0] = ft_strdup(lst->content);
 		error |= format_map_line(array[0]);
 		while ((lst = lst->next) && !(error |= format_map_line(lst->content)))
 			array[len++] = ft_strdup(lst->content);

@@ -1,23 +1,23 @@
-R 1000 1000
-NO ./texture/test0.xpm
-SO ./texture/test1.xpm
-WE ./texture/test2.xpm
-EA ./texture/test3.xpm
+int			write_bmp(char *path, t_data *data)
+{
+	int			fd;
+	int			image_size;
+	t_bfh		bfh;
+	t_bih		bih;
 
-S ./path_to_the_sprite_texture
-F 220,100,0
-C 225,30,0
-
-        1111111111111111111111111
-        1000000001110000000000001
-        1011000001110000002000011
-        1001000000000000000000001
-111111111011000001110000000000011
-100000000011000001110111111111111
-11110111111111011100000010001
-11110111101111011101010010001
-11000000110101011100000010001
-10002000000000001100000010001
-10000000000000001101010010001
-11000001110101011111011110N01
-11111111 1111111 111111111111
+	image_size = data->width * data->height * data->bits_per_pixel / 8;
+	bfh = (t_bfh){{'B', 'M'}, BMP_HEADER_SIZE + image_size, 0, 0, 0};
+	bih = (t_bih)
+	{
+		sizeof(t_bih), data->width, data->height, 1, 32, 0, bfh.file_size,
+		BMP_DPI * 39.375, BMP_DPI * 39.375, 0, 0
+	};
+	if ((fd = open(path, O_WRONLY | O_CREAT)) <= 0)
+		return (FILE_INVALID_ERROR);
+	write(fd, (void *)&bfh, 14);
+	write(fd, (void *)&bih, sizeof(t_bih));
+	write(fd, data->addr , image_size);
+	close(fd);
+	printf("file_size :%d\n", bfh.file_size);
+	return (SUCCESS_CODE);
+}

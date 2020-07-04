@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 16:33:23 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 14:42:47 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,10 @@ int			write_bmp(char *path, t_data *data)
 	t_bih		bih;
 
 	image_size = data->width * data->height * data->bits_per_pixel / 8;
-	reverse_img(data);
-	flip_img(data);
 	bfh = (t_bfh){{'B', 'M'}, BMP_HEADER_SIZE + image_size, 0, 0, 0};
 	bih = (t_bih)
 	{
-		sizeof(t_bih), data->width, data->height, 1, 32, 0, bfh.file_size,
+		sizeof(t_bih), data->width, -data->height, 1, 32, 0, bfh.file_size,
 		BMP_DPI * 39.375, BMP_DPI * 39.375, 0, 0
 	};
 	if ((fd = open(path, O_WRONLY | O_CREAT)) <= 0)
@@ -117,8 +115,7 @@ int			write_bmp(char *path, t_data *data)
 	write(fd, (void *)&bfh, 14);
 	write(fd, (void *)&bih, sizeof(t_bih));
 	write(fd, data->addr , image_size);
-	flip_img(data);
-	reverse_img(data);
 	close(fd);
+	printf("file_size :%d\n", bfh.file_size);
 	return (SUCCESS_CODE);
 }
