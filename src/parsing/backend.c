@@ -6,11 +6,12 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 16:06:18 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:02:05 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "mlx.h"
 
 int	get_conf(t_vars *vars, char *line)
 {
@@ -38,6 +39,17 @@ int	get_conf(t_vars *vars, char *line)
 	return (SUCCESS_CODE);
 }
 
+int check_resolution(void *mlx, int *width, int *height)
+{
+	int	max_width;
+	int max_height;
+
+	mlx_get_screen_size(mlx, &max_height, &max_width);
+	*width = (*width > max_width) ? max_width : *width;
+	*height = (*height > max_height) ? max_height : *height;
+	return (SUCCESS_CODE);
+}
+
 int	parse_config(t_list *cub, t_vars *vars)
 {
 	char	*line __attribute__((cleanup(free_str)));
@@ -61,6 +73,8 @@ int	parse_config(t_list *cub, t_vars *vars)
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
 	vars->text_paths[5] = NULL;
+	check_resolution(vars->mlx,
+					&vars->game_screen.width, &vars->game_screen.height);
 	return (SUCCESS_CODE);
 }
 
@@ -96,7 +110,7 @@ int	load_cub(char *path, t_vars *vars)
 	int		len;
 	int		error;
 
-	if (!ft_strnstr(path + ft_strlen(path) - 4, ".cub", 4))
+	if (!ft_strnstr(path + ft_strlen(path) - 4, CONF_FILE_EXTENSION, 4))
 		return (WRONG_EXTENSION_ERROR);
 	vars->map = (t_map){0, 0, 0};
 	if ((len = read_cub(path, &cub)) <= 0)

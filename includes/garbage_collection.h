@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:59:21 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 16:17:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:14:44 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "structs/structs.h"
 # include "libftprintf.h"
-# include <mlx.h>
+# include "mlx.h"
 
 /*
 ** Useful garbage collection functions

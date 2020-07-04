@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
+#    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/03 18:51:05 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/04 18:17:34 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,20 @@ NAME = cub3D
 
 CC = clang
 
-INCLUDES = ./includes/
+HEADERS_PATH = ./includes/
 
-CFLAGS = -Wall -Wextra -I$(INCLUDES) -g3 
+INCLUDES = -I$(HEADERS_PATH) 
+
+CFLAGS = -Wall -Wextra -g3
 
 RM = rm -rf
 
 DIRSRC = ./src/
+
+MLX_OPENGL_PATH = ./minilibx_opengl
+MLX_LINUX_PATH = ./minilibx_linux
+
+MLX_PATH = 
 
 SRC = $(addprefix $(DIRSRC), \
 			main.c \
@@ -48,7 +55,7 @@ OBJDIR = ./obj/
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = $(addprefix $(INCLUDES), \
+HEADERS = $(addprefix $(HEADERS_PATH), \
 				cub3d.h events.h frontend.h \
 				garbage_collection.h parsing.h raycast.h sprites.h\
 			)
@@ -66,17 +73,28 @@ FRAMEWORKS =
 UNAME = $(shell uname)
 
 ifeq ($(UNAME),Darwin)
+	MLX_PATH = $(MLX_OPENGL_PATH)
+	MLX_LIB = $(MLX_PATH)/libmlx.dylib
 	FRAMEWORKS += -framework OpenGL -framework Appkit
+	INCLUDES += -I$(MLX_OPENGL_PATH)
+	
 else
-	LINKS += -L/usr/local/lib -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+	MLX_PATH = $(MLX_LINUX_PATH)
+	INCLUDES += -I$(MLX_LINUX_PATH)
+	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 endif
+
+CFLAGS += $(INCLUDES)
 
 all: $(NAME) $(HEADERS)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(LINKS) $(FRAMEWORKS)
+$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX_LIB) $(LINKS) $(FRAMEWORKS)
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
+
+$(MLX_LIB):
+	$(MAKE) -C $(MLX_PATH)/
 
 obj/%.o: $(SRC) $(HEADERS)
 	$(CC) $(CFLAGS) -c $(SRC) -o $@

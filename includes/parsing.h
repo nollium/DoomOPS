@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 16:26:36 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:14:22 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define VALID_CONF_IDS		"NSWEFC\n"
 # define VALID_MAP_CHARS	"012NSEW "
-
+# define  CONF_FILE_EXTENSION ".cub"
 /*
 **  IMAGE PARSING
 */
