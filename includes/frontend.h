@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frontend.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:39:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 14:00:21 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 16:24:38 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,6 @@
 # define BMP_HEADER_SIZE	54
 # define BMP_DPI			72
 
-
-typedef struct	s_bfh
-{
-	unsigned char	bitmap_type[2];
-	int				file_size;
-	short			reserved1;
-	short			reserved2;
-	unsigned int	offset_bits;
-}				t_bfh;
-
-typedef struct	s_bih
-{
-	unsigned int	size_header;
-	unsigned int	width;
-	unsigned int	height;
-	short int		planes;
-	short int		bit_count;
-	unsigned int	compression;
-	unsigned int	image_size;
-	unsigned int	ppm_x;
-	unsigned int	ppm_y;
-	unsigned int	clr_used;
-	unsigned int	clr_important;
-}				t_bih;
-
 /*
 ** IN PLACE MODIFICATIONS
 */
@@ -62,9 +37,9 @@ int		write_bmp(char *path, t_data *data);
 */
 
 void	draw_text(t_texture *text, t_data *img, int x0, int y0);
-int		create_rgb(unsigned char r, unsigned char g, unsigned char b) \
+int		create_rgb(unsigned char r, unsigned char g, unsigned char b)
  __attribute__((pure));
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color) \
+void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
  __attribute__((hot));
 int		add_shade(double dist, int color) __attribute__((pure));
 

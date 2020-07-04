@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 17:38:30 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 16:26:36 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		parse_resolution(char *line, t_screen *screen);
 int		parse_color(char *line);
 
 /*
-**  Cub3D specific functions 
+**  Cub3D specific functions
 */
 int		check_borders(char **map);
 int		find_spawn(char **map, t_spawn *spawn);

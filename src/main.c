@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 13:32:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:49:25 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ USAGE : ./cub3D --save (optional) config.cub", 2);
 	}
 	vars.img = vars.img2;
 	draw_scene(&vars);
+	system("leaks cub3D");
 	if (argc == 3)
 	{
 		error_print(write_bmp("screenshot.bmp", vars.img));

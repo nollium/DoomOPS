@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/04 13:32:22 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:17:01 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	format_map_line(char *line)
 	}
 	if (!i || line[i - 1] != WALL)
 		return (MAP_ERROR);
-	return (error);	
+	return (error);
 }
 
 char		**parse_array(t_list *lst, int len)
@@ -93,7 +93,7 @@ int			find_spawn(char **map, t_spawn *spawn)
 int			check_borders(char **map)
 {
 	int	y;
-	int	x;	
+	int	x;
 
 	y = -1;
 	if (!map)
@@ -104,10 +104,12 @@ int			check_borders(char **map)
 		if (map[y][0] != WALL || map[y][ft_strlen(map[y]) - 1] != WALL)
 			return (MAP_ERROR);
 		while (y > 0 && map[y][++x] && map[y + 1])
-			if (map[y][x] == VOID && (x >= (int)ft_strlen(map[y - 1]) || x >= (int)ft_strlen(map[y + 1])))
+			if (map[y][x] == VOID && (x >= (int)ft_strlen(map[y - 1])
+									|| x >= (int)ft_strlen(map[y + 1])))
 				return (MAP_ERROR);
 	}
-	if (ft_setchr(map[0], VOID_CHARS) || !y || ft_setchr(map[y - 1], VOID_CHARS))
+	if (ft_setchr(map[0], VOID_CHARS) || y <= 0
+		|| ft_setchr(map[y - 1], VOID_CHARS))
 		return (MAP_ERROR);
 	return (SUCCESS_CODE);
 }

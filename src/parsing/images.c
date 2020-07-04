@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 14:42:47 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:31:47 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,46 +55,51 @@ int			load_texture(t_texture *text, char *path, void *mlx)
 	return (SUCCESS_CODE);
 }
 
-void		reverse_img(t_data *data)
-{
-	int start;
-	int end;
-	int tmp;
-	
-	start = 0;
-	end =  data->bits_per_pixel / 8 * data->width * data->height;
-	while (start < end)
-	{
-		tmp = *(int *)(data->addr + start);    
-        *(int *)(data->addr + start) = *(int *)(data->addr + end); 
-        *(int *)(data->addr + end) = tmp; 
-        start += sizeof(int); 
-        end -= sizeof(int); 
-	}
-}
-
-void		flip_img(t_data *data)
-{
-	int				y;
-	int				x;
-	int				tmp;
-	int				*ptr;
-	int				*dst;
-
-	x = -1;
-	while (++x < data->width / 2)
-	{
-		y = -1;
-		while (++y < data->height)
-		{
-			ptr = (int *)(data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8)));
-			tmp = *ptr;
-			dst = (int *)(data->addr + (y * data->line_length + (data->width - x) * (data->bits_per_pixel / 8)));
-			*ptr = *dst;
-			*dst = tmp;
-		}
-	}
-}
+/*
+** Unused functions
+** void		reverse_img(t_data *data)
+** {
+** 	int start;
+** 	int end;
+** 	int tmp;
+**
+** 	start = 0;
+** 	end = data->bits_per_pixel / 8 * data->width * data->height;
+** 	while (start < end)
+** 	{
+** 		tmp = *(int *)(data->addr + start);
+** 		*(int *)(data->addr + start) = *(int *)(data->addr + end);
+** 		*(int *)(data->addr + end) = tmp;
+** 		start += sizeof(int);
+** 		end -= sizeof(int);
+** 	}
+** }
+**
+** void		flip_img(t_data *data)
+** {
+** 	int				y;
+** 	int				x;
+** 	int				tmp;
+** 	int				*ptr;
+** 	int				*dst;
+**
+** 	x = -1;
+** 	while (++x < data->width / 2)
+** 	{
+** 		y = -1;
+** 		while (++y < data->height)
+** 		{
+** 			ptr = (int *)(data->addr + (y * data->line_length
+**  + x * (data->bits_per_pixel / 8)));
+** 			tmp = *ptr;
+** 			dst = (int *)(data->addr + (y * data->line_length
+**  + (data->width - x) * (data->bits_per_pixel / 8)));
+** 			*ptr = *dst;
+** 			*dst = tmp;
+** 		}
+** 	}
+** }
+*/
 
 int			write_bmp(char *path, t_data *data)
 {
@@ -114,8 +119,7 @@ int			write_bmp(char *path, t_data *data)
 		return (FILE_INVALID_ERROR);
 	write(fd, (void *)&bfh, 14);
 	write(fd, (void *)&bih, sizeof(t_bih));
-	write(fd, data->addr , image_size);
+	write(fd, data->addr, image_size);
 	close(fd);
-	printf("file_size :%d\n", bfh.file_size);
 	return (SUCCESS_CODE);
 }

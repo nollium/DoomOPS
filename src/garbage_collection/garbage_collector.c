@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 10:34:34 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 16:37:31 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void	free_textures(t_texture **t)
 
 void	free_vars(t_vars *vars)
 {
+	int	i;
+
+	i = -1;
 	if (vars->mlx && vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->mlx && vars->img2[0].img)
@@ -65,6 +68,8 @@ void	free_vars(t_vars *vars)
 	free_textures(&(vars->text));
 	free(vars->sprites);
 	free(vars->z_buffer);
+	while (vars->text_paths[++i])
+		free(vars->text_paths[i]);
 }
 
 void	free_cub(t_list **alst)

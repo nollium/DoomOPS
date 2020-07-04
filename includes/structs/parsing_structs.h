@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_structs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:54:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 16:29:41 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 16:27:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_STRUCTS_H
 # define PARSING_STRUCTS_H
 
-
 /*
-**	Useful graphic structs 
+**	Useful graphic structs
 */
 
 /*
@@ -52,7 +51,7 @@ typedef struct	s_screen
 }				t_screen;
 
 /*
-** cub3D specific structs 
+** cub3D specific structs
 */
 
 typedef struct	s_spawn

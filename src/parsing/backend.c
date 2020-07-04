@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 10:35:33 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 16:06:18 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int	load_cub(char *path, t_vars *vars)
 		return (MAP_ERROR);
 	if (find_spawn(vars->map.array, &(vars->spawn)) != SUCCESS_CODE)
 		return (MAP_ERROR);
-	if (parse_sprites(vars, vars->map.array, &(vars->num_sprites)) != SUCCESS_CODE)
+	if (parse_sprites(vars, vars->map.array, &(vars->num_sprites))
+		!= SUCCESS_CODE)
 		return (MAP_ERROR);
 	return (check_borders(vars->map.array));
 }
