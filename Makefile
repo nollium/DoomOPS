@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/04 18:17:34 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/05 01:14:23 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,31 @@ MLX_OPENGL_PATH = ./minilibx_opengl
 MLX_LINUX_PATH = ./minilibx_linux
 
 MLX_PATH = 
+
+LIBFT = libft/libftprintf.a
+
+LIB_ARG = 
+
+LINKS = -lmlx
+
+FRAMEWORKS = 
+
+UNAME = $(shell uname)
+
+ifeq ($(UNAME),Darwin)
+	MLX_PATH = $(MLX_OPENGL_PATH)
+	MLX_LIB = $(MLX_PATH)/libmlx.dylib
+	LINKS = -L$(MLX_PATH)/
+	FRAMEWORKS += -framework OpenGL -framework Appkit
+	INCLUDES += -I$(MLX_OPENGL_PATH)
+else
+	MLX_PATH = $(MLX_LINUX_PATH)
+	INCLUDES += -I$(MLX_LINUX_PATH)
+	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+endif
+
+#CFLAGS += $(INCLUDES)
+
 
 SRC = $(addprefix $(DIRSRC), \
 			main.c \
@@ -62,44 +87,22 @@ HEADERS = $(addprefix $(HEADERS_PATH), \
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
-LIBFT = libft/libftprintf.a
-
-LIB_ARG = 
-
-LINKS = -lmlx
-
-FRAMEWORKS = 
-
-UNAME = $(shell uname)
-
-ifeq ($(UNAME),Darwin)
-	MLX_PATH = $(MLX_OPENGL_PATH)
-	MLX_LIB = $(MLX_PATH)/libmlx.dylib
-	FRAMEWORKS += -framework OpenGL -framework Appkit
-	INCLUDES += -I$(MLX_OPENGL_PATH)
-	
-else
-	MLX_PATH = $(MLX_LINUX_PATH)
-	INCLUDES += -I$(MLX_LINUX_PATH)
-	MLX_LIB = $(MLX_PATH)/libmlx.dylib
-	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
-endif
-
-CFLAGS += $(INCLUDES)
+SRC += $(MLX_LIB)
 
 all: $(NAME) $(HEADERS)
 
 $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX_LIB) $(LINKS) $(FRAMEWORKS)
+	export DYLD_LIBRARY_PATH=./minilibx_opengl:$DYLD_LIBRARY_PATH
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) $(MLX_LIB) $(LINKS) $(FRAMEWORKS)
+
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
 
 $(MLX_LIB):
 	$(MAKE) -C $(MLX_PATH)/
 
-obj/%.o: $(SRC) $(HEADERS)
-	$(CC) $(CFLAGS) -c $(SRC) -o $@
-
+.c.o: $(SRC) $(HEADERS) $(MLX_LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	$(MAKE) -C libft/ clean

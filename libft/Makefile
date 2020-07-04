@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/18 17:19:48 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/05 01:02:20 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ bonus: $(OBJBONUS) $(NAME)
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ) 
 
-obj/%.o: %.c %.h
+.c.o: %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
