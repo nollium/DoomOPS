@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 16:51:42 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 10:35:33 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	parse_config(t_list *cub, t_vars *vars)
 		if ((error = get_conf(vars, line)) != SUCCESS_CODE)
 			return (error);
 		cub = cub->next;
+		free(line);
+		line = NULL;
 	}
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
@@ -90,7 +92,7 @@ int	read_cub(char *path, t_list **alst)
 
 int	load_cub(char *path, t_vars *vars)
 {
-	t_list	*cub;
+	t_list	*cub __attribute__((cleanup(free_cub)));
 	int		len;
 	int		error;
 
@@ -105,8 +107,7 @@ int	load_cub(char *path, t_vars *vars)
 		return (MAP_ERROR);
 	if (find_spawn(vars->map.array, &(vars->spawn)) != SUCCESS_CODE)
 		return (MAP_ERROR);
-	if ((error = parse_sprites(vars, vars->map.array, &(vars->num_sprites)))
-				!= SUCCESS_CODE)
-		return (error);
-	return (SUCCESS_CODE);
+	if (parse_sprites(vars, vars->map.array, &(vars->num_sprites)) != SUCCESS_CODE)
+		return (MAP_ERROR);
+	return (check_borders(vars->map.array));
 }

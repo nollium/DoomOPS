@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
+#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/06/30 18:23:35 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/03 18:51:05 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,13 +68,13 @@ UNAME = $(shell uname)
 ifeq ($(UNAME),Darwin)
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 else
-	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+	LINKS += -L/usr/local/lib -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 endif
 
 all: $(NAME) $(HEADERS)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L/usr/local/lib $(LINKS) $(FRAMEWORKS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(LINKS) $(FRAMEWORKS)
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
 

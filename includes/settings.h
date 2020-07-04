@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 18:25:58 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 09:58:24 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define DEBUG_MODE		1
 # define SHADOW_MODE	0
 # define SPAWN_CHARS		"NSEW"
+# define VOID_CHARS         "NSEW02"
+# define WALL               '1'
+# define VOID               '0'
 # define WHITESPACES		"\t\010\011\012\013 "
 
 # define SPEED				0.04

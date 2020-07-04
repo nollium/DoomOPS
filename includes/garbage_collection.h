@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:59:21 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 14:16:49 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/04 10:36:16 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GARBAGE_COLLECTION_H
 
 # include "structs/structs.h"
+# include "libftprintf.h"
 # include <mlx.h>
 
 /*
@@ -29,5 +30,6 @@ void	free_textures(t_texture **t);
 */
 
 void	free_vars(t_vars *vars);
+void	free_cub(t_list **alst);
 
 #endif

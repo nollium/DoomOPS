@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 16:48:49 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/03 16:55:45 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int		key_handler(int keycode, t_vars *vars)
 	if (((vars->keys)[i]).keycode != -1)
 		return (0);
 	((vars->keys)[i]).keycode = keycode;
+	while (++i < K_BUFF_SIZE)
+		if (((vars->keys)[i]).keycode == keycode)
+			((vars->keys)[i]).keycode = -1;
 	return (0);
 }
 

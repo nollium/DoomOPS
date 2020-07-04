@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 14:13:26 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/03 17:38:30 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		parse_color(char *line);
 /*
 **  Cub3D specific functions 
 */
-
+int		check_borders(char **map);
 int		find_spawn(char **map, t_spawn *spawn);
 char	**parse_array(t_list *lst, int len);
 int		init_vars(char *path, t_vars *vars, int save);

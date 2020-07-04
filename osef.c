@@ -1,17 +1,23 @@
-int	get_perp_wall_dist(t_cam *cam, t_ray *ray)
-{
-	long double	wall_dist;
+R 1000 1000
+NO ./texture/test0.xpm
+SO ./texture/test1.xpm
+WE ./texture/test2.xpm
+EA ./texture/test3.xpm
 
+S ./path_to_the_sprite_texture
+F 220,100,0
+C 225,30,0
 
-	if (ray->side == 0)
-		wall_dist =
-			(ray->x - cam->x + (1.0 - ray->step_x) / 2.0)
-				/ ray->dir_x;
-	else
-		wall_dist =
-			(ray->y - cam->y + (1.0 - ray->step_y) / 2.0)
-				/ ray->dir_y;
-	if (wall_dist == 0)
-		wall_dist = 0.01;
-	return (wall_dist)
-}
+        1111111111111111111111111
+        1000000001110000000000001
+        1011000001110000002000011
+        1001000000000000000000001
+111111111011000001110000000000011
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111101111011101010010001
+11000000110101011100000010001
+10002000000000001100000010001
+10000000000000001101010010001
+11000001110101011111011110N01
+11111111 1111111 111111111111

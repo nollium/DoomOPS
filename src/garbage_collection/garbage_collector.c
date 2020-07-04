@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/02 15:35:05 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/04 10:34:34 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "garbage_collection.h"
+#include "libftprintf.h"
 
 void	free_str(char **str)
 {
@@ -64,4 +65,9 @@ void	free_vars(t_vars *vars)
 	free_textures(&(vars->text));
 	free(vars->sprites);
 	free(vars->z_buffer);
+}
+
+void	free_cub(t_list **alst)
+{
+	ft_lstclear(alst, free);
 }
