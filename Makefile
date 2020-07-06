@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
+#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/05 01:14:23 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/06 11:37:38 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ ifeq ($(UNAME),Darwin)
 	LINKS = -L$(MLX_PATH)/
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
+	EXPORT_DYLIB = export DYLD_LIBRARY_PATH=./minilibx_opengl:$DYLD_LIBRARY_PATH
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
 	INCLUDES += -I$(MLX_LINUX_PATH)
@@ -92,7 +93,7 @@ SRC += $(MLX_LIB)
 all: $(NAME) $(HEADERS)
 
 $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
-	export DYLD_LIBRARY_PATH=./minilibx_opengl:$DYLD_LIBRARY_PATH
+	$(EXPORT_DYLIB)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) $(MLX_LIB) $(LINKS) $(FRAMEWORKS)
 
 $(LIBFT):
