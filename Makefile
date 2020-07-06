@@ -6,7 +6,7 @@
 #    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/06 11:37:38 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/06 12:41:12 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -g3
 
 RM = rm -rf
 
-DIRSRC = ./src/
+DIRSRC = ./src
 
 MLX_OPENGL_PATH = ./minilibx_opengl
 MLX_LINUX_PATH = ./minilibx_linux
@@ -52,10 +52,7 @@ else
 	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 endif
 
-#CFLAGS += $(INCLUDES)
-
-
-SRC = $(addprefix $(DIRSRC), \
+SRC = $(addprefix $(DIRSRC)/, \
 			main.c \
 \
 			$(addprefix parsing/,\
@@ -77,9 +74,9 @@ SRC = $(addprefix $(DIRSRC), \
 			debug/debug_map.c debug/errors.c \
 		)
 
-OBJDIR = ./obj/
+OBJDIR = ./obj
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:$(DIRSRC)/%.c= $(OBJDIR)/%.o)
 
 HEADERS = $(addprefix $(HEADERS_PATH), \
 				cub3d.h events.h frontend.h \
@@ -88,13 +85,11 @@ HEADERS = $(addprefix $(HEADERS_PATH), \
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
-SRC += $(MLX_LIB)
-
 all: $(NAME) $(HEADERS)
 
 $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
 	$(EXPORT_DYLIB)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) $(MLX_LIB) $(LINKS) $(FRAMEWORKS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME) $(LINKS) $(FRAMEWORKS)
 
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
@@ -102,8 +97,8 @@ $(LIBFT):
 $(MLX_LIB):
 	$(MAKE) -C $(MLX_PATH)/
 
-.c.o: $(SRC) $(HEADERS) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o: $(DIRSRC)/%.c $(HEADERS) $(MLX_LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $< 
 
 clean:
 	$(MAKE) -C libft/ clean
@@ -120,6 +115,9 @@ lilclean:
 re: fclean all	
 
 .PHONY: clean fclean
+
+show:
+	echo $(OBJ)
 
 opti:
 	$(eval CFLAGS += -Ofast)
