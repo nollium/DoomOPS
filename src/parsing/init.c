@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 19:00:27 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/06 11:34:27 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int			init_vars(char *path, t_vars *vars, int save)
 		return (MALLOC_ERROR);
 	if (!(vars->mlx = mlx_init()))
 		return (MLX_ERROR);
+	check_resolution(vars->mlx,
+		&vars->game_screen.width, &vars->game_screen.height);
 	if (!save)
 		if (!(vars->win = mlx_new_window(vars->mlx,
 		vars->game_screen.width, vars->game_screen.height, "cub3D")))

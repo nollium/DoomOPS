@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 18:02:05 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/06 11:33:48 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int check_resolution(void *mlx, int *width, int *height)
 	int	max_width;
 	int max_height;
 
-	mlx_get_screen_size(mlx, &max_height, &max_width);
+	mlx_get_screen_size(mlx, &max_width, &max_height);
 	*width = (*width > max_width) ? max_width : *width;
 	*height = (*height > max_height) ? max_height : *height;
 	return (SUCCESS_CODE);
@@ -73,8 +73,6 @@ int	parse_config(t_list *cub, t_vars *vars)
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
 	vars->text_paths[5] = NULL;
-	check_resolution(vars->mlx,
-					&vars->game_screen.width, &vars->game_screen.height);
 	return (SUCCESS_CODE);
 }
 
