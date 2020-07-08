@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/06 15:28:47 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/08 14:10:44 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,12 @@ UNAME = $(shell uname)
 
 ifeq ($(UNAME),Darwin)
 	MLX_PATH = $(MLX_OPENGL_PATH)
-	MLX_LIB = $(MLX_PATH)/libmlx.dylib
+	MLX_NAME = libmlx.dylib
+	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
 	LINKS = -L$(MLX_PATH)/
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
-	EXPORT_DYLIB = export DYLD_LIBRARY_PATH=$(MLX_OPENGL_PATH)/$$DYLD_LIBRARY_PATH
+	LOAD_DYLIB = install_name_tool -change $(MLX_PATH)/$(MLX_LIB) $(MLX_LIB) $(NAME)
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
 	INCLUDES += -I$(MLX_LINUX_PATH)
@@ -88,8 +89,9 @@ OBJBONUS = $(SRCBONUS:.c=.o)
 all: $(NAME) $(HEADERS)
 
 $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
-	export DYLD_LIBRARY_PATH=$(MLX_OPENGL_PATH)/$$DYLD_LIBRARY_PATH
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME) $(LINKS) $(FRAMEWORKS)
+	$(LOAD_DYLIB)
+
 
 $(LIBFT):
 	$(MAKE) $(LIB_ARG) all -C libft/
