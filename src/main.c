@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 18:27:27 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:32:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if (check_args(argv, argv) != SUCCESS_CODE)
+	if (check_args(argc, argv) != SUCCESS_CODE)
 		return (ERROR_CODE);
 	vars = (t_vars){0};
 	if ((init_vars(argv[1], &vars, (argc == 3) ? 1 : 0))
