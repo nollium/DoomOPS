@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/06 11:33:48 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/09 18:28:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	get_conf(t_vars *vars, char *line)
 	return (SUCCESS_CODE);
 }
 
-int check_resolution(void *mlx, int *width, int *height)
+int	check_resolution(void *mlx, int *width, int *height)
 {
 	int	max_width;
 	int max_height;

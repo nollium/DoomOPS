@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/06 11:35:46 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/09 18:29:55 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 
 # define VALID_CONF_IDS		"NSWEFC\n"
 # define VALID_MAP_CHARS	"012NSEW "
-# define  CONF_FILE_EXTENSION ".cub"
+# define CONF_FILE_EXTENSION ".cub"
+
 /*
 **  IMAGE PARSING
 */
@@ -35,7 +36,7 @@ void	img_to_text(t_data *data, t_texture *text);
 **  Reusable conf parsing function
 */
 
-int     check_resolution(void *mlx, int *width, int *height);
+int		check_resolution(void *mlx, int *width, int *height);
 int		parse_resolution(char *line, t_screen *screen);
 int		parse_color(char *line);
 

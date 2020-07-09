@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 18:15:00 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:29:02 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "structs/structs.h"
 # include "debug.h"
 
-# define DEBUG_PRINT(txt) printf("\n\n%s\n", txt)
 # define PI 3.141592653
 # define WARNINGS 		1
 # define WARN_LEVEL		100000
