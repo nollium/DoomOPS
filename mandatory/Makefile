@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
+#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/09 19:31:15 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/10 12:32:49 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RM = rm -rf
 
 DIR = $(shell pwd)
 
-DIRSRC = ./src
+DIRSRC = src
 
 MLX_OPENGL_PATH = ./minilibx_opengl
 MLX_LINUX_PATH = ./minilibx_linux
@@ -76,9 +76,11 @@ SRC = $(addprefix $(DIRSRC)/, \
 			debug/debug_map.c debug/errors.c \
 		)
 
-OBJDIR = ./obj
+OBJDIR = obj
 
 OBJ = $(SRC:$(DIRSRC)/%.c= $(OBJDIR)/%.o)
+
+OBJ_PATHS = $(shell ls -R $(DIRSRC) | grep / | sed 's/://g' | sed 's/src/$(OBJDIR)/g')
 
 HEADERS = $(addprefix $(HEADERS_PATH), \
 				cub3d.h events.h frontend.h \
@@ -90,17 +92,21 @@ OBJBONUS = $(SRCBONUS:.c=.o)
 all: $(NAME) $(HEADERS)
 
 $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
+	@echo COMPILING $(NAME)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME) $(LINKS) $(FRAMEWORKS)
 	$(LOAD_DYLIB)
 
 
 $(LIBFT):
+	@echo "COMPILING LIBFT"
 	$(MAKE) $(LIB_ARG) all -C libft/
 
 $(MLX_LIB):
+	@echo "COMPILING MLX"
 	$(MAKE) -C $(MLX_PATH)/
 
 $(OBJDIR)/%.o: $(DIRSRC)/%.c $(HEADERS) $(MLX_LIB)
+	@mkdir -p $(OBJ_PATHS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $< 
 
 clean:
