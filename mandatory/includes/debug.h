@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:26:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 19:25:47 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/11 00:05:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@
 
 void	print_map(char **array);
 int		error_print(int error);
+int		check_file(char *path);
 
 #endif

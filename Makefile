@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/10 12:39:29 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/10 22:50:03 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CUB_PATH = $(MANDATORY_PATH)
 
 MAKE = make
 
-MAKE_ARGS = opti
+MAKE_ARGS =
 
 all:
 	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
@@ -48,9 +48,15 @@ bonus:
 
 opti:
 	$(eval MAKE_ARGS += opti)
+	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
+	@cp $(CUB_PATH)/$(NAME) .
 
-debug: fclean
+debug:
 	$(eval MAKE_ARGS += debug)
+	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
+	@cp $(CUB_PATH)/$(NAME) .
 
 QWERTY:
 	$(eval MAKE_ARGS += QWERTY)
+	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
+	@cp $(CUB_PATH)/$(NAME) .

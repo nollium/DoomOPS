@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/10 12:19:23 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 00:01:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ int	read_cub(char *path, t_list **alst)
 		}
 	}
 	close(fd);
-	return ((!error) ? len : error == -1 || !*alst);
+	if (error < 0 || !*alst)
+		return ((error < 0) ? error : NULL_ERROR);
+	return (len);
 }
 
 int	load_cub(char *path, t_vars *vars)
@@ -109,9 +111,10 @@ int	load_cub(char *path, t_vars *vars)
 	int		len;
 	int		error;
 
+	cub = NULL;
 	if (!ft_strnstr(path + ft_strlen(path) - 4, CONF_FILE_EXTENSION, 4))
 		return (WRONG_EXTENSION_ERROR);
-	vars->map = (t_map){0, 0, 0};
+	vars->map = (t_map){0};
 	if ((len = read_cub(path, &cub)) <= 0)
 		return (FILE_INVALID_ERROR);
 	if ((error = parse_config(cub, vars)) != SUCCESS_CODE)

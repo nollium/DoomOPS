@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 19:56:48 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/11 00:07:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,28 @@
 
 int			load_xpm(t_data *data, char *path, void *mlx)
 {
+	if (!data || !path || check_file(path) != SUCCESS_CODE)
+		return (NULL_ERROR);
+	if (!mlx)
+		return (MLX_ERROR);
 	*data = (t_data){0};
 	data->img = mlx_xpm_file_to_image(mlx, path, &(data->width),
 										&(data->height));
 	if (!data->img)
-		return (-1);
+		return (FILE_INVALID_ERROR);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 									&(data)->line_length, &(data)->endian);
-	return (0);
+	return (SUCCESS_CODE);
 }
 
-void		img_to_text(t_data *data, t_texture *text)
+int			img_to_text(t_data *data, t_texture *text)
 {
 	int	x;
 	int	y;
 
 	x = -1;
-	text->array = malloc(sizeof(int) * data->width * data->height);
+	if (!(text->array = malloc(sizeof(int) * data->width * data->height)))
+		return (MALLOC_ERROR);
 	text->width = data->width;
 	text->height = data->height;
 	while (++x < text->width)
@@ -42,17 +47,25 @@ void		img_to_text(t_data *data, t_texture *text)
 			(data->addr + (y * data->line_length + x *
 			(data->bits_per_pixel / 8)));
 	}
+	return (SUCCESS_CODE);
 }
 
 int			load_texture(t_texture *text, char *path, void *mlx)
 {
-	t_data data;
+	t_data	data;
+	int		error;
 
-	if (load_xpm(&data, path, mlx) == -1)
+	if (check_file(path) != SUCCESS_CODE)
+		return (FILE_INVALID_ERROR);
+	if (!text)
 		return (TEXTURE_ERROR);
-	img_to_text(&data, text);
+	if (load_xpm(&data, path, mlx) != SUCCESS_CODE)
+		return (TEXTURE_ERROR);
+	if (!data.addr || data.height <= 0 || data.width <= 0 || !data.img)
+		return (MLX_ERROR);
+	error = img_to_text(&data, text);
 	mlx_destroy_image(mlx, data.img);
-	return (SUCCESS_CODE);
+	return (error);
 }
 
 /*

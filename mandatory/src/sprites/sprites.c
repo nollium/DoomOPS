@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:04:10 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/11 00:40:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 {
-	register size_t	d;
-	register int	y;
+	ssize_t	denom;
+	int		y;
 
 	y = draw->start_y - 1;
 	while (++y < draw->end_y)
 	{
-		d = (y) * 256 + draw->factor_128;
-		draw->text_y = ((d * draw->text->width)
+		denom = (ssize_t)((y) * 256 + draw->factor_128);
+		draw->text_y = ((denom * draw->text->width)
 						/ (draw->sprite_height) / 256);
-		draw->color = draw->text->array[draw->text->width
-										* draw->text_y + draw->text_x];
+		printf("IN %d %zu %zu %zd, %d %d\n", draw->text->width, draw->text_y, draw->text_x, denom, draw->factor_128, draw->screen->height);
+		draw->color = draw->text->array[(draw->text->width
+		* draw->text_y + draw->text_x)];
+		printf("OUT\n");
 		my_mlx_pixel_put(img, stripe, y, (SHADOW_MODE) ?
 					add_shade(draw->shader, draw->color) : draw->color);
 	}
@@ -56,7 +58,8 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 	int				i;
 	t_sprite		v_sprite;
 	t_sprite_drawer	draw;
-
+	
+	draw = (t_sprite_drawer){0};
 	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
 	draw.screen = &(vars->game_screen);
 	draw.half_win_height = draw.screen->height / 2;

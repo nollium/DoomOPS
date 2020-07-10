@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 19:22:42 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/10 23:19:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 int		load_xpm(t_data *data, char *path, void *mlx);
 int		load_texture(t_texture *text, char *path, void *mlx);
-void	img_to_text(t_data *data, t_texture *text);
+int		img_to_text(t_data *data, t_texture *text);
 
 /*
 **  Reusable conf parsing function

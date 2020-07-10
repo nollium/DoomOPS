@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:56:52 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 17:20:36 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/11 00:42:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_STRUCTS_H
 # define DRAW_STRUCTS_H
 # include "structs.h"
+# include <sys/types.h>
 
 typedef struct	s_drawer
 {
@@ -51,8 +52,8 @@ typedef struct	s_sprite_drawer
 	int			start_y;
 	int			end_x;
 	int			end_y;
-	size_t		text_x;
-	size_t		text_y;
+	ssize_t		text_x;
+	ssize_t		text_y;
 	int			color;
 	double		shader;
 	double		pre_calc1;
