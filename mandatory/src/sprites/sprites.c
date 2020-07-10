@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 00:40:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/11 00:56:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 		denom = (ssize_t)((y) * 256 + draw->factor_128);
 		draw->text_y = ((denom * draw->text->width)
 						/ (draw->sprite_height) / 256);
-		printf("IN %d %zu %zu %zd, %d %d\n", draw->text->width, draw->text_y, draw->text_x, denom, draw->factor_128, draw->screen->height);
 		draw->color = draw->text->array[(draw->text->width
 		* draw->text_y + draw->text_x)];
-		printf("OUT\n");
 		my_mlx_pixel_put(img, stripe, y, (SHADOW_MODE) ?
 					add_shade(draw->shader, draw->color) : draw->color);
 	}
