@@ -6,7 +6,7 @@
 #    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/10 12:30:27 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/10 12:39:29 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ re: fclean all
 
 bonus:
 	$(eval CUB_PATH = $(BONUS_PATH))
-	$(NAME)
+	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
+	@cp $(CUB_PATH)/$(NAME) .
 
 .PHONY: clean fclean
 
