@@ -44,7 +44,7 @@ ifeq ($(UNAME),Darwin)
 	MLX_PATH = $(MLX_OPENGL_PATH)
 	MLX_NAME = libmlx.dylib
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
-	LINKS = -lmlx -L$(MLX_PATH)/
+	LINKS = -L$(MLX_PATH)/
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
 	LOAD_DYLIB = install_name_tool -change $(MLX_PATH)/$(MLX_LIB) $(DIR)/$(MLX_LIB) $(NAME)
