@@ -34,9 +34,9 @@ LIBFT = libft/libftprintf.a
 
 LIB_ARG = 
 
-LINKS = -lmlx
-
 FRAMEWORKS = 
+
+LINKS = 
 
 UNAME = $(shell uname)
 
@@ -44,15 +44,19 @@ ifeq ($(UNAME),Darwin)
 	MLX_PATH = $(MLX_OPENGL_PATH)
 	MLX_NAME = libmlx.dylib
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
-	LINKS = -L$(MLX_PATH)/
+	LINKS = -lmlx -L$(MLX_PATH)/
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
 	LOAD_DYLIB = install_name_tool -change $(MLX_PATH)/$(MLX_LIB) $(DIR)/$(MLX_LIB) $(NAME)
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
+	MLX_NAME = libmlx.a
 	INCLUDES += -I$(MLX_LINUX_PATH)
-	LINKS += -lmlx -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+	LINKS += -L$(MLX_PATH) -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
 endif
+
+
 
 SRC = $(addprefix $(DIRSRC)/, \
 			main.c \
