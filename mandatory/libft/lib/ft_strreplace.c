@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strreplace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:13:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/15 23:32:54 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/10 22:45:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 /*
 **  Replaces all occurences of old in src by new
-**  Returns the number of replaced chars 
+**  Returns the number of replaced chars
 */
 
-int ft_strreplace(char *src, char old, char new)
+int	ft_strreplace(char *src, char old, char new)
 {
 	size_t count;
 	size_t i;
@@ -37,13 +37,13 @@ int ft_strreplace(char *src, char old, char new)
 
 /*
 **  Replaces all occurences of charset's chars in src by new
-**  Returns the number of replaced chars 
+**  Returns the number of replaced chars
 */
 
-int ft_replace_charset(char *src, char *charset,  char new)
+int	ft_replace_charset(char *src, char *charset, char new)
 {
-	size_t i;
-	size_t count;
+	size_t	i;
+	size_t	count;
 
 	i = -1;
 	count = 0;

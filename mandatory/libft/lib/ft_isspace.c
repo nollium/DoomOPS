@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 16:20:46 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/13 16:22:26 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/10 22:43:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isspace(char c)
+int	ft_isspace(char c)
 {
-    return (((9 <= c && c <= 13) || c == ' '));
+	return (((9 <= c && c <= 13) || c == ' '));
 }

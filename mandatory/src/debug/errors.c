@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 18:20:31 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 19:25:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/10 22:39:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	error_print(int error)
 		if (i == -error)
 		{
 			ft_putendl_fd(errors[-error], STDERR);
-			return(error);
+			return (error);
 		}
 	}
 	ft_putendl_fd("UNKNOWN ERROR", STDERR);
