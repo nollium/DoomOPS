@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/10 22:50:03 by user42           ###   ########.fr        #
+#    Updated: 2020/07/11 13:52:18 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,13 @@ all:
 	@cp $(CUB_PATH)/$(NAME) .
 
 clean:
-	$(MAKE) -C $(CUB_PATH) clean
+	$(MAKE) -C $(MANDATORY_PATH) clean
+	$(MAKE) -C $(BONUS_PATH) clean
+
 
 fclean: clean
-	$(MAKE) -C $(CUB_PATH) fclean
+	$(MAKE) -C $(MANDATORY_PATH) fclean
+	$(MAKE) -C $(BONUS_PATH) fclean
 	$(RM) $(NAME) 
 
 lilclean:
@@ -39,7 +42,7 @@ lilclean:
 
 re: fclean all
 
-bonus:
+bonus: fclean
 	$(eval CUB_PATH = $(BONUS_PATH))
 	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
 	@cp $(CUB_PATH)/$(NAME) .
