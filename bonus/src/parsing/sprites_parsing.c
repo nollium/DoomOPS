@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:38:01 by user42            #+#    #+#             */
-/*   Updated: 2020/07/11 21:10:25 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 21:42:24 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_sprite	*alloc_sprites(char **map, int *size)
 	{
 		y = -1;
 		while (map[x][++y])
-			if (map[x][y] == '2' || map[x][y] == '3')
+			if ('2' <= map[x][y] && map[x][y] <= '4')
 				(*size)++;
 	}
 	return (ft_calloc(1 + *size, sizeof(t_sprite)));

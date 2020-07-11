@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 16:42:46 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 22:43:54 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 //# define T_BUFF_SIZE		8
 # define S_BUFF_SIZE		1
+
+# define SPRITE_RADIUS      0.5
+# define ENNEMIES_TEX       6
 
 # ifdef __linux__
 

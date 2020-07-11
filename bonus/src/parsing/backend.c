@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 21:12:55 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 21:40:48 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	parse_config(t_list *cub, t_vars *vars)
 	}
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
-	vars->text_paths[T_BUFF_SIZE + 1] = NULL;
+	vars->text_paths[T_BUFF_SIZE] = NULL;
 	return (SUCCESS_CODE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 16:41:58 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 21:18:10 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ int		mouse_move_handler(t_vars *vars)
 			while (i-- >= 0)
 				turn_right(vars);
 	}
-	if (vars->win_focus && (win_x != vars->game_screen.width / 2 || win_y != vars->game_screen.height / 2)) 
-		mlx_mouse_move(vars->mlx, vars->win, vars->game_screen.height / 2, vars->game_screen.width / 2);
+	if (vars->win_focus && (win_x != vars->game_screen.width / 2
+	|| win_y != vars->game_screen.height / 2)) 
+		mlx_mouse_move(vars->mlx, vars->win,
+		vars->game_screen.height / 2, vars->game_screen.width / 2);
 	else
 		return (0);
-	return (1);	
+	return (1);
 }
 
 int		loop_handler(t_vars *vars)
