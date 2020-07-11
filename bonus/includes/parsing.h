@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 16:03:41 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 20:59:55 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "settings.h"
 
 # define VALID_CONF_IDS		"NSWEFC\n"
-# define VALID_MAP_CHARS	"0123NSEW "
+# define VALID_MAP_CHARS	"01234NSEW "
 # define CONF_FILE_EXTENSION ".cub"
 # define WIN_NAME "cub3D"
 # define STDERR 2

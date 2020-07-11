@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 16:02:50 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 21:12:55 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "S2", 0};
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "S2", "EN", 0};
 	int			i;
 	int			error;
 
@@ -99,6 +99,7 @@ int	read_cub(char *path, t_list **alst)
 			return (MALLOC_ERROR);
 		}
 	}
+	free(line);
 	close(fd);
 	if (error < 0 || !*alst)
 		return ((error < 0) ? error : NULL_ERROR);

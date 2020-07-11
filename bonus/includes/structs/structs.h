@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 16:01:33 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 20:58:58 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 
 # define K_BUFF_SIZE 20
-# define T_BUFF_SIZE 6
+# define T_BUFF_SIZE 7
 
 typedef struct		s_db_point
 {
