@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 00:01:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/11 16:02:50 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", 0};
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "S2", 0};
 	int			i;
 	int			error;
 
@@ -72,7 +72,7 @@ int	parse_config(t_list *cub, t_vars *vars)
 	}
 	if (vars->floor_color < 0 || vars->roof_color < 0)
 		return (COLOR_ERROR);
-	vars->text_paths[5] = NULL;
+	vars->text_paths[T_BUFF_SIZE + 1] = NULL;
 	return (SUCCESS_CODE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 15:21:38 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 16:01:33 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 
 # define K_BUFF_SIZE 20
+# define T_BUFF_SIZE 6
 
 typedef struct		s_db_point
 {
@@ -43,7 +44,7 @@ typedef struct		s_vars
 	t_spawn			spawn;
 	int				floor_color;
 	int				roof_color;
-	char			*text_paths[6];
+	char			*text_paths[T_BUFF_SIZE + 1];
 	int				num_sprites;
 	double			*z_buffer;
 	int				redraw;

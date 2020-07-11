@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 15:17:03 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/11 16:42:46 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "settings.h"
 # include "frontend.h"
 
-# define T_BUFF_SIZE		8
+//# define T_BUFF_SIZE		8
 # define S_BUFF_SIZE		1
 
 # ifdef __linux__
@@ -74,6 +74,8 @@ int		release_handler(int keycode, t_vars *vars);
 
 void    turn_right(t_vars *vars);
 void    turn_left(t_vars *vars);
+
+int		mouse_move_handler(t_vars *vars);
 
 int		forward_handler(t_vars *vars);
 int		backward_handler(t_vars *vars);

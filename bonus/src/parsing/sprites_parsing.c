@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_parsing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:38:01 by user42            #+#    #+#             */
-/*   Updated: 2020/06/30 18:47:26 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/11 16:08:03 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_sprite	*alloc_sprites(char **map, int *size)
 	{
 		y = -1;
 		while (map[x][++y])
-			if (map[x][y] == '2')
+			if (map[x][y] == '2' || map[x][y] == '3')
 				(*size)++;
 	}
 	return (malloc(sizeof(t_sprite) * (1 + *size)));
@@ -46,9 +46,9 @@ int				parse_sprites(t_vars *vars, char **map, int *size)
 	{
 		y = -1;
 		while (map[x][++y])
-			if (map[x][y] == '2')
+			if (map[x][y] == '2' || map[x][y] == '3')
 			{
-				array[i++] = (t_sprite){(double)x + 0.5, (double)y + 0.5, 0, 4};
+				array[i++] = (t_sprite){(double)x + 0.5, (double)y + 0.5, 0, 2 + map[x][y] - '0'};
 				map[x][y] = '0';
 			}
 	}
