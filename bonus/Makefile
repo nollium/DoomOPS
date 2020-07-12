@@ -6,7 +6,7 @@
 #    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/11 14:59:04 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/12 15:51:12 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ SRC = $(addprefix $(DIRSRC)/, \
 			garbage_collection/garbage_collector.c \
 \
 			$(addprefix events/,\
-			loop.c  handlers.c  keyboard_handler.c keyboard.c mouvements.c) \
+			loop.c  handlers.c  keyboard_handler.c keyboard.c mouvements.c ennemies.c) \
 \
 			debug/debug_map.c debug/errors.c \
 		)

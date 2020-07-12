@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 22:43:54 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/12 16:39:04 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 # include "structs/structs.h"
 # include "settings.h"
 # include "frontend.h"
+# include <time.h>
 
-//# define T_BUFF_SIZE		8
+# define FRAME_CAP			60
+
 # define S_BUFF_SIZE		1
 
 # define SPRITE_RADIUS      0.5
 # define ENNEMIES_TEX       6
+# define EN_SPEED           0.005
 
 # ifdef __linux__
 
@@ -85,6 +88,10 @@ int		backward_handler(t_vars *vars);
 int		right_handler(t_vars *vars);
 int		left_handler(t_vars *vars);
 int		alt_handler(t_vars *vars);
+
+double  my_dist(double x0, double y0, double x1, double y1);
+int		sprite_collision(t_sprite *sprites, double x, double y);
+
 
 /*
 ** EVENT DEFINITION

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:38:01 by user42            #+#    #+#             */
-/*   Updated: 2020/07/11 21:42:24 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/12 16:29:02 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				parse_sprites(t_vars *vars, char **map, int *size)
 		while (map[x][++y])
 			if ('2' <= map[x][y] && map[x][y] <= '4')
 			{
-				array[i++] = (t_sprite){(double)x + 0.5, (double)y + 0.5, 0, 2 + map[x][y] - '0'};
+				array[i++] = (t_sprite){(double)x + 0.5, (double)y + 0.5, 0, 2 + map[x][y] - '0', 100};
 				map[x][y] = '0';
 			}
 	}

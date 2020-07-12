@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_structs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:01:39 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/25 17:19:03 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/12 16:29:27 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_sprite
 	double		y;
 	char		seen;
 	int			tex_num;
+	int			hp;
 }				t_sprite;
 
 typedef struct	s_sprites_sorter

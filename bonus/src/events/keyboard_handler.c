@@ -6,29 +6,12 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 22:56:38 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/12 15:43:50 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "garbage_collection.h"
-
-int		sprite_collision(t_sprite *sprites, double x, double y)
-{
-	int	i;
-
-	i = -1;
-	while (sprites[++i].tex_num)
-	{
-		if (sprites[i].tex_num == ENNEMIES_TEX)
-		{
-			if (sqrt((x - sprites[i].x) * (x - sprites[i].x)
-			 + (y - sprites[i].y) * (y - sprites[i].y)) <= SPRITE_RADIUS)
-				return (1);
-		}
-	}
-	return (0);
-}
 
 int		forward_handler(t_vars *vars)
 {

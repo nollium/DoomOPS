@@ -6,7 +6,7 @@
 #    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/11 13:52:18 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/12 16:54:59 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ clean:
 	$(MAKE) -C $(MANDATORY_PATH) clean
 	$(MAKE) -C $(BONUS_PATH) clean
 
+clean_mandatory:
+	$(MAKE) -C $(MANDATORY_PATH) fclean
+	$(RM) $(NAME)
 
 fclean: clean
 	$(MAKE) -C $(MANDATORY_PATH) fclean
@@ -42,7 +45,7 @@ lilclean:
 
 re: fclean all
 
-bonus: fclean
+bonus: clean_mandatory
 	$(eval CUB_PATH = $(BONUS_PATH))
 	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
 	@cp $(CUB_PATH)/$(NAME) .
