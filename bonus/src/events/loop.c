@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 16:50:35 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/12 20:11:24 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,20 @@ int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map)
 	}
 	return (0);
 }
-
+#include "parsing.h"
 int		loop_handler(t_vars *vars)
 {
-	static int		img = 0;
-	static clock_t	t0 = 0;
-	static int		frame_ready = 0;
-	int				i;
+	static int			img = 0;
+	static clock_t		t0 = 0;
+	static int			frame_ready = 0;
+	int					i;
+	static t_texture	image;
+	static int			load = 0;
 
 	i = -1;
+	if (!load)
+		load_texture(&image, "pics/small_gun.xpm", vars->mlx);
+	load = 1;
 	if (!frame_ready)
 	{
 		vars->redraw |= keyboard_handler(vars);
@@ -114,6 +119,7 @@ int		loop_handler(t_vars *vars)
 			vars->redraw |= vars->sprites[i].seen;
 		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
 		draw_scene(vars);
+		draw_text(&image, vars->img, vars->img->width / 2 - image.width / 2, vars->img->height - image.height);
 		frame_ready = 1;
 	}
 	if (vars->redraw || clock() - t0 >= CLOCKS_PER_SEC / FRAME_CAP)

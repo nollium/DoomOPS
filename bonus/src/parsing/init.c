@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 19:23:41 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:42:14 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	init_keys_buffer(t_keys *keys)
 
 	i = -1;
 	while (++i < K_BUFF_SIZE)
-		keys[i] = (t_keys){-1, 0};
+		keys[i] = (typeof(keys[i])){-1, 0};
 }
 
 int			init_vars(char *path, t_vars *vars, int save)
