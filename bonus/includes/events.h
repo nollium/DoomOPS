@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 16:39:04 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 01:01:57 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@
 # define SPRITE_RADIUS      0.5
 # define ENNEMIES_TEX       6
 # define EN_SPEED           0.005
+
+# define LEFT_CLICK			1
+# define MIDDLE_CLICK		2
+# define RIGHT_CLICK		3
+
+# define SHOT_COOLDOWN		0.2
+# define SHOT_DURATION		0.25
+
+# define ESC_KEY			65307
 
 # ifdef __linux__
 
@@ -71,6 +80,10 @@ t_keys	*key_chr(t_keys *arr, int keycode, size_t size);
 /*
 ** EVENT HANDLERS
 */
+
+int		mouse_press_handler(int keycode, int x, int y, t_vars *vars);
+int		mouse_release_handler(int keycode, int x, int y, t_vars *vars);
+
 
 int		keyboard_handler(t_vars *vars);
 void	hooks(t_vars *vars);

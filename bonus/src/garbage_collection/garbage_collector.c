@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/10 23:35:43 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/12 23:22:37 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ void	free_vars(t_vars *vars)
 	free_split(&(vars->map.array));
 	free_textures(&(vars->text));
 	free(vars->sprites);
+	free(vars->gun.array);
 	free(vars->z_buffer);
 	while (vars->text_paths[++i])
 		free(vars->text_paths[i]);
+	*vars = (t_vars){};
 }
 
 void	free_cub(t_list **alst)

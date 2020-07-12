@@ -6,19 +6,30 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 16:48:33 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 00:07:50 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "garbage_collection.h"
 
+int		mouse_press_handler(int keycode, int x, int y, t_vars *vars)
+{
+	(void)(x && y);
+	return (key_handler(keycode, vars));
+}
+
+int		mouse_release_handler(int keycode, int x, int y, t_vars *vars)
+{
+	(void)(x && y);
+	return (release_handler(keycode, vars));
+}
+
 int		key_handler(int keycode, t_vars *vars)
 {
 	int i;
 
-	i = -1;
-	if (keycode == 65307)
+	if (keycode == ESC_KEY)
 	{
 		free_vars(vars);
 		exit(0);

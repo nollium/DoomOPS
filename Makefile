@@ -6,7 +6,7 @@
 #    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/12 16:54:59 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/12 23:21:14 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,8 @@ opti:
 	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
 	@cp $(CUB_PATH)/$(NAME) .
 
-debug:
+debug: fclean
 	$(eval MAKE_ARGS += debug)
-	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
-	@cp $(CUB_PATH)/$(NAME) .
 
 QWERTY:
 	$(eval MAKE_ARGS += QWERTY)

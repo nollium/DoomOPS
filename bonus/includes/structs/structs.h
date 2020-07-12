@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 22:40:45 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 00:16:05 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct		s_vars
 	t_keys			keys[K_BUFF_SIZE + 1];
 	t_texture		*text;
 	t_sprite		*sprites;
+	t_texture		gun;
+	t_texture		flash;
 	t_spawn			spawn;
 	int				floor_color;
 	int				roof_color;
@@ -50,6 +52,7 @@ typedef struct		s_vars
 	int				redraw;
 	int				seen_sprite;
 	int				win_focus;
+	int				draw_shot;
 }					t_vars;
 
 typedef struct		s_bfh

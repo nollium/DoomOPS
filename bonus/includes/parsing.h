@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 21:36:48 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 00:16:30 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "../libft/libftprintf.h"
 # include "garbage_collection.h"
 # include "settings.h"
+
+# define GUN_PATH   "pics/small_gun.xpm"
+# define FLASH_PATH "pics/flash.xpm"
 
 # define VALID_CONF_IDS		"NSWEFC\n"
 # define VALID_MAP_CHARS	"01234NSEW "

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 20:11:24 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 01:17:42 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ void	hooks(t_vars *vars)
 	mlx_hook(vars->win, KEY_PRESS, KEYPRESS_MASK, key_handler, (void *)vars);
 	mlx_hook(vars->win, KEY_RELEASE, KEYRELEASE_MASK, release_handler,
 			(void *)vars);
-	mlx_hook(vars->win, FOCUS_IN, FOCUS_CHANGE_MASK, focus_in_handler, (void *)vars);
-	mlx_hook(vars->win, FOCUS_OUT, FOCUS_CHANGE_MASK, focus_out_handler, (void *)vars);
+	mlx_hook(vars->win, BUTTON_PRESS, BUTTONPRESS_MASK,
+			mouse_press_handler, (void *)vars);
+	mlx_hook(vars->win, BUTTON_RELEASE, BUTTONRELEASE_MASK,
+			mouse_release_handler, (void *)vars);
+	mlx_hook(vars->win, FOCUS_IN, FOCUS_CHANGE_MASK, focus_in_handler, vars);
+	mlx_hook(vars->win, FOCUS_OUT, FOCUS_CHANGE_MASK, focus_out_handler, vars);
 	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 }
 
@@ -44,6 +48,8 @@ int		mouse_move_handler(t_vars *vars)
 	int	returned;
 	int	i;
 	
+	if (!vars->win_focus)
+		return (0);
 	returned = mlx_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
 	if (((i = win_x - vars->game_screen.width / 2)) != 0)
 	{
@@ -55,12 +61,10 @@ int		mouse_move_handler(t_vars *vars)
 			while (i-- >= 0)
 				turn_right(vars);
 	}
-	if (vars->win_focus && (win_x != vars->game_screen.width / 2
-	|| win_y != vars->game_screen.height / 2)) 
+	if (win_x != vars->game_screen.width / 2
+	|| win_y != vars->game_screen.height / 2)
 		mlx_mouse_move(vars->mlx, vars->win,
 		vars->game_screen.width / 2, vars->game_screen.height / 2);
-	else
-		return (0);
 	return (1);
 }
 
@@ -105,13 +109,8 @@ int		loop_handler(t_vars *vars)
 	static clock_t		t0 = 0;
 	static int			frame_ready = 0;
 	int					i;
-	static t_texture	image;
-	static int			load = 0;
 
 	i = -1;
-	if (!load)
-		load_texture(&image, "pics/small_gun.xpm", vars->mlx);
-	load = 1;
 	if (!frame_ready)
 	{
 		vars->redraw |= keyboard_handler(vars);
@@ -119,7 +118,9 @@ int		loop_handler(t_vars *vars)
 			vars->redraw |= vars->sprites[i].seen;
 		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
 		draw_scene(vars);
-		draw_text(&image, vars->img, vars->img->width / 2 - image.width / 2, vars->img->height - image.height);
+		if (vars->draw_shot)
+			draw_text(&(vars->flash), vars->img, vars->img->width / 2 - vars->flash.width / 2 + 60, vars->img->height - vars->gun.height - vars->flash.height / 2);
+		draw_text(&(vars->gun), vars->img, vars->img->width / 2 - (vars->gun).width / 2, vars->img->height - (vars->gun).height);
 		frame_ready = 1;
 	}
 	if (vars->redraw || clock() - t0 >= CLOCKS_PER_SEC / FRAME_CAP)

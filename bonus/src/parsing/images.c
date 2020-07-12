@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 21:31:00 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/12 20:58:48 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			load_xpm(t_data *data, char *path, void *mlx)
 		return (NULL_ERROR);
 	if (!mlx)
 		return (MLX_ERROR);
-	*data = (t_data){0};
+	*data = (t_data){};
 	data->img = mlx_xpm_file_to_image(mlx, path, &(data->width),
 										&(data->height));
 	if (!data->img)
@@ -35,6 +35,7 @@ int			img_to_text(t_data *data, t_texture *text)
 	int	y;
 
 	x = -1;
+	*text = (t_texture){};
 	if (!(text->array = malloc(sizeof(int) * data->width * data->height)))
 		return (MALLOC_ERROR);
 	text->width = data->width;
@@ -55,6 +56,7 @@ int			load_texture(t_texture *text, char *path, void *mlx)
 	t_data	data;
 	int		error;
 
+	*text = (t_texture){};
 	if (check_file(path) != SUCCESS_CODE)
 		return (FILE_INVALID_ERROR);
 	if (!text)

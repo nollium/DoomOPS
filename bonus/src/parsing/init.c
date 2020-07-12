@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 18:42:14 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 00:20:08 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int			init_textures(t_vars *vars)
 
 	text_paths = vars->text_paths;
 	i = -1;
+	if (load_texture(&(vars->gun), GUN_PATH, vars->mlx) != SUCCESS_CODE
+		|| load_texture(&(vars->flash), FLASH_PATH, vars->mlx) != SUCCESS_CODE)
+		return (TEXTURE_ERROR);
 	while (text_paths[++i])
 		;
 	if (!(vars->text = malloc(sizeof(t_texture) * (i + 1))))
