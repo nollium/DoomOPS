@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 00:16:05 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 19:02:33 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_vars
 	int				seen_sprite;
 	int				win_focus;
 	int				draw_shot;
+	int				frame_ready;
 }					t_vars;
 
 typedef struct		s_bfh

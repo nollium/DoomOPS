@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   frontend.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:39:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/04 16:24:38 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/13 17:59:56 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRONTEND_H
 # define FRONTEND_H
+
 # include "structs/structs.h"
 # include "settings.h"
+
 # define TRANS_COLOR		0x00000001
 
 # define WALL_COLOR			0x00AAAAAA

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:06:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/13 19:50:11 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
 
-static void	swap_sprites(t_sprites_sorter *sprite_1, t_sprites_sorter *sprite_2)
+void		swap_sprites(t_sprites_sorter *sprite_1, t_sprites_sorter *sprite_2)
 {
 	t_sprites_sorter	tmp;
 

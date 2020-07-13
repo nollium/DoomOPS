@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 01:01:57 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 17:03:24 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define MIDDLE_CLICK		2
 # define RIGHT_CLICK		3
 
-# define SHOT_COOLDOWN		0.2
-# define SHOT_DURATION		0.25
+# define SHOT_COOLDOWN		0.20
+# define SHOT_DURATION		0.20
 
 # define ESC_KEY			65307
 
@@ -91,8 +91,8 @@ int		loop_handler(t_vars *vars);
 int		key_handler(int keycode, t_vars *vars);
 int		release_handler(int keycode, t_vars *vars);
 
-void    turn_right(t_vars *vars);
-void    turn_left(t_vars *vars);
+void	turn_right(t_vars *vars);
+void	turn_left(t_vars *vars);
 
 int		mouse_move_handler(t_vars *vars);
 
@@ -102,9 +102,15 @@ int		right_handler(t_vars *vars);
 int		left_handler(t_vars *vars);
 int		alt_handler(t_vars *vars);
 
-double  my_dist(double x0, double y0, double x1, double y1);
-int		sprite_collision(t_sprite *sprites, double x, double y);
 
+/*
+** ENNEMIES
+*/
+
+void	move_ennemy(t_sprite *sprite, t_camera *cam, char **map);
+int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map);
+double	my_dist(double x0, double y0, double x1, double y1);
+int		sprite_collision(t_sprite *sprites, double x, double y);
 
 /*
 ** EVENT DEFINITION

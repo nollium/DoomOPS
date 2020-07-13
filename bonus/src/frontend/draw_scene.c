@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:20:06 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:43:05 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/13 18:35:15 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,23 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 {
 	while (++draw->y < draw->screen->height)
 	{
-		if (draw->start <= draw->y && draw->y <= draw->end)
+		if (draw->roof_color != 0 &&
+			SHADOW_MODE && draw->y <= draw->start && draw->roof_color != 0)
+			draw->color = add_shade((double)draw->y * 2.3 /
+				(double)draw->screen->height , draw->roof_color);
+		while (draw->start <= draw->y && draw->y < draw->end)
 		{
 			get_color(draw, &(vars->text[draw->side]));
-			if (SHADOW_MODE)
+			if (SHADOW_MODE && draw->color != 0)
 				draw->color = add_shade(((double)draw->dist / 16 * 2),
 				draw->color);
+			draw->y++;
+			my_mlx_pixel_put(vars->img, draw->x, draw->y, draw->color);
 		}
-		if (draw->y > draw->end)
+		if (draw->y >= draw->end )
 		{
 			draw->color = draw->floor_color;
-			if (SHADOW_MODE)
+			if (SHADOW_MODE && draw->color != 0)
 				draw->color = add_shade(1.05 / ((double)draw->y * 2.15
 				/ (double)((draw->screen->height))), draw->color);
 		}

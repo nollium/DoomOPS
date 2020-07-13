@@ -6,12 +6,13 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 01:17:42 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 17:05:41 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "mlx_int.h"
+#include "parsing.h"
 
 int		focus_in_handler(t_vars *vars)
 {
@@ -68,69 +69,36 @@ int		mouse_move_handler(t_vars *vars)
 	return (1);
 }
 
-void	move_ennemy(t_sprite *sprite, t_camera *cam, char **map)
+int		refresh(t_vars *vars)
 {
-	double	v[2];
-	double	new_pos[2];
-	
-	ft_bzero(v, sizeof(v));
-	if (sprite->x < cam->x)
-		v[0] = EN_SPEED;
-	else if (sprite->x > cam->x)
-		v[0] = -EN_SPEED;
-	if (sprite->y < cam->y)
-		v[1] = EN_SPEED;
-	else if (sprite->y > cam->y)
-		v[1] = -EN_SPEED;
-	new_pos[0] = sprite->x + v[0];
-	new_pos[1] = sprite->y + v[1];	
-	if (map[(int)new_pos[0]][(int)sprite->y] == VOID && my_dist(new_pos[0], sprite->y, cam->x, cam->y) > SPRITE_RADIUS)
-		sprite->x = new_pos[0];
-	if (map[(int)sprite->x][(int)new_pos[1]] == VOID && my_dist(sprite->x, new_pos[1], cam->x, cam->y) > SPRITE_RADIUS)
-		sprite->y = new_pos[1];
+	static clock_t	t0 = 0;
+	static int		img = 0;
+
+	if (clock() - t0 < CLOCKS_PER_SEC / FRAME_CAP || !(vars->frame_ready))
+		return (0);
+	t0 = clock();
+	mlx_put_image_to_window(vars->mlx, vars->win, (vars->img)->img, 0, 0);
+	vars->img = vars->img2 + img;
+	img = (img) ? 0 : 1;
+	vars->redraw = 0;
+	vars->frame_ready = 0;
+	return (1);
 }
 
-int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map)
-{
-	int	i;
-
-	i = -1;
-	while (sprites[++i].tex_num)
-	{
-		if (sprites[i].tex_num == ENNEMIES_TEX)
-			move_ennemy(sprites + i, cam, map);
-	}
-	return (0);
-}
-#include "parsing.h"
 int		loop_handler(t_vars *vars)
 {
-	static int			img = 0;
-	static clock_t		t0 = 0;
-	static int			frame_ready = 0;
-	int					i;
-
-	i = -1;
-	if (!frame_ready)
+	if (!(vars->frame_ready))
 	{
 		vars->redraw |= keyboard_handler(vars);
-		while (++i < vars->num_sprites)
-			vars->redraw |= vars->sprites[i].seen;
+		vars->redraw = 1;
 		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
 		draw_scene(vars);
 		if (vars->draw_shot)
-			draw_text(&(vars->flash), vars->img, vars->img->width / 2 - vars->flash.width / 2 + 60, vars->img->height - vars->gun.height - vars->flash.height / 2);
-		draw_text(&(vars->gun), vars->img, vars->img->width / 2 - (vars->gun).width / 2, vars->img->height - (vars->gun).height);
-		frame_ready = 1;
+			draw_text(&(vars->flash), vars->img, vars->flash.x, vars->flash.y);
+		draw_text(&(vars->gun), vars->img, vars->gun.x, vars->gun.y);
+		vars->frame_ready = 1;
 	}
-	if (vars->redraw || clock() - t0 >= CLOCKS_PER_SEC / FRAME_CAP)
-	{
-		t0 = clock();
-		mlx_put_image_to_window(vars->mlx, vars->win, (vars->img)->img, 0, 0);
-		vars->img = vars->img2 + img;
-		img = (img) ? 0 : 1;
-		vars->redraw = 0;
-		frame_ready = 0;
-	}
+	if (vars->redraw)
+		refresh(vars);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 00:56:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/13 19:48:09 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		draw_sprites(t_sprite_drawer *draw, t_sprite *sprites,
 	int	stripe;
 
 	stripe = draw->start_x - 1;
+	sprites[draw->sprite_index].seen = 0;
 	while (++stripe < draw->end_x)
 	{
 		draw->text_x = (int)(stripe * draw->pre_calc1 + draw->pre_calc2);
@@ -45,8 +46,6 @@ void		draw_sprites(t_sprite_drawer *draw, t_sprite *sprites,
 			draw_sprite_pxl(draw, stripe, img);
 			sprites[draw->sprite_index].seen = 1;
 		}
-		else
-			sprites[draw->sprite_index].seen = 0;
 	}
 }
 
@@ -57,7 +56,7 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 	t_sprite		v_sprite;
 	t_sprite_drawer	draw;
 	
-	draw = (t_sprite_drawer){0};
+	draw = (t_sprite_drawer){};
 	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
 	draw.screen = &(vars->game_screen);
 	draw.half_win_height = draw.screen->height / 2;
@@ -65,16 +64,19 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 	i = -1;
 	while (++i < vars->num_sprites)
 	{
-		draw.sprite_index = sprites_srt[i].sprite_order;
-		v_sprite = sprites[draw.sprite_index];
-		v_sprite.x -= cam->x;
-		v_sprite.y -= cam->y;
-		draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
-		if (draw.dist < 8 || !SHADOW_MODE)
+		if ((sprites[i]).hp > 0)
 		{
-			init_sprite_drawing(&draw, cam, &v_sprite,
-								vars->text + v_sprite.tex_num);
-			draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
+			draw.sprite_index = sprites_srt[i].sprite_order;
+			v_sprite = sprites[draw.sprite_index];
+			v_sprite.x -= cam->x;
+			v_sprite.y -= cam->y;
+			draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
+			if (draw.dist < 8 || !SHADOW_MODE)
+			{
+				init_sprite_drawing(&draw, cam, &v_sprite,
+									vars->text + v_sprite.tex_num);
+				draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 23:22:37 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 19:08:45 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	free_vars(t_vars *vars)
 	free_textures(&(vars->text));
 	free(vars->sprites);
 	free(vars->gun.array);
+	free(vars->flash.array);
 	free(vars->z_buffer);
 	while (vars->text_paths[++i])
 		free(vars->text_paths[i]);

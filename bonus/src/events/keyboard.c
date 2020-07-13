@@ -6,12 +6,47 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 01:01:24 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 19:53:14 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "garbage_collection.h"
+#include "sprites.h"
+
+int				shoot_sprites(t_sprite *sprites, t_camera *cam, int *n_sprites)
+{
+	int		i;
+	double	min_dist;
+	double	dist;
+	int		min_i;
+	
+	i = -1;
+	min_dist = -1;
+	min_i = -1;
+	while (++i < *n_sprites)
+	{
+		if (sprites[i].hp > 0 && sprites[i].seen && sprites[i].tex_num
+			== ENNEMIES_TEX)
+		{
+			dist = my_dist(sprites[i].x, sprites[i].y, cam->x, cam->y);
+			if (min_dist == -1 || dist < min_dist)
+			{
+				min_dist = dist;
+				min_i = i;	
+			}
+		}
+	}
+	if (min_i == -1 || min_dist == -1)
+		return (0);
+	sprites[min_i].hp -= 11;
+	if (sprites[min_i].hp < 0)
+	{
+		swap_sprites(sprites + min_i, sprites + *n_sprites);
+		(*n_sprites)--;
+	}
+	return (1);
+}
 
 int				click_handler(t_vars *vars)
 {
@@ -20,19 +55,19 @@ int				click_handler(t_vars *vars)
 	static int		released = 1;
 	
 	elapsed = (double)(clock() - last_shot) / (double)CLOCKS_PER_SEC;
-	if (!key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE))
+	if (!released && !key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE))
 		released = 1;
-	if (key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE) && elapsed > (double)SHOT_DURATION
-	&& released)
+	if (key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE)
+		&& elapsed > (double)SHOT_DURATION && released)
 	{
 		released = 0;
 		if (elapsed > (double)SHOT_DURATION + (double)SHOT_COOLDOWN)
 		{
 			last_shot = clock();
 			vars->draw_shot = 1;
+			shoot_sprites(vars->sprites, &(vars->cam), &(vars->num_sprites));
 			return (1);
 		}
-		
 	}
 	if (elapsed > (double)SHOT_DURATION && vars->draw_shot)
 	{

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 00:20:08 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 16:37:07 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,21 @@ static void	init_keys_buffer(t_keys *keys)
 		keys[i] = (typeof(keys[i])){-1, 0};
 }
 
+static int	init_2(t_vars *vars)
+{
+	int	error;
+
+	if ((error = init_textures(vars)) != SUCCESS_CODE)
+		return (error);
+	(vars->gun).x = vars->game_screen.width / 2 - (vars->gun.width) / 2;
+	(vars->gun).y = vars->game_screen.height - (vars->gun).height;
+	(vars->flash).x = vars->game_screen.width / 2 - vars->flash.width / 2;
+	(vars->flash).x += 60;
+	(vars->flash).y = vars->game_screen.height - vars->gun.height
+					- vars->flash.height / 2;
+	return (SUCCESS_CODE);
+}
+
 int			init_vars(char *path, t_vars *vars, int save)
 {
 	int				error;
@@ -109,5 +124,5 @@ int			init_vars(char *path, t_vars *vars, int save)
 	if ((error = init_img(vars->mlx, vars->game_screen.width,
 		vars->game_screen.height, vars->img2 + 1)) != SUCCESS_CODE)
 		return (error_print(error));
-	return (error_print(init_textures(vars)));
+	return (error_print(init_2(vars)));
 }
