@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 15:43:58 by dirty             #+#    #+#             */
-/*   Updated: 2020/07/14 18:57:55 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 23:43:13 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ double  my_dist(double x0, double y0, double x1, double y1)
     return (sqrt((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1)));
 }
 
-int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y)
+int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y,
+						int n)
 {
 	int		i;
 
 	i = -1;
-	while (sprites[++i].tex_num)
+	while (++i < n)
 	{
 		if (sprites[i].tex_num == ENNEMIES_TEX && sprites + i != curr)
 		{
@@ -34,12 +35,12 @@ int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y)
 	return (0);
 }
 
-int		sprite_collision(t_sprite *sprites, double x, double y)
+int		sprite_collision(t_sprite *sprites, double x, double y, int n)
 {
 	int		i;
 
 	i = -1;
-	while (sprites[++i].tex_num)
+	while (++i < n)
 	{
 		if (sprites[i].tex_num == ENNEMIES_TEX)
 		{
@@ -64,7 +65,7 @@ int		player_hit(t_camera *cam)
 }
 
 void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
-					char **map)
+					char **map, int n)
 {
 	double	new_pos[2];
 	int		hit_x;
@@ -73,31 +74,36 @@ void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
 	ft_bzero(new_pos, sizeof(new_pos));
 	hit_x = 0;
 	hit_y = 0;
-	if (sprite->x != cam->x)
+	if (cam->x - 0.04 <= sprite->x && sprite->x <= cam->x + 0.04)
+		new_pos[0] = cam->x;
+	else
 		new_pos[0] = sprite->x + EN_SPEED * ((sprite->x > cam->x) ? -1 : 1);
-	if (sprite->y != cam->y)
+	if (cam->y - 0.1 <= sprite->y && sprite->y <= cam->y + 0.1)
+		new_pos[1] = cam->y;
+	else
 		new_pos[1] = sprite->y + EN_SPEED * ((sprite->y > cam->y) ? -1 : 1);
 	if (map[(int)(new_pos[0])][(int)(sprite->y)] == VOID
-&& !(s_s_collision(lst_sprites, sprite, new_pos[0] + 0.5, sprite->y + 0.5))
+&& !(s_s_collision(lst_sprites, sprite, new_pos[0] + 0.5, sprite->y + 0.5, n))
 && !(hit_x = !(my_dist(new_pos[0], sprite->y, cam->x, cam->y) > SPRITE_RADIUS)))
 		sprite->x = new_pos[0];
 	if (map[(int)(sprite->x)][(int)(new_pos[1])] == VOID
-&& !(s_s_collision(lst_sprites, sprite, sprite->x + 0.5, new_pos[1] + 0.5))
+&& !(s_s_collision(lst_sprites, sprite, sprite->x + 0.5, new_pos[1] + 0.5, n))
 && !(hit_y = !(my_dist(sprite->x, new_pos[1], cam->x, cam->y) > SPRITE_RADIUS)))
 		sprite->y = new_pos[1];
-	if (hit_x || hit_y)
+	if (!GOD_MODE && (hit_x || hit_y))
 		player_hit(cam);
 }
 
-int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map)
+int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map,
+		int n_sprites)
 {
 	int	i;
 
 	i = -1;
-	while (sprites[++i].tex_num)
+	while (++i < n_sprites / 2)
 	{
 		if (sprites[i].tex_num == ENNEMIES_TEX)
-			move_ennemy(sprites, sprites + i, cam, map);
+			move_ennemy(sprites, sprites + i, cam, map, n_sprites / 2);
 	}
 	return (0);
 }

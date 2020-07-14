@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 16:02:58 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 23:41:14 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int		loop_handler(t_vars *vars)
 	{
 		vars->redraw |= keyboard_handler(vars);
 		vars->redraw = 1;
-		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
+		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array,
+							vars->num_sprites);
 		if (vars->cam.hp < 0)
 		{
 			free_vars(vars);

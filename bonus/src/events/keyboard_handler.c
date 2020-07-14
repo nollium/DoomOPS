@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 15:43:50 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 23:21:55 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ int		forward_handler(t_vars *vars)
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
-		&& !sprite_collision(vars->sprites, next_x, vars->cam.y))
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y,
+		vars->num_sprites))
 			vars->cam.x += vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
-		&& !sprite_collision(vars->sprites, vars->cam.x, next_y))
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y,
+			vars->num_sprites))
 			vars->cam.y += vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
@@ -43,10 +45,12 @@ int		backward_handler(t_vars *vars)
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
-		&& !sprite_collision(vars->sprites, next_x, vars->cam.y))
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y,
+		vars->num_sprites))
 			vars->cam.x -= vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
-		&& !sprite_collision(vars->sprites, vars->cam.x, next_y))
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y,
+		vars->num_sprites))
 			vars->cam.y -= vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}

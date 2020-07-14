@@ -3,28 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:41:36 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:05:55 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/14 23:52:23 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
 
-void		init_sprites_info(t_vars *vars, t_sprites_sorter *sprites_srt)
+void		init_sprites_info(t_camera *cam, t_sprite *sprites, int n)
 {
-	register int		i;
-
-	i = -1;
-	while (++i < vars->num_sprites)
-		sprites_srt[i] = (t_sprites_sorter)
-		{i, ((vars->cam.x - vars->sprites[i].x)
-			* (vars->cam.x - vars->sprites[i].x)
-			+ (vars->cam.y - vars->sprites[i].y)
-			* (vars->cam.y - vars->sprites[i].y))
-		};
-	sort_sprites(vars->num_sprites, sprites_srt);
+	sort_sprites(cam, sprites, n);
 }
 
 static void	get_stripe_size(t_sprite_drawer *draw)

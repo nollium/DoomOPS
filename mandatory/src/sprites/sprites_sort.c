@@ -3,29 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:06:39 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/14 23:58:08 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
 
-static void	swap_sprites(t_sprites_sorter *sprite_1, t_sprites_sorter *sprite_2)
+static void		swap_sprites(t_sprite *sprite_1, t_sprite *sprite_2)
 {
-	t_sprites_sorter	tmp;
+	t_sprite	tmp;
 
 	tmp = *sprite_1;
 	*sprite_1 = *sprite_2;
 	*sprite_2 = tmp;
 }
 
+static double	s_dist(t_camera *cam, t_sprite *sprite)
+{
+	return (((cam->x - sprite->x)
+			* (cam->x - sprite->x)
+			+ (cam->y - sprite->y)
+			* (cam->y - sprite->y)));
+}
+
 /*
 **	Insertion sort
 */
 
-void		sort_sprites(int n, t_sprites_sorter *arr)
+void		sort_sprites(t_camera *cam, t_sprite *arr, int n)
 {
 	int	i;
 	int	j;
@@ -34,7 +42,7 @@ void		sort_sprites(int n, t_sprites_sorter *arr)
 	while (i < n)
 	{
 		j = i;
-		while (j > 0 && arr[j - 1].sprite_distance < arr[j].sprite_distance)
+		while (j > 0 && s_dist(cam, arr + j - 1) < arr[j]
 		{
 			swap_sprites(arr + j, arr + j - 1);
 			j--;
