@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/12 20:58:48 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 21:06:17 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int			load_texture(t_texture *text, char *path, void *mlx)
 		return (TEXTURE_ERROR);
 	if (!data.addr || data.height <= 0 || data.width <= 0 || !data.img)
 		return (MLX_ERROR);
-	error = img_to_text(&data, text);
+	if ((error = img_to_text(&data, text)) != SUCCESS_CODE)
+		*text = (t_texture){};
 	mlx_destroy_image(mlx, data.img);
 	return (error);
 }

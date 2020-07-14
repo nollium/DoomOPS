@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 17:03:24 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 19:47:54 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@
 
 # define S_BUFF_SIZE		1
 
-# define SPRITE_RADIUS      0.5
-# define ENNEMIES_TEX       6
-# define EN_SPEED           0.005
+# define SPRITE_RADIUS		0.5
+
+# define ENNEMIES_TEX		6
+# define EN_SPEED			0.035
+# define EN_HEALTH          10
 
 # define LEFT_CLICK			1
 # define MIDDLE_CLICK		2
@@ -32,10 +34,26 @@
 
 # define SHOT_COOLDOWN		0.20
 # define SHOT_DURATION		0.20
+# define GUN_DAMAGE         5
+
+# define DAMAGE_COOLDOWN    1
 
 # define ESC_KEY			65307
 
+# define GUNSHOT_PATH "gunshot.wav"
+
+# define DEATH_SOUND    "death.wav"
+# define MUSIC_PATH "music.wav"
+# define OPTIONS    " 2>/dev/null"
+# define BACKGROUND " &"
+
 # ifdef __linux__
+
+#  define LINUX 1
+#  define OSX 0
+#  define MIXER_COMMAND "amixer set Master 50% 2> /dev/null"
+#  define PLAYER        "aplay"
+#  define KILL_COMMAND  "killall"
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
@@ -61,6 +79,13 @@
 
 # ifdef __APPLE__
 
+#  define OSX 1
+#  define LINUX 0
+
+#  define MIXER_COMMAND "echo NO MIXER"
+#  define PLAYER        "afplay"
+#  define KILL_COMMAND  "killall"
+
 #  define FORWARD_KEY		13
 #  define BACKWARD_KEY		1
 #  define LEFT_KEY			0
@@ -70,6 +95,8 @@
 #  define C_KEY				8
 
 # endif
+
+int		main(int argc, char **argv);
 
 /*
 ** BACKEND
@@ -107,7 +134,8 @@ int		alt_handler(t_vars *vars);
 ** ENNEMIES
 */
 
-void	move_ennemy(t_sprite *sprite, t_camera *cam, char **map);
+void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
+                    char **map);
 int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map);
 double	my_dist(double x0, double y0, double x1, double y1);
 int		sprite_collision(t_sprite *sprites, double x, double y);

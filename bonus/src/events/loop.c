@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 17:05:41 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 16:02:58 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,24 @@ int		refresh(t_vars *vars)
 
 int		loop_handler(t_vars *vars)
 {
+	static char *str[] = {"cub3D", "maps/map.cub"};
+
 	if (!(vars->frame_ready))
 	{
 		vars->redraw |= keyboard_handler(vars);
 		vars->redraw = 1;
 		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
+		if (vars->cam.hp < 0)
+		{
+			free_vars(vars);
+			main(2, str);
+			exit(0);
+		}
 		draw_scene(vars);
 		if (vars->draw_shot)
 			draw_text(&(vars->flash), vars->img, vars->flash.x, vars->flash.y);
 		draw_text(&(vars->gun), vars->img, vars->gun.x, vars->gun.y);
+		draw_text(vars->health_bars + vars->cam.hp, vars->img, 0, 0);
 		vars->frame_ready = 1;
 	}
 	if (vars->redraw)

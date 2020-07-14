@@ -6,12 +6,13 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 19:08:45 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 19:47:24 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "garbage_collection.h"
 #include "libftprintf.h"
+#include "events.h"
 
 void	free_str(char **str)
 {
@@ -71,9 +72,14 @@ void	free_vars(t_vars *vars)
 	free(vars->gun.array);
 	free(vars->flash.array);
 	free(vars->z_buffer);
+	while (++i < N_BARS)
+		free((vars->health_bars[i]).array);
+	i = -1;
 	while (vars->text_paths[++i])
 		free(vars->text_paths[i]);
 	*vars = (t_vars){};
+	system("(" KILL_COMMAND " " PLAYER " )" OPTIONS);
+	system("(" PLAYER " " DEATH_SOUND BACKGROUND ") "  OPTIONS);
 }
 
 void	free_cub(t_list **alst)

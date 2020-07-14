@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 19:53:14 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 19:27:15 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ int				shoot_sprites(t_sprite *sprites, t_camera *cam, int *n_sprites)
 			{
 				min_dist = dist;
 				min_i = i;	
+		
 			}
 		}
 	}
 	if (min_i == -1 || min_dist == -1)
 		return (0);
-	sprites[min_i].hp -= 11;
-	if (sprites[min_i].hp < 0)
+	sprites[min_i].hp -= GUN_DAMAGE;
+	if (sprites[min_i].hp <= 0)
 	{
 		swap_sprites(sprites + min_i, sprites + *n_sprites);
 		(*n_sprites)--;
@@ -65,6 +66,7 @@ int				click_handler(t_vars *vars)
 		{
 			last_shot = clock();
 			vars->draw_shot = 1;
+			system("(" PLAYER " " GUNSHOT_PATH BACKGROUND ") "  OPTIONS);
 			shoot_sprites(vars->sprites, &(vars->cam), &(vars->num_sprites));
 			return (1);
 		}

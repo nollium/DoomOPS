@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 00:16:30 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 23:51:30 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 
 # define GUN_PATH   "pics/small_gun.xpm"
 # define FLASH_PATH "pics/flash.xpm"
+
+# define BAR_1_PATH "pics/bars/bar_2_.xpm"
+# define BAR_2_PATH	"pics/bars/bar_3_.xpm"
+# define BAR_3_PATH	"pics/bars/bar_4_.xpm"
+# define BAR_4_PATH	"pics/bars/bar_5_.xpm"
+# define BAR_5_PATH	"pics/bars/bar_6_.xpm"
+# define BAR_6_PATH	"pics/bars/bar_7_.xpm"
 
 # define VALID_CONF_IDS		"NSWEFC\n"
 # define VALID_MAP_CHARS	"01234NSEW "

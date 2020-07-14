@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 19:02:33 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/13 21:10:22 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define K_BUFF_SIZE 20
 # define T_BUFF_SIZE 8
+# define N_BARS		6
 
 typedef struct		s_db_point
 {
@@ -54,6 +55,8 @@ typedef struct		s_vars
 	int				win_focus;
 	int				draw_shot;
 	int				frame_ready;
+	t_texture		health_bars[N_BARS];
+	int				hp;
 }					t_vars;
 
 typedef struct		s_bfh

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 19:48:09 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/14 19:27:15 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,16 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 	i = -1;
 	while (++i < vars->num_sprites)
 	{
-		if ((sprites[i]).hp > 0)
+		draw.sprite_index = sprites_srt[i].sprite_order;
+		v_sprite = sprites[draw.sprite_index];
+		v_sprite.x -= cam->x;
+		v_sprite.y -= cam->y;
+		draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
+		if (draw.dist < 8 || !SHADOW_MODE)
 		{
-			draw.sprite_index = sprites_srt[i].sprite_order;
-			v_sprite = sprites[draw.sprite_index];
-			v_sprite.x -= cam->x;
-			v_sprite.y -= cam->y;
-			draw.dist = sqrt(v_sprite.x * v_sprite.x + v_sprite.y * v_sprite.y);
-			if (draw.dist < 8 || !SHADOW_MODE)
-			{
-				init_sprite_drawing(&draw, cam, &v_sprite,
-									vars->text + v_sprite.tex_num);
-				draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
-			}
+			init_sprite_drawing(&draw, cam, &v_sprite,
+								vars->text + v_sprite.tex_num);
+			draw_sprites(&draw, sprites, vars->z_buffer, vars->img);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_structs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:58:46 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 15:49:02 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/13 21:24:10 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_camera
 	double			speed;
 	double			turn_speed;
 	t_plane			plane;
+	int				hp;
 }				t_camera;
 
 #endif
