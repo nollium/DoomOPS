@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 21:10:22 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 01:02:50 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_vars
 	int				frame_ready;
 	t_texture		health_bars[N_BARS];
 	int				hp;
+	t_sprite		*sprite_ptr;
 }					t_vars;
 
 typedef struct		s_bfh

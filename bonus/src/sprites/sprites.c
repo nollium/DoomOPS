@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 19:27:15 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 00:44:09 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void		draw_sprites(t_sprite_drawer *draw, t_sprite *sprites,
 	}
 }
 
-void		put_sprites(t_vars *vars, t_sprite *sprites,
-						t_sprites_sorter *sprites_srt, t_camera *cam)
+void		put_sprites(t_vars *vars, t_sprite *sprites, t_camera *cam)
 {
 	int				i;
 	t_sprite		v_sprite;
@@ -62,9 +61,9 @@ void		put_sprites(t_vars *vars, t_sprite *sprites,
 	draw.half_win_height = draw.screen->height / 2;
 	draw.half_win_width = draw.screen->width / 2;
 	i = -1;
-	while (++i < vars->num_sprites)
+	while (++i <= vars->num_sprites)
 	{
-		draw.sprite_index = sprites_srt[i].sprite_order;
+		draw.sprite_index = i;
 		v_sprite = sprites[draw.sprite_index];
 		v_sprite.x -= cam->x;
 		v_sprite.y -= cam->y;

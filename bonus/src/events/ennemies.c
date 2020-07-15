@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 15:43:58 by dirty             #+#    #+#             */
-/*   Updated: 2020/07/14 23:43:13 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 03:00:31 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,26 @@ double  my_dist(double x0, double y0, double x1, double y1)
 int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y,
 						int n)
 {
-	int		i;
-
-	i = -1;
-	while (++i < n)
+	while (--n >= 0)
 	{
-		if (sprites[i].tex_num == ENNEMIES_TEX && sprites + i != curr)
+		if (sprites[n].tex_num == ENNEMIES_TEX && sprites + n != curr)
 		{
-			if (my_dist(sprites[i].x + 0.5, sprites[i].y + 0.5, x, y)
+			if (my_dist(sprites[n].x + 0.5, sprites[n].y + 0.5, x, y)
 				<= SPRITE_RADIUS)
-				return (1);
+				return (n + 1);
 		}
 	}
 	return (0);
 }
 
-int		sprite_collision(t_sprite *sprites, double x, double y, int n)
+int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n)
 {
-	int		i;
-
-	i = -1;
-	while (++i < n)
+	while (--n >= 0)
 	{
-		if (sprites[i].tex_num == ENNEMIES_TEX)
+		if (sprites[n].tex_num == tex)
 		{
-			if (my_dist(sprites[i].x, sprites[i].y, x, y) <= SPRITE_RADIUS)
-				return (1);
+			if (my_dist(sprites[n].x, sprites[n].y, x, y) <= SPRITE_RADIUS)
+				return (n + 1);
 		}
 	}
 	return (0);
@@ -100,10 +94,10 @@ int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map,
 	int	i;
 
 	i = -1;
-	while (++i < n_sprites / 2)
+	while (++i < n_sprites)
 	{
 		if (sprites[i].tex_num == ENNEMIES_TEX)
-			move_ennemy(sprites, sprites + i, cam, map, n_sprites / 2);
+			move_ennemy(sprites, sprites + i, cam, map, n_sprites);
 	}
 	return (0);
 }

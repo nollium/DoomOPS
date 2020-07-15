@@ -6,13 +6,14 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 23:41:14 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 03:20:16 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "mlx_int.h"
 #include "parsing.h"
+#include "sprites.h"
 
 int		focus_in_handler(t_vars *vars)
 {
@@ -85,6 +86,22 @@ int		refresh(t_vars *vars)
 	return (1);
 }
 
+int		pickup_handler(t_sprite **sprites, t_camera *cam, int *n)
+{
+	int	i;
+
+	if (cam->hp < 5
+		&& (i = sprite_collision(*sprites, cam->x, cam->y, PICKUP_TEX, *n)))
+	{
+		cam->hp++;
+		swap_sprites(*sprites, *sprites + i - 1);
+		(*n)--;
+		(*sprites)++;
+		return (1);
+	}
+	return (0);
+}
+
 int		loop_handler(t_vars *vars)
 {
 	static char *str[] = {"cub3D", "maps/map.cub"};
@@ -95,6 +112,8 @@ int		loop_handler(t_vars *vars)
 		vars->redraw = 1;
 		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array,
 							vars->num_sprites);
+		pickup_handler(&(vars->sprites), &(vars->cam), &(vars->num_sprites));
+		sort_sprites(&(vars->cam), vars->sprites, vars->num_sprites);
 		if (vars->cam.hp < 0)
 		{
 			free_vars(vars);
@@ -105,7 +124,8 @@ int		loop_handler(t_vars *vars)
 		if (vars->draw_shot)
 			draw_text(&(vars->flash), vars->img, vars->flash.x, vars->flash.y);
 		draw_text(&(vars->gun), vars->img, vars->gun.x, vars->gun.y);
-		draw_text(vars->health_bars + vars->cam.hp, vars->img, 0, 0);
+		draw_text(vars->health_bars + vars->cam.hp, vars->img,
+		vars->game_screen.width / 2 - vars->health_bars->width / 2, 0);
 		vars->frame_ready = 1;
 	}
 	if (vars->redraw)

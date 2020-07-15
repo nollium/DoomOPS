@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 19:27:15 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 01:00:18 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,28 @@
 #include "garbage_collection.h"
 #include "sprites.h"
 
-int				shoot_sprites(t_sprite *sprites, t_camera *cam, int *n_sprites)
+int				shoot_sprites(t_sprite **ptr, int *n_sprites)
 {
-	int		i;
-	double	min_dist;
-	double	dist;
-	int		min_i;
+	int			i;
+	t_sprite	*sprites;
 	
-	i = -1;
-	min_dist = -1;
-	min_i = -1;
-	while (++i < *n_sprites)
+	sprites = *ptr;
+	i = *n_sprites;
+	while (--i >= 0)
 	{
-		if (sprites[i].hp > 0 && sprites[i].seen && sprites[i].tex_num
-			== ENNEMIES_TEX)
+		if (sprites[i].seen && sprites[i].tex_num == ENNEMIES_TEX)
 		{
-			dist = my_dist(sprites[i].x, sprites[i].y, cam->x, cam->y);
-			if (min_dist == -1 || dist < min_dist)
+			sprites[i].hp -= GUN_DAMAGE;
+			if (sprites[i].hp <= 0)
 			{
-				min_dist = dist;
-				min_i = i;	
-		
+				swap_sprites(sprites + i, sprites);
+				(*n_sprites)--;
+				(*ptr)++;
 			}
+			return (1);
 		}
 	}
-	if (min_i == -1 || min_dist == -1)
-		return (0);
-	sprites[min_i].hp -= GUN_DAMAGE;
-	if (sprites[min_i].hp <= 0)
-	{
-		swap_sprites(sprites + min_i, sprites + *n_sprites);
-		(*n_sprites)--;
-	}
-	return (1);
+	return (0);
 }
 
 int				click_handler(t_vars *vars)
@@ -67,7 +56,7 @@ int				click_handler(t_vars *vars)
 			last_shot = clock();
 			vars->draw_shot = 1;
 			system("(" PLAYER " " GUNSHOT_PATH BACKGROUND ") "  OPTIONS);
-			shoot_sprites(vars->sprites, &(vars->cam), &(vars->num_sprites));
+			shoot_sprites(&(vars->sprites), &(vars->num_sprites));
 			return (1);
 		}
 	}

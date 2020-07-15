@@ -6,7 +6,7 @@
 #    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/12 23:21:14 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/15 02:17:10 by dirty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,8 @@ bonus: clean_mandatory
 
 .PHONY: clean fclean
 
-opti:
+opti: fclean
 	$(eval MAKE_ARGS += opti)
-	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
-	@cp $(CUB_PATH)/$(NAME) .
 
 debug: fclean
 	$(eval MAKE_ARGS += debug)

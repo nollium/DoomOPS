@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 23:19:42 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 03:11:57 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define SPRITE_RADIUS		0.8
 
 # define ENNEMIES_TEX		6
+# define PICKUP_TEX         4
+
 # define EN_SPEED			0.035
 # define EN_HEALTH          10
 
@@ -38,7 +40,7 @@
 
 # define DAMAGE_COOLDOWN    1
 
-# define GOD_MODE           1
+# define GOD_MODE           0
 
 # define ESC_KEY			65307
 
@@ -141,7 +143,7 @@ void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
 int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map,
                         int n_sprites);
 double	my_dist(double x0, double y0, double x1, double y1);
-int		sprite_collision(t_sprite *sprites, double x, double y, int n);
+int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n);
 
 /*
 ** EVENT DEFINITION

@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 23:58:08 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 00:00:26 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		sort_sprites(t_camera *cam, t_sprite *arr, int n)
 	while (i < n)
 	{
 		j = i;
-		while (j > 0 && s_dist(cam, arr + j - 1) < arr[j]
+		while (j > 0 && s_dist(cam, arr + j - 1) < s_dist(cam, arr + j))
 		{
 			swap_sprites(arr + j, arr + j - 1);
 			j--;

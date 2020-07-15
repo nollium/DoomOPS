@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 23:31:34 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 00:44:59 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,17 @@ void		swap_sprites(t_sprite *s1, t_sprite *s2)
 	*s2 = tmp;
 }
 
-void		swap_sprites_sorter(t_sprites_sorter *sprite_1, t_sprites_sorter *sprite_2)
+double		s_dist(t_camera *cam, t_sprite *sprite)
 {
-	t_sprites_sorter	tmp;
-
-	tmp = *sprite_1;
-	*sprite_1 = *sprite_2;
-	*sprite_2 = tmp;
+	return ((cam->x - sprite->x) * (cam->x - sprite->x)
+			+ (cam->y - sprite->y) * (cam->y - sprite->y));
 }
 
 /*
 **	Insertion sort
 */
 
-void		sort_sprites(int n, t_sprites_sorter *arr)
+void		sort_sprites(t_camera *cam, t_sprite *arr, int n)
 {
 	int	i;
 	int	j;
@@ -43,9 +40,9 @@ void		sort_sprites(int n, t_sprites_sorter *arr)
 	while (i < n)
 	{
 		j = i;
-		while (j > 0 && arr[j - 1].sprite_distance < arr[j].sprite_distance)
+		while (j > 0 && s_dist(cam, arr + j - 1) < s_dist(cam, arr + j))
 		{
-			swap_sprites_sorter(arr + j, arr + j - 1);
+			swap_sprites(arr + j, arr + j - 1);
 			j--;
 		}
 		i++;

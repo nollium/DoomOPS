@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:24:35 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:08:03 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/15 00:14:46 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,7 @@ void	get_texture_coords(t_vars *vars, t_ray *ray)
 
 void	cast_sprites(t_sprite *sprites, t_camera *cam, t_vars *vars)
 {
-	t_sprites_sorter	*sprites_srt;
-
 	vars->seen_sprite = 0;
-	if (!(sprites_srt = malloc(sizeof(t_sprites_sorter) * vars->num_sprites)))
-	{
-		ft_putendl_fd("MALLOC ERROR", 2);
-		free_vars(vars);
-		exit(1);
-	}
-	init_sprites_info(vars, sprites_srt);
-	put_sprites(vars, sprites, sprites_srt, cam);
-	free(sprites_srt);
+	sort_sprites(cam, sprites, vars->num_sprites);
+	put_sprites(vars, sprites, cam);
 }

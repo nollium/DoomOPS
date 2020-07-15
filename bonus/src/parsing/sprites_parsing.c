@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:38:01 by user42            #+#    #+#             */
-/*   Updated: 2020/07/14 17:44:17 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 01:03:28 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int				parse_sprites(t_vars *vars, char **map, int *size)
 			}
 	}
 	vars->sprites = array;
+	vars->sprite_ptr = array;
 	return (SUCCESS_CODE);
 }
