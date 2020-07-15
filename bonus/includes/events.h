@@ -48,14 +48,14 @@
 
 # define DEATH_SOUND    "death.wav"
 # define MUSIC_PATH "music.wav"
-# define OPTIONS    " 2>/dev/null"
+# define OPTIONS    " > /dev/null 2>&1"
 # define BACKGROUND " &"
 
 # ifdef __linux__
 
 #  define LINUX 1
 #  define OSX 0
-#  define MIXER_COMMAND "amixer set Master 50% 2> /dev/null"
+#  define MIXER_COMMAND "amixer set Master 50% > /dev/null 2>&1"
 #  define PLAYER        "aplay"
 #  define KILL_COMMAND  "killall"
 
@@ -65,7 +65,7 @@
 #   define LEFT_KEY			113
 #   define RIGHT_KEY			100
 #   define CTRL_KEY			65507
-#   define ALT_KEY			65513
+#   define ALT_KEY			    99
 #   define C_KEY				99
 #  endif
 
@@ -75,7 +75,7 @@
 #   define LEFT_KEY			97
 #   define RIGHT_KEY		100
 #   define CTRL_KEY			65507
-#   define ALT_KEY			65506
+#   define ALT_KEY			99
 #   define C_KEY			99
 #  endif
 
@@ -95,7 +95,7 @@
 #  define LEFT_KEY			0
 #  define RIGHT_KEY			2
 #  define CTRL_KEY			256
-#  define ALT_KEY			258
+#  define ALT_KEY			8
 #  define C_KEY				8
 
 # endif
@@ -115,7 +115,6 @@ t_keys	*key_chr(t_keys *arr, int keycode, size_t size);
 int		mouse_press_handler(int keycode, int x, int y, t_vars *vars);
 int		mouse_release_handler(int keycode, int x, int y, t_vars *vars);
 
-
 int		keyboard_handler(t_vars *vars);
 void	hooks(t_vars *vars);
 int		loop_handler(t_vars *vars);
@@ -133,15 +132,14 @@ int		right_handler(t_vars *vars);
 int		left_handler(t_vars *vars);
 int		alt_handler(t_vars *vars);
 
-
 /*
 ** ENNEMIES
 */
 
 void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
-                    char **map, int n);
+					char **map, int n);
 int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map,
-                        int n_sprites);
+						int n_sprites);
 double	my_dist(double x0, double y0, double x1, double y1);
 int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n);
 

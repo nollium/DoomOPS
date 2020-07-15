@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 00:07:50 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 15:58:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "garbage_collection.h"
-
-int		mouse_press_handler(int keycode, int x, int y, t_vars *vars)
-{
-	(void)(x && y);
-	return (key_handler(keycode, vars));
-}
-
-int		mouse_release_handler(int keycode, int x, int y, t_vars *vars)
-{
-	(void)(x && y);
-	return (release_handler(keycode, vars));
-}
 
 int		key_handler(int keycode, t_vars *vars)
 {

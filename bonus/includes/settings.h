@@ -30,7 +30,7 @@
 # define DEBUG_MODE		1
 
 # ifndef SHADOW_MODE
-#   define SHADOW_MODE	1
+#  define SHADOW_MODE	1
 # endif
 
 # define SPAWN_CHARS		"NSEW"

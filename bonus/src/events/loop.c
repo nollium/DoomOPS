@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 15:26:22 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 15:57:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,6 @@ void	hooks(t_vars *vars)
 	mlx_hook(vars->win, FOCUS_IN, FOCUS_CHANGE_MASK, focus_in_handler, vars);
 	mlx_hook(vars->win, FOCUS_OUT, FOCUS_CHANGE_MASK, focus_out_handler, vars);
 	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
-}
-
-int		mouse_move_handler(t_vars *vars)
-{
-	int	win_x;
-	int	win_y;
-	int	returned;
-	int	i;
-	
-	if (!vars->win_focus)
-		return (0);
-	returned = mlx_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
-	if (((i = win_x - vars->game_screen.width / 2)) != 0)
-	{
-		if (i < 0)
-			while (i++ <= 0)
-				turn_left(vars, 0.01);
-		else if (i > 0)
-			while (i-- >= 0)
-				turn_right(vars, 0.01);
-	}
-	if (win_x != vars->game_screen.width / 2
-	|| win_y != vars->game_screen.height / 2)
-		mlx_mouse_move(vars->mlx, vars->win,
-		vars->game_screen.width / 2, vars->game_screen.height / 2);
-	return (1);
 }
 
 int		refresh(t_vars *vars)
