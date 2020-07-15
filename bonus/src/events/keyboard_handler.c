@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 02:58:47 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 15:25:24 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		right_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, RIGHT_KEY, K_BUFF_SIZE))
 	{
-		turn_right(vars);
+		turn_right(vars, vars->cam.turn_speed);
 		return (1);
 	}
 	return (0);
@@ -71,7 +71,7 @@ int		left_handler(t_vars *vars)
 {
 	if (key_chr(vars->keys, LEFT_KEY, K_BUFF_SIZE))
 	{
-		turn_left(vars);
+		turn_left(vars, vars->cam.turn_speed);
 		return (1);
 	}
 	return (0);

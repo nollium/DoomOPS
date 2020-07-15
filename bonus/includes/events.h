@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 03:11:57 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 15:25:23 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int		loop_handler(t_vars *vars);
 int		key_handler(int keycode, t_vars *vars);
 int		release_handler(int keycode, t_vars *vars);
 
-void	turn_right(t_vars *vars);
-void	turn_left(t_vars *vars);
+void	turn_right(t_vars *vars, double speed);
+void	turn_left(t_vars *vars, double speed);
 
 int		mouse_move_handler(t_vars *vars);
 

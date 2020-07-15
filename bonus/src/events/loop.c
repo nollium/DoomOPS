@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 03:20:16 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/15 15:26:22 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,12 @@ int		mouse_move_handler(t_vars *vars)
 	returned = mlx_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
 	if (((i = win_x - vars->game_screen.width / 2)) != 0)
 	{
-		i *= 0.25;
 		if (i < 0)
 			while (i++ <= 0)
-				turn_left(vars);
+				turn_left(vars, 0.01);
 		else if (i > 0)
 			while (i-- >= 0)
-				turn_right(vars);
+				turn_right(vars, 0.01);
 	}
 	if (win_x != vars->game_screen.width / 2
 	|| win_y != vars->game_screen.height / 2)
