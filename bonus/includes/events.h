@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 15:25:23 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 15:06:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,12 @@ int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map,
 						int n_sprites);
 double	my_dist(double x0, double y0, double x1, double y1);
 int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n);
+int		shoot_sprites(t_sprite **ptr, int *n_sprites);
+int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y,
+						int n);
+double	my_dist(double x0, double y0, double x1, double y1);
+int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n);
+int				click_handler(t_vars *vars);
 
 /*
 ** EVENT DEFINITION

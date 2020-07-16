@@ -6,15 +6,15 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 16:00:23 by user42            #+#    #+#             */
-/*   Updated: 2020/07/15 16:00:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 15:05:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 
-double  my_dist(double x0, double y0, double x1, double y1)
-{    
-    return (sqrt((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1)));
+double	my_dist(double x0, double y0, double x1, double y1)
+{
+	return (sqrt((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1)));
 }
 
 int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y,
