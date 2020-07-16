@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 23:51:30 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:53:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 **  IMAGE PARSING
 */
 
+int		init_img(void *mlx, int width, int height, t_data *img);
 int		load_xpm(t_data *data, char *path, void *mlx);
 int		load_texture(t_texture *text, char *path, void *mlx);
 int		img_to_text(t_data *data, t_texture *text);

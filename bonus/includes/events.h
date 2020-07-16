@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:23:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 19:53:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_keys	*key_chr(t_keys *arr, int keycode, size_t size);
 ** EVENT HANDLERS
 */
 
-int		focus_out_handler(t_vars *vars)
+int		focus_out_handler(t_vars *vars);
 int		focus_in_handler(t_vars *vars);
 
 int		mouse_press_handler(int keycode, int x, int y, t_vars *vars);

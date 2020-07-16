@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 21:40:48 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:51:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,12 @@ int	read_cub(char *path, t_list **alst)
 		if (line)
 			ft_lstadd_back(alst, ft_lstnew(line));
 		else
-		{
-			close(fd);
 			ft_lstclear(alst, free);
-			return (MALLOC_ERROR);
-		}
 	}
 	free(line);
 	close(fd);
-	if (error < 0 || !*alst)
-		return ((error < 0) ? error : NULL_ERROR);
+	if (error != SUCCESS_CODE || !*alst)
+		return ((error != SUCCESS_CODE) ? error : NULL_ERROR);
 	return (len);
 }
 

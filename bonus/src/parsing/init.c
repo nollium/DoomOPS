@@ -3,40 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 23:52:45 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:48:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int			init_img(void *mlx, int width, int height, t_data *img)
-{
-	*img = (t_data){0};
-	if (!(img->img = mlx_new_image(mlx, width, height)))
-		return (MLX_ERROR);
-	img->addr = mlx_get_data_addr(img->img,
-	&(img->bits_per_pixel), &(img->line_length), &(img->endian));
-	img->width = width;
-	img->height = height;
-	return (SUCCESS_CODE);
-}
-
 int			init_cam(t_camera *cam, t_spawn *spawn)
 {
+	t_camera		cam_switcher[4];
 	int				i;
-	static t_camera	cam_switcher[] = {
-	(t_camera){.dir_x = -1, .speed = SPEED, .turn_speed = TURN_SPEED,
-	.plane = (t_plane){0, 0.66}},
-	(t_camera){.dir_x = 1, .speed = SPEED, .turn_speed = TURN_SPEED,
-	.plane = (t_plane){0, -0.66}}, (t_camera){.dir_y = -1.0, .speed = SPEED,
-	.turn_speed = TURN_SPEED, .plane = (t_plane){-0.66, 0.0}},
-	(t_camera){.dir_y = 1.0, .speed = SPEED, .turn_speed = TURN_SPEED,
-	.plane = (t_plane){0.66, 0.0}}};
 
 	i = 0;
+	cam_switcher[0] = (t_camera){.dir_x = -1, .speed = SPEED,
+	.turn_speed = TURN_SPEED, .plane = (t_plane){0, 0.66}};
+	cam_switcher[1] = (t_camera){.dir_x = 1, .speed = SPEED,
+	.turn_speed = TURN_SPEED, .plane = (t_plane){0, -0.66}};
+	cam_switcher[2] = (t_camera){.dir_y = -1.0, .speed = SPEED,
+	.turn_speed = TURN_SPEED, .plane = (t_plane){-0.66, 0.0}};
+	cam_switcher[3] = (t_camera){.dir_y = 1.0, .speed = SPEED,
+	.turn_speed = TURN_SPEED, .plane = (t_plane){0.66, 0.0}};
 	while (SPAWN_CHARS[i] && SPAWN_CHARS[i] != spawn->dir)
 		i++;
 	if (SPAWN_CHARS[i])
@@ -83,13 +72,13 @@ static void	init_keys_buffer(t_keys *keys)
 
 	i = -1;
 	while (++i < K_BUFF_SIZE)
-		keys[i] = (typeof(keys[i])){-1, 0};
+		keys[i] = (t_keys){-1, 0};
 }
 
 static int	init_2(t_vars *vars)
 {
-	int	error;
-	int	i;
+	int			error;
+	int			i;
 	static char *bar_path[] = {BAR_1_PATH, BAR_2_PATH, BAR_3_PATH,
 								BAR_4_PATH, BAR_5_PATH, BAR_6_PATH};
 
