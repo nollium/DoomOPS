@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 15:25:24 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 16:05:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ int		forward_handler(t_vars *vars)
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
-		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX,
-		vars->num_sprites))
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
 			vars->cam.x += vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
-		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX,
-			vars->num_sprites))
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
 			vars->cam.y += vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}
@@ -45,12 +43,10 @@ int		backward_handler(t_vars *vars)
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
-		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX,
-		vars->num_sprites))
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
 			vars->cam.x -= vars->cam.dir_x * (vars->cam.speed);
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
-		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX,
-		vars->num_sprites))
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
 			vars->cam.y -= vars->cam.dir_y * (vars->cam.speed);
 		return (1);
 	}

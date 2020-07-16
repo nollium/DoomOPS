@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 15:06:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 16:01:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,17 +137,16 @@ int		alt_handler(t_vars *vars);
 */
 
 void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
-					char **map, int n);
-int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map,
-						int n_sprites);
+					char **map);
+int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map);
 double	my_dist(double x0, double y0, double x1, double y1);
-int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n);
+int		sprite_collision(t_sprite *sprites, double x, double y, int tex);
 int		shoot_sprites(t_sprite **ptr, int *n_sprites);
-int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y,
-						int n);
+int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y);
 double	my_dist(double x0, double y0, double x1, double y1);
-int		sprite_collision(t_sprite *sprites, double x, double y, int tex, int n);
-int				click_handler(t_vars *vars);
+int		sprite_collision(t_sprite *sprites, double x, double y, int tex);
+int		click_handler(t_vars *vars);
+int		get_n(int *init);
 
 /*
 ** EVENT DEFINITION

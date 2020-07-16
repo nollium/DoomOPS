@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 15:57:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 16:04:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		pickup_handler(t_sprite **sprites, t_camera *cam, int *n)
 	int	i;
 
 	if (cam->hp < 5
-		&& (i = sprite_collision(*sprites, cam->x, cam->y, PICKUP_TEX, *n)))
+		&& (i = sprite_collision(*sprites, cam->x, cam->y, PICKUP_TEX)))
 	{
 		cam->hp++;
 		swap_sprites(*sprites, *sprites + i - 1);
@@ -83,8 +83,8 @@ int		loop_handler(t_vars *vars)
 	{
 		vars->redraw |= keyboard_handler(vars);
 		vars->redraw = 1;
-		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array,
-							vars->num_sprites);
+		get_n(&(vars->num_sprites));
+		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
 		pickup_handler(&(vars->sprites), &(vars->cam), &(vars->num_sprites));
 		sort_sprites(&(vars->cam), vars->sprites, vars->num_sprites);
 		if (vars->cam.hp < 0)
