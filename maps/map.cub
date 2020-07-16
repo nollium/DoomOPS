@@ -2,13 +2,13 @@ R 2000 2000
 C 0,0,0
 F 69,69,69
 
-NO  pics/NO.xpm
-SO  pics/SO.xpm
-EA  pics/EA.xpm
-WE  pics/WE.xpm
-S   pics/small_shrek.xpm
+NO	pics/NO.xpm
+SO	pics/SO.xpm
+EA	pics/EA.xpm
+WE	pics/WE.xpm
+S	pics/burger.xpm
 S2	pics/64x64.xpm
-EN  pics/wtc_bigger.xpm
+EN	pics/wtc_bigger.xpm
 
 
 11111111111111111111111111111111111111111

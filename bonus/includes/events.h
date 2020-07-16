@@ -44,10 +44,10 @@
 
 # define ESC_KEY			65307
 
-# define GUNSHOT_PATH "gunshot.wav"
+# define GUNSHOT_PATH "sounds/gunshot.wav"
 
-# define DEATH_SOUND    "death.wav"
-# define MUSIC_PATH "music.wav"
+# define DEATH_SOUND    "sounds/death.wav"
+# define MUSIC_PATH "sounds/music.wav"
 # define OPTIONS    " > /dev/null 2>&1"
 # define BACKGROUND " &"
 
