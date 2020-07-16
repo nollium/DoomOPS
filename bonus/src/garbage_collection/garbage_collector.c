@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 01:04:10 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:33:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	free_vars(t_vars *vars)
 	i = -1;
 	while (vars->text_paths[++i])
 		free(vars->text_paths[i]);
-	*vars = (t_vars){};
+	*vars = (t_vars){0};
 	system("(" KILL_COMMAND " " PLAYER " )" OPTIONS);
-	system("(" PLAYER " " DEATH_SOUND BACKGROUND ") "  OPTIONS);
+	system("(" PLAYER " " DEATH_SOUND BACKGROUND ") " OPTIONS);
 }
 
 void	free_cub(t_list **alst)

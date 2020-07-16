@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 19:21:43 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:32:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int			main(int argc, char **argv)
 	}
 	hooks(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
-	if (LINUX)	
+	if (LINUX)
 		system(MIXER_COMMAND);
-	system("(" PLAYER " " MUSIC_PATH BACKGROUND ") "  OPTIONS);
+	system("(" PLAYER " " MUSIC_PATH BACKGROUND ") " OPTIONS);
 	mlx_loop(vars.mlx);
 }

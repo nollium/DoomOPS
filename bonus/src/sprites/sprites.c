@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 00:44:09 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:34:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void		put_sprites(t_vars *vars, t_sprite *sprites, t_camera *cam)
 	int				i;
 	t_sprite		v_sprite;
 	t_sprite_drawer	draw;
-	
-	draw = (t_sprite_drawer){};
+
+	draw = (t_sprite_drawer){0};
 	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
 	draw.screen = &(vars->game_screen);
 	draw.half_win_height = draw.screen->height / 2;

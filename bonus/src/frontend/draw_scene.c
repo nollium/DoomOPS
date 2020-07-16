@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:20:06 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/14 15:57:35 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:35:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 	{
 		if (draw->roof_color != 0 && SHADOW_MODE && draw->y < draw->start)
 			draw->color = add_shade((double)draw->y * 2.3 /
-				(double)draw->screen->height , draw->roof_color);
+				(double)draw->screen->height, draw->roof_color);
 		if (draw->y >= draw->start && draw->y < draw->end)
 		{
 			get_color(draw, &(vars->text[draw->side]));

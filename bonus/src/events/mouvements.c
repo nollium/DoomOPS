@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mouvements.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 14:54:02 by dirty             #+#    #+#             */
-/*   Updated: 2020/07/15 15:24:12 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:31:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 
-void turn_left(t_vars *vars, double speed)
+void	turn_left(t_vars *vars, double speed)
 {
 	long double	old_dir_x;
 	long double	old_plane_x;
@@ -29,7 +29,7 @@ void turn_left(t_vars *vars, double speed)
 		+ vars->cam.plane.y * cos(speed);
 }
 
-void turn_right(t_vars *vars, double speed)
+void	turn_right(t_vars *vars, double speed)
 {
 	long double	old_dir_x;
 	long double	old_plane_x;

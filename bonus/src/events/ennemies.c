@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 15:43:58 by dirty             #+#    #+#             */
-/*   Updated: 2020/07/16 16:09:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 19:20:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,19 @@ void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
 	double	new_pos[2];
 	int		hit_x;
 	int		hit_y;
-		
+
 	hit_x = 0;
 	hit_y = 0;
 	get_sprite_path(cam, sprite, new_pos);
 	if (map[(int)(new_pos[0])][(int)(sprite->y)] == VOID
-&& !(s_s_collision(lst_sprites, sprite, new_pos[0] + 0.5, sprite->y + 0.5))
-&& !(hit_x = !(my_dist(new_pos[0], sprite->y, cam->x, cam->y) > SPRITE_RADIUS)))
+	&& !s_s_collision(lst_sprites, sprite, new_pos[0] + 0.5, sprite->y + 0.5)
+	&& !(hit_x = !(my_dist(new_pos[0], sprite->y, cam->x, cam->y)
+					> SPRITE_RADIUS)))
 		sprite->x = new_pos[0];
 	if (map[(int)(sprite->x)][(int)(new_pos[1])] == VOID
-&& !(s_s_collision(lst_sprites, sprite, sprite->x + 0.5, new_pos[1] + 0.5))
-&& !(hit_y = !(my_dist(sprite->x, new_pos[1], cam->x, cam->y) > SPRITE_RADIUS)))
+	&& !s_s_collision(lst_sprites, sprite, sprite->x + 0.5, new_pos[1] + 0.5)
+	&& !(hit_y = !(my_dist(sprite->x, new_pos[1], cam->x, cam->y)
+					> SPRITE_RADIUS)))
 		sprite->y = new_pos[1];
 	if (!GOD_MODE && (hit_x || hit_y))
 		player_hit(cam);

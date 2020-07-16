@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 00:44:59 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/16 19:35:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		swap_sprites(t_sprite *s1, t_sprite *s2)
 {
 	t_sprite	tmp;
-	
+
 	tmp = *s1;
 	*s1 = *s2;
 	*s2 = tmp;

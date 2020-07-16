@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/16 15:18:32 by user42           ###   ########.fr        #
+#    Updated: 2020/07/16 19:13:38 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,11 +105,11 @@ $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
 
 $(LIBFT):
 	@echo "COMPILING LIBFT"
-	$(MAKE) $(LIB_ARG) all -C libft/
+	$(MAKE) $(LIB_ARG) all -C libft/ --quiet
 
 $(MLX_LIB):
 	@echo "COMPILING MLX"
-	$(MAKE) -C $(MLX_PATH)/
+	$(MAKE) -C $(MLX_PATH)/ --quiet
 
 $(OBJDIR)/%.o: $(DIRSRC)/%.c $(HEADERS) $(MLX_LIB)
 	@mkdir -p $(OBJ_PATHS)
@@ -131,6 +131,9 @@ lilclean:
 re: fclean all	
 
 .PHONY: clean fclean
+
+shadow_off:
+	$(eval CFLAGS += -D SHADOW_MODE=0)
 
 opti:
 	$(eval CFLAGS += -O3)

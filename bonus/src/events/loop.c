@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 16:04:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 19:25:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "mlx_int.h"
 #include "parsing.h"
 #include "sprites.h"
-
-int		focus_in_handler(t_vars *vars)
-{
-	vars->redraw = 1;
-	vars->win_focus = 1;
-	return (0);
-}
-
-int		focus_out_handler(t_vars *vars)
-{
-	vars->win_focus = 0;
-	return (0);
-}
 
 void	hooks(t_vars *vars)
 {
@@ -75,6 +62,17 @@ int		pickup_handler(t_sprite **sprites, t_camera *cam, int *n)
 	return (0);
 }
 
+int		redraw(t_vars *vars)
+{
+	draw_scene(vars);
+	if (vars->draw_shot)
+		draw_text(&(vars->flash), vars->img, vars->flash.x, vars->flash.y);
+	draw_text(&(vars->gun), vars->img, vars->gun.x, vars->gun.y);
+	draw_text(vars->health_bars + vars->cam.hp, vars->img,
+	vars->game_screen.width / 2 - vars->health_bars->width / 2, 0);
+	vars->frame_ready = 1;
+}
+
 int		loop_handler(t_vars *vars)
 {
 	static char *str[] = {"cub3D", "maps/map.cub"};
@@ -93,13 +91,7 @@ int		loop_handler(t_vars *vars)
 			main(2, str);
 			exit(0);
 		}
-		draw_scene(vars);
-		if (vars->draw_shot)
-			draw_text(&(vars->flash), vars->img, vars->flash.x, vars->flash.y);
-		draw_text(&(vars->gun), vars->img, vars->gun.x, vars->gun.y);
-		draw_text(vars->health_bars + vars->cam.hp, vars->img,
-		vars->game_screen.width / 2 - vars->health_bars->width / 2, 0);
-		vars->frame_ready = 1;
+		redraw(vars);
 	}
 	if (vars->redraw)
 		refresh(vars);

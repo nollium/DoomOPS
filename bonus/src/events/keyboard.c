@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 15:58:58 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/16 19:21:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				shoot_sprites(t_sprite **ptr, int *n_sprites)
 {
 	int			i;
 	t_sprite	*sprites;
-	
+
 	sprites = *ptr;
 	i = *n_sprites;
 	while (--i >= 0)
