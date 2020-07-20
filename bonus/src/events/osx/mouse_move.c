@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   osx.c                                              :+:      :+:    :+:   */
+/*   mouse_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 20:09:46 by user42            #+#    #+#             */
-/*   Updated: 2020/07/20 20:10:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/20 20:40:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		mouse_move_handler(t_vars *vars)
 	if (((i = (double)win_x - (double)vars->game_screen.width / 2.0)) != 0.0)
 	{
 		turn_right(vars, i * 2.0 / vars->game_screen.width);
-		mlx_mouse_move(vars->mlx, vars->win,
+		mlx_mouse_move(vars->win,
 		vars->game_screen.width / 2, vars->game_screen.height / 2);
 	}
 	return (1);
