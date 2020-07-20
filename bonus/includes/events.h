@@ -25,8 +25,8 @@
 # define SPRITE_RADIUS		0.8
 
 # define ENNEMIES_TEX		6
-# define DOOR_OPEN_TEX		5
-# define DOOR_TEX			7
+# define DOOR_OPEN_TEX		7
+# define DOOR_TEX			5
 # define PICKUP_TEX         4
 
 # define EN_SPEED			0.035
@@ -72,6 +72,7 @@
 #  define KILL_COMMAND  "killall"
 
 # define ESC_KEY			65307
+# define USE_KEY			102
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122

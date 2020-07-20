@@ -16,7 +16,7 @@
 int		key_handler(int keycode, t_vars *vars)
 {
 	int i;
-
+	
 	if (keycode == ESC_KEY)
 	{
 		free_vars(vars);

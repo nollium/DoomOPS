@@ -15,7 +15,7 @@
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "DO", "EN", "DC",
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "DC", "EN", "DO",
 								0};
 	int			i;
 	int			error;
