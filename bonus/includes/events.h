@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:53:07 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/20 18:30:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@
 #   define FORWARD_KEY		122
 #   define BACKWARD_KEY		115
 #   define LEFT_KEY			113
-#   define RIGHT_KEY			100
+#   define RIGHT_KEY		100
 #   define CTRL_KEY			65507
-#   define ALT_KEY			    99
-#   define C_KEY				99
+#   define ALT_KEY			99
+#   define C_KEY			99
 #  endif
 
 #  ifdef QWERTY

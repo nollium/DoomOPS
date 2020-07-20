@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/04 16:17:01 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:03:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ char		**parse_array(t_list *lst, int len)
 	if (lst && (array = malloc(sizeof(char *) * (len + 1))))
 	{
 		len = 1;
-		while (lst->next && !ft_isdigit(*(char *)lst->content)
-						&& !ft_isspace(*(char *)lst->content))
+		while ((lst->next && (!ft_isdigit(*(char *)lst->content)
+			&& !ft_isspace(*(char *)lst->content))) || !*(char *)lst->content)
 			lst = lst->next;
 		array[0] = ft_strdup(lst->content);
 		error |= format_map_line(array[0]);
-		while ((lst = lst->next) && !(error |= format_map_line(lst->content)))
+		while ((lst = lst->next) && *(char *)lst->content
+				&& !(error |= format_map_line(lst->content)))
 			array[len++] = ft_strdup(lst->content);
 		array[len] = NULL;
 	}
@@ -101,7 +102,8 @@ int			check_borders(char **map)
 	while (map[++y])
 	{
 		x = -1;
-		if (map[y][0] != WALL || map[y][ft_strlen(map[y]) - 1] != WALL)
+		if ((map[y][0] != WALL)
+			|| map[y][ft_strlen(map[y]) - 1] != WALL)
 			return (MAP_ERROR);
 		while (y > 0 && map[y][++x] && map[y + 1])
 			if (map[y][x] == VOID && (x >= (int)ft_strlen(map[y - 1])

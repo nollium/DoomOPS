@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/16 20:10:18 by user42           ###   ########.fr        #
+#    Updated: 2020/07/20 20:18:12 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ LINKS =
 
 UNAME = $(shell uname)
 
+MOUSE_DIR =
+
 ifeq ($(UNAME),Darwin)
 	MLX_PATH = $(MLX_OPENGL_PATH)
 	MLX_NAME = libmlx.dylib
@@ -48,12 +50,14 @@ ifeq ($(UNAME),Darwin)
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
 	LOAD_DYLIB = install_name_tool -change $(MLX_PATH)/$(MLX_LIB) $(DIR)/$(MLX_LIB) $(NAME)
+	MOUSE_DIR = osx
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
 	MLX_NAME = libmlx.a
 	INCLUDES += -I$(MLX_LINUX_PATH)
 	LINKS += -L$(MLX_PATH) -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
+	MOUSE_DIR = linux
 endif
 
 
@@ -76,7 +80,7 @@ SRC = $(addprefix $(DIRSRC)/, \
 \
 			$(addprefix events/,\
 			loop.c  handlers.c keyboard_handler.c keyboard.c mouvements.c ennemies.c \
-			mouse.c collisions.c handlers_2.c \
+			mouse.c collisions.c handlers_2.c $(MOUSE_DIR)/mouse_move.c \
 	)\
 \
 			debug/debug_map.c debug/errors.c \
