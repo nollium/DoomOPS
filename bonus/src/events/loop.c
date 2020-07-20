@@ -6,12 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:54:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/20 20:36:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
-#include "mlx_int.h"
 #include "parsing.h"
 #include "sprites.h"
 
