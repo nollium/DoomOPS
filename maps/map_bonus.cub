@@ -2,10 +2,10 @@ R 800 800
 C 0,0,0
 F 69,69,69
 
-NO	pics/NO.xpm
-SO	pics/SO.xpm
-EA	pics/EA.xpm
-WE	pics/WE.xpm
+NO	pics/brick.xpm
+SO	pics/brick.xpm
+EA	pics/brick.xpm
+WE	pics/brick.xpm
 S	pics/burger.xpm
 S2	pics/64x64.xpm
 EN	pics/wtc_bigger.xpm

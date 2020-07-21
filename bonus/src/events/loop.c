@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/21 20:18:05 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/21 21:16:48 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	hooks(t_vars *vars)
 			mouse_release_handler, (void *)vars);
 	mlx_hook(vars->win, FOCUS_IN, FOCUS_CHANGE_MASK, focus_in_handler, vars);
 	mlx_hook(vars->win, FOCUS_OUT, FOCUS_CHANGE_MASK, focus_out_handler, vars);
+	mlx_expose_hook(vars->win, focus_in_handler, vars);
 	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 }
 

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/21 20:13:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/21 21:12:06 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@
 # define EN_SPEED			0.035
 # define EN_HEALTH          10
 
-# define LEFT_CLICK			1
-# define MIDDLE_CLICK		2
-# define RIGHT_CLICK		3
+# define LEFT_CLICK			999666
 
 # define SHOT_COOLDOWN		0.20
 # define SHOT_DURATION		0.20
@@ -48,8 +46,6 @@
 # define MUSIC_PATH "sounds/music.wav"
 # define OPTIONS    " > /dev/null 2>&1"
 # define BACKGROUND " &"
-
-# define CLICK_KEY			999666
 
 # ifdef __linux__
 

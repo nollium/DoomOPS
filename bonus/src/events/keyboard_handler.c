@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 16:05:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/21 22:56:03 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int		forward_handler(t_vars *vars)
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
 		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
-			vars->cam.x += vars->cam.dir_x * (vars->cam.speed);
+			vars->cam.x = next_x;
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
 		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
-			vars->cam.y += vars->cam.dir_y * (vars->cam.speed);
+			vars->cam.y = next_y;
 		return (1);
 	}
 	return (0);
@@ -44,10 +44,10 @@ int		backward_handler(t_vars *vars)
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
 		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
-			vars->cam.x -= vars->cam.dir_x * (vars->cam.speed);
+			vars->cam.x = next_x;
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
 		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
-			vars->cam.y -= vars->cam.dir_y * (vars->cam.speed);
+			vars->cam.y = next_y;
 		return (1);
 	}
 	return (0);
@@ -55,9 +55,19 @@ int		backward_handler(t_vars *vars)
 
 int		right_handler(t_vars *vars)
 {
+	double	next_x;
+	double	next_y;
+
+	next_x = (double)(vars->cam.x - (vars->cam.dir_y) * -(vars->cam.speed));
+	next_y = (double)(vars->cam.y - (-vars->cam.dir_x) * -(vars->cam.speed));
 	if (key_chr(vars->keys, RIGHT_KEY, K_BUFF_SIZE))
 	{
-		turn_right(vars, vars->cam.turn_speed);
+		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
+			vars->cam.x = next_x;
+		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
+			vars->cam.y = next_y;
 		return (1);
 	}
 	return (0);
@@ -65,9 +75,19 @@ int		right_handler(t_vars *vars)
 
 int		left_handler(t_vars *vars)
 {
+	double	next_x;
+	double	next_y;
+
+	next_x = (double)(vars->cam.x - (vars->cam.dir_y) * (vars->cam.speed));
+	next_y = (double)(vars->cam.y - (-vars->cam.dir_x) * (vars->cam.speed));
 	if (key_chr(vars->keys, LEFT_KEY, K_BUFF_SIZE))
 	{
-		turn_left(vars, vars->cam.turn_speed);
+		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
+			vars->cam.x = next_x;
+		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
+			vars->cam.y = next_y;
 		return (1);
 	}
 	return (0);
