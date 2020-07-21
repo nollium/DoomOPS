@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 13:45:37 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/03 16:55:45 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/21 20:15:12 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		key_handler(int keycode, t_vars *vars)
 	int i;
 
 	i = -1;
-	if (keycode == 65307)
+	if (keycode == ESC_KEY)
 	{
 		free_vars(vars);
 		exit(0);

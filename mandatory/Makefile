@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/10 23:00:01 by user42           ###   ########.fr        #
+#    Updated: 2020/07/21 20:05:45 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ ifeq ($(UNAME),Darwin)
 	LINKS = -L$(MLX_PATH)/
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
-	LOAD_DYLIB = install_name_tool -change $(MLX_PATH)/$(MLX_LIB) $(DIR)/$(MLX_LIB) $(NAME)
+	LOAD_DYLIB = install_name_tool -change $(MLX_NAME) $(DIR)/$(MLX_LIB) $(NAME)
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
 	MLX_NAME = libmlx.a

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 17:01:35 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/21 21:02:12 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@
 
 # ifdef __linux__
 
+#   define ESC_KEY          65307
+
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
 #   define BACKWARD_KEY		115
 #   define LEFT_KEY			113
 #   define RIGHT_KEY			100
 #   define CTRL_KEY			65507
-#   define ALT_KEY			65513
-#   define C_KEY				99
+#   define ALT_KEY			99
+#   define C_KEY			99
 #  endif
 
 #  ifdef QWERTY
@@ -38,7 +40,7 @@
 #   define LEFT_KEY			97
 #   define RIGHT_KEY		100
 #   define CTRL_KEY			65507
-#   define ALT_KEY			65506
+#   define ALT_KEY			99
 #   define C_KEY			99
 #  endif
 
@@ -51,8 +53,9 @@
 #  define LEFT_KEY			0
 #  define RIGHT_KEY			2
 #  define CTRL_KEY			256
-#  define ALT_KEY			258
+#  define ALT_KEY			8
 #  define C_KEY				8
+#  define ESC_KEY			53
 
 # endif
 
@@ -91,7 +94,7 @@ int		alt_handler(t_vars *vars);
 # define LEAVEWINDOW_MASK			32L
 # define POINTERMOTION_MASK		    64L
 # define POINTERMOTIONHINT_MASK	    128L
-
+# define STRUCTURE_NOTIFY_MASK      131072L
 /*
 ** # define Button1MotionMask		(1L<<8)
 ** # define Button2MotionMask		(1L<<9)
@@ -116,6 +119,7 @@ int		alt_handler(t_vars *vars);
 # define KEY_RELEASE		3
 # define BUTTON_PRESS		4
 # define BUTTON_RELEASE	    5
+# define DESTROY_NOTIFY     17
 
 /*
 ** # define MotionNotify	    6

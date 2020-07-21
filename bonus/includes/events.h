@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/20 18:30:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/21 20:13:52 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@
 
 # define GOD_MODE           0
 
-# define ESC_KEY			65307
-
 # define GUNSHOT_PATH "sounds/gunshot.wav"
 
 # define DEATH_SOUND    "sounds/death.wav"
 # define MUSIC_PATH "sounds/music.wav"
 # define OPTIONS    " > /dev/null 2>&1"
 # define BACKGROUND " &"
+
+# define CLICK_KEY			999666
 
 # ifdef __linux__
 
@@ -58,6 +58,8 @@
 #  define MIXER_COMMAND "amixer set Master 50% > /dev/null 2>&1"
 #  define PLAYER        "aplay"
 #  define KILL_COMMAND  "killall"
+
+# define ESC_KEY			65307
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
@@ -97,6 +99,7 @@
 #  define CTRL_KEY			256
 #  define ALT_KEY			8
 #  define C_KEY				8
+#  define ESC_KEY			53
 
 # endif
 

@@ -6,17 +6,25 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/27 17:06:55 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/21 20:23:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "garbage_collection.h"
+
+int		leave(t_vars *vars)
+{
+	free_vars(vars);
+	exit(0);
+}
 
 void	hooks(t_vars *vars)
 {
 	mlx_hook(vars->win, KEY_PRESS, KEYPRESS_MASK, key_handler, (void *)vars);
 	mlx_hook(vars->win, KEY_RELEASE, KEYRELEASE_MASK, release_handler,
 			(void *)vars);
+	mlx_hook(vars->win, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, leave, vars);
 	mlx_loop_hook(vars->mlx, loop_handler, (void *)vars);
 }
 
