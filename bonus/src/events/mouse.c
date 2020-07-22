@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/22 05:05:37 by root             ###   ########.fr       */
+/*   Updated: 2020/07/22 17:52:29 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int		mouse_move_handler(t_vars *vars)
 	if (((i = (double)win_x - (double)vars->game_screen.width / 2.0))
 		!= (double)vars->game_screen.width / 2.0)
 	{
-		turn_right(vars, i / 400);
+		turn_right(vars, i / MOUSE_DPI);
 		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
-						vars->game_screen.height / 2);
+						(LINUX) ?  vars->game_screen.height / 2 : 0);
 	}
 	return (1);
 }

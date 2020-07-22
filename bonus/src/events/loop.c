@@ -6,7 +6,7 @@
 /*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/22 03:43:56 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/22 17:36:43 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	redraw(t_vars *vars)
 
 int		loop_handler(t_vars *vars)
 {
+	mlx_mouse_hide(vars->mlx, vars->win);
 	if (!(vars->frame_ready))
 	{
 		vars->redraw |= keyboard_handler(vars);

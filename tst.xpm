@@ -2,8 +2,8 @@
 static char *juggernot[] = {
 /* columns rows colors chars-per-pixel */
 "256 241 249 2 ",
-"   c #000000",
-".  c #000001",
+"   c #040201",
+".  c #0B0302",
 "X  c #0D0B0B",
 "o  c #130202",
 "O  c #1B0301",
