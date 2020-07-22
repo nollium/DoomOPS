@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/20 20:51:54 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/22 05:02:27 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_PATH = ./includes/
 
 INCLUDES = -I$(HEADERS_PATH) 
 
-CFLAGS = -Wall -Wextra -g3
+CFLAGS = -Wall -Wextra -g3 -O3
 RM = rm -rf
 
 DIR = $(shell pwd)

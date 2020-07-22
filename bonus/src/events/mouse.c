@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/22 02:02:34 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/22 05:05:37 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		mouse_move_handler(t_vars *vars)
 	if (((i = (double)win_x - (double)vars->game_screen.width / 2.0))
 		!= (double)vars->game_screen.width / 2.0)
 	{
-		turn_right(vars, i / vars->game_screen.width);
+		turn_right(vars, i / 400);
 		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
 						vars->game_screen.height / 2);
 	}

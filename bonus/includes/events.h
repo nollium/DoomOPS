@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/22 04:20:18 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/22 05:06:21 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define EN_HEALTH          10
 # define EN_ALIGN			0.02
 
+# define MOUSE_DPI			400
 # define LEFT_CLICK			999666
 
 # define SHOT_COOLDOWN		0.20
