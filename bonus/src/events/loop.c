@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/21 21:16:48 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/22 03:43:56 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	hooks(t_vars *vars)
 {
 	mlx_mouse_hide(vars->mlx, vars->win);
+	my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
+	(LINUX) ? vars->game_screen.height / 2 : 0);
 	mlx_hook(vars->win, KEY_PRESS, KEYPRESS_MASK, key_handler, (void *)vars);
 	mlx_hook(vars->win, KEY_RELEASE, KEYRELEASE_MASK, release_handler,
 			(void *)vars);
@@ -53,6 +55,7 @@ int		pickup_handler(t_sprite **sprites, t_camera *cam, int *n)
 	if (cam->hp < 5
 		&& (i = sprite_collision(*sprites, cam->x, cam->y, PICKUP_TEX)))
 	{
+		system("(" PLAYER " " DRINK_SOUND BACKGROUND ") " OPTIONS);
 		cam->hp++;
 		swap_sprites(*sprites, *sprites + i - 1);
 		(*n)--;
@@ -75,8 +78,6 @@ void	redraw(t_vars *vars)
 
 int		loop_handler(t_vars *vars)
 {
-	static char *str[] = {"cub3D", "maps/map.cub"};
-
 	if (!(vars->frame_ready))
 	{
 		vars->redraw |= keyboard_handler(vars);
@@ -88,7 +89,6 @@ int		loop_handler(t_vars *vars)
 		if (vars->cam.hp < 0)
 		{
 			free_vars(vars);
-			main(2, str);
 			exit(0);
 		}
 		redraw(vars);

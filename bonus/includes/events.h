@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/21 21:12:06 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/22 04:20:18 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 # define EN_SPEED			0.035
 # define EN_HEALTH          10
+# define EN_ALIGN			0.02
 
 # define LEFT_CLICK			999666
 
@@ -36,16 +37,24 @@
 # define SHOT_DURATION		0.20
 # define GUN_DAMAGE         5
 
-# define DAMAGE_COOLDOWN    1
+# define DAMAGE_COOLDOWN    0.65
 
 # define GOD_MODE           0
 
-# define GUNSHOT_PATH "sounds/gunshot.wav"
-
+# define HIT_SOUND		"sounds/hit.wav"
+# define EN_DEATH_00	"sounds/zdeath00.wav"
+# define EN_DEATH_01	"sounds/zdeath01.wav"
+# define EN_DEATH_02	"sounds/zdeath02.wav"
+# define EN_DEATH_03	"sounds/zdeath04.wav"
+# define EN_DEATH_04	"sounds/zdeath05.wav"
+# define EN_DEATH_05	"sounds/zdeath06.wav"
+# define GUNSHOT_PATH	"sounds/m1911.wav"
 # define DEATH_SOUND    "sounds/death.wav"
-# define MUSIC_PATH "sounds/music.wav"
-# define OPTIONS    " > /dev/null 2>&1"
-# define BACKGROUND " &"
+# define ROUND_SOUND	"sounds/round.wav"
+# define DRINK_SOUND	"sounds/drink.wav"
+# define MUSIC_PATH 	"sounds/music.wav"
+# define OPTIONS    	" > /dev/null 2>&1"
+# define BACKGROUND 	" &"
 
 # ifdef __linux__
 
@@ -100,6 +109,13 @@
 # endif
 
 int		main(int argc, char **argv);
+
+/*
+** PORTABLE MLX FUNCTIONS 
+*/
+
+int		my_mouse_get_pos(void *mlx, void *win, int *x, int *y);
+int		my_mouse_move(void *mlx, void *win, int x, int y);
 
 /*
 ** BACKEND

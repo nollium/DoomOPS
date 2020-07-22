@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:53:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/22 04:34:17 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "settings.h"
 
 # define GUN_PATH   "pics/small_gun.xpm"
-# define FLASH_PATH "pics/flash.xpm"
+# define FLASH_PATH "pics/muzzle.xpm"
 
 # define BAR_1_PATH "pics/bars/bar_2_.xpm"
 # define BAR_2_PATH	"pics/bars/bar_3_.xpm"

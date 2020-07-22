@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:48:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/22 04:37:53 by dirty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	init_2(t_vars *vars)
 	(vars->gun).x = vars->game_screen.width / 2 - (vars->gun.width) / 2;
 	(vars->gun).y = vars->game_screen.height - (vars->gun).height;
 	(vars->flash).x = vars->game_screen.width / 2 - vars->flash.width / 2;
-	(vars->flash).x += 60;
+	(vars->flash).x += 20;
 	(vars->flash).y = vars->game_screen.height - vars->gun.height
 					- vars->flash.height / 2;
 	i = -1;
