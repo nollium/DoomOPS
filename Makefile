@@ -60,5 +60,3 @@ debug: fclean
 
 QWERTY:
 	$(eval MAKE_ARGS += QWERTY)
-	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
-	@cp $(CUB_PATH)/$(NAME) .
