@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 20:02:46 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 22:52:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,22 @@ int				doors_handler(t_vars *vars)
 	return (0);
 }
 
+int				arrow_handler(t_vars *vars)
+{
+	if (key_chr(vars->keys, ARROW_UP_KEY, K_BUFF_SIZE))
+		vars->pitch += 30;
+	if (key_chr(vars->keys, ARROW_DOWN_KEY, K_BUFF_SIZE))
+		vars->pitch -= 30;
+	if (key_chr(vars->keys, ARROW_LEFT_KEY, K_BUFF_SIZE))
+		turn_left(vars, TURN_SPEED);
+	if (key_chr(vars->keys, ARROW_RIGHT_KEY, K_BUFF_SIZE))
+		turn_right(vars, TURN_SPEED);
+	if (key_chr(vars->keys, SHOOT_KEY, K_BUFF_SIZE))
+		click_handler(vars);
+	check_pitch(&(vars->pitch));
+	return (1);
+}
+
 int				keyboard_handler(t_vars *vars)
 {
 	int redraw;
@@ -100,7 +116,8 @@ int				keyboard_handler(t_vars *vars)
 	redraw = (int)(forward_handler(vars) | backward_handler(vars)
 					| right_handler(vars) | left_handler(vars)
 					| alt_handler(vars) | mouse_move_handler(vars)
-					| click_handler(vars) | doors_handler(vars));
+					| click_handler(vars) | doors_handler(vars)
+					| arrow_handler(vars));
 	if (key_chr(vars->keys, CTRL_KEY, K_BUFF_SIZE))
 	{
 		vars->pos_z = CAM_HEIGHT + CROUNCH;

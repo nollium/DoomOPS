@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 20:25:40 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 22:53:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,14 @@
 #  define PLAYER        "aplay"
 #  define KILL_COMMAND  "killall"
 
-# define ESC_KEY			65307
-# define USE_KEY			102
+#  define ESC_KEY			65307
+#  define USE_KEY			102
+
+#  define ARROW_UP_KEY		65362
+#  define ARROW_DOWN_KEY	65364
+#  define ARROW_LEFT_KEY	65361
+#  define ARROW_RIGHT_KEY	65363
+#  define SHOOT_KEY			65506
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122

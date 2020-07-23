@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 16:13:08 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 18:42:36 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/23 22:47:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define WHITESPACES		"\t\010\011\012\013 "
 
 # define SPEED				0.04
-# define TURN_SPEED			SPEED
+# define TURN_SPEED			0.08
 # define ALT_MULT			4
 
 # define NORTH	0

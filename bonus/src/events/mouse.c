@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/23 21:24:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 22:58:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int		click_handler(t_vars *vars)
 	static int		released = 1;
 
 	elapsed = (double)(clock() - last_shot) / (double)CLOCKS_PER_SEC;
-	if (!released && !key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE))
+	if (!key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE)
+		&& !key_chr(vars->keys, SHOOT_KEY, K_BUFF_SIZE))
 		released = 1;
-	if (key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE)
-		&& elapsed > (double)SHOT_DURATION && released)
+	else if (elapsed > (double)SHOT_DURATION && released)
 	{
 		released = 0;
 		if (elapsed > (double)SHOT_DURATION + (double)SHOT_COOLDOWN)
