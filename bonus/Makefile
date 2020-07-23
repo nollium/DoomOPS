@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/22 05:02:27 by root             ###   ########.fr        #
+#    Updated: 2020/07/23 01:13:35 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ SRC = $(addprefix $(DIRSRC)/, \
 \
 			$(addprefix events/,\
 			loop.c  handlers.c keyboard_handler.c keyboard.c mouvements.c ennemies.c \
-			mouse.c collisions.c handlers_2.c $(MOUSE_DIR)/mouse_move.c \
+			mouse.c collisions.c handlers_2.c $(MOUSE_DIR)/mouse_move.c singletons.c\
 	)\
 \
 			debug/debug_map.c debug/errors.c \

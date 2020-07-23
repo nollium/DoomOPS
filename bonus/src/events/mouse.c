@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/22 17:52:29 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 01:22:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,23 @@ int		click_handler(t_vars *vars)
 
 int		mouse_move_handler(t_vars *vars)
 {
-	int		win_x;
-	int		win_y;
-	int		returned;
-	double	i;
+	int				win_x;
+	int				win_y;
+	int				returned;
+	double			i;
+
 
 	if (!vars->win_focus)
 		return (0);
 	returned = my_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
+	if (((i = (double)win_y - (double)vars->game_screen.height / 2.0))
+		!= ((double)vars->game_screen.height / 2.0))
+	{
+		vars->pitch -= i * 2;
+		check_pitch(&(vars->pitch));
+		my_mouse_move(vars->mlx, vars->win, win_x,
+						(LINUX) ?  vars->game_screen.height / 2 : 0);
+	}
 	if (((i = (double)win_x - (double)vars->game_screen.width / 2.0))
 		!= (double)vars->game_screen.width / 2.0)
 	{

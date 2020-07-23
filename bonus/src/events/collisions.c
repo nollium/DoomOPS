@@ -6,20 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 16:00:23 by user42            #+#    #+#             */
-/*   Updated: 2020/07/16 18:56:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 01:10:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
-
-int		get_n(int *init)
-{
-	static int	*n = NULL;
-
-	if (init)
-		n = init;
-	return (*n);
-}
 
 double	my_dist(double x0, double y0, double x1, double y1)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/22 04:24:40 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/23 01:45:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,14 @@ int				keyboard_handler(t_vars *vars)
 					| click_handler(vars));
 	if (key_chr(vars->keys, CTRL_KEY, K_BUFF_SIZE))
 	{
+		vars->pos_z = CAM_HEIGHT + CROUNCH;
 		if (key_chr(vars->keys, C_KEY, K_BUFF_SIZE))
 		{
 			free_vars(vars);
 			exit(0);
 		}
 	}
+	else
+		vars->pos_z = CAM_HEIGHT;
 	return (redraw);
 }

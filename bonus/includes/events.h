@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/22 05:06:21 by root             ###   ########.fr       */
+/*   Updated: 2020/07/23 01:44:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define GUN_DAMAGE         5
 
 # define DAMAGE_COOLDOWN    0.65
+
+# define CAM_HEIGHT			0
+# define CROUNCH			-100
 
 # define GOD_MODE           0
 
@@ -165,6 +168,12 @@ int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y);
 double	my_dist(double x0, double y0, double x1, double y1);
 int		sprite_collision(t_sprite *sprites, double x, double y, int tex);
 int		click_handler(t_vars *vars);
+
+/*
+** SINGLETONS 
+*/
+
+void	check_pitch(double *ptr);
 int		get_n(int *init);
 
 /*

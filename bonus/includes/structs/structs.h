@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 01:02:50 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/23 01:42:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct		s_vars
 	t_texture		health_bars[N_BARS];
 	int				hp;
 	t_sprite		*sprite_ptr;
+	double			pitch;
+	double			pos_z;
 }					t_vars;
 
 typedef struct		s_bfh

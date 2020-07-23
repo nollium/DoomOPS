@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:56:52 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/11 00:42:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 02:16:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct	s_drawer
 	int			floor_color;
 	int			roof_color;
 	t_screen	*screen;
-
+	double		pitch;
+	double		pos_z;
 }				t_drawer;
 
 typedef struct	s_sprite_drawer
@@ -62,6 +63,9 @@ typedef struct	s_sprite_drawer
 	t_texture	*text;
 	int			sprite_index;
 	t_screen	*screen;
+	double		pitch;
+	double		pos_z;
+	double		offset;
 }				t_sprite_drawer;
 
 #endif

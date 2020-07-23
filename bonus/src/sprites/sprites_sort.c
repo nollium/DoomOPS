@@ -6,11 +6,20 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:35:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 01:19:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
+
+int		get_n(int *init)
+{
+	static int	*n = NULL;
+
+	if (init)
+		n = init;
+	return (*n);
+}
 
 void		swap_sprites(t_sprite *s1, t_sprite *s2)
 {

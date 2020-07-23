@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:34:39 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 02:18:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 	y = draw->start_y - 1;
 	while (++y < draw->end_y)
 	{
-		denom = (ssize_t)((y) * 256 + draw->factor_128);
+		denom = (ssize_t)((y - draw->offset) * 256 + draw->factor_128);
 		draw->text_y = ((denom * draw->text->width)
 						/ (draw->sprite_height) / 256);
 		draw->color = draw->text->array[(draw->text->width
@@ -55,9 +55,9 @@ void		put_sprites(t_vars *vars, t_sprite *sprites, t_camera *cam)
 	t_sprite		v_sprite;
 	t_sprite_drawer	draw;
 
-	draw = (t_sprite_drawer){0};
+	draw = (t_sprite_drawer){.pitch = vars->pitch,
+	.screen = &(vars->game_screen), .pos_z = vars->pos_z};
 	draw.denom = 1.0 / (cam->plane.x * cam->dir_y - cam->dir_x * cam->plane.y);
-	draw.screen = &(vars->game_screen);
 	draw.half_win_height = draw.screen->height / 2;
 	draw.half_win_width = draw.screen->width / 2;
 	i = -1;
