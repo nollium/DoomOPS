@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:40:17 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 02:18:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 20:20:44 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 {
 	ssize_t	denom;
+	int		index;
 	int		y;
 
 	y = draw->start_y - 1;
@@ -23,10 +24,13 @@ void		draw_sprite_pxl(t_sprite_drawer *draw, int stripe, t_data *img)
 		denom = (ssize_t)((y - draw->offset) * 256 + draw->factor_128);
 		draw->text_y = ((denom * draw->text->width)
 						/ (draw->sprite_height) / 256);
-		draw->color = draw->text->array[(draw->text->width
-		* draw->text_y + draw->text_x)];
-		my_mlx_pixel_put(img, stripe, y, (SHADOW_MODE) ?
-					add_shade(draw->shader, draw->color) : draw->color);
+		index = (draw->text->width * draw->text_y + draw->text_x);
+		if (index > 0 && index < draw->text->width * draw->text->height)
+		{
+			draw->color = draw->text->array[index];
+			my_mlx_pixel_put(img, stripe, y, (SHADOW_MODE) ?
+							add_shade(draw->shader, draw->color) : draw->color);
+		}
 	}
 }
 

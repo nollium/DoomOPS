@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 18:32:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 20:25:40 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define SPRITE_RADIUS		0.8
 
 # define ENNEMIES_TEX		6
-# define DOOR_OPEN_TEX		7
-# define DOOR_TEX			5
-# define PICKUP_TEX         7
+# define DOOR_OPEN_TEX		5
+# define DOOR_TEX			7
+# define PICKUP_TEX         4
 
 # define EN_SPEED			0.035
 # define EN_HEALTH          10
@@ -48,6 +48,7 @@
 # define GOD_MODE           0
 
 # define HIT_SOUND		"sounds/hit.wav"
+# define DOOR_SOUND		"sounds/door.wav"
 # define EN_DEATH_00	"sounds/zdeath00.wav"
 # define EN_DEATH_01	"sounds/zdeath01.wav"
 # define EN_DEATH_02	"sounds/zdeath02.wav"

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 18:33:09 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 20:02:46 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int				doors_handler(t_vars *vars)
 	int			n;
 	int			*tex_num;
 	static int	released = 1;
+	double		dist;
 
 	n = -1;
 	if (key_chr(vars->keys, USE_KEY, K_BUFF_SIZE))
@@ -74,8 +75,15 @@ int				doors_handler(t_vars *vars)
 			tex_num = &(vars->sprites[n].tex_num);
 			if (*tex_num == DOOR_TEX || *tex_num == DOOR_OPEN_TEX)
 			{
-				if (my_dist(vars->sprites[n].x, vars->sprites[n].y, vars->cam.x, vars->cam.y) <= SPRITE_RADIUS + 1)
-				*tex_num = (*tex_num == DOOR_TEX) ? DOOR_OPEN_TEX : DOOR_TEX;
+				dist = my_dist(vars->sprites[n].x, vars->sprites[n].y, vars->cam.x, vars->cam.y);
+				if (SPRITE_RADIUS < dist && dist <= SPRITE_RADIUS + 1)
+				{
+					if (*tex_num == DOOR_TEX)
+						*tex_num = DOOR_OPEN_TEX;
+					else if (*tex_num == DOOR_OPEN_TEX)
+						*tex_num = DOOR_TEX;
+					system("(" PLAYER " " DOOR_SOUND BACKGROUND ") " OPTIONS);
+				}
 			}
 		}
 		released = 0;

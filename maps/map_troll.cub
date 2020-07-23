@@ -6,8 +6,9 @@ NO	pics/brick.xpm
 SO	pics/brick.xpm
 EA	pics/brick.xpm
 WE	pics/brick.xpm
-S	pics/burger.xpm
-S2	pics/64x64.xpm
+S 	pics/burger.xpm
+DO	pics/door_open.xpm
+DC	pics/door_close.xpm
 EN	pics/zombie.xpm
 
 

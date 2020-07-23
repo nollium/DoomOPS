@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 18:11:33 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 20:25:33 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	get_conf(t_vars *vars, char *line)
 {
-	static char	*text_type[] = {"NO", "SO", "WE", "EA", "DO", "DC", "EN", "S ",
+	static char	*text_type[] = {"NO", "SO", "WE", "EA", "S ", "DO", "EN", "DC",
 								0};
 	int			i;
 	int			error;
