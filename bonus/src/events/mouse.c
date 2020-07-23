@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/23 16:38:16 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 21:24:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,13 @@ int		mouse_move_handler(t_vars *vars)
 	foo = 0;
 	if (centerx == INT_MIN)
 	{
-		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2, vars->game_screen.height / 2);
-		my_mouse_get_pos(vars->mlx, vars->win, &centerx, &centery);
+		centerx = vars->game_screen.width / 2;
+		centery = vars->game_screen.height / 2;
+		if (OSX)
+		{
+			my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2, vars->game_screen.height / 2);
+			my_mouse_get_pos(vars->mlx, vars->win, &centerx, &centery);
+		}
 	}
 	if (!vars->win_focus)
 		return (0);
