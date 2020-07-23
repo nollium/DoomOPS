@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 01:45:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 18:33:09 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,31 @@ int				shoot_sprites(t_sprite **ptr, int *n_sprites)
 	return (0);
 }
 
+int				doors_handler(t_vars *vars)
+{
+	int			n;
+	int			*tex_num;
+	static int	released = 1;
+
+	n = -1;
+	if (key_chr(vars->keys, USE_KEY, K_BUFF_SIZE))
+	{
+		while (released && ++n < vars->num_sprites)
+		{
+			tex_num = &(vars->sprites[n].tex_num);
+			if (*tex_num == DOOR_TEX || *tex_num == DOOR_OPEN_TEX)
+			{
+				if (my_dist(vars->sprites[n].x, vars->sprites[n].y, vars->cam.x, vars->cam.y) <= SPRITE_RADIUS + 1)
+				*tex_num = (*tex_num == DOOR_TEX) ? DOOR_OPEN_TEX : DOOR_TEX;
+			}
+		}
+		released = 0;
+		return (1);
+	}
+	released = 1;
+	return (0);
+}
+
 int				keyboard_handler(t_vars *vars)
 {
 	int redraw;
@@ -67,7 +92,7 @@ int				keyboard_handler(t_vars *vars)
 	redraw = (int)(forward_handler(vars) | backward_handler(vars)
 					| right_handler(vars) | left_handler(vars)
 					| alt_handler(vars) | mouse_move_handler(vars)
-					| click_handler(vars));
+					| click_handler(vars) | doors_handler(vars));
 	if (key_chr(vars->keys, CTRL_KEY, K_BUFF_SIZE))
 	{
 		vars->pos_z = CAM_HEIGHT + CROUNCH;

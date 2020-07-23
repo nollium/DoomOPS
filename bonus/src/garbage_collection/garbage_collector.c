@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/16 19:33:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 17:33:46 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ void	free_split(char ***split)
 	*split = NULL;
 }
 
-void	free_textures(t_texture **t)
+void	free_textures(t_texture *text)
 {
-	t_texture	*text;
 	int			i;
 
-	if (!(text = *t))
+	if (!(text))
 		return ;
 	i = -1;
 	while (text[++i].array)
@@ -51,8 +50,6 @@ void	free_textures(t_texture **t)
 		free(text[i].array);
 		text[i].array = NULL;
 	}
-	free(text);
-	*t = NULL;
 }
 
 void	free_vars(t_vars *vars)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 01:42:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 17:27:31 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct		s_vars
 	t_data			img2[2];
 	t_camera		cam;
 	t_keys			keys[K_BUFF_SIZE + 1];
-	t_texture		*text;
+	t_texture		text[T_BUFF_SIZE + 1];
 	t_sprite		*sprites;
 	t_texture		gun;
 	t_texture		flash;

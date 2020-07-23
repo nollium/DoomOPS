@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/23 01:22:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 16:38:16 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,40 @@ int		click_handler(t_vars *vars)
 	return (0);
 }
 
+#include <limits.h>
+
 int		mouse_move_handler(t_vars *vars)
 {
 	int				win_x;
 	int				win_y;
-	int				returned;
 	double			i;
+	static int		centerx = INT_MIN;
+	static int		centery = INT_MIN;
+	int				foo;
 
-
+	foo = 0;
+	if (centerx == INT_MIN)
+	{
+		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2, vars->game_screen.height / 2);
+		my_mouse_get_pos(vars->mlx, vars->win, &centerx, &centery);
+	}
 	if (!vars->win_focus)
 		return (0);
-	returned = my_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
+	my_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
 	if (((i = (double)win_y - (double)vars->game_screen.height / 2.0))
 		!= ((double)vars->game_screen.height / 2.0))
 	{
 		vars->pitch -= i * 2;
 		check_pitch(&(vars->pitch));
-		my_mouse_move(vars->mlx, vars->win, win_x,
-						(LINUX) ?  vars->game_screen.height / 2 : 0);
+		foo = 1;
 	}
 	if (((i = (double)win_x - (double)vars->game_screen.width / 2.0))
 		!= (double)vars->game_screen.width / 2.0)
 	{
 		turn_right(vars, i / MOUSE_DPI);
-		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
-						(LINUX) ?  vars->game_screen.height / 2 : 0);
+		foo = 1;
 	}
+	if (foo)
+		my_mouse_move(vars->mlx, vars->win, centerx, centery);
 	return (1);
 }

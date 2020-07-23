@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 02:29:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 18:32:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # define SPRITE_RADIUS		0.8
 
 # define ENNEMIES_TEX		6
+# define DOOR_OPEN_TEX		7
 # define DOOR_TEX			5
-# define PICKUP_TEX         4
+# define PICKUP_TEX         7
 
 # define EN_SPEED			0.035
 # define EN_HEALTH          10
@@ -110,6 +111,7 @@
 #  define ALT_KEY			8
 #  define C_KEY				8
 #  define ESC_KEY			53
+#  define USE_KEY			3
 
 # endif
 

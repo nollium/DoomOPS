@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/21 22:56:03 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/23 18:11:59 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ int		forward_handler(t_vars *vars)
 	if (key_chr(vars->keys, FORWARD_KEY, K_BUFF_SIZE))
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
-		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX)
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, DOOR_TEX))
 			vars->cam.x = next_x;
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
-		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX)
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, DOOR_TEX))
 			vars->cam.y = next_y;
 		return (1);
 	}
@@ -43,10 +45,12 @@ int		backward_handler(t_vars *vars)
 	if (key_chr(vars->keys, BACKWARD_KEY, K_BUFF_SIZE))
 	{
 		if (vars->map.array[(int)next_x][(int)(vars->cam.y)] == '0'
-		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX))
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, ENNEMIES_TEX)
+		&& !sprite_collision(vars->sprites, next_x, vars->cam.y, DOOR_TEX))
 			vars->cam.x = next_x;
 		if (vars->map.array[(int)(vars->cam.x)][(int)next_y] == '0'
-		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX))
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, ENNEMIES_TEX)
+		&& !sprite_collision(vars->sprites, vars->cam.x, next_y, DOOR_TEX))
 			vars->cam.y = next_y;
 		return (1);
 	}

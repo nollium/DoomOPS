@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/22 04:37:53 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/23 17:46:18 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,16 @@ int			init_textures(t_vars *vars)
 	if (load_texture(&(vars->gun), GUN_PATH, vars->mlx) != SUCCESS_CODE
 		|| load_texture(&(vars->flash), FLASH_PATH, vars->mlx) != SUCCESS_CODE)
 		return (TEXTURE_ERROR);
-	while (text_paths[++i])
-		;
-	if (!(vars->text = malloc(sizeof(t_texture) * (i + 1))))
-		return (MALLOC_ERROR);
 	i = -1;
 	while (text_paths[++i])
 		if (load_texture(vars->text + i, text_paths[i], vars->mlx)
 			!= SUCCESS_CODE)
 		{
 			vars->text[i] = (t_texture){0};
-			free_textures(&(vars->text));
+			free_textures(vars->text);
 			return (TEXTURE_ERROR);
 		}
-	vars->text[i] = (t_texture) {0};
+	vars->text[i] = (t_texture){0};
 	return (SUCCESS_CODE);
 }
 
@@ -95,6 +91,9 @@ static int	init_2(t_vars *vars)
 	while (error == SUCCESS_CODE && ++i < N_BARS)
 		error = load_texture(vars->health_bars + i, bar_path[i], vars->mlx);
 	vars->cam.hp = N_BARS - 1;
+	while (++i < T_BUFF_SIZE)
+		if (vars->text[i].array == 0)
+			return (FILE_INVALID_ERROR);
 	return (error);
 }
 
@@ -113,6 +112,8 @@ int			init_vars(char *path, t_vars *vars, int save)
 		return (MLX_ERROR);
 	check_resolution(vars->mlx,
 		&vars->game_screen.width, &vars->game_screen.height);
+	if ((error = init_2(vars)) != SUCCESS_CODE)
+		return (error_print(error));
 	if (!save)
 		if (!(vars->win = mlx_new_window(vars->mlx,
 		vars->game_screen.width, vars->game_screen.height, WIN_NAME)))
@@ -120,8 +121,6 @@ int			init_vars(char *path, t_vars *vars, int save)
 	if ((error = init_img(vars->mlx, vars->game_screen.width,
 		vars->game_screen.height, vars->img2)) != SUCCESS_CODE)
 		return (error_print(error));
-	if ((error = init_img(vars->mlx, vars->game_screen.width,
-		vars->game_screen.height, vars->img2 + 1)) != SUCCESS_CODE)
-		return (error_print(error));
-	return (error_print(init_2(vars)));
+	return (error_print(init_img(vars->mlx, vars->game_screen.width,
+		vars->game_screen.height, vars->img2 + 1)));
 }
