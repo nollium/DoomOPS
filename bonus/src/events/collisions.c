@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 16:00:23 by user42            #+#    #+#             */
-/*   Updated: 2020/07/23 01:10:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 02:30:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		s_s_collision(t_sprite *sprites, t_sprite *curr, double x, double y)
 	n = get_n(NULL);
 	while (--n >= 0)
 	{
-		if (sprites[n].tex_num == ENNEMIES_TEX && sprites + n != curr)
+		if ((sprites[n].tex_num == ENNEMIES_TEX
+			|| sprites[n].tex_num == DOOR_TEX) && sprites + n != curr)
 		{
 			if (my_dist(sprites[n].x + 0.5, sprites[n].y + 0.5, x, y)
 				<= SPRITE_RADIUS)

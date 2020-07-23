@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 01:44:41 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/23 02:29:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define SPRITE_RADIUS		0.8
 
 # define ENNEMIES_TEX		6
+# define DOOR_TEX			5
 # define PICKUP_TEX         4
 
 # define EN_SPEED			0.035
