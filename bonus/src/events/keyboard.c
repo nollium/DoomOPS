@@ -3,37 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 22:52:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/27 13:02:00 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "garbage_collection.h"
 #include "sprites.h"
-
-void			play_death_sound(int n)
-{
-	static int last = 0;
-
-	if (last == n)
-		n = (n + 1) % 6;
-	last = n;
-	if (n == 0)
-		system("(" PLAYER " " EN_DEATH_00 BACKGROUND ") " OPTIONS);
-	if (n == 1)
-		system("(" PLAYER " " EN_DEATH_01 BACKGROUND ") " OPTIONS);
-	if (n == 2)
-		system("(" PLAYER " " EN_DEATH_02 BACKGROUND ") " OPTIONS);
-	if (n == 3)
-		system("(" PLAYER " " EN_DEATH_03 BACKGROUND ") " OPTIONS);
-	if (n == 4)
-		system("(" PLAYER " " EN_DEATH_04 BACKGROUND ") " OPTIONS);
-	if (n == 5)
-		system("(" PLAYER " " EN_DEATH_05 BACKGROUND ") " OPTIONS);
-}
 
 int				shoot_sprites(t_sprite **ptr, int *n_sprites)
 {
@@ -60,37 +39,48 @@ int				shoot_sprites(t_sprite **ptr, int *n_sprites)
 	return (0);
 }
 
+int				switch_closest_door(t_vars *vars)
+{
+	int		n;
+	int		*tex_num;
+	double	dist;
+
+	n = -1;
+	while (++n < vars->num_sprites)
+	{
+		tex_num = &(vars->sprites[n].tex_num);
+		if (*tex_num == DOOR_TEX || *tex_num == DOOR_OPEN_TEX)
+		{
+			dist = my_dist(vars->sprites[n].x, vars->sprites[n].y,
+							vars->cam.x, vars->cam.y);
+			if (SPRITE_RADIUS < dist && dist <= SPRITE_RADIUS + 1)
+			{
+				if (*tex_num == DOOR_TEX)
+					*tex_num = DOOR_OPEN_TEX;
+				else if (*tex_num == DOOR_OPEN_TEX)
+					*tex_num = DOOR_TEX;
+				system("(" PLAYER " " DOOR_SOUND BACKGROUND ") " OPTIONS);
+				return (1);
+			}
+		}
+	}
+	return (1);
+}
+
 int				doors_handler(t_vars *vars)
 {
 	int			n;
-	int			*tex_num;
 	static int	released = 1;
-	double		dist;
 
 	n = -1;
 	if (key_chr(vars->keys, USE_KEY, K_BUFF_SIZE))
 	{
-		while (released && ++n < vars->num_sprites)
-		{
-			tex_num = &(vars->sprites[n].tex_num);
-			if (*tex_num == DOOR_TEX || *tex_num == DOOR_OPEN_TEX)
-			{
-				dist = my_dist(vars->sprites[n].x, vars->sprites[n].y, vars->cam.x, vars->cam.y);
-				if (SPRITE_RADIUS < dist && dist <= SPRITE_RADIUS + 1)
-				{
-					if (*tex_num == DOOR_TEX)
-						*tex_num = DOOR_OPEN_TEX;
-					else if (*tex_num == DOOR_OPEN_TEX)
-						*tex_num = DOOR_TEX;
-					system("(" PLAYER " " DOOR_SOUND BACKGROUND ") " OPTIONS);
-				}
-			}
-		}
+		if (released)
+			switch_closest_door(vars);
 		released = 0;
-		return (1);
 	}
 	released = 1;
-	return (0);
+	return (!released);
 }
 
 int				arrow_handler(t_vars *vars)

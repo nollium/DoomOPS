@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/15 00:00:26 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/27 13:07:22 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static double	s_dist(t_camera *cam, t_sprite *sprite)
 **	Insertion sort
 */
 
-void		sort_sprites(t_camera *cam, t_sprite *arr, int n)
+void			sort_sprites(t_camera *cam, t_sprite *arr, int n)
 {
 	int	i;
 	int	j;

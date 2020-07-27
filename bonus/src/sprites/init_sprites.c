@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:41:36 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 02:18:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/27 12:38:06 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static void	get_stripe_size(t_sprite_drawer *draw)
 {
-	draw->start_y = -draw->half_sprite_height + draw->half_win_height + draw->offset;
+	draw->start_y = -draw->half_sprite_height + draw->half_win_height
+	+ draw->offset;
 	draw->start_y = (draw->start_y < 0) ? 0 : draw->start_y;
-	draw->end_y = draw->half_sprite_height + draw->half_win_height + draw->offset;
+	draw->end_y = draw->half_sprite_height + draw->half_win_height
+	+ draw->offset;
 	if (draw->end_y >= draw->screen->height)
 		draw->end_y = draw->screen->height - 1;
 	draw->sprite_width = fabs((draw->screen->height / (draw->transform_y)));

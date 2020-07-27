@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 21:43:54 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 01:19:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/27 12:37:36 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprites.h"
 
-int		get_n(int *init)
+int			get_n(int *init)
 {
 	static int	*n = NULL;
 

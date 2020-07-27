@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/21 21:02:12 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:06:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # ifdef __linux__
 
-#   define ESC_KEY          65307
+#  define ESC_KEY          65307
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
@@ -95,6 +95,7 @@ int		alt_handler(t_vars *vars);
 # define POINTERMOTION_MASK		    64L
 # define POINTERMOTIONHINT_MASK	    128L
 # define STRUCTURE_NOTIFY_MASK      131072L
+
 /*
 ** # define Button1MotionMask		(1L<<8)
 ** # define Button2MotionMask		(1L<<9)

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:20:06 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 16:05:58 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:39:13 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 	while (++draw->y < draw->screen->height)
 	{
 		if (draw->roof_color != 0 && SHADOW_MODE && draw->y < draw->start)
-			draw->color = add_shade((double)draw->y * 2.3 / (draw->screen->height / (draw->screen->height - draw->pitch)) /
-				(double)draw->screen->height, draw->roof_color);
+			draw->color = add_shade((double)draw->y * 2.3 /
+			(draw->screen->height / (draw->screen->height - draw->pitch))
+			/ (double)draw->screen->height, draw->roof_color);
 		if (draw->y >= draw->start && draw->y < draw->end)
 		{
 			get_color(draw, &(vars->text[draw->side]));
@@ -43,7 +44,8 @@ void		draw_col(t_vars *vars, t_drawer *draw)
 		{
 			draw->color = draw->floor_color;
 			if (SHADOW_MODE && draw->color != 0)
-				draw->color = add_shade(1.05 * (draw->screen->height / (draw->screen->height - draw->pitch)) / (((double)draw->y) * 2
+				draw->color = add_shade(1.05 * (draw->screen->height
+				/ (draw->screen->height - draw->pitch)) / (((double)draw->y) * 2
 				/ (double)((draw->screen->height + draw->pitch))), draw->color);
 		}
 		my_mlx_pixel_put(vars->img, draw->x, draw->y, draw->color);
@@ -65,8 +67,9 @@ void		init_drawer(t_drawer *draw, t_ray *ray, int text_height)
 	draw->end = (draw->end >= draw->screen->height)
 				? draw->screen->height - 1 : draw->end;
 	draw->step = 1.0 * text_height / draw->line_height;
-	draw->tex_pos = (draw->start - draw->pitch - (draw->pos_z / ray->perp_wall_dist) - draw->screen->height / 2
-					+ draw->line_height / 2) * draw->step;
+	draw->tex_pos = (draw->start - draw->pitch
+	- (draw->pos_z / ray->perp_wall_dist) - draw->screen->height / 2
+	+ draw->line_height / 2) * draw->step;
 }
 
 void		draw_scene(t_vars *vars)

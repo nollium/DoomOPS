@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ennemies.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 15:43:58 by dirty             #+#    #+#             */
-/*   Updated: 2020/07/22 03:58:23 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/27 13:02:43 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,25 @@ int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map)
 		n--;
 	}
 	return (0);
+}
+
+void	play_death_sound(int n)
+{
+	static int last = 0;
+
+	if (last == n)
+		n = (n + 1) % 6;
+	last = n;
+	if (n == 0)
+		system("(" PLAYER " " EN_DEATH_00 BACKGROUND ") " OPTIONS);
+	if (n == 1)
+		system("(" PLAYER " " EN_DEATH_01 BACKGROUND ") " OPTIONS);
+	if (n == 2)
+		system("(" PLAYER " " EN_DEATH_02 BACKGROUND ") " OPTIONS);
+	if (n == 3)
+		system("(" PLAYER " " EN_DEATH_03 BACKGROUND ") " OPTIONS);
+	if (n == 4)
+		system("(" PLAYER " " EN_DEATH_04 BACKGROUND ") " OPTIONS);
+	if (n == 5)
+		system("(" PLAYER " " EN_DEATH_05 BACKGROUND ") " OPTIONS);
 }

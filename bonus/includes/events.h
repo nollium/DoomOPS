@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 12:10:53 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:04:29 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@
 #  define MAX_PITCH			400
 # else
 #  define MAX_PITCH			1000
-#endif
+# endif
 
 # define CAM_HEIGHT			0
 # define CROUNCH			-100
 
-# define GOD_MODE           0
+# define GOD_MODE			0
 
 # define HIT_SOUND		"sounds/hit.wav"
 # define DOOR_SOUND		"sounds/door.wav"
@@ -64,11 +64,11 @@
 # define EN_DEATH_04	"sounds/zdeath05.wav"
 # define EN_DEATH_05	"sounds/zdeath06.wav"
 # define GUNSHOT_PATH	"sounds/m1911.wav"
-# define DEATH_SOUND    "sounds/death.wav"
+# define DEATH_SOUND	"sounds/death.wav"
 # define ROUND_SOUND	"sounds/round.wav"
 # define DRINK_SOUND	"sounds/drink.wav"
 # define MUSIC_PATH 	"sounds/music.wav"
-# define OPTIONS    	" > /dev/null 2>&1"
+# define OPTIONS		" > /dev/null 2>&1"
 # define BACKGROUND 	" &"
 
 # ifdef __linux__
@@ -140,7 +140,7 @@
 int		main(int argc, char **argv);
 
 /*
-** PORTABLE MLX FUNCTIONS 
+** PORTABLE MLX FUNCTIONS
 */
 
 int		my_mouse_get_pos(void *mlx, void *win, int *x, int *y);
@@ -183,6 +183,7 @@ int		alt_handler(t_vars *vars);
 ** ENNEMIES
 */
 
+void	play_death_sound(int n);
 void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
 					char **map);
 int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map);
@@ -195,7 +196,7 @@ int		sprite_collision(t_sprite *sprites, double x, double y, int tex);
 int		click_handler(t_vars *vars);
 
 /*
-** SINGLETONS 
+** SINGLETONS (-like)
 */
 
 void	check_pitch(double *ptr);
