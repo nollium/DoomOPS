@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 22:53:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/27 12:10:53 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,12 @@
 #  define MIXER_COMMAND "echo NO MIXER"
 #  define PLAYER        "afplay"
 #  define KILL_COMMAND  "killall"
+
+#  define ARROW_UP_KEY		126
+#  define ARROW_DOWN_KEY	123
+#  define ARROW_LEFT_KEY	125
+#  define ARROW_RIGHT_KEY	124
+#  define SHOOT_KEY			258
 
 #  define FORWARD_KEY		13
 #  define BACKWARD_KEY		1
