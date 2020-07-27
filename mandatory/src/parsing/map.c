@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/20 20:03:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/27 16:32:37 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,22 @@ char		**parse_array(t_list *lst, int len)
 	int		error;
 
 	error = 0;
-	if (lst && (array = malloc(sizeof(char *) * (len + 1))))
+	if (lst && lst->content && (array = ft_calloc((len + 1), sizeof(char *))))
 	{
 		len = 1;
-		while ((lst->next && (!ft_isdigit(*(char *)lst->content)
-			&& !ft_isspace(*(char *)lst->content))) || !*(char *)lst->content)
+		while (lst && lst->content
+			&& ((lst->next && (!ft_isdigit(*(char *)lst->content)
+			&& !ft_isspace(*(char *)lst->content))) || !*(char *)lst->content))
 			lst = lst->next;
-		array[0] = ft_strdup(lst->content);
-		error |= format_map_line(array[0]);
-		while ((lst = lst->next) && *(char *)lst->content
-				&& !(error |= format_map_line(lst->content)))
-			array[len++] = ft_strdup(lst->content);
-		array[len] = NULL;
+		if (!(error = !lst))
+		{
+			array[0] = ft_strdup(lst->content);
+			error |= format_map_line(array[0]);
+			while ((lst = lst->next) && *(char *)lst->content
+					&& !(error |= format_map_line(lst->content)))
+				array[len++] = ft_strdup(lst->content);
+			array[len] = NULL;
+		}
 	}
 	else
 		array = NULL;

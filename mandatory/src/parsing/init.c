@@ -6,11 +6,12 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/09 19:23:41 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:01:08 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "events.h"
 
 int			init_img(void *mlx, int width, int height, t_data *img)
 {
@@ -56,7 +57,11 @@ int			init_textures(t_vars *vars)
 	text_paths = vars->text_paths;
 	i = -1;
 	while (text_paths[++i])
-		;
+		if (!ft_strnstr(text_paths[i] + ft_strlen(text_paths[i]) - 4,
+			".xpm", 4))
+			return (FILE_INVALID_ERROR);
+	if (i != T_BUFF_SIZE)
+		return (FILE_INVALID_ERROR);
 	if (!(vars->text = malloc(sizeof(t_texture) * (i + 1))))
 		return (MALLOC_ERROR);
 	i = -1;

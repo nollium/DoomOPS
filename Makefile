@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dirty <dirty@student.42.fr>                +#+  +:+       +#+         #
+#    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/15 02:17:10 by dirty            ###   ########.fr        #
+#    Updated: 2020/07/27 15:05:10 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ bonus: clean_mandatory
 opti: fclean
 	$(eval MAKE_ARGS += opti)
 
-debug: fclean
+debug:
 	$(eval MAKE_ARGS += debug)
 
 QWERTY:

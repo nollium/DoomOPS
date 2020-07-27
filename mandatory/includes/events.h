@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 13:06:28 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:00:36 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "settings.h"
 # include "frontend.h"
 
-# define T_BUFF_SIZE		8
+# define T_BUFF_SIZE		5
 # define S_BUFF_SIZE		1
 
 # ifdef __linux__
