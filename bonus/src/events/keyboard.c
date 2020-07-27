@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 13:02:00 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:39:56 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ int				doors_handler(t_vars *vars)
 		if (released)
 			switch_closest_door(vars);
 		released = 0;
+		return (1);
 	}
 	released = 1;
-	return (!released);
+	return (0);
 }
 
 int				arrow_handler(t_vars *vars)
