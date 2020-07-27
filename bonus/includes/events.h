@@ -42,6 +42,14 @@
 
 # define DAMAGE_COOLDOWN    0.65
 
+# define MIN_PITCH			-1000
+
+# ifdef __linux__
+#  define MAX_PITCH			400
+# else
+#  define MAX_PITCH			1000
+#endif
+
 # define CAM_HEIGHT			0
 # define CROUNCH			-100
 

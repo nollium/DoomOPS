@@ -20,6 +20,8 @@
 # include "garbage_collection.h"
 # include "settings.h"
 
+# define ASPECT_RATIO 0.6
+
 # define GUN_PATH   "pics/small_gun.xpm"
 # define FLASH_PATH "pics/muzzle.xpm"
 

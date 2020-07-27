@@ -82,7 +82,6 @@ int		loop_handler(t_vars *vars)
 	if (!(vars->frame_ready))
 	{
 		vars->redraw |= keyboard_handler(vars);
-		vars->redraw = 1;
 		get_n(&(vars->num_sprites));
 		ennemies_handler(vars->sprites, &(vars->cam), vars->map.array);
 		pickup_handler(&(vars->sprites), &(vars->cam), &(vars->num_sprites));
@@ -92,9 +91,10 @@ int		loop_handler(t_vars *vars)
 			free_vars(vars);
 			exit(0);
 		}
-		redraw(vars);
+		if (vars->redraw)
+			redraw(vars);
 	}
-	if (vars->redraw)
+	if (vars->frame_ready)
 		refresh(vars);
 	return (0);
 }

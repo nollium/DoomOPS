@@ -12,20 +12,22 @@
 
 #include "parsing.h"
 
-int			init_cam(t_camera *cam, t_spawn *spawn)
+int			init_cam(t_camera *cam, t_spawn *spawn, t_screen *s)
 {
 	t_camera		cam_switcher[4];
 	int				i;
+	double			ratio;
 
+	ratio = ((double)(s->width) / (double)(s->height)) * ASPECT_RATIO;
 	i = 0;
 	cam_switcher[0] = (t_camera){.dir_x = -1, .speed = SPEED,
-	.turn_speed = TURN_SPEED, .plane = (t_plane){0, 0.66}};
+	.turn_speed = TURN_SPEED, .plane = (t_plane){0, ratio}};
 	cam_switcher[1] = (t_camera){.dir_x = 1, .speed = SPEED,
-	.turn_speed = TURN_SPEED, .plane = (t_plane){0, -0.66}};
+	.turn_speed = TURN_SPEED, .plane = (t_plane){0, -ratio}};
 	cam_switcher[2] = (t_camera){.dir_y = -1.0, .speed = SPEED,
-	.turn_speed = TURN_SPEED, .plane = (t_plane){-0.66, 0.0}};
+	.turn_speed = TURN_SPEED, .plane = (t_plane){-ratio, 0.0}};
 	cam_switcher[3] = (t_camera){.dir_y = 1.0, .speed = SPEED,
-	.turn_speed = TURN_SPEED, .plane = (t_plane){0.66, 0.0}};
+	.turn_speed = TURN_SPEED, .plane = (t_plane){ratio, 0.0}};
 	while (SPAWN_CHARS[i] && SPAWN_CHARS[i] != spawn->dir)
 		i++;
 	if (SPAWN_CHARS[i])
@@ -104,14 +106,15 @@ int			init_vars(char *path, t_vars *vars, int save)
 	init_keys_buffer(vars->keys);
 	if ((error = load_cub(path, vars)) != SUCCESS_CODE)
 		return (error_print(error));
-	if ((error = init_cam(&(vars->cam), &(vars->spawn))) != SUCCESS_CODE)
-		return (error_print(error));
-	if (!(vars->z_buffer = malloc(sizeof(double) * vars->game_screen.width)))
-		return (MALLOC_ERROR);
 	if (!(vars->mlx = mlx_init()))
 		return (MLX_ERROR);
 	check_resolution(vars->mlx,
-		&vars->game_screen.width, &vars->game_screen.height);
+					&(vars->game_screen.width), &(vars->game_screen.height));
+	if ((error = init_cam(&(vars->cam), &(vars->spawn), &(vars->game_screen)))
+	!= SUCCESS_CODE)
+		return (error_print(error));
+	if (!(vars->z_buffer = malloc(sizeof(double) * vars->game_screen.width)))
+		return (MALLOC_ERROR);
 	if ((error = init_2(vars)) != SUCCESS_CODE)
 		return (error_print(error));
 	if (!save)

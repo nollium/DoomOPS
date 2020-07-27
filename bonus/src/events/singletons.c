@@ -16,10 +16,10 @@ void	check_pitch(double *ptr)
 {
 	if (ptr)
 	{
-		if (*ptr < -800)
-			*ptr = -800;
-		if (*ptr > 800)
-			*ptr = 800;
+		if (*ptr < MIN_PITCH)
+			*ptr = MIN_PITCH;
+		if (*ptr > MAX_PITCH)
+			*ptr = MAX_PITCH;
 	}
 }
 

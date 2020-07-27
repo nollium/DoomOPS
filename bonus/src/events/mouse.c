@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "events.h"
+#include <limits.h>
 
 int		mouse_press_handler(int keycode, int x, int y, t_vars *vars)
 {
@@ -31,8 +32,8 @@ int		mouse_release_handler(int keycode, int x, int y, t_vars *vars)
 int		click_handler(t_vars *vars)
 {
 	static clock_t	last_shot = 0;
-	double			elapsed;
-	static int		released = 1;
+	double		elapsed;
+	static int	released = 1;
 
 	elapsed = (double)(clock() - last_shot) / (double)CLOCKS_PER_SEC;
 	if (!key_chr(vars->keys, LEFT_CLICK, K_BUFF_SIZE)
@@ -55,40 +56,32 @@ int		click_handler(t_vars *vars)
 	return (0);
 }
 
-#include <limits.h>
-
 int		mouse_move_handler(t_vars *vars)
 {
-	int				win_x;
-	int				win_y;
-	double			i;
-	static int		centerx = INT_MIN;
-	static int		centery = INT_MIN;
-	int				foo;
+	int		win_x;
+	int		win_y;
+	double		i;
+	static int	centerx = INT_MIN;
+	static int	centery = INT_MIN;
+	int		foo;
 
 	foo = 0;
 	if (centerx == INT_MIN)
 	{
-		centerx = vars->game_screen.width / 2;
-		centery = vars->game_screen.height / 2;
-		if (OSX)
-		{
-			my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2, vars->game_screen.height / 2);
-			my_mouse_get_pos(vars->mlx, vars->win, &centerx, &centery);
-		}
+		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
+					vars->game_screen.height / 2);
+		my_mouse_get_pos(vars->mlx, vars->win, &centerx, &centery);
 	}
 	if (!vars->win_focus)
 		return (0);
 	my_mouse_get_pos(vars->mlx, vars->win, &win_x, &win_y);
-	if (((i = (double)win_y - (double)vars->game_screen.height / 2.0))
-		!= ((double)vars->game_screen.height / 2.0))
+	if (((i = (double)win_y - centery) != centery))
 	{
 		vars->pitch -= i * 2;
 		check_pitch(&(vars->pitch));
 		foo = 1;
 	}
-	if (((i = (double)win_x - (double)vars->game_screen.width / 2.0))
-		!= (double)vars->game_screen.width / 2.0)
+	if ((i = (double)win_x - centerx) != (centerx))
 	{
 		turn_right(vars, i / MOUSE_DPI);
 		foo = 1;

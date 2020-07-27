@@ -101,7 +101,8 @@ OBJBONUS = $(SRCBONUS:.c=.o)
 
 all: $(NAME) $(HEADERS)
 
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
+$(NAME): $(MLX_LIB) $(LIBFT) $(OBJ)
+	@echo MLX : $(MLX_LIB)
 	@echo COMPILING $(NAME)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME) $(LINKS) $(FRAMEWORKS)
 	$(LOAD_DYLIB)
