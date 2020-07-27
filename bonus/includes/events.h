@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 13:04:29 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:49:06 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@
 #  define KILL_COMMAND  "killall"
 
 #  define ARROW_UP_KEY		126
-#  define ARROW_DOWN_KEY	123
-#  define ARROW_LEFT_KEY	125
+#  define ARROW_DOWN_KEY	125
+#  define ARROW_LEFT_KEY	123
 #  define ARROW_RIGHT_KEY	124
 #  define SHOOT_KEY			258
 
