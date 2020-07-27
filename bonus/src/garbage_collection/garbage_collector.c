@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 17:33:46 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:50:34 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	free_vars(t_vars *vars)
 	if (vars->mlx && vars->img2[1].img)
 		mlx_destroy_image(vars->mlx, vars->img2[1].img);
 	free_split(&(vars->map.array));
-	free_textures(&(vars->text));
+	free_textures(vars->text);
 	free(vars->sprite_ptr);
 	free(vars->gun.array);
 	free(vars->flash.array);
