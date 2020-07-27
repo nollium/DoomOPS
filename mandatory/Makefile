@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/27 16:43:47 by smaccary         ###   ########.fr        #
+#    Updated: 2020/07/27 18:57:47 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_PATH = ./includes/
 
 INCLUDES = -I$(HEADERS_PATH) 
 
-CFLAGS = -Wall -Wextra -g3
+CFLAGS = -Wall -Wextra -Werror -O3
 RM = rm -rf
 
 DIR = $(shell pwd)

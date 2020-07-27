@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 17:47:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 19:14:43 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,17 @@ int	read_cub(char *path, t_list **alst)
 		return (FILE_INVALID_ERROR);
 	*alst = NULL;
 	len = 0;
-	while ((error = get_next_line(fd, &line)) == 1 || error == 0)
+	while ((((error = get_next_line(fd, &line)) == 1) || !error) && ++len)
 	{
-		(len)++;
-		if (line)
-			ft_lstadd_back(alst, ft_lstnew(line));
-		else
+		if (!line)
 		{
 			close(fd);
 			ft_lstclear(alst, free);
 			return (MALLOC_ERROR);
 		}
+		ft_lstadd_back(alst, ft_lstnew(line));
 		if (!error)
-			break;
+			break ;
 	}
 	close(fd);
 	if (error < 0 || !*alst)

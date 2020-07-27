@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/27 16:32:37 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/27 19:19:00 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,12 @@ char		**parse_array(t_list *lst, int len)
 			while ((lst = lst->next) && *(char *)lst->content
 					&& !(error |= format_map_line(lst->content)))
 				array[len++] = ft_strdup(lst->content);
-			array[len] = NULL;
 		}
 	}
 	else
 		array = NULL;
 	if (error || len <= 2)
-	{
 		free_split(&array);
-		return (NULL);
-	}
 	return (array);
 }
 
