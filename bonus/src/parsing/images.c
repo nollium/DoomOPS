@@ -12,6 +12,7 @@
 
 #include "parsing.h"
 #include "frontend.h"
+#include <stdint.h>
 
 int			init_img(void *mlx, int width, int height, t_data *img)
 {

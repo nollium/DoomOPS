@@ -12,6 +12,7 @@
 
 #include "parsing.h"
 #include "frontend.h"
+#include <stdint.h>
 
 int			load_xpm(t_data *data, char *path, void *mlx)
 {

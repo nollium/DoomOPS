@@ -14,7 +14,7 @@
 
 int	add_shade(double shade, int color)
 {
-	unsignedv char	rgb[4];
+	unsigned char	rgb[4];
 
 	if (0 > shade || color == TRANS_COLOR)
 		return (color);
