@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 17:27:31 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:47:05 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,6 @@ typedef struct		s_vars
 	double			pitch;
 	double			pos_z;
 }					t_vars;
-
-typedef struct		s_bfh
-{
-	unsigned char	bitmap_type[2];
-	int				file_size;
-	short			reserved1;
-	short			reserved2;
-	unsigned int	offset_bits;
-}					t_bfh;
 
 typedef struct		s_bih
 {

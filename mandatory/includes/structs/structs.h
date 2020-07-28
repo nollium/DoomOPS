@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 15:46:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/13 17:01:51 by dirty            ###   ########.fr       */
+/*   Updated: 2020/07/28 17:21:46 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,6 @@ typedef struct		s_vars
 	int				redraw;
 	int				seen_sprite;
 }					t_vars;
-
-typedef struct		s_bfh
-{
-	unsigned char	bitmap_type[2];
-	int				file_size;
-	short			reserved1;
-	short			reserved2;
-	unsigned int	offset_bits;
-}					t_bfh;
 
 typedef struct		s_bih
 {
