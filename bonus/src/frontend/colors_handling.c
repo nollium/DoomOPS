@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:58:15 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:11:46 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/28 20:07:58 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	add_shade(double shade, int color)
 {
-	unsigned char	rgb[4];
+	unsignedv char	rgb[4];
 
 	if (0 > shade || color == TRANS_COLOR)
 		return (color);

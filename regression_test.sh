@@ -6,7 +6,8 @@ if [[ -z "$1" ]]
 fi
 
 make debug $arg --quiet
-
+rm -rf screenshots
+mkdir -p screenshots
 paths=$(find maps/mandatory/valid -name "*.cub")
 
 for path in $paths ; do
@@ -25,6 +26,7 @@ for path in $paths ; do
 		fi
 		exit
 	fi
+	cp screenshot.bmp screenshots/$(basename $path | sed 's/.cub/.bmp/g')
 done
 
 paths=$(find maps/mandatory/invalid -name "*.cub")
