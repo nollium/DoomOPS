@@ -1,0 +1,30 @@
+AddressSanitizer:DEADLYSIGNAL ================================================================= ==19597==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x000105384eec bp 0x7ffeea880fb0 sp 0x7ffeea880ec0 T0) ==19597==The signal is caused by a READ memory access. ==19597==Hint: address points to the zero page. #0 0x105384eeb in parse_array map.c:45 #1 0x1053809b8 in load_cub backend.c:120 #2 0x105382560 in init_vars init.c:107 #3 0x10537f8b7 in main main.c:33 #4 0x7fff67fcd3d4 in start (libdyld.dylib:x86_64+0x163d4) ==19597==Register values: rax = 0x0000000000000001 rbx = 0x00007ffeea880f00 rcx = 0x0000000000004f00 rdx = 0x0000100000000000 rdi = 0x0000602000004fd0 rsi = 0x0000000000000058 rbp = 0x00007ffeea880fb0 rsp = 0x00007ffeea880ec0 r8 = 0x0000200000000000 r9 = 0x00000fffffffffff r10 = 0x0000000000000000 r11 = 0xffffffffffffffff r12 = 0x0000100000000001 r13 = 0x00001c04000009f6 r14 = 0x0000000000000000 r15 = 0x0000000000000008 AddressSanitizer can not provide additional info. SUMMARY: AddressSanitizer: SEGV map.c:45 in parse_array ==19597==ABORTING
+[31mERROR ON maps/bonus/invalid/invalid.cub
+R 1920 1080
+F 100,100,100
+C 0,0,1
+
+NO  pics/NO.xpm
+SO  pics/SO.xpm
+EA  pics/EA.xpm
+WE  pics/WE.xpm
+
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==19597==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x000105384eec bp 0x7ffeea880fb0 sp 0x7ffeea880ec0 T0)
+==19597==The signal is caused by a READ memory access.
+==19597==Hint: address points to the zero page.
+    #0 0x105384eeb in parse_array map.c:45
+    #1 0x1053809b8 in load_cub backend.c:120
+    #2 0x105382560 in init_vars init.c:107
+    #3 0x10537f8b7 in main main.c:33
+    #4 0x7fff67fcd3d4 in start (libdyld.dylib:x86_64+0x163d4)
+
+==19597==Register values:
+rax = 0x0000000000000001  rbx = 0x00007ffeea880f00  rcx = 0x0000000000004f00  rdx = 0x0000100000000000  
+rdi = 0x0000602000004fd0  rsi = 0x0000000000000058  rbp = 0x00007ffeea880fb0  rsp = 0x00007ffeea880ec0  
+ r8 = 0x0000200000000000   r9 = 0x00000fffffffffff  r10 = 0x0000000000000000  r11 = 0xffffffffffffffff  
+r12 = 0x0000100000000001  r13 = 0x00001c04000009f6  r14 = 0x0000000000000000  r15 = 0x0000000000000008  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV map.c:45 in parse_array
+==19597==ABORTING
