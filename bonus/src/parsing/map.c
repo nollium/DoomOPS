@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/29 15:18:21 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/07/20 19:42:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,26 @@ char		**parse_array(t_list *lst, int len)
 	int		error;
 
 	error = 0;
-	if (lst && lst->content && (array = ft_calloc((len + 1), sizeof(char *))))
+	if (lst && (array = malloc(sizeof(char *) * (len + 1))))
 	{
 		len = 1;
-		while (lst && lst->content
-			&& ((lst->next && (!ft_isdigit(*(char *)lst->content)
-			&& !ft_isspace(*(char *)lst->content))) || !*(char *)lst->content))
+		while ((lst->next && (!ft_isdigit(*(char *)lst->content)
+			&& !ft_isspace(*(char *)lst->content))) || !*(char *)lst->content)
 			lst = lst->next;
-		if (!(error = !lst))
-		{
-			array[0] = ft_strdup(lst->content);
-			error |= format_map_line(array[0]);
-			while ((lst = lst->next) && *(char *)lst->content
-					&& !(error |= format_map_line(lst->content)))
-				array[len++] = ft_strdup(lst->content);
-		}
+		array[0] = ft_strdup(lst->content);
+		error |= format_map_line(array[0]);
+		while ((lst = lst->next) && *(char *)lst->content
+				&& !(error |= format_map_line(lst->content)))
+			array[len++] = ft_strdup(lst->content);
+		array[len] = NULL;
 	}
 	else
 		array = NULL;
 	if (error || len <= 2)
+	{
 		free_split(&array);
+		return (NULL);
+	}
 	return (array);
 }
 

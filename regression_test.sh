@@ -1,18 +1,14 @@
 #!/bin/bash
 
 if [[ -z "$1" ]]
-	then 
-		arg="all"
-		dir="mandatory"
-	else 
-	arg="bonus"
-	dir="bonus"
+	then arg="all"
+	else arg="bonus"
 fi
 
 make debug $arg --quiet
 rm -rf screenshots
 mkdir -p screenshots
-paths=$(find maps/$dir/valid -name "*.cub")
+paths=$(find maps/mandatory/valid -name "*.cub")
 
 for path in $paths ; do
 	error=$(./cub3D $path --save 2>&1)
@@ -33,7 +29,7 @@ for path in $paths ; do
 	cp screenshot.bmp screenshots/$(basename $path | sed 's/.cub/.bmp/g')
 done
 
-paths=$(find maps/$dir/invalid -name "*.cub")
+paths=$(find maps/mandatory/invalid -name "*.cub")
 
 for path in $paths ; do
 	error=$(./cub3D $path --save 2>&1)
@@ -47,8 +43,8 @@ for path in $paths ; do
 		read -p " [y/n] " -n 1 -r
 		printf "\e[0m\n"
 		if 	[[ $REPLY =~ ^[Yy]$ ]]
-			then
-				lldb -o run ./cub3D -- $path --save
+		then
+			lldb -o run ./cub3D -- $path --save
 		fi
 		exit
 	fi
