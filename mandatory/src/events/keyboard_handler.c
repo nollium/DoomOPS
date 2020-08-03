@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 16:15:55 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:17:54 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/03 17:41:14 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,45 +47,21 @@ int		backward_handler(t_vars *vars)
 	return (0);
 }
 
-int		right_handler(t_vars *vars)
+int		turn_right_handler(t_vars *vars)
 {
-	long double	old_dir_x;
-	long double	old_plane_x;
-
-	if (key_chr(vars->keys, RIGHT_KEY, K_BUFF_SIZE))
+	if (key_chr(vars->keys, ARROW_RIGHT_KEY, K_BUFF_SIZE))
 	{
-		old_dir_x = vars->cam.dir_x;
-		vars->cam.dir_x = vars->cam.dir_x * cos(-vars->cam.turn_speed)
-			- vars->cam.dir_y * sin(-vars->cam.turn_speed);
-		vars->cam.dir_y = old_dir_x * sin(-vars->cam.turn_speed)
-			+ vars->cam.dir_y * cos(-vars->cam.turn_speed);
-		old_plane_x = vars->cam.plane.x;
-		vars->cam.plane.x = vars->cam.plane.x * cos(-vars->cam.turn_speed)
-			- vars->cam.plane.y * sin(-vars->cam.turn_speed);
-		vars->cam.plane.y = old_plane_x * sin(-vars->cam.turn_speed)
-			+ vars->cam.plane.y * cos(-vars->cam.turn_speed);
+		turn(vars, -vars->cam.turn_speed);
 		return (1);
 	}
 	return (0);
 }
 
-int		left_handler(t_vars *vars)
+int		turn_left_handler(t_vars *vars)
 {
-	long double	old_dir_x;
-	long double	old_plane_x;
-
-	if (key_chr(vars->keys, LEFT_KEY, K_BUFF_SIZE))
+	if (key_chr(vars->keys, ARROW_LEFT_KEY, K_BUFF_SIZE))
 	{
-		old_dir_x = vars->cam.dir_x;
-		vars->cam.dir_x = vars->cam.dir_x * cos(vars->cam.turn_speed)
-			- vars->cam.dir_y * sin(vars->cam.turn_speed);
-		vars->cam.dir_y = old_dir_x * sin(vars->cam.turn_speed)
-			+ vars->cam.dir_y * cos(vars->cam.turn_speed);
-		old_plane_x = vars->cam.plane.x;
-		vars->cam.plane.x = vars->cam.plane.x * cos(vars->cam.turn_speed)
-			- vars->cam.plane.y * sin(vars->cam.turn_speed);
-		vars->cam.plane.y = old_plane_x * sin(vars->cam.turn_speed)
-			+ vars->cam.plane.y * cos(vars->cam.turn_speed);
+		turn(vars, vars->cam.turn_speed);
 		return (1);
 	}
 	return (0);

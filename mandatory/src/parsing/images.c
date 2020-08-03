@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/29 01:22:31 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/03 19:01:35 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int			write_bmp(char *path, t_data *data)
 	bih = (t_bih){
 	sizeof(t_bih), data->width, -data->height, 1, 32, 0,
 	image_size + BMP_HEADER_SIZE, BMP_DPI * 39.375, BMP_DPI * 39.375, 0, 0};
-	if ((fd = open(path, O_WRONLY | O_CREAT | O_TRUNC,
-	S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)) <= 0)
+	if ((fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0666)) <= 0)
 		return (FILE_INVALID_ERROR);
+	printf("%s %d %d\n", path, fd, image_size);
 	write(fd, (void *)ptr, 14);
 	write(fd, (void *)&bih, sizeof(t_bih));
 	img_to_text(data, &text);

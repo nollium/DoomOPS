@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 18:49:06 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/03 19:10:36 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ int		right_handler(t_vars *vars);
 int		left_handler(t_vars *vars);
 int		alt_handler(t_vars *vars);
 
+int		leave(t_vars *vars);
+
 /*
 ** ENNEMIES
 */
@@ -216,6 +218,7 @@ int		get_n(int *init);
 # define POINTERMOTION_MASK		    64L
 # define POINTERMOTIONHINT_MASK	    128L
 # define FOCUS_CHANGE_MASK			2097152L
+# define STRUCTURE_NOTIFY_MASK      131072L
 
 /*
 ** # define Button1MotionMask		(1L<<8)
@@ -243,6 +246,7 @@ int		get_n(int *init);
 # define BUTTON_RELEASE		5
 # define FOCUS_IN			9
 # define FOCUS_OUT			10
+# define DESTROY_NOTIFY     17
 
 /*
 ** # define MotionNotify	    6

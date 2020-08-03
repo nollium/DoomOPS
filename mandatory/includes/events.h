@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 18:00:36 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/03 17:40:22 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,20 @@
 
 # ifdef __linux__
 
-#  define ESC_KEY          65307
+#  define ESC_KEY			65307
+#  define USE_KEY			102
+
+#  define ARROW_UP_KEY		65362
+#  define ARROW_DOWN_KEY	65364
+#  define ARROW_LEFT_KEY	65361
+#  define ARROW_RIGHT_KEY	65363
+#  define SHOOT_KEY			65506
 
 #  ifndef QWERTY
 #   define FORWARD_KEY		122
 #   define BACKWARD_KEY		115
 #   define LEFT_KEY			113
-#   define RIGHT_KEY			100
+#   define RIGHT_KEY		100
 #   define CTRL_KEY			65507
 #   define ALT_KEY			99
 #   define C_KEY			99
@@ -48,6 +55,15 @@
 
 # ifdef __APPLE__
 
+#  define OSX 1
+#  define LINUX 0
+
+#  define ARROW_UP_KEY		126
+#  define ARROW_DOWN_KEY	125
+#  define ARROW_LEFT_KEY	123
+#  define ARROW_RIGHT_KEY	124
+#  define SHOOT_KEY			258
+
 #  define FORWARD_KEY		13
 #  define BACKWARD_KEY		1
 #  define LEFT_KEY			0
@@ -56,6 +72,7 @@
 #  define ALT_KEY			8
 #  define C_KEY				8
 #  define ESC_KEY			53
+#  define USE_KEY			3
 
 # endif
 
@@ -80,6 +97,9 @@ int		backward_handler(t_vars *vars);
 int		right_handler(t_vars *vars);
 int		left_handler(t_vars *vars);
 int		alt_handler(t_vars *vars);
+void	turn(t_vars *vars, double angle);
+int		turn_right_handler(t_vars *vars);
+int		turn_left_handler(t_vars *vars);
 
 /*
 ** EVENT DEFINITION
