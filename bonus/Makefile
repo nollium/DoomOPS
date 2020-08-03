@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 01:10:01 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 01:51:08 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ DIRSRC = src
 
 MLX_OPENGL_PATH = ../minilibx_opengl
 MLX_LINUX_PATH = ../minilibx_linux
+MLX_WINDOWS_PATH = ../minilibx_windows
 
 MLX_PATH = 
 
@@ -60,7 +61,16 @@ else
 	OS_DIR = linux
 endif
 
-
+ifeq ($(UNAME),MINGW64_NT-10.0)
+	MLX_PATH = $(MLX_WINDOWS_PATH)
+	MLX_NAME = libmlx.a
+	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
+	LINKS = -L"$(MLX_PATH)/SDL/lib" -lmingw32 -lSDL2main -lSDL2 -lSDL2_image \
+	-lSDL2_mixer -lSDL2_ttf  -lmingw32 -lSDL2main -luser32 -lgdi32 -lwinmm -ldxguid
+	INCLUDES += -I$(MLX_WINDOWS_PATH)/includes
+	LOAD_DYLIB = cp $(MLX_PATH)/*.dll ../
+	OS_DIR = windows
+endif
 
 SRC = $(addprefix $(DIRSRC)/, \
 			main.c \

@@ -17,5 +17,6 @@ int         stop_sounds(void)
 
 int			play_sound(char *path)
 {
+    (void)path;
     return (0);
 }

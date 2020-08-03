@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/08/04 00:38:35 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 02:01:03 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,14 @@ void	get_center(t_vars *vars, int *center_x, int *center_y)
 
 	if (center[0] == INT_MIN)
 	{
-		my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
-					vars->game_screen.height / 2);
-		my_mouse_get_pos(vars->mlx, vars->win, center + 0, center + 1);
+		center[0] = vars->game_screen.width / 2;
+		center[1] = vars->game_screen.height / 2;
+		if (OSX)
+		{
+			my_mouse_move(vars->mlx, vars->win, vars->game_screen.width / 2,
+						vars->game_screen.height / 2);
+			my_mouse_get_pos(vars->mlx, vars->win, center + 0, center + 1);
+		}
 	}
 	*center_x = center[0];
 	*center_y = center[1];
