@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 01:02:46 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 01:09:50 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ DIR = $(shell pwd)
 
 DIRSRC = src
 
-MLX_OPENGL_PATH = ./minilibx_opengl
-MLX_LINUX_PATH = ./minilibx_linux
+MLX_OPENGL_PATH = ../minilibx_opengl
+MLX_LINUX_PATH = ../minilibx_linux
 
 MLX_PATH = 
 
