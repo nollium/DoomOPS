@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 22:08:40 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 18:50:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:33:39 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	free_vars(t_vars *vars)
 	while (vars->text_paths[++i])
 		free(vars->text_paths[i]);
 	*vars = (t_vars){0};
-	system("(" KILL_COMMAND " " PLAYER " )" OPTIONS);
-	system("(" PLAYER " " DEATH_SOUND BACKGROUND ") " OPTIONS);
+	stop_sounds();
+	play_sound(DEATH_SOUND);
 }
 
 void	free_cub(t_list **alst)

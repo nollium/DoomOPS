@@ -6,13 +6,13 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/27 18:57:47 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/03 23:11:45 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-CC = clang
+CC = gcc
 
 HEADERS_PATH = ./includes/
 

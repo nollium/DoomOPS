@@ -6,13 +6,13 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/27 18:58:02 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 00:40:06 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-CC = clang
+CC = gcc
 
 HEADERS_PATH = ./includes/
 
@@ -40,7 +40,7 @@ LINKS =
 
 UNAME = $(shell uname)
 
-MOUSE_DIR =
+OS_DIR =
 
 ifeq ($(UNAME),Darwin)
 	MLX_PATH = $(MLX_OPENGL_PATH)
@@ -50,14 +50,14 @@ ifeq ($(UNAME),Darwin)
 	FRAMEWORKS += -framework OpenGL -framework Appkit
 	INCLUDES += -I$(MLX_OPENGL_PATH)
 	LOAD_DYLIB = install_name_tool -change $(MLX_NAME) $(DIR)/$(MLX_LIB) $(NAME)
-	MOUSE_DIR = osx
+	OS_DIR = osx
 else
 	MLX_PATH = $(MLX_LINUX_PATH)
 	MLX_NAME = libmlx.a
 	INCLUDES += -I$(MLX_LINUX_PATH)
 	LINKS += -L$(MLX_PATH) -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
-	MOUSE_DIR = linux
+	OS_DIR = linux
 endif
 
 
@@ -80,7 +80,8 @@ SRC = $(addprefix $(DIRSRC)/, \
 \
 			$(addprefix events/,\
 			loop.c  handlers.c keyboard_handler.c keyboard.c mouvements.c ennemies.c \
-			mouse.c collisions.c handlers_2.c $(MOUSE_DIR)/mouse_move.c singletons.c\
+			mouse.c collisions.c handlers_2.c $(OS_DIR)/mouse_move.c \
+			$(OS_DIR)/sound.c singletons.c\
 	)\
 \
 			debug/debug_map.c debug/errors.c \

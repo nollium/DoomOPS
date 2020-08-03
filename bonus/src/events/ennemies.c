@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 15:43:58 by dirty             #+#    #+#             */
-/*   Updated: 2020/07/27 13:02:43 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:37:48 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		player_hit(t_camera *cam)
 
 	if ((clock() - t0) / CLOCKS_PER_SEC > DAMAGE_COOLDOWN)
 	{
-		system("(" PLAYER " " HIT_SOUND BACKGROUND ") " OPTIONS);
+		play_sound(HIT_SOUND);
 		t0 = clock();
 		cam->hp--;
 		return (1);
@@ -81,21 +81,12 @@ int		ennemies_handler(t_sprite *sprites, t_camera *cam, char **map)
 
 void	play_death_sound(int n)
 {
-	static int last = 0;
+	static int		last = 0;
+	static char		*sounds[] = {EN_DEATH_00, EN_DEATH_01, EN_DEATH_02,
+								EN_DEATH_03, EN_DEATH_04, EN_DEATH_05};
 
 	if (last == n)
 		n = (n + 1) % 6;
 	last = n;
-	if (n == 0)
-		system("(" PLAYER " " EN_DEATH_00 BACKGROUND ") " OPTIONS);
-	if (n == 1)
-		system("(" PLAYER " " EN_DEATH_01 BACKGROUND ") " OPTIONS);
-	if (n == 2)
-		system("(" PLAYER " " EN_DEATH_02 BACKGROUND ") " OPTIONS);
-	if (n == 3)
-		system("(" PLAYER " " EN_DEATH_03 BACKGROUND ") " OPTIONS);
-	if (n == 4)
-		system("(" PLAYER " " EN_DEATH_04 BACKGROUND ") " OPTIONS);
-	if (n == 5)
-		system("(" PLAYER " " EN_DEATH_05 BACKGROUND ") " OPTIONS);
+	play_sound(sounds[n]);
 }

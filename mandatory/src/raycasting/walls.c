@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 15:30:41 by smaccary          #+#    #+#             */
-/*   Updated: 2020/06/30 17:07:44 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:03:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static double	get_corner(double angle)
 
 	i = -1;
 	max = DBL_MAX;
+	corner = 0;
 	while (++i <= 3)
 		if (((diff = fabs(angle - (double)corner_angle[i])) < max))
 		{

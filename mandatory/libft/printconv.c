@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:06:07 by smaccary          #+#    #+#             */
-/*   Updated: 2020/02/24 15:18:30 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/03 23:13:01 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	print_s(char *str, t_infos infos)
 		str = "(null)";
 	len = ft_strlen(str);
 	return (infos.printer(1, str,
-		((int)len < infos.trunc || !infos.dot) ? len : infos.trunc));
+		((int)len < infos.trunc || !infos.dot)
+		? len : (size_t)infos.trunc));
 }
 
 static int	print_conv_2(char c, va_list *list, t_infos infos)

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/27 18:01:08 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:25:36 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ int			init_img(void *mlx, int width, int height, t_data *img)
 int			init_cam(t_camera *cam, t_spawn *spawn)
 {
 	int				i;
-	static t_camera	cam_switcher[] = {
-		(t_camera){0.0, 0.0, -1.0, 0.0, SPEED, TURN_SPEED,
-		(t_plane){0, 0.66}}, (t_camera){0.0, 0.0, 1.0, 0.0, SPEED, TURN_SPEED,
-		(t_plane){0, -0.66}}, (t_camera){0.0, 0.0, 0.0, -1.0, SPEED, TURN_SPEED,
-		(t_plane){-0.66, 0.0}}, (t_camera){0, 0, 0, 1.0, SPEED, TURN_SPEED,
-		(t_plane){0.66, 0.0}}};
-
+	t_camera		cam_switcher[4];
+	
+	cam_switcher[0] = (t_camera){0.0, 0.0, -1.0, 0.0, SPEED, TURN_SPEED,
+	(t_plane){0, 0.66}};
+	cam_switcher[1] = (t_camera){0.0, 0.0, 1.0, 0.0, SPEED, TURN_SPEED,
+	(t_plane){0, -0.66}};
+	cam_switcher[2] = (t_camera){0.0, 0.0, 0.0, -1.0, SPEED, TURN_SPEED,
+	(t_plane){-0.66, 0.0}};
+	cam_switcher[3] = (t_camera){0, 0, 0, 1.0, SPEED, TURN_SPEED,
+	(t_plane){0.66, 0.0}};
 	i = 0;
 	while (SPAWN_CHARS[i] && SPAWN_CHARS[i] != spawn->dir)
 		i++;

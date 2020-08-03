@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 17:13:04 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/03 17:39:06 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:35:10 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				switch_closest_door(t_vars *vars)
 					*tex_num = DOOR_OPEN_TEX;
 				else if (*tex_num == DOOR_OPEN_TEX)
 					*tex_num = DOOR_TEX;
-				system("(" PLAYER " " DOOR_SOUND BACKGROUND ") " OPTIONS);
+				play_sound(DOOR_SOUND);
 				return (1);
 			}
 		}
@@ -69,10 +69,8 @@ int				switch_closest_door(t_vars *vars)
 
 int				doors_handler(t_vars *vars)
 {
-	int			n;
 	static int	released = 1;
 
-	n = -1;
 	if (key_chr(vars->keys, USE_KEY, K_BUFF_SIZE))
 	{
 		if (released)

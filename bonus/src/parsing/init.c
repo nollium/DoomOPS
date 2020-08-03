@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 17:46:18 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:26:38 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int			init_cam(t_camera *cam, t_spawn *spawn, t_screen *s)
 
 	ratio = ((double)(s->width) / (double)(s->height)) * ASPECT_RATIO;
 	i = 0;
-	cam_switcher[0] = (t_camera){.dir_x = -1, .speed = SPEED,
+	cam_switcher[0] = (t_camera){.hp = 100, .dir_x = -1, .speed = SPEED,
 	.turn_speed = TURN_SPEED, .plane = (t_plane){0, ratio}};
-	cam_switcher[1] = (t_camera){.dir_x = 1, .speed = SPEED,
+	cam_switcher[1] = (t_camera){.hp = 100, .dir_x = 1, .speed = SPEED,
 	.turn_speed = TURN_SPEED, .plane = (t_plane){0, -ratio}};
-	cam_switcher[2] = (t_camera){.dir_y = -1.0, .speed = SPEED,
+	cam_switcher[2] = (t_camera){.hp = 100, .dir_y = -1.0, .speed = SPEED,
 	.turn_speed = TURN_SPEED, .plane = (t_plane){-ratio, 0.0}};
-	cam_switcher[3] = (t_camera){.dir_y = 1.0, .speed = SPEED,
+	cam_switcher[3] = (t_camera){.hp = 100, .dir_y = 1.0, .speed = SPEED,
 	.turn_speed = TURN_SPEED, .plane = (t_plane){ratio, 0.0}};
 	while (SPAWN_CHARS[i] && SPAWN_CHARS[i] != spawn->dir)
 		i++;

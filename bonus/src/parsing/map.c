@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:34:07 by user42            #+#    #+#             */
-/*   Updated: 2020/07/20 19:42:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/04 00:27:30 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ int			find_spawn(char **map, t_spawn *spawn)
 	char	*spawn_ptr;
 	char	*last_ptr;
 	int		x;
-	int		y;
 
-	y = -1;
 	x = -1;
 	*spawn = (t_spawn){-1, -1, 0};
 	while (map && map[++x])

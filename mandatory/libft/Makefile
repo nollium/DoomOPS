@@ -6,13 +6,13 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/07/05 01:02:20 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/03 23:11:43 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-CC = clang
+CC = gcc
 
 CFLAGS = -Wall -Wextra -g3
 

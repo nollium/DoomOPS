@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/03 19:10:36 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:39:05 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,8 @@ int		leave(t_vars *vars);
 /*
 ** ENNEMIES
 */
-
+int		stop_sounds(void);
+int		play_sound(char *path);
 void	play_death_sound(int n);
 void	move_ennemy(t_sprite *lst_sprites, t_sprite *sprite, t_camera *cam,
 					char **map);

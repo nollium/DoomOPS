@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 13:37:22 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/03 19:09:13 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:34:24 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		pickup_handler(t_sprite **sprites, t_camera *cam, int *n)
 	if (cam->hp < 5
 		&& (i = sprite_collision(*sprites, cam->x, cam->y, PICKUP_TEX)))
 	{
-		system("(" PLAYER " " DRINK_SOUND BACKGROUND ") " OPTIONS);
+		play_sound(DRINK_SOUND);
 		cam->hp++;
 		swap_sprites(*sprites, *sprites + i - 1);
 		(*n)--;

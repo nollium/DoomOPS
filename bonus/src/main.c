@@ -6,11 +6,13 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/28 17:51:13 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:28:32 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "events.h"
+
 
 static int	check_args(int argc, char **argv)
 {
@@ -46,8 +48,6 @@ int			main(int argc, char **argv)
 	}
 	hooks(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
-	if (LINUX)
-		system(MIXER_COMMAND);
-	system("(" PLAYER " " MUSIC_PATH BACKGROUND ") " OPTIONS);
+	play_sound(MUSIC_PATH);
 	mlx_loop(vars.mlx);
 }

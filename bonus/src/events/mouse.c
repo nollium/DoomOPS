@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:57:06 by user42            #+#    #+#             */
-/*   Updated: 2020/07/27 12:49:52 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 00:38:35 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		click_handler(t_vars *vars)
 		{
 			last_shot = clock();
 			vars->draw_shot = 1;
-			system("(" PLAYER " " GUNSHOT_PATH BACKGROUND ") " OPTIONS);
+			play_sound(GUNSHOT_PATH);
 			shoot_sprites(&(vars->sprites), &(vars->num_sprites));
 			return (1);
 		}
