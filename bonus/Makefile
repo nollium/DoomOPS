@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 02:26:40 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 02:33:18 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ ifeq ($(UNAME),Darwin)
 	INCLUDES += -I$(MLX_OPENGL_PATH)
 	LOAD_DYLIB = install_name_tool -change $(MLX_NAME) $(DIR)/$(MLX_LIB) $(NAME)
 	OS_DIR = osx
+endif
 
 ifeq ($(UNAME),Linux)
 	MLX_PATH = $(MLX_LINUX_PATH)
