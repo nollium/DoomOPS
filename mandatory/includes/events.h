@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:52:42 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 01:00:02 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 01:45:13 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@
 #  define ARROW_RIGHT_KEY	1073741903
 #  define SHOOT_KEY			1073742053
 
-#  define FORWARD_KEY		112
+#  define FORWARD_KEY		122
 #  define BACKWARD_KEY		115
 #  define LEFT_KEY			113
 #  define RIGHT_KEY			100

@@ -2,7 +2,7 @@
 static char *WE[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 156 2 ",
-"   c #FFFF00",
+"   c yellow",
 ".  c #2C2C00",
 "X  c black",
 "o  c #090900",
