@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 01:09:50 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 01:35:42 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ DIRSRC = src
 
 MLX_OPENGL_PATH = ../minilibx_opengl
 MLX_LINUX_PATH = ../minilibx_linux
+MLX_WINDOWS_PATH = ../minilibx_windows
 
 MLX_PATH = 
 
@@ -56,6 +57,16 @@ ifeq ($(UNAME),Linux)
 	INCLUDES += -I$(MLX_LINUX_PATH)
 	LINKS += -L$(MLX_PATH) -lXext -lX11 -lxcb -lXau -lXdmcp -lm
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
+endif
+
+ifeq ($(UNAME),MINGW64_NT-10.0)
+	MLX_PATH = $(MLX_WINDOWS_PATH)
+	MLX_NAME = libmlx.a
+	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
+	LINKS = -L"$(MLX_PATH)/SDL/lib" -lmingw32 -lSDL2main -lSDL2 -lSDL2_image \
+	-lSDL2_mixer -lSDL2_ttf  -lmingw32 -lSDL2main -luser32 -lgdi32 -lwinmm -ldxguid
+	INCLUDES += -I$(MLX_WINDOWS_PATH)/includes
+	LOAD_DYLIB = cp $(MLX_PATH)/*.dll ../
 endif
 
 SRC = $(addprefix $(DIRSRC)/, \
@@ -117,14 +128,15 @@ clean:
 	$(MAKE) -C libft/ clean
 	$(MAKE) -C $(MLX_PATH) clean
 	$(RM) $(OBJ) $(OBJBONUS)
+	$(RM) ../*.dll
 
 fclean: clean
 	$(MAKE) -C libft/ fclean
-	$(RM) $(NAME) 
+	$(RM) $(NAME)
 
 lilclean:
 	$(RM) $(OBJ) $(OBJBONUS)
-	$(RM) $(NAME) 
+	$(RM) $(NAME)
 
 re: fclean all	
 
