@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 01:51:08 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 02:26:40 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ ifeq ($(UNAME),Darwin)
 	INCLUDES += -I$(MLX_OPENGL_PATH)
 	LOAD_DYLIB = install_name_tool -change $(MLX_NAME) $(DIR)/$(MLX_LIB) $(NAME)
 	OS_DIR = osx
-else
+
+ifeq ($(UNAME),Linux)
 	MLX_PATH = $(MLX_LINUX_PATH)
 	MLX_NAME = libmlx.a
 	INCLUDES += -I$(MLX_LINUX_PATH)
@@ -66,7 +67,7 @@ ifeq ($(UNAME),MINGW64_NT-10.0)
 	MLX_NAME = libmlx.a
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
 	LINKS = -L"$(MLX_PATH)/SDL/lib" -lmingw32 -lSDL2main -lSDL2 -lSDL2_image \
-	-lSDL2_mixer -lSDL2_ttf  -lmingw32 -lSDL2main -luser32 -lgdi32 -lwinmm -ldxguid
+	-lSDL2_mixer -lSDL2_ttf -luser32 -lgdi32 -lwinmm -ldxguid
 	INCLUDES += -I$(MLX_WINDOWS_PATH)/includes
 	LOAD_DYLIB = cp $(MLX_PATH)/*.dll ../
 	OS_DIR = windows
