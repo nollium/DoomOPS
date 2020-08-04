@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 02:33:18 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 15:00:34 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -158,7 +158,7 @@ opti:
 	$(eval LIB_ARG += opti)
 
 debug:
-	$(eval CFLAGS += -fsanitize=address)
+	$(eval CFLAGS += -g3 -fsanitize=address)
 	$(eval LIB_ARG += debug)
 
 QWERTY:
