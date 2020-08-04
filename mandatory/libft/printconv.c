@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 #include <stdarg.h>
 
 static int	print_p(void *ptr, t_infos infos)

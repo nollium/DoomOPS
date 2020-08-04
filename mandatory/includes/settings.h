@@ -17,7 +17,6 @@
 # include <math.h>
 
 # include <fcntl.h>
-# include <stdio.h>
 # include <limits.h>
 # include <float.h>
 # include "libftprintf.h"
