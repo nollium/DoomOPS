@@ -14,7 +14,7 @@
 
 int	stop_sounds(void)
 {
-	return (system("(" KILL_COMMAND " " PLAYER " )" OPTIONS));
+	return (system("(" KILL_COAND " " PLAYER " )" OPTIONS));
 }
 
 int	play_sound(char *path)

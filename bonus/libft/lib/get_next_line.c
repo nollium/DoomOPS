@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "../libftprintf.h"
-#include <stdio.h>
 
 static long long	is_newline(char *str)
 {

@@ -6,13 +6,12 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 15:49:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 00:28:32 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 17:15:34 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "events.h"
-
 
 static int	check_args(int argc, char **argv)
 {

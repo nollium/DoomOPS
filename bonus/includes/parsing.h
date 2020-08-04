@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dirty <dirty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 14:44:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/22 04:34:17 by dirty            ###   ########.fr       */
+/*   Updated: 2020/08/04 17:16:34 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdint.h>
 # include "structs/structs.h"
 # include "../libft/libftprintf.h"
 # include "garbage_collection.h"

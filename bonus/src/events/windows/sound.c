@@ -6,17 +6,17 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 00:30:34 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 00:30:34 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 17:11:28 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int         stop_sounds(void)
+int	stop_sounds(void)
 {
-    return (0);
+	return (0);
 }
 
-int			play_sound(char *path)
+int	play_sound(char *path)
 {
-    (void)path;
-    return (0);
+	(void)path;
+	return (0);
 }

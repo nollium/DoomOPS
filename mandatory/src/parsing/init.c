@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:31:27 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 00:25:36 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 17:18:39 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			init_cam(t_camera *cam, t_spawn *spawn)
 {
 	int				i;
 	t_camera		cam_switcher[4];
-	
+
 	cam_switcher[0] = (t_camera){0.0, 0.0, -1.0, 0.0, SPEED, TURN_SPEED,
 	(t_plane){0, 0.66}};
 	cam_switcher[1] = (t_camera){0.0, 0.0, 1.0, 0.0, SPEED, TURN_SPEED,

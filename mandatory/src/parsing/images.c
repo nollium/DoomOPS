@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 16:55:14 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 00:00:55 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 17:18:11 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int			write_bmp(char *path, t_data *data)
 	int			fd;
 	int			image_size;
 	t_texture	text;
-	int 		error;
+	int			error;
 
 	if ((fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0666)) <= 0)
 		return (FILE_INVALID_ERROR);

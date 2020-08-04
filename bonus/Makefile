@@ -6,7 +6,7 @@
 #    By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 10:47:14 by smaccary          #+#    #+#              #
-#    Updated: 2020/08/04 15:00:34 by smaccary         ###   ########.fr        #
+#    Updated: 2020/08/04 17:17:36 by smaccary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ SRC = $(addprefix $(DIRSRC)/, \
 			main.c \
 \
 			$(addprefix parsing/,\
-			backend.c  init.c parsing.c images.c map.c sprites_parsing.c) \
+			backend.c  init.c parsing.c images.c map.c sprites_parsing.c bmp.c) \
 \
 			raycasting/raycast.c raycasting/walls.c\
 \
