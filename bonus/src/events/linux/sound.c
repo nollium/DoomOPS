@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/04 00:29:13 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 00:29:13 by smaccary         ###   ########.fr       */
+/*   Created: 2020/08/04 17:00:02 by smaccary          #+#    #+#             */
+/*   Updated: 2020/08/04 17:00:02 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 
-int         stop_sounds(void)
+int	stop_sounds(void)
 {
-    return (system("(" KILL_COMMAND " " PLAYER " )" OPTIONS));           
+	return (system("(" KILL_COMMAND " " PLAYER " )" OPTIONS));
 }
 
-int			play_sound(char *path)
+int	play_sound(char *path)
 {
 	char	command[1000];
 
