@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 17:00:02 by smaccary          #+#    #+#             */
-/*   Updated: 2020/08/04 17:00:02 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/04 19:08:22 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	stop_sounds(void)
 {
-	return (system("(" KILL_COAND " " PLAYER " )" OPTIONS));
+	return (system("(" KILL_COMMAND " " PLAYER " )" OPTIONS));
 }
 
 int	play_sound(char *path)
