@@ -33,7 +33,7 @@ paths=$(find maps/mandatory/invalid -name "*.cub")
 
 for path in $paths ; do
 	error=$(./cub3D $path --save 2>&1)
-	if [ ! $? -eq 0 ] && [ ! "$error" = "MAP ERROR" ] && [ ! "$error" = "FILE INVALID ERROR" ];
+	if [ ! $? -eq 0 ] && [ ! "$error" = "MAP ERROR" ] && [ ! "$error" = "FILE INVALID ERROR" ] && [ ! "$error" = "COLOR ERROR" ];
 	then
 		echo $error > log
 		printf "\e[31mERROR ON $path\n$(cat $path)\n" >> log

@@ -6,7 +6,7 @@
 /*   By: smaccary <smaccary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 19:52:44 by smaccary          #+#    #+#             */
-/*   Updated: 2020/07/23 20:25:33 by smaccary         ###   ########.fr       */
+/*   Updated: 2020/08/06 18:03:17 by smaccary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	check_resolution(void *mlx, int *width, int *height)
 	int max_height;
 
 	mlx_get_screen_size(mlx, &max_width, &max_height);
-	*width = (*width > max_width) ? max_width : *width;
-	*height = (*height > max_height) ? max_height : *height;
+	*width = (*width > max_width || *width < 0) ? max_width : *width;
+	*height = (*height > max_height || *height < 0) ? max_height : *height;
 	return (SUCCESS_CODE);
 }
 
