@@ -10,6 +10,9 @@ The bonus part of this project involves implementing ennemies, music, weapons, h
 
 Compiles and runs on Mac OSX, Linux and Windows ([using my SDL2 port of the minilibx](https://github.com/Dirty-No/minilibx_windows))
 
+## Usage:
+    ./cub3D <map.cub>
+
 ## Build:
 
 ### Mandatory part:
