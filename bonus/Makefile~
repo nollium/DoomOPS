@@ -42,6 +42,27 @@ LINKS =
 UNAME = $(shell uname)
 
 OS_DIR =
+
+ifeq ($(UNAME),Darwin)
+	MLX_PATH = $(MLX_OPENGL_PATH)
+	MLX_NAME = libmlx.dylib
+	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
+	LINKS = -L$(MLX_PATH)/
+	FRAMEWORKS += -framework OpenGL -framework Appkit
+	INCLUDES += -I$(MLX_OPENGL_PATH)
+	LOAD_DYLIB = install_name_tool -change $(MLX_NAME) $(DIR)/$(MLX_LIB) $(NAME)
+	OS_DIR = osx
+endif
+
+ifeq ($(UNAME),Linux)
+	MLX_PATH = $(MLX_LINUX_PATH)
+	MLX_NAME = libmlx.a
+	INCLUDES += -I$(MLX_LINUX_PATH)
+	LINKS += -L$(MLX_PATH) -lXext -lX11 -lxcb -lXau -lXdmcp -lm
+	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
+	OS_DIR = linux
+endif
+
 ifeq ($(OS),Windows_NT)
 	MLX_PATH = $(MLX_WINDOWS_PATH)
 	MLX_NAME = libmlx.a
@@ -51,22 +72,6 @@ ifeq ($(OS),Windows_NT)
 	INCLUDES += -I$(MLX_WINDOWS_PATH)/includes
 	LOAD_DYLIB = cp $(MLX_PATH)/*.dll ../
 	OS_DIR = windows
-else ifeq ($(UNAME),Darwin)
-	MLX_PATH = $(MLX_OPENGL_PATH)
-	MLX_NAME = libmlx.dylib
-	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
-	LINKS = -L$(MLX_PATH)/
-	FRAMEWORKS += -framework OpenGL -framework Appkit
-	INCLUDES += -I$(MLX_OPENGL_PATH)
-	LOAD_DYLIB = install_name_tool -change $(MLX_NAME) $(DIR)/$(MLX_LIB) $(NAME)
-	OS_DIR = osx
-else ifeq ($(UNAME),Linux)
-	MLX_PATH = $(MLX_LINUX_PATH)
-	MLX_NAME = libmlx.a
-	INCLUDES += -I$(MLX_LINUX_PATH)
-	LINKS += -L$(MLX_PATH) -lXext -lX11 -lxcb -lXau -lXdmcp -lm
-	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
-	OS_DIR = linux
 endif
 
 SRC = $(addprefix $(DIRSRC)/, \

@@ -22,6 +22,8 @@ MAKE = make
 
 MAKE_ARGS =
 
+RM=rm -rf
+
 all:
 	$(MAKE) -C $(CUB_PATH) $(MAKE_ARGS) all
 	@cp $(CUB_PATH)/$(NAME) .

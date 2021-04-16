@@ -59,7 +59,7 @@ ifeq ($(UNAME),Linux)
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
 endif
 
-ifeq ($(UNAME),MINGW64_NT-10.0)
+ifeq ($(OS),Windows_NT)
 	MLX_PATH = $(MLX_WINDOWS_PATH)
 	MLX_NAME = libmlx.a
 	MLX_LIB = $(MLX_PATH)/$(MLX_NAME)
