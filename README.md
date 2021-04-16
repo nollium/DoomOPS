@@ -1,6 +1,5 @@
 
-# cub3D
-cub3D for 42 Paris School
+# cub3D for 42 Paris School
 
 ## Grade: 115/100
 
