@@ -3,7 +3,7 @@
 cub3D for 42 Paris School
 Grade: 115/100
 
-<img src="https://media1.giphy.com/media/J0w7KyPaNEuBPuZWOb/giphy.gif" width="800" height="600" />
+<img src="https://media2.giphy.com/media/lz67zZWfWPsWnuGH0s/200.webp" width="800" height="600" />
 
 Compiles and runs on Mac OSX, Linux and Windows ([using my SDL2 port of the minilibx](https://github.com/Dirty-No/minilibx_windows))
 
