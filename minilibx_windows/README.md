@@ -103,7 +103,6 @@ Feel free to contribute to the project by making issues, pull request, or by con
 
 You can contact me at :
 
-[https://twitter.com/slutymeme](https://twitter.com/slutymeme)
 
 smaccary@student.42.fr
 
